@@ -1,0 +1,53 @@
+# References {#ref .unnumbered}
+
+### Gail's References 
+
+\[1\] Ringnér, M. (2008). What is principal component analysis? Nature biotechnology, 26(3), 303-304.
+
+\[2\] Jolliffe, I. T., & Cadima, J. (2016). Principal component analysis: a review and recent developments. Philosophical transactions of the royal society A: Mathematical, Physical and Engineering Sciences, 374(2065), 20150202.
+
+\[3\] Jolliffe, I. T. (1990). Principal component analysis: a beginner's guide---I. Introduction and application. Weather, 45(10), 375-382.
+
+\[4\] Hasan, B. M. S., & Abdulazeez, A. M. (2021). A review of principal component analysis algorithm for dimensionality reduction. Journal of Soft Computing and Data Mining, 2(1), 20-30.
+
+\[5\] Everitt, B., & Hothorn, T. (2011). Chapter 3: Principal Component Analysis. An introduction to applied multivariate analysis with R. Springer Science & Business Media.
+
+\[6\] Greenacre, M., Groenen, P. J., Hastie, T., d'Enza, A. I., Markos, A., & Tuzhilina, E. (2022). Principal component analysis. Nature Reviews Methods Primers, 2(1), 100.
+
+\[7\] Pearson, K. (1901). On lines and planes of closest fit to systems of points in space. Philosophical Magazine, 2(6), 559-572.
+
+\[8\] Fisher, R. & MacKenzie, W. (1923). Studies in crop variation. II. The manurial response of different potato varieties, Journal of Agricultural Science, 13, 311-320.
+
+\[9\] Abdi, H., & Williams, L. J. (2010). Principal component analysis. Wiley Interdisciplinary Reviews: Computational Statistics, 2(4), 433-459. https://doi.org/10.1002/wics.101.
+
+\[10\] Hotelling, H. (1933). Analysis of a complex of statistical variables into principal components. Journal of Educational Psychology, 24, 417-441 and 498-520.
+
+\[11\] Wold, S., Esbensen, K., & Geladi, P. (1987). Principal Component Analysis. Chemometrics and Intelligent Laboratory Systems, 2, 37-52.
+
+### Hector's References
+
+\[1\] Esposito, Dino, and Dino Esposito. "Unsupervised Learning." Introducing Machine Learning, Microsoft Press, Redmond, 2020, pp. 27--29. 
+
+\[2\] Smith, Lindsay I. A Tutorial on Principal Component Analysis, 26 Feb. 2022.
+
+\[3\] Turk, M.A., and A.P. Pentland. "Eigenfaces for Recognition." vol. 3, no. 1, 1991, pp. 71--86, https://doi.org/https://doi.org/10.1162/jocn.1991.3.1.71.
+
+\[4\] Zhang, Sheng, and Turk, M.A. "Eigenfaces." Scholarpedia, 3(9):4244, 2008. doi:10.4249/scholarpedia.4244.
+
+\[5\] Scikit-learn: Machine Learning in Python, Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.
+
+### Michael's References
+
+\[1\] Pearson, K. (1901). "On Lines and Planes of Closest Fit to Systems of Points in Space." Philosophical Magazine. 2 (11): 559--572. <https://doi.org/10.1080%2F14786440109462720>.
+
+\[2\] Hotelling, H. (1933). "Analysis of a complex of statistical variables into principal components." Journal of Educational Psychology, 24, 417--441, and 498--520.
+
+\[3\] Jolliffe, T., and Cadima, J. "Principal Component Analysis: a Review and Recent Developments." Philosophical Transactions of the Royal Society of London. Series A: Mathematical, Physical, and Engineering Sciences, vol. 374, no. 2065, 2016, pp. 20150202--20150202, <https://doi.org/10.1098/rsta.2015.0202>.
+
+\[4\] Maindonald, J. H., and Braun, J. "Data Analysis and Graphics Using R : an Example-Based Approach." Third edition. Cambridge: Cambridge University Press, 2010. No DOI link available. Retrieved from: <https://uwf-flvc.primo.exlibrisgroup.com/permalink/01FALSC_UWF/r39qlm/alma99379649429206600>
+
+\[5\] Abdi, Hervé, and Lynne J. Williams. "Principal Component Analysis." Wiley Interdisciplinary Reviews. Computational Statistics, vol. 2, no. 4, 2010, pp. 433--59, <https://doi.org/10.1002/wics.101>.
+
+\[6\] Lever, Krzywinski, M., and Altman, N. "Points of Significance: Principal Component Analysis." Nature Methods, vol. 14, no. 7, 2017, p. 641--, <https://doi.org/10.1038/nmeth.4346>.
+
+\[7\] Gewers, Ferreira, G. R., De Arruda, H. F., Silva, F. N., Comin, C. H., Amancio, D. R., & Costa, L. D. F. "Principal Component Analysis: A Natural Approach to Data Exploration." ACM Computing Surveys, vol. 54, no. 4, 2021, pp. 1--34, <https://doi.org/10.1145/3447755>.
