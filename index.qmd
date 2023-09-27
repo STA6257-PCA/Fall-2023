@@ -1,3 +1,5 @@
 # Index {#index .unnumbered}
 
 Hello. More things will appear here as my competency levels up. I feel I am currently at level 1.
+
+Attempting an edit in RStudio to push to GitHub. Will it work?
