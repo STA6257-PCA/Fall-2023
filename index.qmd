@@ -1,5 +1,3 @@
-# Index {#index .unnumbered}
+# Home {#index .unnumbered}
 
-Hello. More things will appear here as my competency levels up. I feel I am currently at level 1.
-
-Attempting an edit in RStudio to push to GitHub. Will it work?
+![](images/01-Preface.jpg){fig-alt="PCA cover page" fig-align="center"}
