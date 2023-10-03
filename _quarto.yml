@@ -10,9 +10,9 @@ book:
     - index.qmd
     - intro.qmd
     - dataset.qmd
+    - EDA.qmd
     - summary.qmd
     - references.qmd
-    - EDA.qmd
 
 bibliography: references.bib
 csl: ieee-with-url.csl
