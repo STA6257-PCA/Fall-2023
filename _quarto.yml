@@ -12,7 +12,7 @@ book:
     - dataset.qmd
     - summary.qmd
     - references.qmd
-    - EDA-draft.qmd
+    - EDA.qmd
 
 bibliography: references.bib
 csl: ieee-with-url.csl

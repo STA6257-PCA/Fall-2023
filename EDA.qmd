@@ -1,3 +1,5 @@
 # EDA {#intro}
 
 DATA Viz
+
+## Visual Report
