@@ -1,3 +1,10 @@
 # Dataset {#dataset}
 
 This is where we can put everything about our dataset description and visualization.
+
+## Report
+
+```{=html}
+<iframe width="1160" height="720" src="report/report.html" 
+title="Quarto Documentation" style="max-height: 80%"></iframe>
+```
