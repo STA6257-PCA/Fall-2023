@@ -1,3 +1,9 @@
+---
+format: 
+ html: 
+  toc: false
+---
+
 # Dataset {#dataset}
 
 This is where we can put everything about our dataset description and visualization.
@@ -5,6 +11,30 @@ This is where we can put everything about our dataset description and visualizat
 ## Report
 
 ```{=html}
-<iframe width="1160" height="720" src="report/report.html" 
-title="Quarto Documentation" style="max-height: 80%"></iframe>
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #iframe-container {
+      position: relative;
+      width: 1140px;
+      height: 13100px;
+      overflow: hidden;
+    }
+    #embedded-iframe {
+      width: 100%;
+      height: 100%; 
+      border: none; 
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div id="iframe-container">
+  <iframe id="embedded-iframe" src="report/report.html" onload="resizeIframe(this)"></iframe>
+</div>
+
+</body>
+</html>
 ```
