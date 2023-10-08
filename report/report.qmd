@@ -4,6 +4,9 @@
 # clear environment
 rm(list = ls())
 
+# original dataset link: 
+#https://data.cms.gov/provider-data/dataset/2fpu-cgbb
+
 # Load dataset
 train_original <- read.csv('../dataset/DFC_STATE.csv')
 
