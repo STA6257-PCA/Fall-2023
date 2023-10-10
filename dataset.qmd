@@ -6,9 +6,25 @@ format:
 
 # Dataset {#dataset}
 
-This is where we can put everything about our dataset description and visualization.
+The data used in this analysis was obtained from the "Consumer Assessment of Healthcare Providers and Systems (CAHPS®) In-Center Hemodialysis Survey," which is administered to in-center hemodialysis (ICH) facilities by approved survey vendors under the Centers for Medicare & Medicaid Services (CMS). The dataset, consisting of state-level averages of common dialysis quality measures, was released on July 19, 2023, through the [Data.CMS.gov](https://data.cms.gov/provider-data/dataset/2fpu-cgbb) website. It comprises a total of 39 variables.
 
-## Report
+The structure of the dataset can be categorized into three main components:
+
+1.  Index Variable: The primary index variable is "State," encompassing all 50 states and 6 U.S. territories, namely American Samoa, the District of Columbia, Guam, the Northern Mariana Islands, Puerto Rico, and the U.S. Virgin Islands.
+
+```{=html}
+<!-- -->
+```
+2.  Response Variables: The dataset incorporates 24 response variables aligned with ratings of patient care quality in dialysis facilities. These variables pertain to various aspects of dialysis procedures, such as transfusions, fistula usage, infections, hospitalizations, incident patient waitlisting, and readmissions.
+
+```{=html}
+<!-- -->
+```
+3.  Classification of Dialysis Patients: Fourteen variables within the dataset classify dialysis patients based on parameters including dialysis adequacy (Kt/V), type of dialysis (hemodialysis vs. peritoneal dialysis), normalized protein catabolic rate (nPCR), hypercalcemia level (Serum Calcium, Mg/dL), serum phosphorus level (Mg/dL), and average hemoglobin (Hgb) level.
+
+The selection of this dataset for our analysis is driven by its inherent characteristic of multicollinearity among variables, indicating that certain variables are less significant in explaining the variability of the response variables. Additionally, all variables in the dataset are numeric, except for the index variable that is excluded from the subsequent Principal Component Analysis (PCA). Our objective is to utilize this dataset to illustrate the efficacy of PCA in dimension reduction and the efficient visualization of data.
+
+## Visualization Report
 
 ```{=html}
 <!DOCTYPE html>

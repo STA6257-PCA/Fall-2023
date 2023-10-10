@@ -155,9 +155,22 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>This is where we can put everything about our dataset description and visualization.</p>
-<section id="report" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="report"><span class="header-section-number">2.1</span> Report</h2>
+<p>The data used in this analysis was obtained from the “Consumer Assessment of Healthcare Providers and Systems (CAHPS®) In-Center Hemodialysis Survey,” which is administered to in-center hemodialysis (ICH) facilities by approved survey vendors under the Centers for Medicare &amp; Medicaid Services (CMS). The dataset, consisting of state-level averages of common dialysis quality measures, was released on July 19, 2023, through the <a href="https://data.cms.gov/provider-data/dataset/2fpu-cgbb">Data.CMS.gov</a> website. It comprises a total of 39 variables.</p>
+<p>The structure of the dataset can be categorized into three main components:</p>
+<ol type="1">
+<li>Index Variable: The primary index variable is “State,” encompassing all 50 states and 6 U.S. territories, namely American Samoa, the District of Columbia, Guam, the Northern Mariana Islands, Puerto Rico, and the U.S. Virgin Islands.</li>
+</ol>
+<!-- -->
+<ol start="2" type="1">
+<li>Response Variables: The dataset incorporates 24 response variables aligned with ratings of patient care quality in dialysis facilities. These variables pertain to various aspects of dialysis procedures, such as transfusions, fistula usage, infections, hospitalizations, incident patient waitlisting, and readmissions.</li>
+</ol>
+<!-- -->
+<ol start="3" type="1">
+<li>Classification of Dialysis Patients: Fourteen variables within the dataset classify dialysis patients based on parameters including dialysis adequacy (Kt/V), type of dialysis (hemodialysis vs.&nbsp;peritoneal dialysis), normalized protein catabolic rate (nPCR), hypercalcemia level (Serum Calcium, Mg/dL), serum phosphorus level (Mg/dL), and average hemoglobin (Hgb) level.</li>
+</ol>
+<p>The selection of this dataset for our analysis is driven by its inherent characteristic of multicollinearity among variables, indicating that certain variables are less significant in explaining the variability of the response variables. Additionally, all variables in the dataset are numeric, except for the index variable that is excluded from the subsequent Principal Component Analysis (PCA). Our objective is to utilize this dataset to illustrate the efficacy of PCA in dimension reduction and the efficient visualization of data.</p>
+<section id="visualization-report" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="visualization-report"><span class="header-section-number">2.1</span> Visualization Report</h2>
 
 
 
