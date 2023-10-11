@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -155,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>The data used in this analysis was obtained from the “Consumer Assessment of Healthcare Providers and Systems (CAHPS®) In-Center Hemodialysis Survey,” which is administered to in-center hemodialysis (ICH) facilities by approved survey vendors under the Centers for Medicare &amp; Medicaid Services (CMS). The dataset, consisting of state-level averages of common dialysis quality measures, was released on July 19, 2023, through the <a href="https://data.cms.gov/provider-data/dataset/2fpu-cgbb">Data.CMS.gov</a> website. It comprises a total of 39 variables.</p>
+<p>The data used in this analysis was obtained from the “Consumer Assessment of Healthcare Providers and Systems (CAHPS®) In-Center Hemodialysis Survey,” which is administered to in-center hemodialysis (ICH) facilities by approved survey vendors under the Centers for Medicare &amp; Medicaid Services (CMS). The dataset, consisting of state-level averages of common dialysis quality measures, was released on July 19, 2023, through the data.cms.gov website. <span class="citation" data-cites="dialysis2023july"><a href="references.html#ref-dialysis2023july" role="doc-biblioref">[1]</a></span> It comprises a total of 39 variables.</p>
 <p>The structure of the dataset can be categorized into three main components:</p>
 <ol type="1">
 <li>Index Variable: The primary index variable is “State,” encompassing all 50 states and 6 U.S. territories, namely American Samoa, the District of Columbia, Guam, the Northern Mariana Islands, Puerto Rico, and the U.S. Virgin Islands.</li>
@@ -199,6 +218,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<div id="refs" class="references csl-bib-body" role="list" style="display: none">
+<div id="ref-dialysis2023july" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">T. U. of Michigan Kidney Epidemiology and C. Center, <span>“Quarterly dialysis facility care compare (QDFCC) report.”</span> Centers for Medicare &amp; Medicaid Services (CMS), 2023. Available: <a href="https://data.cms.gov/provider-data/dataset/2fpu-cgbb">https://data.cms.gov/provider-data/dataset/2fpu-cgbb</a>. [Accessed: Oct. 11, 2023]</div>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
