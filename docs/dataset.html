@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -49,7 +83,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./summary.html" rel="next">
+<link href="./methods.html" rel="next">
 <link href="./intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -138,14 +172,20 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -174,7 +214,7 @@ div.csl-indent {
 
 </header>
 
-<p>The data used in this analysis was obtained from the “Consumer Assessment of Healthcare Providers and Systems (CAHPS®) In-Center Hemodialysis Survey,” which is administered to in-center hemodialysis (ICH) facilities by approved survey vendors under the Centers for Medicare &amp; Medicaid Services (CMS). The dataset, consisting of state-level averages of common dialysis quality measures, was released on July 19, 2023, through the data.cms.gov website. <span class="citation" data-cites="dialysis2023july"><a href="references.html#ref-dialysis2023july" role="doc-biblioref">[1]</a></span> It comprises a total of 39 variables.</p>
+<p>The data used in this analysis was obtained from the “Consumer Assessment of Healthcare Providers and Systems (CAHPS) In-Center Hemodialysis Survey”, which is administered to in-center hemodialysis (ICH) facilities by approved survey vendors under the Centers for Medicare &amp; Medicaid Services (CMS). The dataset comprises 39 variables consisting of state-level averages of common dialysis quality measures. The version in this analysis was released on July 19, 2023 through the data.cms.gov website. <span class="citation" data-cites="dialysis2023july"><a href="references.html#ref-dialysis2023july" role="doc-biblioref">[1]</a></span></p>
 <p>The structure of the dataset can be categorized into three main components:</p>
 <ol type="1">
 <li>Index Variable: The primary index variable is “State,” encompassing all 50 states and 6 U.S. territories, namely American Samoa, the District of Columbia, Guam, the Northern Mariana Islands, Puerto Rico, and the U.S. Virgin Islands.</li>
@@ -188,8 +228,910 @@ div.csl-indent {
 <li>Classification of Dialysis Patients: Fourteen variables within the dataset classify dialysis patients based on parameters including dialysis adequacy (Kt/V), type of dialysis (hemodialysis vs.&nbsp;peritoneal dialysis), normalized protein catabolic rate (nPCR), hypercalcemia level (Serum Calcium, Mg/dL), serum phosphorus level (Mg/dL), and average hemoglobin (Hgb) level.</li>
 </ol>
 <p>The selection of this dataset for our analysis is driven by its inherent characteristic of multicollinearity among variables, indicating that certain variables are less significant in explaining the variability of the response variables. Additionally, all variables in the dataset are numeric, except for the index variable that is excluded from the subsequent Principal Component Analysis (PCA). Our objective is to utilize this dataset to illustrate the efficacy of PCA in dimension reduction and the efficient visualization of data.</p>
-<section id="visualization-report" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="visualization-report"><span class="header-section-number">2.1</span> Visualization Report</h2>
+<section id="statistical-summary" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="statistical-summary"><span class="header-section-number">2.1</span> Statistical Summary</h2>
+<section id="load-the-dataset" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="load-the-dataset"><span class="header-section-number">2.1.1</span> Load the dataset</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./dataset/DFC_STATE.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The dataset contains 55 observations of 38 variables with 1 discrete variable (States/Territories) and 38 continuous variables. 13 observations have at least 1 missing record, with 34 missing records in total. Most missing data in the dataset occurs in variables relating to pediatric patient data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("vtable")</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">descr</span>(data, <span class="at">plain.ascii =</span> <span class="cn">FALSE</span>, <span class="at">headings =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">'render'</span>) <span class="co"># descriptive statistics for the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="container st-container">
+
+<table class="table table-bordered table-striped st-table st-table-bordered st-table-striped st-descr-table table-sm small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Fistula.Rate<br>
+...As.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Fistula.Rate<br>
+...Better.<br>
+Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Fistula.Rate<br>
+...Worse.<br>
+Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Hospital..<br>
+Readmission<br>
+...Worse.<br>
+Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Hospital.<br>
+Readmission<br>
+...As.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Hospital.<br>
+Readmission<br>
+...Better.<br>
+Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Hospitalizat<br>
+ions..As.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Hospitalizat<br>
+ions..Better<br>
+.Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Hospitalizat<br>
+ions..Worse.<br>
+Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Incident.<br>
+Patients.<br>
+Transplant.<br>
+Waitlisting<br>
+...As.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Incident.<br>
+Patients.<br>
+Transplant.<br>
+Waitlisting<br>
+...Worse.<br>
+Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Incident.<br>
+Patients.<br>
+Transplant.<br>
+Waitlisting<br>
+..Better.<br>
+Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Infection..<br>
+As.expected<br>
+..STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Infection..<br>
+Better.than.<br>
+expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Infection..<br>
+Worse.than.<br>
+expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+of.adult.HD.<br>
+patients.<br>
+with.Kt.V..1<br>
+.2</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Adult.<br>
+Patients.<br>
+With.<br>
+Hypercalcemi<br>
+a..Serum.<br>
+Calcium.<br>
+Greater.Than<br>
+.10.2.Mg.dL.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Adult.<br>
+Patients.<br>
+With.Long.<br>
+Term.<br>
+Catheter.In.<br>
+Use</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Adult.<br>
+Patients.<br>
+With.Serum.<br>
+Phosphorus.<br>
+Between.3.5.<br>
+4.5.Mg.dL</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Adult.<br>
+Patients.<br>
+With.Serum.<br>
+Phosphorus.<br>
+Between.4.6.<br>
+5.5.Mg.dL</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Adult.<br>
+Patients.<br>
+With.Serum.<br>
+Phosphorus.<br>
+Between.5.6.<br>
+7.0.Mg.dL</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Adult.<br>
+Patients.<br>
+With.Serum.<br>
+Phosphorus.<br>
+Greater.Than<br>
+.7.0.Mg.dL</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Adult.<br>
+Patients.<br>
+With.Serum.<br>
+Phosphorus.<br>
+Less.Than.3.<br>
+5.Mg.dL</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Adult.PD.<br>
+Patients.<br>
+With.Kt.V..1<br>
+.7</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Patients.<br>
+With.Hgb.10.<br>
+g.dL</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+of.patients.<br>
+with.Hgb.12.<br>
+g.dL</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Pediatric<br>
+.HD.Patients<br>
+.With.Kt.V..<br>
+1.2</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Pediatric<br>
+.HD.Patients<br>
+.With.nPCR.<br>
+In.Use</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Percentage.<br>
+Of.Pediatric<br>
+.PD.Patients<br>
+.With.Kt.V..<br>
+1.8</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Prevalent.<br>
+Patients.<br>
+Transplant.<br>
+Waitlisting<br>
+...As.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Prevalent.<br>
+Patients.<br>
+Transplant.<br>
+Waitlisting<br>
+...Worse.<br>
+Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Prevalent.<br>
+Patients.<br>
+Transplant.<br>
+Waitlisting<br>
+..Better.<br>
+Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Survival..As<br>
+.Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Survival..<br>
+Better.Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Survival..<br>
+Worse.Than.<br>
+Expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Transfusions<br>
+..As.<br>
+expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Transfusions<br>
+..Better.<br>
+than.<br>
+expected..<br>
+STATE.</th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th">Transfusions<br>
+..Worse.than<br>
+.expected..<br>
+STATE.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Mean</strong></td>
+<td><span>116.57</span></td>
+<td><span>4.93</span></td>
+<td><span>5.25</span></td>
+<td><span>3.50</span></td>
+<td><span>119.59</span></td>
+<td><span>2.45</span></td>
+<td><span>122.96</span></td>
+<td><span>1.25</span></td>
+<td><span>4.93</span></td>
+<td><span>61.02</span></td>
+<td><span>2.86</span></td>
+<td><span>4.71</span></td>
+<td><span>74.00</span></td>
+<td><span>40.00</span></td>
+<td><span>1.14</span></td>
+<td><span>96.40</span></td>
+<td><span>2.40</span></td>
+<td><span>17.02</span></td>
+<td><span>23.13</span></td>
+<td><span>29.09</span></td>
+<td><span>23.71</span></td>
+<td><span>16.45</span></td>
+<td><span>7.60</span></td>
+<td><span>91.72</span></td>
+<td><span>21.47</span></td>
+<td><span>0.24</span></td>
+<td><span>91.20</span></td>
+<td><span>91.02</span></td>
+<td><span>74.54</span></td>
+<td><span>120.91</span></td>
+<td><span>2.89</span></td>
+<td><span>7.84</span></td>
+<td><span>118.93</span></td>
+<td><span>3.48</span></td>
+<td><span>4.12</span></td>
+<td><span>99.23</span></td>
+<td><span>0.18</span></td>
+<td><span>7.29</span></td>
+</tr>
+<tr class="even">
+<td><strong>Std.Dev</strong></td>
+<td><span>137.77</span></td>
+<td><span>9.44</span></td>
+<td><span>8.24</span></td>
+<td><span>6.27</span></td>
+<td><span>143.41</span></td>
+<td><span>3.20</span></td>
+<td><span>144.86</span></td>
+<td><span>2.23</span></td>
+<td><span>10.76</span></td>
+<td><span>84.74</span></td>
+<td><span>5.53</span></td>
+<td><span>9.69</span></td>
+<td><span>80.79</span></td>
+<td><span>54.68</span></td>
+<td><span>1.71</span></td>
+<td><span>1.87</span></td>
+<td><span>4.33</span></td>
+<td><span>3.92</span></td>
+<td><span>2.41</span></td>
+<td><span>1.67</span></td>
+<td><span>1.59</span></td>
+<td><span>3.06</span></td>
+<td><span>1.10</span></td>
+<td><span>4.36</span></td>
+<td><span>7.87</span></td>
+<td><span>0.43</span></td>
+<td><span>10.38</span></td>
+<td><span>14.85</span></td>
+<td><span>23.31</span></td>
+<td><span>144.05</span></td>
+<td><span>3.53</span></td>
+<td><span>24.43</span></td>
+<td><span>141.58</span></td>
+<td><span>5.13</span></td>
+<td><span>6.08</span></td>
+<td><span>120.25</span></td>
+<td><span>0.47</span></td>
+<td><span>9.42</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Min</strong></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>2.00</span></td>
+<td><span>0.00</span></td>
+<td><span>1.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>87.00</span></td>
+<td><span>1.00</span></td>
+<td><span>10.00</span></td>
+<td><span>11.00</span></td>
+<td><span>24.00</span></td>
+<td><span>20.00</span></td>
+<td><span>8.00</span></td>
+<td><span>5.00</span></td>
+<td><span>69.00</span></td>
+<td><span>9.00</span></td>
+<td><span>0.00</span></td>
+<td><span>47.00</span></td>
+<td><span>15.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>2.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>1.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+</tr>
+<tr class="even">
+<td><strong>Q1</strong></td>
+<td><span>24.50</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>22.50</span></td>
+<td><span>0.00</span></td>
+<td><span>26.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>8.50</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>13.00</span></td>
+<td><span>5.50</span></td>
+<td><span>0.00</span></td>
+<td><span>96.00</span></td>
+<td><span>1.00</span></td>
+<td><span>15.00</span></td>
+<td><span>22.00</span></td>
+<td><span>28.00</span></td>
+<td><span>23.00</span></td>
+<td><span>15.00</span></td>
+<td><span>7.00</span></td>
+<td><span>90.00</span></td>
+<td><span>18.00</span></td>
+<td><span>0.00</span></td>
+<td><span>86.00</span></td>
+<td><span>89.00</span></td>
+<td><span>64.00</span></td>
+<td><span>26.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>23.00</span></td>
+<td><span>0.00</span></td>
+<td><span>0.00</span></td>
+<td><span>21.50</span></td>
+<td><span>0.00</span></td>
+<td><span>1.00</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Median</strong></td>
+<td><span>66.00</span></td>
+<td><span>2.00</span></td>
+<td><span>1.00</span></td>
+<td><span>1.00</span></td>
+<td><span>68.50</span></td>
+<td><span>1.50</span></td>
+<td><span>71.50</span></td>
+<td><span>1.00</span></td>
+<td><span>1.00</span></td>
+<td><span>32.00</span></td>
+<td><span>1.00</span></td>
+<td><span>1.00</span></td>
+<td><span>47.50</span></td>
+<td><span>22.00</span></td>
+<td><span>0.00</span></td>
+<td><span>97.00</span></td>
+<td><span>2.00</span></td>
+<td><span>17.00</span></td>
+<td><span>23.00</span></td>
+<td><span>29.00</span></td>
+<td><span>24.00</span></td>
+<td><span>16.00</span></td>
+<td><span>8.00</span></td>
+<td><span>93.00</span></td>
+<td><span>20.00</span></td>
+<td><span>0.00</span></td>
+<td><span>93.00</span></td>
+<td><span>96.00</span></td>
+<td><span>80.50</span></td>
+<td><span>63.00</span></td>
+<td><span>2.00</span></td>
+<td><span>1.00</span></td>
+<td><span>67.50</span></td>
+<td><span>1.00</span></td>
+<td><span>1.00</span></td>
+<td><span>53.00</span></td>
+<td><span>0.00</span></td>
+<td><span>3.00</span></td>
+</tr>
+<tr class="even">
+<td><strong>Q3</strong></td>
+<td><span>158.50</span></td>
+<td><span>5.50</span></td>
+<td><span>7.00</span></td>
+<td><span>3.00</span></td>
+<td><span>157.50</span></td>
+<td><span>3.50</span></td>
+<td><span>169.50</span></td>
+<td><span>2.00</span></td>
+<td><span>4.50</span></td>
+<td><span>80.00</span></td>
+<td><span>3.00</span></td>
+<td><span>4.50</span></td>
+<td><span>107.00</span></td>
+<td><span>52.00</span></td>
+<td><span>2.00</span></td>
+<td><span>97.00</span></td>
+<td><span>2.00</span></td>
+<td><span>18.00</span></td>
+<td><span>24.00</span></td>
+<td><span>30.00</span></td>
+<td><span>24.00</span></td>
+<td><span>18.00</span></td>
+<td><span>8.00</span></td>
+<td><span>94.00</span></td>
+<td><span>23.00</span></td>
+<td><span>0.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>93.00</span></td>
+<td><span>168.00</span></td>
+<td><span>4.50</span></td>
+<td><span>4.00</span></td>
+<td><span>161.00</span></td>
+<td><span>4.50</span></td>
+<td><span>5.00</span></td>
+<td><span>135.50</span></td>
+<td><span>0.00</span></td>
+<td><span>10.50</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Max</strong></td>
+<td><span>659.00</span></td>
+<td><span>50.00</span></td>
+<td><span>40.00</span></td>
+<td><span>38.00</span></td>
+<td><span>665.00</span></td>
+<td><span>17.00</span></td>
+<td><span>675.00</span></td>
+<td><span>15.00</span></td>
+<td><span>67.00</span></td>
+<td><span>420.00</span></td>
+<td><span>34.00</span></td>
+<td><span>52.00</span></td>
+<td><span>397.00</span></td>
+<td><span>290.00</span></td>
+<td><span>8.00</span></td>
+<td><span>99.00</span></td>
+<td><span>33.00</span></td>
+<td><span>29.00</span></td>
+<td><span>27.00</span></td>
+<td><span>32.00</span></td>
+<td><span>29.00</span></td>
+<td><span>26.00</span></td>
+<td><span>11.00</span></td>
+<td><span>96.00</span></td>
+<td><span>60.00</span></td>
+<td><span>1.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>714.00</span></td>
+<td><span>18.00</span></td>
+<td><span>168.00</span></td>
+<td><span>657.00</span></td>
+<td><span>24.00</span></td>
+<td><span>24.00</span></td>
+<td><span>596.00</span></td>
+<td><span>2.00</span></td>
+<td><span>47.00</span></td>
+</tr>
+<tr class="even">
+<td><strong>MAD</strong></td>
+<td><span>76.35</span></td>
+<td><span>2.97</span></td>
+<td><span>1.48</span></td>
+<td><span>1.48</span></td>
+<td><span>80.80</span></td>
+<td><span>2.22</span></td>
+<td><span>83.03</span></td>
+<td><span>1.48</span></td>
+<td><span>1.48</span></td>
+<td><span>43.00</span></td>
+<td><span>1.48</span></td>
+<td><span>1.48</span></td>
+<td><span>54.86</span></td>
+<td><span>26.69</span></td>
+<td><span>0.00</span></td>
+<td><span>1.48</span></td>
+<td><span>1.48</span></td>
+<td><span>2.97</span></td>
+<td><span>1.48</span></td>
+<td><span>1.48</span></td>
+<td><span>1.48</span></td>
+<td><span>2.97</span></td>
+<td><span>1.48</span></td>
+<td><span>2.97</span></td>
+<td><span>4.45</span></td>
+<td><span>0.00</span></td>
+<td><span>10.38</span></td>
+<td><span>5.93</span></td>
+<td><span>20.02</span></td>
+<td><span>77.84</span></td>
+<td><span>2.97</span></td>
+<td><span>1.48</span></td>
+<td><span>77.10</span></td>
+<td><span>1.48</span></td>
+<td><span>1.48</span></td>
+<td><span>62.27</span></td>
+<td><span>0.00</span></td>
+<td><span>4.45</span></td>
+</tr>
+<tr class="odd">
+<td><strong>IQR</strong></td>
+<td><span>132.50</span></td>
+<td><span>5.25</span></td>
+<td><span>6.50</span></td>
+<td><span>3.00</span></td>
+<td><span>133.00</span></td>
+<td><span>3.25</span></td>
+<td><span>142.25</span></td>
+<td><span>2.00</span></td>
+<td><span>4.25</span></td>
+<td><span>70.25</span></td>
+<td><span>3.00</span></td>
+<td><span>4.25</span></td>
+<td><span>92.50</span></td>
+<td><span>45.25</span></td>
+<td><span>2.00</span></td>
+<td><span>1.00</span></td>
+<td><span>1.00</span></td>
+<td><span>3.00</span></td>
+<td><span>2.00</span></td>
+<td><span>2.00</span></td>
+<td><span>1.00</span></td>
+<td><span>3.00</span></td>
+<td><span>1.00</span></td>
+<td><span>4.00</span></td>
+<td><span>5.00</span></td>
+<td><span>0.00</span></td>
+<td><span>14.00</span></td>
+<td><span>10.50</span></td>
+<td><span>28.50</span></td>
+<td><span>139.00</span></td>
+<td><span>4.25</span></td>
+<td><span>4.00</span></td>
+<td><span>136.50</span></td>
+<td><span>4.25</span></td>
+<td><span>5.00</span></td>
+<td><span>111.50</span></td>
+<td><span>0.00</span></td>
+<td><span>9.25</span></td>
+</tr>
+<tr class="even">
+<td><strong>CV</strong></td>
+<td><span>1.18</span></td>
+<td><span>1.92</span></td>
+<td><span>1.57</span></td>
+<td><span>1.79</span></td>
+<td><span>1.20</span></td>
+<td><span>1.31</span></td>
+<td><span>1.18</span></td>
+<td><span>1.78</span></td>
+<td><span>2.18</span></td>
+<td><span>1.39</span></td>
+<td><span>1.93</span></td>
+<td><span>2.06</span></td>
+<td><span>1.09</span></td>
+<td><span>1.37</span></td>
+<td><span>1.50</span></td>
+<td><span>0.02</span></td>
+<td><span>1.80</span></td>
+<td><span>0.23</span></td>
+<td><span>0.10</span></td>
+<td><span>0.06</span></td>
+<td><span>0.07</span></td>
+<td><span>0.19</span></td>
+<td><span>0.14</span></td>
+<td><span>0.05</span></td>
+<td><span>0.37</span></td>
+<td><span>1.81</span></td>
+<td><span>0.11</span></td>
+<td><span>0.16</span></td>
+<td><span>0.31</span></td>
+<td><span>1.19</span></td>
+<td><span>1.22</span></td>
+<td><span>3.12</span></td>
+<td><span>1.19</span></td>
+<td><span>1.47</span></td>
+<td><span>1.48</span></td>
+<td><span>1.21</span></td>
+<td><span>2.64</span></td>
+<td><span>1.29</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Skewness</strong></td>
+<td><span>2.10</span></td>
+<td><span>3.36</span></td>
+<td><span>2.01</span></td>
+<td><span>3.38</span></td>
+<td><span>2.09</span></td>
+<td><span>2.33</span></td>
+<td><span>2.11</span></td>
+<td><span>4.35</span></td>
+<td><span>3.96</span></td>
+<td><span>2.73</span></td>
+<td><span>3.66</span></td>
+<td><span>3.54</span></td>
+<td><span>1.78</span></td>
+<td><span>2.64</span></td>
+<td><span>1.80</span></td>
+<td><span>-2.89</span></td>
+<td><span>6.42</span></td>
+<td><span>1.04</span></td>
+<td><span>-2.29</span></td>
+<td><span>-0.66</span></td>
+<td><span>0.85</span></td>
+<td><span>0.19</span></td>
+<td><span>0.33</span></td>
+<td><span>-2.84</span></td>
+<td><span>2.74</span></td>
+<td><span>1.21</span></td>
+<td><span>-1.85</span></td>
+<td><span>-3.16</span></td>
+<td><span>-1.27</span></td>
+<td><span>2.06</span></td>
+<td><span>1.90</span></td>
+<td><span>5.27</span></td>
+<td><span>2.14</span></td>
+<td><span>2.26</span></td>
+<td><span>1.96</span></td>
+<td><span>2.31</span></td>
+<td><span>2.58</span></td>
+<td><span>2.22</span></td>
+</tr>
+<tr class="even">
+<td><strong>SE.Skewness</strong></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.34</span></td>
+<td><span>0.33</span></td>
+<td><span>0.35</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+<td><span>0.32</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Kurtosis</strong></td>
+<td><span>4.76</span></td>
+<td><span>11.89</span></td>
+<td><span>4.18</span></td>
+<td><span>14.26</span></td>
+<td><span>4.73</span></td>
+<td><span>6.70</span></td>
+<td><span>4.91</span></td>
+<td><span>23.38</span></td>
+<td><span>18.22</span></td>
+<td><span>8.09</span></td>
+<td><span>16.04</span></td>
+<td><span>12.93</span></td>
+<td><span>3.58</span></td>
+<td><span>7.99</span></td>
+<td><span>3.26</span></td>
+<td><span>11.35</span></td>
+<td><span>42.31</span></td>
+<td><span>1.57</span></td>
+<td><span>9.58</span></td>
+<td><span>0.57</span></td>
+<td><span>1.26</span></td>
+<td><span>1.71</span></td>
+<td><span>0.59</span></td>
+<td><span>11.47</span></td>
+<td><span>10.10</span></td>
+<td><span>-0.55</span></td>
+<td><span>4.79</span></td>
+<td><span>11.98</span></td>
+<td><span>1.43</span></td>
+<td><span>4.66</span></td>
+<td><span>4.55</span></td>
+<td><span>30.44</span></td>
+<td><span>4.95</span></td>
+<td><span>5.33</span></td>
+<td><span>3.11</span></td>
+<td><span>6.09</span></td>
+<td><span>5.98</span></td>
+<td><span>5.96</span></td>
+</tr>
+<tr class="even">
+<td><strong>N.Valid</strong></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>55</span></td>
+<td><span>55</span></td>
+<td><span>55</span></td>
+<td><span>55</span></td>
+<td><span>55</span></td>
+<td><span>55</span></td>
+<td><span>55</span></td>
+<td><span>55</span></td>
+<td><span>54</span></td>
+<td><span>55</span></td>
+<td><span>55</span></td>
+<td><span>49</span></td>
+<td><span>51</span></td>
+<td><span>46</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+<td><span>56</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Pct.Valid</strong></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>98.21</span></td>
+<td><span>98.21</span></td>
+<td><span>98.21</span></td>
+<td><span>98.21</span></td>
+<td><span>98.21</span></td>
+<td><span>98.21</span></td>
+<td><span>98.21</span></td>
+<td><span>98.21</span></td>
+<td><span>96.43</span></td>
+<td><span>98.21</span></td>
+<td><span>98.21</span></td>
+<td><span>87.50</span></td>
+<td><span>91.07</span></td>
+<td><span>82.14</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+<td><span>100.00</span></td>
+</tr>
+</tbody>
+</table>
+
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.3.1)<br>2023-10-11</p>
+</div>
+</div>
+</div>
+<p>The histograms of the data reveal that majority of the variables are skewed right, with the QQ plots supporting that very few of the variables are normally distributed. Finally, many of the variables are highly correlated as expected based on the design of the dataset.</p>
+</section>
+</section>
+<section id="visualization-report" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="visualization-report"><span class="header-section-number">2.2</span> Visualization Report</h2>
 
 
 
@@ -220,7 +1162,7 @@ div.csl-indent {
 
 <div id="refs" class="references csl-bib-body" role="list" style="display: none">
 <div id="ref-dialysis2023july" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">T. U. of Michigan Kidney Epidemiology and C. Center, <span>“Quarterly dialysis facility care compare (QDFCC) report.”</span> Centers for Medicare &amp; Medicaid Services (CMS), 2023. Available: <a href="https://data.cms.gov/provider-data/dataset/2fpu-cgbb">https://data.cms.gov/provider-data/dataset/2fpu-cgbb</a>. [Accessed: Oct. 11, 2023]</div>
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Quarterly dialysis facility care compare (QDFCC) report: July 2023.”</span> Centers for Medicare &amp; Medicaid Services (CMS). Available: <a href="https://data.cms.gov/provider-data/dataset/2fpu-cgbb">https://data.cms.gov/provider-data/dataset/2fpu-cgbb</a>. [Accessed: Oct. 11, 2023]</div>
 </div>
 </div>
 </section>
@@ -466,8 +1408,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./summary.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./methods.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

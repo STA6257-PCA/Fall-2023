@@ -5,7 +5,7 @@
 rm(list = ls())
 
 # original dataset link: 
-#https://data.cms.gov/provider-data/dataset/2fpu-cgbb
+# https://data.cms.gov/provider-data/dataset/2fpu-cgbb
 
 # Load dataset
 train_original <- read.csv('../dataset/DFC_STATE.csv')
@@ -29,7 +29,7 @@ create_report(train_data)
 create_report(
   train_data,
   output_file = "report.html",
-  #output_dir = "docs/",
+  # output_dir = "docs/",
   config = configure_report(),
   report_title = "Exploratory Data Analysis"
 )

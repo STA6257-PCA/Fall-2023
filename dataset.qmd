@@ -6,7 +6,7 @@ format:
 
 # Dataset {#dataset}
 
-The data used in this analysis was obtained from the "Consumer Assessment of Healthcare Providers and Systems (CAHPS®) In-Center Hemodialysis Survey," which is administered to in-center hemodialysis (ICH) facilities by approved survey vendors under the Centers for Medicare & Medicaid Services (CMS). The dataset, consisting of state-level averages of common dialysis quality measures, was released on July 19, 2023, through the data.cms.gov website. @dialysis2023july It comprises a total of 39 variables.
+The data used in this analysis was obtained from the "Consumer Assessment of Healthcare Providers and Systems (CAHPS) In-Center Hemodialysis Survey", which is administered to in-center hemodialysis (ICH) facilities by approved survey vendors under the Centers for Medicare & Medicaid Services (CMS). The dataset comprises 39 variables consisting of state-level averages of common dialysis quality measures. The version in this analysis was released on July 19, 2023 through the data.cms.gov website. @dialysis2023july
 
 The structure of the dataset can be categorized into three main components:
 
@@ -21,6 +21,26 @@ The structure of the dataset can be categorized into three main components:
 3.  Classification of Dialysis Patients: Fourteen variables within the dataset classify dialysis patients based on parameters including dialysis adequacy (Kt/V), type of dialysis (hemodialysis vs. peritoneal dialysis), normalized protein catabolic rate (nPCR), hypercalcemia level (Serum Calcium, Mg/dL), serum phosphorus level (Mg/dL), and average hemoglobin (Hgb) level.
 
 The selection of this dataset for our analysis is driven by its inherent characteristic of multicollinearity among variables, indicating that certain variables are less significant in explaining the variability of the response variables. Additionally, all variables in the dataset are numeric, except for the index variable that is excluded from the subsequent Principal Component Analysis (PCA). Our objective is to utilize this dataset to illustrate the efficacy of PCA in dimension reduction and the efficient visualization of data.
+
+## Statistical Summary
+
+The dataset contains 55 observations of 38 variables with 1 discrete variable (States/Territories) and 38 continuous variables. 13 observations have at least 1 missing record, with 34 missing records in total. Most missing data in the dataset occurs in variables relating to pediatric patient data.
+
+```{r, warning = FALSE, message = FALSE}
+# Load the dataset
+data <- read.csv('./dataset/DFC_STATE.csv')
+
+# install.packages("vtable")
+library(summarytools)
+
+print(
+  descr(data, plain.ascii = FALSE, headings = FALSE),
+  method = 'render') # descriptive statistics for the dataset
+```
+
+
+
+The histograms of the data reveal that majority of the variables are skewed right, with the QQ plots supporting that very few of the variables are normally distributed. Finally, many of the variables are highly correlated as expected based on the design of the dataset.
 
 ## Visualization Report
 
