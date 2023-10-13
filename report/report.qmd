@@ -16,14 +16,14 @@ train_data <- train_original
 
 ## Libraries
 
-```{r, warning=FALSE}
+```{r, warning = FALSE}
 # install.packages("DataExplorer")
 library(DataExplorer)
 ```
 
 ## Create EDA Report
 
-```{r}
+```{r, warning = FALSE}
 # Create HTML report
 create_report(train_data)
 create_report(

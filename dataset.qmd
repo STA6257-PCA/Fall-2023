@@ -36,7 +36,7 @@ print(
 
 <br>
 
-The summary statistics show that measurements are mostly consistent across variables, with most means and variances falling within ranges of less than 10 or greater than 100. The majority of the data skew to the right, shown also in the histogram plots in the visualization report. Additionally, the QQ plots support that very few of the variables are normally distributed. Many of the variables are highly correlated as expected based on the design of the dataset.
+The summary statistics show that measurements are mostly consistent across variables, with most means and variances falling in ranges of less than 10 or greater than 100. The majority of the data skew to the right, shown also in the histogram plots in the visualization report. Additionally, the QQ plots support that very few of the variables are normally distributed. Many of the variables are highly correlated as expected based on the design of the dataset.
 
 ## Visualization Report
 
