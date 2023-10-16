@@ -149,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link active" data-scroll-target="#assumptions"><span class="header-section-number">3.1</span> Assumptions</a></li>
   <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link" data-scroll-target="#preprocessing"><span class="header-section-number">3.2</span> Preprocessing</a></li>
-  <li><a href="#principal-component-analysis" id="toc-principal-component-analysis" class="nav-link" data-scroll-target="#principal-component-analysis"><span class="header-section-number">3.3</span> Principal Component Analysis</a></li>
+  <li><a href="#principal-component-analysis-via-singular-value-decomposition" id="toc-principal-component-analysis-via-singular-value-decomposition" class="nav-link" data-scroll-target="#principal-component-analysis-via-singular-value-decomposition"><span class="header-section-number">3.3</span> Principal Component Analysis via Singular Value Decomposition</a></li>
   </ul>
 </nav>
     </div>
@@ -180,14 +180,18 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="preprocessing" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="preprocessing"><span class="header-section-number">3.2</span> Preprocessing</h2>
-<p>Preprocessing data for PCA is straightforward. Missing data should be handled using a method appropriate for the dataset, such as imputation based on the mean or median of the variable observations. After this the variables should be centered and scaled, to a mean of 0 and a standard deviation of 1, although statistical software libraries for SVD and PCA may include this as an option within the function.[ref]</p>
+<p>Preprocessing data for PCA is straightforward. Missing data should be handled using a method appropriate for the dataset, such as imputation based on the mean or median of the variable observations. After this the variables should be centered and scaled, to a mean of 0 and a standard deviation of 1, although statistical software libraries for SVD and PCA may include this as an option within the function. [ref]</p>
 </section>
-<section id="principal-component-analysis" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="principal-component-analysis"><span class="header-section-number">3.3</span> Principal Component Analysis</h2>
-<p>Let our dataset be represented by the I x J matrix X comprised of I observations of J variables in the data set. Any element xij represents the ith observation of variable j in the dataset. The data in X is centered and scaled , such that the mean of each column Xj is 0 and every xij has been standardized with unit variance. We can represent this with the formula:</p>
+<section id="principal-component-analysis-via-singular-value-decomposition" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="principal-component-analysis-via-singular-value-decomposition"><span class="header-section-number">3.3</span> Principal Component Analysis via Singular Value Decomposition</h2>
+<p>Let our dataset be represented by the <span class="math inline">\(N \times P\)</span> matrix <span class="math inline">\(X\)</span> comprised of <span class="math inline">\(N\)</span> observations of <span class="math inline">\(P\)</span> variables in the data set, where any element <span class="math inline">\(x_{np}\)</span> represents the <span class="math inline">\(n\)</span>th observation of variable <span class="math inline">\(p\)</span> in the dataset and matrix <span class="math inline">\(X\)</span> has rank <span class="math inline">\(R\)</span> where <span class="math inline">\(R \leq min\{N, P\}\)</span>. The data in <span class="math inline">\(X\)</span> is centered and scaled, such that the mean of each column <span class="math inline">\(X_p\)</span> is 0 and every <span class="math inline">\(x_np\)</span> has been standardized with unit variance. We can represent this with the formula:</p>
 <p><span id="eq-1"><span class="math display">\[
-z_{ij} = \frac{x_{ij} - \bar{x}_{j}}{\sqrt{\sigma_{j}}}
+z_{np} = \frac{x_{np} - \bar{x}_{p}}{\sqrt{\sigma_{p}}}
 \tag{3.1}\]</span></span></p>
+<p>Next we define the singular value decomposition of <span class="math inline">\(X\)</span>. Let <span class="math inline">\(L\)</span> be the <span class="math inline">\(N \times R\)</span> matrix of left singular vectors of the matrix; that is, the columns of <span class="math inline">\(L\)</span> are made up of the eigenvectors of <span class="math inline">\(XX^T\)</span>. Let <span class="math inline">\(R\)</span> be the <span class="math inline">\(P \times R\)</span> matrix of right singular vector; the columns of <span class="math inline">\(R\)</span> are made up of the eigenvectors of <span class="math inline">\(X^TX\)</span>. Finally, let <span class="math inline">\(D\)</span> be the diagonal matrix of singular values, meaning the singular values in <span class="math inline">\(D\)</span> are the square roots of the eigenvalues of <span class="math inline">\(XX^T\)</span> and <span class="math inline">\(X^TX\)</span>, and <span class="math inline">\(D^2\)</span> is defined as the diagonal matrix of the non-zero eigenvalues. [ref] We can define the singular value decomposition of matrix <span class="math inline">\(X\)</span> as:</p>
+<p><span class="math display">\[
+X = LD{R}^T
+\]</span></p>
 
 
 </section>

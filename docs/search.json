@@ -95,7 +95,7 @@
     "href": "methods.html#preprocessing",
     "title": "3  Methods",
     "section": "3.2 Preprocessing",
-    "text": "3.2 Preprocessing\nPreprocessing data for PCA is straightforward. Missing data should be handled using a method appropriate for the dataset, such as imputation based on the mean or median of the variable observations. After this the variables should be centered and scaled, to a mean of 0 and a standard deviation of 1, although statistical software libraries for SVD and PCA may include this as an option within the function.[ref]"
+    "text": "3.2 Preprocessing\nPreprocessing data for PCA is straightforward. Missing data should be handled using a method appropriate for the dataset, such as imputation based on the mean or median of the variable observations. After this the variables should be centered and scaled, to a mean of 0 and a standard deviation of 1, although statistical software libraries for SVD and PCA may include this as an option within the function. [ref]"
   },
   {
     "objectID": "methods.html#pca",
@@ -117,5 +117,12 @@
     "title": "3  Methods",
     "section": "3.3 Principal Component Analysis",
     "text": "3.3 Principal Component Analysis\nLet our dataset be represented by the I x J matrix X comprised of I observations of J variables in the data set. Any element xij represents the ith observation of variable j in the dataset. The data in X is centered and scaled , such that the mean of each column Xj is 0 and every xij has been standardized with unit variance. We can represent this with the formula:\n\\[\nz_{ij} = \\frac{x_{ij} - \\bar{x}_{j}}{\\sqrt{\\sigma_{j}}}\n\\tag{3.1}\\]"
+  },
+  {
+    "objectID": "methods.html#principal-component-analysis-via-singular-value-decomposition",
+    "href": "methods.html#principal-component-analysis-via-singular-value-decomposition",
+    "title": "3  Methods",
+    "section": "3.3 Principal Component Analysis via Singular Value Decomposition",
+    "text": "3.3 Principal Component Analysis via Singular Value Decomposition\nLet our dataset be represented by the \\(N \\times P\\) matrix \\(X\\) comprised of \\(N\\) observations of \\(P\\) variables in the data set, where any element \\(x_{np}\\) represents the \\(n\\)th observation of variable \\(p\\) in the dataset and matrix \\(X\\) has rank \\(R\\) where \\(R \\leq min\\{N, P\\}\\). The data in \\(X\\) is centered and scaled, such that the mean of each column \\(X_p\\) is 0 and every \\(x_np\\) has been standardized with unit variance. We can represent this with the formula:\n\\[\nz_{np} = \\frac{x_{np} - \\bar{x}_{p}}{\\sqrt{\\sigma_{p}}}\n\\tag{3.1}\\]\nNext we define the singular value decomposition of \\(X\\). Let \\(L\\) be the \\(N \\times R\\) matrix of left singular vectors of the matrix; that is, the columns of \\(L\\) are made up of the eigenvectors of \\(XX^T\\). Let \\(R\\) be the \\(P \\times R\\) matrix of right singular vector; the columns of \\(R\\) are made up of the eigenvectors of \\(X^TX\\). Finally, let \\(D\\) be the diagonal matrix of singular values, meaning the singular values in \\(D\\) are the square roots of the eigenvalues of \\(XX^T\\) and \\(X^TX\\), and \\(D^2\\) is defined as the diagonal matrix of the non-zero eigenvalues. [ref] We can define the singular value decomposition of matrix \\(X\\) as:\n\\[\nX = LD{R}^T\n\\]"
   }
 ]
