@@ -86,14 +86,14 @@
   {
     "objectID": "methods.html#assumptions",
     "href": "methods.html#assumptions",
-    "title": "3  Methods (under construction)",
+    "title": "3  Methods",
     "section": "3.1 Assumptions",
     "text": "3.1 Assumptions\nFor PCA to be effective, the data should be continuous (although adaptations of PCA exist for other numeric data structures [ref]) and normally distributed, although the the distribution of the data does not truly matter for the use of PCA as an investigative tool. More importantly, the data should be linearly related or the linear combinations of the principal components cannot meaningfully capture the variance of the data. Ideally, the variables should be similar in scale and free from extreme or missing values, although this can be addressed in preprocessing, and implementations of PCA such as robust PCA have been developed to address these challenges. [ref]"
   },
   {
     "objectID": "methods.html#preprocessing",
     "href": "methods.html#preprocessing",
-    "title": "3  Methods (under construction)",
+    "title": "3  Methods",
     "section": "3.2 Preprocessing",
     "text": "3.2 Preprocessing\nPreprocessing data for PCA is straightforward. Missing data should be handled using a method appropriate for the dataset, such as imputation based on the mean or median of the variable observations. After this the variables should be centered and scaled, to a mean of 0 and a standard deviation of 1, although statistical software libraries for SVD and PCA may include this as an option within the function.[ref]"
   },
@@ -110,5 +110,12 @@
     "title": "3  Methods (under construction)",
     "section": "3.3 PCA (proper latex formatting coming soon)",
     "text": "3.3 PCA (proper latex formatting coming soon)\nLet our dataset be represented by the I x J matrix X comprised of I observations of J variables in the data set. Any element xij represents the ith observation of variable j in the dataset. The data in X is centered and scaled , such that the mean of each column Xj is 0 and every xij has been standardized with unit variance. We can represent this with the formula:\n\\[\nz_{ij} = \\frac{x_{ij} - \\bar{x}_{j}}{\\sqrt{\\sigma_{j}}}\n\\tag{3.1}\\]"
+  },
+  {
+    "objectID": "methods.html#principal-component-analysis",
+    "href": "methods.html#principal-component-analysis",
+    "title": "3  Methods",
+    "section": "3.3 Principal Component Analysis",
+    "text": "3.3 Principal Component Analysis\nLet our dataset be represented by the I x J matrix X comprised of I observations of J variables in the data set. Any element xij represents the ith observation of variable j in the dataset. The data in X is centered and scaled , such that the mean of each column Xj is 0 and every xij has been standardized with unit variance. We can represent this with the formula:\n\\[\nz_{ij} = \\frac{x_{ij} - \\bar{x}_{j}}{\\sqrt{\\sigma_{j}}}\n\\tag{3.1}\\]"
   }
 ]
