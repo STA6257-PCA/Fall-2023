@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -177,44 +196,64 @@ ul.task-list li input[type="checkbox"] {
 <p>The aim of Principal component analysis (PCA) is to reduce the dimensionality of multivariate data while preserving the variability present in the data. The principal components derived from the dataset are orthogonal variables represented by linear combinations of the original variables which maximize variance. The first principal component (PC) captures the most variance, followed by the second orthogonal principal component, and so on. There can be as many PCs as there are variables in the original data, but the technique is typically used to simplify high-dimension data for improved interpretability. Principal components can be calculated using eigenvalue decomposition or the singular value decomposition (SVD) of the data matrix, so data must be preproccesed and several assumptions met for PCA to yield meaningful results.</p>
 <section id="assumptions" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">3.1</span> Assumptions</h2>
-<p>For PCA to be effective, the data should be continuous (although adaptations of PCA exist for other numeric data structures [ref]) and normally distributed, although the the distribution of the data does not truly matter for the use of PCA as an investigative tool. More importantly, the data should be linearly related or the linear combinations of the principal components cannot meaningfully capture the variance of the data. Ideally, the variables should be similar in scale and free from extreme or missing values, although this can be addressed in preprocessing, and implementations of PCA such as robust PCA have been developed to address these challenges. [ref]</p>
+<p>For PCA to be effective, the data should be continuous (although adaptations of PCA exist for other numeric data structures) and normally distributed, although the the distribution of the data does not truly matter when utilizing PCA as an exploratory methodology. More importantly, the data should be linearly related or the linear combinations of the principal components cannot meaningfully capture the variance of the data. Ideally, the variables should be similar in scale and free from extreme or missing values, although this can be addressed in preprocessing, and implementations of PCA such as robust PCA have been developed to address these challenges. <span class="citation" data-cites="jolliffe2016principal"><a href="references.html#ref-jolliffe2016principal" role="doc-biblioref">[1]</a></span></p>
 </section>
 <section id="preprocessing" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="preprocessing"><span class="header-section-number">3.2</span> Preprocessing</h2>
-<p>Preprocessing data for PCA is straightforward. Missing data should be handled using a method appropriate for the dataset, such as imputation based on the mean or median of the variable observations. After this the variables should be centered and scaled, to a mean of 0 and a standard deviation of 1, although statistical software libraries for SVD and PCA may include this as an option within the function. [ref]</p>
+<p>Preprocessing data for PCA is straightforward. Missing data should be handled using a method appropriate for the dataset, such as imputation based on the mean or median of the variable observations. After this the variables should be centered and scaled, to a mean of 0 and a standard deviation of 1, although statistical software libraries for SVD and PCA may include this as an option within the function. <span class="citation" data-cites="prcomp2023ref"><a href="references.html#ref-prcomp2023ref" role="doc-biblioref">[2]</a></span></p>
 </section>
 <section id="principal-component-analysis-via-singular-value-decomposition" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="principal-component-analysis-via-singular-value-decomposition"><span class="header-section-number">3.3</span> Principal Component Analysis via Singular Value Decomposition</h2>
-<p>In this approach to PCA, SVD is used to extract the most information (variance) from the data matrix while reducing the dimensionality of the data. The first PC will have the largest possible variance (also called inertia), whose value is defined as a factor score. Factor scores represent a geometric projection of the observations onto the PCs. The calculation of PCs via SVD can be understood with the implementation of matrix operations on a dataset.</p>
-<p>Let our dataset be represented by the <span class="math inline">\(N \times P\)</span> matrix <span class="math inline">\(X\)</span> comprised of <span class="math inline">\(N\)</span> observations of <span class="math inline">\(P\)</span> variables in the data set, where any element <span class="math inline">\(x_{np}\)</span> represents the <span class="math inline">\(n\)</span>th observation of variable <span class="math inline">\(p\)</span> in the dataset and matrix <span class="math inline">\(X\)</span> has rank <span class="math inline">\(R\)</span> where <span class="math inline">\(R \leq min\{N, P\}\)</span>. The data in <span class="math inline">\(X\)</span> is centered and scaled, such that the mean of each column <span class="math inline">\(X_p\)</span> is 0 and every <span class="math inline">\(x_np\)</span> has been standardized with unit variance. We can represent this with the formula:</p>
+<p>In this approach to PCA, SVD is used to extract the most information (variance) from the data matrix while reducing the dimensionality of the data. The first PC will have the largest possible variance (also called inertia), whose value is defined as a factor score. Factor scores represent a geometric projection of the observations onto the PCs. The calculation of PCs via SVD can be understood with the implementation of matrix operations on a dataset. <span class="citation" data-cites="hopcroft2014foundations"><a href="references.html#ref-hopcroft2014foundations" role="doc-biblioref">[3]</a></span></p>
+<p>Let our dataset be represented by the <span class="math inline">\(N \times P\)</span> matrix <span class="math inline">\(X\)</span> comprised of <span class="math inline">\(N\)</span> observations of <span class="math inline">\(P\)</span> variables in the data set, where any element <span class="math inline">\(x_{np}\)</span> represents the <span class="math inline">\(n\)</span>th observation of variable <span class="math inline">\(p\)</span> in the dataset. The matrix <span class="math inline">\(X\)</span> has rank <span class="math inline">\(K\)</span> where <span class="math inline">\(K \leq min\{N, P\}\)</span>. The data in <span class="math inline">\(X\)</span> is centered and scaled, such that the mean of each column <span class="math inline">\(X_p\)</span> is 0 and every <span class="math inline">\(x_{np}\)</span> has been standardized with unit variance. We can represent this with the formula:</p>
 <p><span id="eq-1"><span class="math display">\[
 z_{np} = \frac{x_{np} - \bar{x}_{p}}{\sqrt{\sigma_{p}}}
 \tag{3.1}\]</span></span></p>
-<p>Next we define the singular value decomposition of <span class="math inline">\(X\)</span>. Let <span class="math inline">\(L\)</span> be the <span class="math inline">\(N \times R\)</span> matrix of left singular vectors of the matrix; that is, the columns of <span class="math inline">\(L\)</span> are made up of the eigenvectors of <span class="math inline">\(XX^T\)</span>. Let <span class="math inline">\(R\)</span> be the <span class="math inline">\(P \times R\)</span> matrix of right singular vector; the columns of <span class="math inline">\(R\)</span> are made up of the eigenvectors of <span class="math inline">\(X^TX\)</span>. Finally, let <span class="math inline">\(D\)</span> be the diagonal matrix of singular values, meaning the singular values in <span class="math inline">\(D\)</span> are the square roots of the eigenvalues of <span class="math inline">\(XX^T\)</span> and <span class="math inline">\(X^TX\)</span>, and <span class="math inline">\(D^2\)</span> is defined as the diagonal matrix of the non-zero eigenvalues. [ref] We can define the singular value decomposition of matrix <span class="math inline">\(X\)</span> as:</p>
+<p>Next we define the singular value decomposition of <span class="math inline">\(X\)</span>. Let <span class="math inline">\(L\)</span> be the <span class="math inline">\(N \times K\)</span> matrix of left singular vectors of the matrix; that is, the columns of <span class="math inline">\(L\)</span> are made up of the eigenvectors of <span class="math inline">\(XX^T\)</span>. Let <span class="math inline">\(R\)</span> be the <span class="math inline">\(P \times K\)</span> matrix of right singular vector; the columns of <span class="math inline">\(R\)</span> are made up of the eigenvectors of <span class="math inline">\(X^TX\)</span>. Finally, let <span class="math inline">\(D\)</span> be the diagonal matrix of singular values, meaning the singular values in <span class="math inline">\(D\)</span> are the square roots of the eigenvalues of <span class="math inline">\(XX^T\)</span> and <span class="math inline">\(X^TX\)</span>, and <span class="math inline">\(D^2\)</span> is defined as the diagonal matrix of the non-zero eigenvalues. We can define the singular value decomposition of matrix <span class="math inline">\(X\)</span> as:</p>
 <p><span id="eq-2"><span class="math display">\[
 X = LD{R}^T
 \tag{3.2}\]</span></span></p>
-<p>In this context, the eigenvalues represent the variances of the principal components and summarily contain the important information for the dataset, and we can obtain the principal components of <span class="math inline">\(X\)</span> from the SVD. With the identity matrix <span class="math inline">\(I\)</span>, the <span class="math inline">\(I \times R\)</span> matrix of factor scores can be expressed as:</p>
+<p>In this context, the eigenvalues represent the variances of the principal components and summarily contain the important information for the dataset, and we can obtain the principal components of <span class="math inline">\(X\)</span> from the SVD. <span class="citation" data-cites="abdi2010principal"><a href="references.html#ref-abdi2010principal" role="doc-biblioref">[4]</a></span> With the identity matrix <span class="math inline">\(I\)</span>, the <span class="math inline">\(I \times R\)</span> matrix of factor scores can be expressed as:</p>
 <p><span id="eq-3"><span class="math display">\[
 F = LD
 \tag{3.3}\]</span></span></p>
-<p>These factor scores are calculated from the coefficients of the linear combinations in matrix <span class="math inline">\(R\)</span>, which can defined as a projection matrix of the original observations onto the principal components, i.e.&nbsp;the product of <span class="math inline">\(X\)</span> and <span class="math inline">\(R\)</span>:</p>
+<p>These factor scores are calculated from the coefficients of the linear combinations in matrix <span class="math inline">\(R\)</span>, which can be defined as a projection matrix of the original observations onto the principal components, i.e.&nbsp;the product of <span class="math inline">\(X\)</span> and <span class="math inline">\(R\)</span>:</p>
 <p><span id="eq-4"><span class="math display">\[
 F = LD = LDR^TR = XR
 \tag{3.4}\]</span></span></p>
-<p>The matrix R is also referred to as a loading matrix, and X is often described as the product of the factor score matrix and the loading matrix:</p>
+<p>The matrix <span class="math inline">\(R\)</span> is also referred to as a loading matrix, and <span class="math inline">\(X\)</span> is often described as the product of the factor score matrix and the loading matrix:</p>
 <p><span id="eq-5"><span class="math display">\[
 X = FR^T
 \tag{3.5}\]</span></span></p>
 <p>with the decomposition of <span class="math inline">\(F^TF = D^2\)</span> and <span class="math inline">\(R^TR = I\)</span>.</p>
 <p>The loadings represent the weights of the original variables in the computation of the principal components; in other words, the correlation from -1 to 1 of each variable with the factor score.</p>
-<p>In a geometric interpretation of PCA, the factor scores measure length on the Cartesian plane. This length represents the projection of the original observations onto the PCs from the origin at <span class="math inline">\((0, 0)\)</span>. This is especially useful as a visualization of higher dimension data in two dimensions by utilizing the first two principal components which capture the most variance in the original data. [ref]</p>
+<p>In a geometric interpretation of PCA, the factor scores measure length on the Cartesian plane. This length represents the projection of the original observations onto the PCs from the origin at <span class="math inline">\((0, 0)\)</span>. This is especially useful as a visualization of higher dimension data in two dimensions by utilizing the first two principal components which capture the most variance in the original data. <span class="citation" data-cites="lever2017points"><a href="references.html#ref-lever2017points" role="doc-biblioref">[5]</a></span></p>
 </section>
 <section id="interpretation-of-the-prinicpal-components" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="interpretation-of-the-prinicpal-components"><span class="header-section-number">3.4</span> Interpretation of the Prinicpal Components</h2>
-<p>There are several ways to interpret the PCs derived from the analysis. Since the eigenvalues represent the variance of the PCs, the proportion of the eigenvalues explain the proportion of variation in the dataset. Using a scree plot, these eigenvalues are plotted to show how much variation each PC explains. Another commonly used tool is a biplot, a combination of the plots of the factor scores (points) and the loadings (vectors) for two PCs (typically PC1 and PC2). The biplot is meant to visually capture the relationship between the original variables and the principal components. Clusters of points represent highly correlated variables, and vector lengths represent the variability captured in that direction on the principal component axis. While many methods and tools exist to interpret the results of PCA, the usefulness of each depends on the needs of the analysis. [ref]</p>
+<p>There are several ways to interpret the PCs derived from the analysis. Since the eigenvalues represent the variance of the PCs, the proportion of the eigenvalues explain the proportion of variation in the dataset. Using a scree plot, these eigenvalues are plotted to show how much variation each PC explains. Another commonly used tool is a biplot, a combination of the plots of the factor scores (points) and the loadings (vectors) for two PCs (typically PC1 and PC2). The biplot is meant to visually capture the relationship between the original variables and the principal components. Clusters of points represent highly correlated variables, and vector lengths represent the variability captured in that direction on the principal component axis. While many methods and tools exist to interpret the results of PCA, the usefulness of each depends on the needs of the analysis. <span class="citation" data-cites="bennett2021linear"><a href="references.html#ref-bennett2021linear" role="doc-biblioref">[6]</a></span></p>
 
 
+<div id="refs" class="references csl-bib-body" role="list" style="display: none">
+<div id="ref-jolliffe2016principal" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">I. T. Jolliffe and J. Cadima, <span>“Principal component analysis: A review and recent developments,”</span> <em>Philosophical transactions of the royal society A: Mathematical, Physical and Engineering Sciences</em>, vol. 374, no. 2065, p. 20150202, 2016.</div>
+</div>
+<div id="ref-prcomp2023ref" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">R Core Team, <span>“Prcomp, a function of r: A language and environment for statistical computing.”</span> R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp</a></div>
+</div>
+<div id="ref-hopcroft2014foundations" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">J. Hopcroft and R. Kannan, <em>Foundations of data science</em>. 2014.</div>
+</div>
+<div id="ref-abdi2010principal" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">H. Abdi and L. Williams, <span>“Principal component analysis. WIREs comp stat 2: 433–459.”</span> 2010.</div>
+</div>
+<div id="ref-lever2017points" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">J. Lever, M. Krzywinski, and N. Altman, <span>“Points of significance: Principal component analysis,”</span> <em>Nature methods</em>, vol. 14, no. 7, pp. 641–643, 2017.</div>
+</div>
+<div id="ref-bennett2021linear" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">S. R. Bennett, <em>Linear algebra for data science</em>. 2021.</div>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
