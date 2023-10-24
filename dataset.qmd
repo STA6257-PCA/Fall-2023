@@ -39,9 +39,7 @@ print(
 
 The histograms of the data reveal that majority of the variables are skewed right, with the QQ plots supporting that very few of the variables are normally distributed. Finally, many of the variables are highly correlated as expected based on the design of the dataset.
 
-## Visualization Report
-
-```{r, warnings = FALSE, message = FALSE, echo=FALSE}
+```{r, warning=FALSE, message = FALSE, echo=FALSE}
 # Load libraries
 library(tidyverse)    
 library(caTools)
@@ -70,8 +68,6 @@ train_data <- data
 # Constant seed
 my_seed = 95
 ```
-
-# Data Preparation
 
 ## Rename Variables
 
@@ -125,6 +121,7 @@ train_data <- rename(train_data,
 -   The missing observations represents 1.6% of the dataset.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# plot Missing values
 plot_intro(train_data)
 plot_missing(train_data)
 
@@ -185,14 +182,20 @@ count_missing_obs %>%
 
 -   Robust statistical methods will be used to address the nonparametric distribution.
 
-    ```{r, echo=FALSE}
+    ```{r}
     # Count the number of missing values in each column
-    colSums(is.na(train_data))
+    no_missing_values_df <- data.frame("Missing_Values" = colSums(is.na(train_data)))
 
+    # table format
+    kbl(no_missing_values_df) %>%
+      kable_paper("hover", full_width = F)
+    ```
+
+    ```{r, echo=FALSE}
     # Remove categorical columns
     train_data$State <- NULL
 
-    # Impute missing values with the mean
+    # Impute missing values with the median
     for (col in colnames(train_data)) {
       median_value <- median(train_data[[col]], na.rm = TRUE)
       train_data[[col]] <- ifelse(is.na(train_data[[col]]), median_value,     train_data[[col]])
@@ -200,27 +203,24 @@ count_missing_obs %>%
     ```
 
 ```{r}
-# Remove rows with missing values
-train_data <- na.omit(train_data)
-
-# Count the number of missing values in each column
-colSums(is.na(train_data)) %>% 
-  kable() %>% 
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
-
-# Get duplicated rows
-# train_data[duplicated(train_data), ]
-
 # Round all variables
 train_data <- round(train_data, digits = 0)
 
-# Summary statistics of the data
-#describe(train_data)
+# Count the number of missing values in each column
+no_missing_values_df <- data.frame("Missing_Values" = colSums(is.na(train_data)))
+
+# table format
+kbl(no_missing_values_df) %>%
+  kable_paper("hover", full_width = F)
 ```
 
 ```{r}
+# install.packages("gtsummary")
+library(gtsummary)
 # Check dataset structure
-str(train_data) %>% 
-  kable() %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+kable(str(train_data) ) %>%
+  kable_styling(latex_options = c("striped", "hover", "condensed", "responsive"))
+
 ```
+
+The dataset is ready for PCA analysis.
