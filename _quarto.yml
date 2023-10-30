@@ -12,6 +12,7 @@ book:
     - dataset.qmd
     - methods.qmd
     - summary.qmd
+    - analysis.qmd
     - references.qmd
 
 bibliography: references.bib
