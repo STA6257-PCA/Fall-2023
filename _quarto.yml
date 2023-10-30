@@ -8,10 +8,10 @@ book:
   date: "10/16/2023"
   chapters:
     - index.qmd
+    - summary.qmd
     - intro.qmd
     - dataset.qmd
     - methods.qmd
-    - summary.qmd
     - analysis.qmd
     - references.qmd
 
