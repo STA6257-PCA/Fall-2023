@@ -19,7 +19,7 @@
  # install.packages("plotly")
 ```
 
-```{r, warning = FALSE, message = FALSE, results='hide', collapse=TRUE}
+```{r, warning = FALSE, message = FALSE, results='hold', collapse=TRUE}
 # Load necessary libraries
 library(tidyverse)    # for handling missing values
 library(EnvStats) # for rosnerTest
