@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Principal Component Analysis - 1&nbsp; Introduction</title>
+<title>Principal Component Analysis - 2&nbsp; Introduction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./dataset.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./summary.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -93,7 +93,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -126,32 +126,38 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./intro.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dataset.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dataset</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  <a href="./analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -164,11 +170,11 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#theoretical-and-mathematical-foundations" id="toc-theoretical-and-mathematical-foundations" class="nav-link active" data-scroll-target="#theoretical-and-mathematical-foundations"><span class="header-section-number">1.1</span> Theoretical and mathematical foundations</a></li>
-  <li><a href="#applications-and-extensions" id="toc-applications-and-extensions" class="nav-link" data-scroll-target="#applications-and-extensions"><span class="header-section-number">1.2</span> Applications and extensions</a>
+  <li><a href="#theoretical-and-mathematical-foundations" id="toc-theoretical-and-mathematical-foundations" class="nav-link active" data-scroll-target="#theoretical-and-mathematical-foundations"><span class="header-section-number">2.1</span> Theoretical and mathematical foundations</a></li>
+  <li><a href="#applications-and-extensions" id="toc-applications-and-extensions" class="nav-link" data-scroll-target="#applications-and-extensions"><span class="header-section-number">2.2</span> Applications and extensions</a>
   <ul class="collapse">
-  <li><a href="#in-archeology-neuroscience-and-the-arts" id="toc-in-archeology-neuroscience-and-the-arts" class="nav-link" data-scroll-target="#in-archeology-neuroscience-and-the-arts"><span class="header-section-number">1.2.1</span> <strong><em>In Archeology, Neuroscience, and the Arts</em></strong>&nbsp;</a></li>
-  <li><a href="#computer-vision-and-pattern-recognition" id="toc-computer-vision-and-pattern-recognition" class="nav-link" data-scroll-target="#computer-vision-and-pattern-recognition"><span class="header-section-number">1.2.2</span> <strong><em>Computer Vision and Pattern Recognition</em></strong></a></li>
+  <li><a href="#in-archeology-neuroscience-and-the-arts" id="toc-in-archeology-neuroscience-and-the-arts" class="nav-link" data-scroll-target="#in-archeology-neuroscience-and-the-arts"><span class="header-section-number">2.2.1</span> <strong><em>In Archeology, Neuroscience, and the Arts</em></strong>&nbsp;</a></li>
+  <li><a href="#computer-vision-and-pattern-recognition" id="toc-computer-vision-and-pattern-recognition" class="nav-link" data-scroll-target="#computer-vision-and-pattern-recognition"><span class="header-section-number">2.2.2</span> <strong><em>Computer Vision and Pattern Recognition</em></strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -178,7 +184,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="intro" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></h1>
+<h1 class="title"><span id="intro" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></h1>
 </div>
 
 
@@ -196,22 +202,22 @@ div.csl-indent {
 <p>In recent years, the exponential growth of large datasets with numerous variables have become increasingly prevalent across various fields <span class="citation" data-cites="ringner2008principal"><a href="references.html#ref-ringner2008principal" role="doc-biblioref">[1]</a></span>, including but not limited to data analysis, image processing, genetics, finance, and signal processing. <span class="citation" data-cites="jolliffe2016principal"><a href="references.html#ref-jolliffe2016principal" role="doc-biblioref">[2]</a></span> Analyzing, processing, and visualizing these multivariate datasets pose significant challenges. Therefore, the significance of unsupervised learning algorithms comes into play, particularly in tasks like dimensionality reduction, feature extraction, and visualization of complex data sets. Unsupervised learning is a collection of algorithms to classify raw data. <span class="citation" data-cites="esposito2020introducing"><a href="references.html#ref-esposito2020introducing" role="doc-biblioref">[3]</a></span> Clustering, and density estimation methods, often serve as a crucial preliminary step in dimensionality reduction where the objective is to find patterns and correlations aiding in organizing the original data. The underlying structures and relationships within the data can inform the selection and application of dimensionality reduction techniques.</p>
 <p>Moreover, dimensionality reduction (DR) techniques aim to mitigate the challenge of extracting valuable insights from complex data by reducing the number of dimensions, decreasing computational complexity, eliminating irrelevant and redundant data, improving algorithm accuracy, and facilitating efficient data visualization. <span class="citation" data-cites="hasan2021review"><a href="references.html#ref-hasan2021review" role="doc-biblioref">[4]</a></span> Unsupervised learning and dimensionality reduction are indispensable tools in data analysis, and machine learning. While unsupervised learning aims to uncover patterns and correlations between raw data, dimensionality reduction simplifies data representation. One widely used DR technique is Principal Component Analysis (PCA). The objectives of the present research project are the comprehensive exploration of PCA, encompassing an introduction to its core concepts, a discussion of its purposes and functions as well as a demonstration of its application through step-by-step examples.</p>
 <p>Principal Component Analysis is best described as a dimension reduction technique for statistical data. PCA has its roots in the work of Karl Pearson in his 1901 paper “On Lines and Planes of Closest Fit to Systems of Points in Space” <span class="citation" data-cites="pearson1901liii"><a href="references.html#ref-pearson1901liii" role="doc-biblioref">[5]</a></span> with the later christening and formal development of the technique by Harold Hotelling in 1933. <span class="citation" data-cites="hotelling1933analysis"><a href="references.html#ref-hotelling1933analysis" role="doc-biblioref">[6]</a></span> Pearson initially conceptualized PCA as a geometric interpretation within statistics; subsequently, PCA gained recognition as a more suitable method than analysis of variance for modeling response data. <span class="citation" data-cites="fisher1923studies"><a href="references.html#ref-fisher1923studies" role="doc-biblioref">[7]</a></span> The aim of PCA is to reduce the dimensionality of a dataset without loss of information about the variability of the data. By creating principal components that act as analogues for variables, the statistical information of the dataset can be preserved and compressed into a more easily representable form. A common example of the application of PCA involves reducing an n-dimensional data set into 2 principal components which can be plotted on a graph representing the relationships among the original variables; for this reason, PCA is often described as an exploratory data analysis tool.</p>
-<section id="theoretical-and-mathematical-foundations" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="theoretical-and-mathematical-foundations"><span class="header-section-number">1.1</span> Theoretical and mathematical foundations</h2>
+<section id="theoretical-and-mathematical-foundations" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="theoretical-and-mathematical-foundations"><span class="header-section-number">2.1</span> Theoretical and mathematical foundations</h2>
 <p>The fundamental concept behind PCA is to explain the variability in a set of correlated variables with a smaller set of uncorrelated variables, thus mitigating issues such as multicollinearity. The geometric properties of PCs facilitate an intuitive interpretation of key features within complex multivariate datasets. <span class="citation" data-cites="greenacre2022principal"><a href="references.html#ref-greenacre2022principal" role="doc-biblioref">[8]</a></span> The first principal component represents the direction with the greatest variation in the original data, while subsequent components are uncorrelated with the previous ones. Each component can be interpreted as the direction that maximizes the variance of the original data when projecting new observations onto the components. <span class="citation" data-cites="ringner2008principal"><a href="references.html#ref-ringner2008principal" role="doc-biblioref">[1]</a></span> PCA aims to capture a significant proportion of the original variables’ variation in the first few components, offering a practical lower-dimensional summary. While other methods may involve weighted averages across related variables to reduce dimensions, PCA often achieves similar results with minimal loss of variance information. <span class="citation" data-cites="everitt2011introduction"><a href="references.html#ref-everitt2011introduction" role="doc-biblioref">[9]</a></span> The mathematical foundations of PCA center around data of p variables in n observations, represented by an n x p matrix X with the goal of finding a linear combination of the columns of X which maximize variance. By maximizing the variance in these linear combinations, we can capture the largest amount of statistical information possible among the dimensions of the dataset. As described by Jolliffe and Cadima <span class="citation" data-cites="jolliffe2016principal"><a href="references.html#ref-jolliffe2016principal" role="doc-biblioref">[2]</a></span> , this boils down to finding the eigenvectors (a) and the largest eigenvalues () of the covariance matrix S, where Xak are the linear combinations called the principal components.&nbsp;</p>
 <p>With the development of software packages in computer languages such as R and Python, the computational burden of PCA for large datasets can be easily handled by software; PCA has become easy to use as part of any data processing pipeline. Abdi and Williams describe PCA as “probably the most popular multivariate statistical technique … used by almost all scientific disciplines.” <span class="citation" data-cites="abdi2010principal"><a href="references.html#ref-abdi2010principal" role="doc-biblioref">[10]</a></span> Abdi and Williams also emphasize that the goals of PCA should be extracting only the most important information from a dataset to both compress and simplify the dataset and provide a way to analyze the structure of the observations and variables more easily. Importantly, the authors also offer a geometric description of the principal components as orthogonal factors to the original axis of the dataset; another strength of PCA is the fact that the technique can be explained and expressed through several mathematical avenues. Finally, Abdi and Williams offer methods to evaluate the quality of the “PCA model” in reconstructing the original data matrix using the derived principal components. For example, calculating the residual sum of squares, or RESS, after rebuilding X provides a way to identify model accuracy by seeking a minimal RESS value from X and X.&nbsp;</p>
 <p>Lever and Altman offer similar praises of PCA while echoing the cautions of prior authors as a powerful data exploration tool with clear limitations. <span class="citation" data-cites="lever2017points"><a href="references.html#ref-lever2017points" role="doc-biblioref">[11]</a></span> PCA is best when interesting patterns in data produce statistical variance which can be capture by the principal components, but the technique is far less effective when patterns in data are non-linear or non-orthogonal or when the maximization of variance fails to produce interesting clusters in the principal component space. Scaling is often necessary for PCA to ensure compatibility across variables with different scales and ranges. The original data is typically standardized to have a mean of 0 and a variance of 1. <span class="citation" data-cites="greenacre2022principal"><a href="references.html#ref-greenacre2022principal" role="doc-biblioref">[8]</a></span> PCA can be used improperly to produce results that obfuscate the actual statistical content of the dataset; scaling may influence the analysis with prior knowledge of the data, so the decision to scale the data and the scaling methodology should be considered carefully.</p>
 </section>
-<section id="applications-and-extensions" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="applications-and-extensions"><span class="header-section-number">1.2</span> Applications and extensions</h2>
-<section id="in-archeology-neuroscience-and-the-arts" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="in-archeology-neuroscience-and-the-arts"><span class="header-section-number">1.2.1</span> <strong><em>In Archeology, Neuroscience, and the Arts</em></strong>&nbsp;</h3>
+<section id="applications-and-extensions" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="applications-and-extensions"><span class="header-section-number">2.2</span> Applications and extensions</h2>
+<section id="in-archeology-neuroscience-and-the-arts" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="in-archeology-neuroscience-and-the-arts"><span class="header-section-number">2.2.1</span> <strong><em>In Archeology, Neuroscience, and the Arts</em></strong>&nbsp;</h3>
 <p>PCA has been utilized by many authors across numerous fields as an essential part of a data analysis pipeline. As an example of the application of PCA, Jolliffe and Cadima <span class="citation" data-cites="jolliffe2016principal"><a href="references.html#ref-jolliffe2016principal" role="doc-biblioref">[2]</a></span> present a dataset of 88 observations with 9 variables of measurement for fossilized mammal teeth including length in two dimensions, width in two dimensions, and more. With the R statistical language, finding and displaying the principal components of the dataset becomes trivial work where patterns can be identified graphically in a two-dimensional (PC1 x PC2) plot, versus the original scatterplot which would be displayed in nine-dimensional space. The development of statistical software has made it straightforward for practitioners to use PCA for data exploration and dimensionality reduction. Authors such as Maindonald and Braun <span class="citation" data-cites="maindonald2006data"><a href="references.html#ref-maindonald2006data" role="doc-biblioref">[12]</a></span> have produced publications which present techniques and step-by-step methodologies of using R to calculate principal components and graphically display the results. Their presentation includes code snippets which can be run in R software environments along with worked examples and a discussion of results, facilitating the use of the technique for practitioners of all experience levels.</p>
 <p>Felipe Gewers and their research team directly expound on Abdi and Williams’ description of PCA as “the most popular multivariate statistical technique [...]” in an analysis of publications which use PCA: Across twenty-three disciplines ranging from Neuroscience to the Arts, PCA is used to explore a dataset before analysis, used as part of a spectrum of statistical analysis tools prior to modeling and analysis, or used to preprocess and simplify data for direct analysis and modeling. <span class="citation" data-cites="gewers2021principal"><a href="references.html#ref-gewers2021principal" role="doc-biblioref">[13]</a></span> The authors also discuss the broad effectiveness of PCA in representing more than 50% of the variance in most datasets using only the first three principal components. They also highlight how differences in captured variance appear between standardization and non-standardization, and in different fields of study; PCA can be effective in an incredibly diverse array of data when applied appropriately. As an exploratory technique with a long tenure in the field of statistics and data analysis, PCA is tried and true in simplifying datasets and allowing practitioners to identify and explore the largest sources of statistical information present in their data.</p>
 <p>Principal Component Analysis is also implemented in Scikit Learn with randomized Singular Value Decomposition (SVD) for dimensionality reduction in data analysis, particularly for face recognition and similar high-dimensional data applications. For instance, with an image of 4096 dimensions (64x64 pixel gray scale images) PCA can transform the data into a lower 200 dimension format that still captures the essential information. <span class="citation" data-cites="pedregosa2011scikit"><a href="references.html#ref-pedregosa2011scikit" role="doc-biblioref">[14]</a></span> With randomized SVD it becomes computationally more efficient to approximate the singular vectors, which are then used to perform the transformation. This approach significantly reduces computation time and memory usage. Additionally, PCA decomposes a multivariate dataset into orthogonal components that explain the maximum amount of variance. It can center and optionally scale the input data before applying SVD. Scaling can be useful for downstream models, such as Support Vector Machines with the RBF kernel and K-Means clustering, which assume certain properties of the data distribution.</p>
 </section>
-<section id="computer-vision-and-pattern-recognition" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="computer-vision-and-pattern-recognition"><span class="header-section-number">1.2.2</span> <strong><em>Computer Vision and Pattern Recognition</em></strong></h3>
+<section id="computer-vision-and-pattern-recognition" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="computer-vision-and-pattern-recognition"><span class="header-section-number">2.2.2</span> <strong><em>Computer Vision and Pattern Recognition</em></strong></h3>
 <p>The Eigenfaces concept has emerged as a groundbreaking approach to facial detection and recognition. The Eigenfaces algorithm employs PCA to extract essential facial features, reducing the dimensionality of face images while retaining crucial information. The Eigenfaces technique represents facial images in high-dimensional space while projecting the images onto a lower-dimensional space. Turk and Pentland demonstrated the effectiveness of Eigenfaces in recognizing faces under various conditions, including variations in lighting, facial expressions, and pose. <span class="citation" data-cites="turk1991eigenfaces"><a href="references.html#ref-turk1991eigenfaces" role="doc-biblioref">[15]</a></span> The potential implications of this research extend beyond face recognition, and have broader implications for image analysis, computer vision, and biometric systems. The paper Eigenfaces by Zhang and Turk provided an insightful exploration of the Eigenfaces method, considered as the first working technique in facial recognition. <span class="citation" data-cites="zhang2008eigenfaces"><a href="references.html#ref-zhang2008eigenfaces" role="doc-biblioref">[16]</a></span> Eigenfaces leverage the power of PCA to represent facial images compactly and efficiently, making it possible to recognize faces in various contexts.</p>
 <p>The idea of principal components to represent human faces was developed by Sirovich and Kirby in 1987 and used by Turk and Pentland in 1991 for face detection and recognition. <span class="citation" data-cites="turk1991eigenfaces"><a href="references.html#ref-turk1991eigenfaces" role="doc-biblioref">[15]</a></span> The authors describe the mathematical principles behind PCA, and its adaptation for facial recognition, capturing the most prominent facial features while reducing the dimensionality of the data. Specifically, the eigenfaces are the principal components of a distribution of faces, or the eigenvectors of the covariance matrix of the set of face images, where an image with N pixels is considered a point (or vector) in N-dimensional space. Emphasis is placed on the versatility of Eigenfaces in handling variations in lighting, pose, and facial expressions, making it a robust tool for real-world applications.</p>
 <p>This application of PCA represents one of many for a longstanding technique in the rapidly growing field of statistics and data analysis. The unsupervised learning algorithm plays a vital role in dimensionality reduction, feature extraction, and visualization of complex data sets. Understanding PCA is crucial for researchers, and students seeking to extract meaningful insights and patterns from high-dimensional data to simplify the decision-making process.</p>
@@ -506,13 +512,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Home</span>
+      <a href="./summary.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Summary</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./dataset.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dataset</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dataset</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

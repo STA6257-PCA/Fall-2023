@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Principal Component Analysis - 3&nbsp; Methods</title>
+<title>Principal Component Analysis - 4&nbsp; Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -83,7 +83,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./summary.html" rel="next">
+<link href="./analysis.html" rel="next">
 <link href="./dataset.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -129,7 +129,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./methods.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./methods.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Methods</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -162,32 +162,38 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dataset.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dataset</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./methods.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  <a href="./analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -200,19 +206,19 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link active" data-scroll-target="#assumptions"><span class="header-section-number">3.1</span> Assumptions</a></li>
-  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link" data-scroll-target="#preprocessing"><span class="header-section-number">3.2</span> Preprocessing</a></li>
-  <li><a href="#eigenvectors" id="toc-eigenvectors" class="nav-link" data-scroll-target="#eigenvectors"><span class="header-section-number">3.3</span> Eigenvectors</a></li>
-  <li><a href="#principal-component-analysis" id="toc-principal-component-analysis" class="nav-link" data-scroll-target="#principal-component-analysis"><span class="header-section-number">3.4</span> Principal Component Analysis</a>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link active" data-scroll-target="#assumptions"><span class="header-section-number">4.1</span> Assumptions</a></li>
+  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link" data-scroll-target="#preprocessing"><span class="header-section-number">4.2</span> Preprocessing</a></li>
+  <li><a href="#eigenvectors" id="toc-eigenvectors" class="nav-link" data-scroll-target="#eigenvectors"><span class="header-section-number">4.3</span> Eigenvectors</a></li>
+  <li><a href="#principal-component-analysis" id="toc-principal-component-analysis" class="nav-link" data-scroll-target="#principal-component-analysis"><span class="header-section-number">4.4</span> Principal Component Analysis</a>
   <ul class="collapse">
-  <li><a href="#centering-and-scaling" id="toc-centering-and-scaling" class="nav-link" data-scroll-target="#centering-and-scaling"><span class="header-section-number">3.4.1</span> Centering and Scaling</a></li>
-  <li><a href="#eigendecomposition-of-the-covariance-matrix" id="toc-eigendecomposition-of-the-covariance-matrix" class="nav-link" data-scroll-target="#eigendecomposition-of-the-covariance-matrix"><span class="header-section-number">3.4.2</span> Eigendecomposition of the Covariance Matrix</a></li>
-  <li><a href="#singular-value-decomposition" id="toc-singular-value-decomposition" class="nav-link" data-scroll-target="#singular-value-decomposition"><span class="header-section-number">3.4.3</span> Singular Value Decomposition</a></li>
+  <li><a href="#centering-and-scaling" id="toc-centering-and-scaling" class="nav-link" data-scroll-target="#centering-and-scaling"><span class="header-section-number">4.4.1</span> Centering and Scaling</a></li>
+  <li><a href="#eigendecomposition-of-the-covariance-matrix" id="toc-eigendecomposition-of-the-covariance-matrix" class="nav-link" data-scroll-target="#eigendecomposition-of-the-covariance-matrix"><span class="header-section-number">4.4.2</span> Eigendecomposition of the Covariance Matrix</a></li>
+  <li><a href="#singular-value-decomposition" id="toc-singular-value-decomposition" class="nav-link" data-scroll-target="#singular-value-decomposition"><span class="header-section-number">4.4.3</span> Singular Value Decomposition</a></li>
   </ul></li>
-  <li><a href="#interpretation-of-the-principal-components" id="toc-interpretation-of-the-principal-components" class="nav-link" data-scroll-target="#interpretation-of-the-principal-components"><span class="header-section-number">3.5</span> Interpretation of the Principal Components</a></li>
-  <li><a href="#step-by-step-calculation-of-principal-component-analysis" id="toc-step-by-step-calculation-of-principal-component-analysis" class="nav-link" data-scroll-target="#step-by-step-calculation-of-principal-component-analysis"><span class="header-section-number">3.6</span> Step-by-Step Calculation of Principal Component Analysis</a>
+  <li><a href="#interpretation-of-the-principal-components" id="toc-interpretation-of-the-principal-components" class="nav-link" data-scroll-target="#interpretation-of-the-principal-components"><span class="header-section-number">4.5</span> Interpretation of the Principal Components</a></li>
+  <li><a href="#step-by-step-calculation-of-principal-component-analysis" id="toc-step-by-step-calculation-of-principal-component-analysis" class="nav-link" data-scroll-target="#step-by-step-calculation-of-principal-component-analysis"><span class="header-section-number">4.6</span> Step-by-Step Calculation of Principal Component Analysis</a>
   <ul class="collapse">
-  <li><a href="#the-new-dataset-left-singular-vector" id="toc-the-new-dataset-left-singular-vector" class="nav-link" data-scroll-target="#the-new-dataset-left-singular-vector"><span class="header-section-number">3.6.1</span> The New Dataset (Left singular vector)</a></li>
+  <li><a href="#the-new-dataset-left-singular-vector" id="toc-the-new-dataset-left-singular-vector" class="nav-link" data-scroll-target="#the-new-dataset-left-singular-vector"><span class="header-section-number">4.6.1</span> The New Dataset (Left singular vector)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -222,7 +228,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="methods" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></span></h1>
+<h1 class="title"><span id="methods" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Methods</span></span></h1>
 </div>
 
 
@@ -238,73 +244,73 @@ div.csl-indent {
 </header>
 
 <p>The aim of Principal component analysis (PCA) is to reduce the dimensionality of multivariate data while preserving the variability present in the data. The principal components derived from the dataset are orthogonal variables represented by linear combinations of the original variables which maximize variance. The first principal component (PC) captures the most variance, followed by the second orthogonal principal component, and so on. There can be as many PCs as there are variables in the original data, but the technique is typically used to simplify high-dimension data for improved interpretability. Principal components can be calculated using eigenvalue decomposition or the singular value decomposition (SVD) of the data matrix, so data must be preproccesed and several assumptions met for PCA to yield meaningful results.</p>
-<section id="assumptions" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">3.1</span> Assumptions</h2>
+<section id="assumptions" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">4.1</span> Assumptions</h2>
 <p>For PCA to be effective, the data should be continuous (although adaptations of PCA exist for other numeric data structures) and normally distributed, although the the distribution of the data does not truly matter when utilizing PCA as an exploratory methodology. More importantly, the data should be linearly related or the linear combinations of the principal components cannot meaningfully capture the variance of the data. Ideally, the variables should be similar in scale and free from extreme or missing values, although this can be addressed in preprocessing, and implementations of PCA such as robust PCA have been developed to address these challenges. <span class="citation" data-cites="jolliffe2016principal"><a href="references.html#ref-jolliffe2016principal" role="doc-biblioref">[1]</a></span></p>
 </section>
-<section id="preprocessing" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="preprocessing"><span class="header-section-number">3.2</span> Preprocessing</h2>
+<section id="preprocessing" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="preprocessing"><span class="header-section-number">4.2</span> Preprocessing</h2>
 <p>Preprocessing data for PCA is straightforward. Missing data should be handled using a method appropriate for the dataset, such as imputation based on the mean or median of the variable observations. After this the variables should be centered and scaled, to a mean of 0 and a standard deviation of 1, although statistical software libraries for SVD and PCA may include this as an option within the function. <span class="citation" data-cites="prcomp2023ref"><a href="references.html#ref-prcomp2023ref" role="doc-biblioref">[2]</a></span></p>
 </section>
-<section id="eigenvectors" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="eigenvectors"><span class="header-section-number">3.3</span> Eigenvectors</h2>
+<section id="eigenvectors" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="eigenvectors"><span class="header-section-number">4.3</span> Eigenvectors</h2>
 <p>PCA uses eigenvectors and their corresponding eigenvalues to calculate the principal components; a brief overview is given here. Eigen is a German word meaning <em>inherent</em> or <em>characteristic</em>, and an eigenvector can be described geometrically as a nonzero vector <span class="math inline">\(a\)</span> of a linear transformation matrix <span class="math inline">\(M\)</span> which does not change direction when the transformation is applied; the only change that occurs is a scaling by factor <span class="math inline">\(\lambda\)</span>, the eigenvalue of the eigenvector <span class="math inline">\(a\)</span>. Such a characteristic vector is useful in PCA, where the goal is to maximize variance while reducing dimensionality, and in this context the eigenvectors and eigenvalues can be thought of as the inherent components of the dataset which contain the most important information. Eigenvalues can be calculated from the characteristic polynomial of the matrix, by taking the determinant of <span class="math inline">\(M - \lambda I\)</span>, where <span class="math inline">\(I\)</span> is the identity matrix. Setting this expression equal to zero allows the calculation of the eigenvalues as the roots of the characteristic polynomial; the resulting equation is called the characteristic equation:</p>
 <p><span id="eq-1"><span class="math display">\[
 det(M - \lambda I) = 0
-\tag{3.1}\]</span></span></p>
+\tag{4.1}\]</span></span></p>
 <p>An eigenvalue <span class="math inline">\(\lambda_k\)</span> can be used to solve for some eigenvector <span class="math inline">\(a_k\)</span> with the equation <span class="math inline">\((M - \lambda I)a = 0\)</span>. With PCA, we can use the eigenvectors of the covariance matrix to compute the PCs. <span class="citation" data-cites="bennett2021linear"><a href="references.html#ref-bennett2021linear" role="doc-biblioref">[3]</a></span></p>
 </section>
-<section id="principal-component-analysis" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="principal-component-analysis"><span class="header-section-number">3.4</span> Principal Component Analysis</h2>
+<section id="principal-component-analysis" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="principal-component-analysis"><span class="header-section-number">4.4</span> Principal Component Analysis</h2>
 <p>In this approach to PCA, SVD is used to extract the most information (variance) from the data matrix while reducing the dimensionality of the data. The first principal component will have the largest possible variance (also called inertia), whose value is defined as a factor score. Factor scores represent a geometric projection of the observations onto the PCs. The second PC, orthogonal to the first, has the second largest variance, and the third PC would continue this pattern. The calculation of PCs via SVD can be understood with the use of matrix operations on a dataset. <span class="citation" data-cites="hopcroft2014foundations"><a href="references.html#ref-hopcroft2014foundations" role="doc-biblioref">[4]</a></span></p>
-<section id="centering-and-scaling" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="centering-and-scaling"><span class="header-section-number">3.4.1</span> Centering and Scaling</h3>
+<section id="centering-and-scaling" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="centering-and-scaling"><span class="header-section-number">4.4.1</span> Centering and Scaling</h3>
 <p>Let our dataset be represented by the <span class="math inline">\(N \times P\)</span> matrix <span class="math inline">\(X\)</span> comprised of <span class="math inline">\(N\)</span> observations of <span class="math inline">\(P\)</span> variables in the data set, where any element <span class="math inline">\(x_{np}\)</span> represents the <span class="math inline">\(n\)</span>th observation of variable <span class="math inline">\(p\)</span> in the dataset. The matrix <span class="math inline">\(X\)</span> has rank <span class="math inline">\(A\)</span> where <span class="math inline">\(A \leq min\{N, P\}\)</span>. The data in <span class="math inline">\(X\)</span> is centered and scaled, such that the mean of each column <span class="math inline">\(X_p\)</span> is 0 and every <span class="math inline">\(x_{np}\)</span> has been standardized with unit variance. We can represent this with the formula:</p>
 <p><span id="eq-2"><span class="math display">\[
 z_{np} = \frac{x_{np} - \bar{x}_{p}}{\sqrt{\sigma_{p}}}
-\tag{3.2}\]</span></span></p>
+\tag{4.2}\]</span></span></p>
 </section>
-<section id="eigendecomposition-of-the-covariance-matrix" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="eigendecomposition-of-the-covariance-matrix"><span class="header-section-number">3.4.2</span> Eigendecomposition of the Covariance Matrix</h3>
+<section id="eigendecomposition-of-the-covariance-matrix" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="eigendecomposition-of-the-covariance-matrix"><span class="header-section-number">4.4.2</span> Eigendecomposition of the Covariance Matrix</h3>
 <p>The aim of PCA is to find some linear combination of the columns of <span class="math inline">\(X\)</span> which maximizes the variance. If we define <span class="math inline">\(a\)</span> as a vector of constants <span class="math inline">\(a_1, a_2, a_3, …, a_p\)</span>, then <span class="math inline">\(Xa\)</span> represents the linear combination of interest. The variance of <span class="math inline">\(Xa\)</span> is represented by <span class="math inline">\(var(Xa) = a^TSa\)</span>, with the covariance matrix <span class="math inline">\(S\)</span>, and <span class="math inline">\(T\)</span> representing the transpose operator. Finding the <span class="math inline">\(Xa\)</span> with maximum variance equates to finding the vector <span class="math inline">\(a\)</span> which maximizes the quadratic <span class="math inline">\(a^TSa\)</span>, where <span class="math inline">\(a^Ta = 1\)</span>. We can write this as <span class="math inline">\(a^TSa - \lambda(a^Ta-1)\)</span>, with the Lagrange multiplier <span class="math inline">\(\lambda\)</span>. <span class="citation" data-cites="luenberger1997optimization"><a href="references.html#ref-luenberger1997optimization" role="doc-biblioref">[5]</a></span> Equating this expression to the null vector <span class="math inline">\(0\)</span> allows us to differentiate with respect to <span class="math inline">\(a\)</span>:</p>
 <p><span id="eq-3"><span class="math display">\[
 Sa - \lambda a = 0 \Rightarrow Sa = \lambda a
-\tag{3.3}\]</span></span></p>
+\tag{4.3}\]</span></span></p>
 <p>Therefore, <span class="math inline">\(a\)</span> is a unit-norm eigenvector with eigenvalue <span class="math inline">\(\lambda\)</span> of the covariance matrix <span class="math inline">\(S\)</span>. The largest eigenvalue of <span class="math inline">\(S\)</span> is <span class="math inline">\(\lambda_1\)</span> with the eigenvector <span class="math inline">\(a_1\)</span>, which we can define for any eigenvector <span class="math inline">\(a\)</span>:</p>
 <p><span id="eq-4"><span class="math display">\[
 var(Xa) = a^TSa = \lambda a^Ta = \lambda
-\tag{3.4}\]</span></span></p>
+\tag{4.4}\]</span></span></p>
 <p>Any <span class="math inline">\(p \times p\)</span> real symmetric matrix has exactly <span class="math inline">\(p\)</span> real eigenvalues <span class="math inline">\(\lambda_k\)</span> for <span class="math inline">\(k = 1,...,p\)</span>. The corresponding eigenvectors of these eigenvalues can be defined to form an orthonormal set of vectors such that <span class="math inline">\(a_k^Ta_{k^T} = 1\)</span> if <span class="math inline">\(k = k^T\)</span> and zero otherwise. If we consider that <span class="math inline">\(S\)</span> is such a matrix and impose the restriction of orthogonality to the different coefficient vectors of <span class="math inline">\(S\)</span>, the full set of eigenvectors of <span class="math inline">\(S\)</span> represent the solutions to finding linear combinations <span class="math inline">\(Xa_k\)</span> which maximize variance while minimizing correlation with prior linear combinations. <span class="math inline">\(Xa_k\)</span> then represent the linear combinations which are the principal components of the dataset with eigenvectors <span class="math inline">\(a_k\)</span> and eigenvalues <span class="math inline">\(\lambda_k\)</span>. The elements of <span class="math inline">\(Xa_k\)</span> are the factor scores of the PCs, while the elements of the eigenvectors <span class="math inline">\(a_k\)</span> represent the loadings of the PCs. <span class="citation" data-cites="jolliffe2016principal"><a href="references.html#ref-jolliffe2016principal" role="doc-biblioref">[1]</a></span></p>
 </section>
-<section id="singular-value-decomposition" class="level3" data-number="3.4.3">
-<h3 data-number="3.4.3" class="anchored" data-anchor-id="singular-value-decomposition"><span class="header-section-number">3.4.3</span> Singular Value Decomposition</h3>
+<section id="singular-value-decomposition" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="singular-value-decomposition"><span class="header-section-number">4.4.3</span> Singular Value Decomposition</h3>
 <p>Next we define the singular value decomposition of <span class="math inline">\(X\)</span>. Let <span class="math inline">\(L\)</span> be the <span class="math inline">\(N \times A\)</span> matrix of left singular vectors of the matrix; that is, the columns of <span class="math inline">\(L\)</span> are made up of the eigenvectors of <span class="math inline">\(XX^T\)</span>. Let <span class="math inline">\(R\)</span> be the <span class="math inline">\(P \times A\)</span> matrix of right singular vectors; the columns of <span class="math inline">\(R\)</span> are made up of the eigenvectors of <span class="math inline">\(X^TX\)</span>. Finally, let <span class="math inline">\(D\)</span> be the diagonal matrix of singular values, meaning the singular values in <span class="math inline">\(D\)</span> are the square roots of the eigenvalues of <span class="math inline">\(XX^T\)</span> and <span class="math inline">\(X^TX\)</span>, and <span class="math inline">\(D^2\)</span> is defined as the diagonal matrix of the non-zero eigenvalues. We can define the singular value decomposition of matrix <span class="math inline">\(X\)</span> as:</p>
 <p><span id="eq-5"><span class="math display">\[
 X = LD{R}^T
-\tag{3.5}\]</span></span></p>
+\tag{4.5}\]</span></span></p>
 <p>In this context, the eigenvalues represent the variances of the principal components and summarily contain the important information for the dataset, and we can obtain the PCs of <span class="math inline">\(X\)</span> from the SVD. <span class="citation" data-cites="abdi2010principal"><a href="references.html#ref-abdi2010principal" role="doc-biblioref">[6]</a></span> With the identity matrix <span class="math inline">\(I\)</span>, the <span class="math inline">\(I \times R\)</span> matrix of factor scores can be expressed as:</p>
 <p><span id="eq-6"><span class="math display">\[
 F = LD
-\tag{3.6}\]</span></span></p>
+\tag{4.6}\]</span></span></p>
 <p>These factor scores are calculated from the coefficients of the linear combinations in matrix <span class="math inline">\(R\)</span>, which can be defined as a projection matrix of the original observations onto the PCs, i.e.&nbsp;the product of <span class="math inline">\(X\)</span> and <span class="math inline">\(R\)</span>:</p>
 <p><span id="eq-7"><span class="math display">\[
 F = LD = LDR^TR = XR
-\tag{3.7}\]</span></span></p>
+\tag{4.7}\]</span></span></p>
 <p>The matrix <span class="math inline">\(R\)</span> is also referred to as a loading matrix, and <span class="math inline">\(X\)</span> is often described as the product of the factor score matrix and the loading matrix:</p>
 <p><span id="eq-8"><span class="math display">\[
 X = FR^T
-\tag{3.8}\]</span></span></p>
+\tag{4.8}\]</span></span></p>
 <p>with the decomposition of <span class="math inline">\(F^TF = D^2\)</span> and <span class="math inline">\(R^TR = I\)</span>.</p>
 <p>The loadings represent the weights of the original variables in the computation of the PCs; in other words, the correlation from -1 to 1 of each variable with the factor score.</p>
 <p>In a geometric interpretation of PCA, the factor scores measure length on the Cartesian plane. This length represents the projection of the original observations onto the PCs from the origin at <span class="math inline">\((0, 0)\)</span>. This is especially useful as a visualization of higher dimension data in two dimensions by utilizing the first two PCs which capture the most variance in the original data. <span class="citation" data-cites="lever2017points"><a href="references.html#ref-lever2017points" role="doc-biblioref">[7]</a></span></p>
 </section>
 </section>
-<section id="interpretation-of-the-principal-components" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="interpretation-of-the-principal-components"><span class="header-section-number">3.5</span> Interpretation of the Principal Components</h2>
+<section id="interpretation-of-the-principal-components" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="interpretation-of-the-principal-components"><span class="header-section-number">4.5</span> Interpretation of the Principal Components</h2>
 <p>There are several ways to interpret the PCs derived from the analysis. Since the eigenvalues represent the variance of the PCs, the proportion of the eigenvalues explain the proportion of variation in the dataset. Using a scree plot, these eigenvalues are plotted to show how much variation each PC explains. Another commonly used tool is a biplot, a combination of the plots of the factor scores (points) and the loadings (vectors) for two PCs (typically PC1 and PC2). The biplot is meant to visually capture the relationship between the original variables and the principal components. Clusters of points represent highly correlated variables, and vector lengths represent the variability captured in that direction on the principal component axis. While many methods and tools exist to interpret the results of PCA, the usefulness of each depends on the needs of the analysis. <span class="citation" data-cites="bennett2021linear"><a href="references.html#ref-bennett2021linear" role="doc-biblioref">[3]</a></span></p>
 </section>
-<section id="step-by-step-calculation-of-principal-component-analysis" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="step-by-step-calculation-of-principal-component-analysis"><span class="header-section-number">3.6</span> Step-by-Step Calculation of Principal Component Analysis</h2>
+<section id="step-by-step-calculation-of-principal-component-analysis" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="step-by-step-calculation-of-principal-component-analysis"><span class="header-section-number">4.6</span> Step-by-Step Calculation of Principal Component Analysis</h2>
 <p><u><strong>Example:</strong></u> In this illustration, we have access to the two grades of four students in a statistics subject. We aim to employ Principal Component Analysis (PCA) as a means to reduce the dimensionality from two variables to a singular variable. This transformation will effectively represent students’ performance in the subject with a more compact and interpretable measure. The example is adopted from “<a href="https://www.youtube.com/watch?v=MLaJbA82nzk&amp;ab_channel=EduFlairKTUCS">PCA problem</a>” posted by EduFlair KTU CS on Youtube.com.</p>
 <table class="table">
 <thead>
@@ -558,8 +564,8 @@ P_{14}= e_1^T \times
 7-8 \\ 14-8.5
 \end{bmatrix} = -5.1238
 \]</span></p>
-<section id="the-new-dataset-left-singular-vector" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="the-new-dataset-left-singular-vector"><span class="header-section-number">3.6.1</span> The New Dataset (Left singular vector)</h3>
+<section id="the-new-dataset-left-singular-vector" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="the-new-dataset-left-singular-vector"><span class="header-section-number">4.6.1</span> The New Dataset (Left singular vector)</h3>
 <table class="table">
 <colgroup>
 <col style="width: 20%">
@@ -590,8 +596,11 @@ P_{14}= e_1^T \times
 <p>Use R code to analyze the same example</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load Libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'MASS' was built under R version 4.3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'factoextra' was built under R version 4.3.1</code></pre>
 </div>
@@ -599,25 +608,28 @@ P_{14}= e_1^T \times
 <pre><code>Loading required package: ggplot2</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
 <pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Import Example Data</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Student =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">BasicStats=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">13</span>,<span class="dv">7</span>), <span class="at">AdvancedStats=</span><span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">14</span>))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Import Example Data</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Student =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">BasicStats=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">13</span>,<span class="dv">7</span>), <span class="at">AdvancedStats=</span><span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">14</span>))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4 3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Structure of Data</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data) <span class="co">#check variable types which matters in PCA </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Structure of Data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data) <span class="co">#check variable types which matters in PCA </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   4 obs. of  3 variables:
  $ Student      : int  1 2 3 4
  $ BasicStats   : num  4 8 13 7
  $ AdvancedStats: num  11 4 5 14</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data) <span class="co">#details about variable scales and missing values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data) <span class="co">#details about variable scales and missing values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Student       BasicStats    AdvancedStats  
  Min.   :1.00   Min.   : 4.00   Min.   : 4.00  
@@ -627,16 +639,16 @@ P_{14}= e_1^T \times
  3rd Qu.:3.25   3rd Qu.: 9.25   3rd Qu.:11.75  
  Max.   :4.00   Max.   :13.00   Max.   :14.00  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Based on Info from Summary: handle missing values and exclude categorical variable</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#na.omit(data) No missing values here</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>data_sample <span class="ot">=</span> data[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>)] <span class="co">#exclude categorical variable</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Run PCA</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>data_pca <span class="ot">=</span> <span class="fu">prcomp</span>(data_sample, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Summary of Analysis</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Based on Info from Summary: handle missing values and exclude categorical variable</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#na.omit(data) No missing values here</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>data_sample <span class="ot">=</span> data[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>)] <span class="co">#exclude categorical variable</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Run PCA</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>data_pca <span class="ot">=</span> <span class="fu">prcomp</span>(data_sample, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Summary of Analysis</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Importance of components:
                           PC1    PC2
@@ -644,30 +656,30 @@ Standard deviation     1.2700 0.6221
 Proportion of Variance 0.8065 0.1935
 Cumulative Proportion  0.8065 1.0000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Elements of PCA Object (all outputs of PCA analysis)</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_pca) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Elements of PCA Object (all outputs of PCA analysis)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_pca) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "sdev"     "rotation" "center"   "scale"    "x"       </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#sdev:standard deviation</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#rotation: eigenvectors (loadings per variable within each PC)</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#center: mean of the original variable</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#scale: standard deviations of the original variable</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#x:principal component values/scores</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Scree Plot of Variance</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(data_pca,</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#sdev:standard deviation</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#rotation: eigenvectors (loadings per variable within each PC)</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#center: mean of the original variable</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#scale: standard deviations of the original variable</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#x:principal component values/scores</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Scree Plot of Variance</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(data_pca,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="methods_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Biplot with Default Settings</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(data_pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Biplot with Default Settings</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(data_pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="methods_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Biplotwith Labeled Variables</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#fviz_pca_biplot(data_pca,label = "var")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Biplotwith Labeled Variables</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#fviz_pca_biplot(data_pca,label = "var")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -934,12 +946,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./dataset.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dataset</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dataset</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./summary.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./analysis.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
