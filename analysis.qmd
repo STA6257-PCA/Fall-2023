@@ -141,7 +141,7 @@ str(train_data)
 
 -   Standardization ensures all features are on the same scale, and this method is less sensitive to outliers.
 
-```{r}
+```{r, collapse=TRUE}
 # Find the index position of the target feature 
 target_name <- "expected_survival"
 target_index <- grep(target_name, 
