@@ -1,46 +1,41 @@
 # Analysis
 
-## Libraries
+{{< include _libraries.qmd >}}
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
-# Install libraries if needed
-# install.packages("caret")
-# install.packages("corrplot")
-# install.packages("Metrics")
-# install.packages("caTools")
-# install.packages("EnvStats")
-# install.packages("car")
-# install.packages("corrr")
-# install.packages("ggcorrplot")
-# install.packages("FactoMineR")
-# install.packages("factoextra")
-# install.packages("pls")
-# install.packages("e1071")
- # install.packages("plotly")
-```
+```{r, warning = FALSE, message = FALSE, echo=FALSE}
+# Clear environment
+rm(list = ls())
 
-```{r, warning = FALSE, message = FALSE, results='hold', collapse=TRUE}
-# Load necessary libraries
-library(tidyverse)    # for handling missing values
-library(EnvStats) # for rosnerTest
+# Load libraries
+library(tidyverse)    
 library(caTools)
 library(caret)
-library(corrplot)
-library(Metrics)
-library(car)        # for outliers test
-library(corrr)      # correlation matrix
-library(ggcorrplot) # correlation graph
-library(FactoMineR) # PCA analysis
-library(factoextra) # PCA plots
-library(pls)        # PC regression
-library(e1071)      # to fit transform PCA 
+library(corrplot)     # plot correlation matrix
+library(Metrics)      # calculate MAE, MSE, RMSE, R^2
+library(pls)          # PC regression
+library(e1071)        # to fit transform PCA  
+library(reshape2)     # transform to matrix
+library(ggcorrplot)   # correlation graph
+library(factoextra)   # PCA plots
+library(psych)        # descriptive stats - skew, kurtosis
+library(rcompanion)   # histogram plot
+library(DataExplorer) # EDA
+library(ggplot2)      # graphics
+library(car)          # for outliers test, power transformation
+library(MASS)         # power transformation, robust model
+library(DescTools)    # robust scaler
+library(kableExtra)   # table formatter
+library(EnvStats)     # for rosnerTest
+library(corrr)        # correlation matrix
+library(FactoMineR)   # PCA analysis
+library(factoextra)   # PCA plots
 library(olsrr)        # outliers, leverage plot
-
+library(sjPlot)       # format linear regression results
 ```
 
 ## Data Preparation
 
-In the previous Dataset section, we renamed the variables to be more significant, and easier to make inference. Moreover, we imputed the missing values with the Mean.
+In the previous $Dataset$ chapter, we renamed the variables to be more significant, and easier to make inference. Moreover, we imputed the missing values with the Mean.
 
 ```{r, echo=FALSE, results='hide'}
 # clear environment
@@ -139,9 +134,19 @@ str(train_data)
 
 ## Feature Scaling
 
--   Standardization ensures all features are on the same scale, and this method is less sensitive to outliers.
+### Standardization
 
-```{r, collapse=TRUE}
+It is important to Mean-Center the data prior to PCA model building to ensure the first Principal Component is in the direction of maximum variance.
+
+-   Standardization produces Mean, $\mu$= 0, and Variance, $\sigma$ = 1.
+
+-   We can rewrite this as:
+
+    $$
+    Z \sim N(0,1)
+    $$
+
+```{r}
 # Find the index position of the target feature 
 target_name <- "expected_survival"
 target_index <- grep(target_name, 
@@ -164,6 +169,14 @@ train_data_sc <- scale(train_data[, -target_index])
 ```{r}
 # Plot a boxplot to visualize potential outliers
 boxplot(train_data_sc, main = "Outliers Detection")
+```
+
+```{r}
+# Create a boxplot
+# train_data_sc %>%  
+#   aes(y = train_data_sc) +
+#   geom_boxplot() +
+#   labs(title = "Outliers Detection")
 ```
 
 ### Leverage
@@ -214,8 +227,10 @@ corr_matrix <- round(corr_matrix, digits = 2)
 
 # Print names of highly correlated features; threshold > 0.30
 high <- findCorrelation(corr_matrix, cutoff = 0.30, names = TRUE)
-high
 
+# table format
+kbl(high) %>%
+  kable_paper("hover", full_width = F)
 ```
 
 ## Full Model Regression
@@ -229,7 +244,7 @@ set.seed(my_seed)
 full_model <- lm(expected_survival ~ ., data = train_data)
 
 # Print a summary of the regression model
-summary(full_model)
+tab_model(full_model, string.p="P-value", show.se="T")
 ```
 
 ## PCA Analysis
@@ -253,7 +268,11 @@ The SVD is closely related to the eigenvalue decomposition (EVD), which is anoth
 ```{r}
 # Apply PCA using prcomp()
 data_pca <- prcomp(train_data_sc, center = TRUE, scale. = TRUE)
-summary(data_pca)
+pca_summ <- summary(data_pca)$importance
+
+# table format
+kbl(pca_summ) %>%
+  kable_paper("hover", full_width = F)
 ```
 
 ### PCA - Elements
@@ -421,15 +440,7 @@ test_set <- subset(train_data, split == FALSE)
 
 ### Feature Scaling: Standardization
 
--   It is important to Mean-Center the data prior to PCA model building to ensure the first Principal Component is in the direction of maximum variance.
-
--   Standardization produces Mean, $\mu$= 0, and Variance, $\sigma$ = 1.
-
--   We can rewrite this as:
-
-    $$
-    Z \sim N(0,1)
-    $$
+-   Standardization ensures all features are on the same scale, and this method is less sensitive to outliers.
 
 ```{r}
 # Feature Scaling: Standardization
@@ -466,7 +477,7 @@ test_set <- test_set[c(2:9, 1)]
 
 ```
 
-### PRESS & Predicted R\^2 Functions
+### PRESS & Predicted $R^2$ Functions
 
 ```{r}
 #PRESS - predicted residual sums of squares
@@ -491,7 +502,7 @@ pred_r_squared <- function(linear.model) {
 }
 ```
 
-### PCA Full Model - 8 Principal Components
+### PCA Full Model: 8 Principal Components
 
 ```{r}
 # reproducible random sampling
@@ -501,7 +512,8 @@ set.seed(my_seed)
 pca_full_model <- lm(expected_survival ~ ., data = training_set)
 
 # Print a summary of the regression model
-summary(pca_full_model)
+# summary(pca_full_model)
+tab_model(pca_full_model, string.p="P-value", show.se="T")
 
 # Calculate PRESS
 cat("PRESS: ", PRESS(pca_full_model), "\n")
@@ -518,7 +530,7 @@ corr_matrix <- cor(training_set)
 ggcorrplot(corr_matrix)
 ```
 
-## PCA - 2 Principal Components
+## PCA: 2 Principal Components
 
 ```{r}
 # Create a subset with 2 principal components
@@ -536,7 +548,7 @@ reg_model <- lm(expected_survival ~ .,
                 data = train_pca)
 
 # Print a summary of the regression model
-summary(reg_model)
+tab_model(reg_model)
 
 # Calculate PRESS
 cat("PRESS: ", PRESS(reg_model), "\n")
@@ -558,7 +570,7 @@ y = train_pca$expected_survival
 # fit PCR
 pcr_model <- pcr(y ~ PC1+PC2, data=train_pca, validation="CV")
 
-summary(pcr_model)
+(pcr_model)
 
 ```
 
@@ -600,7 +612,7 @@ model_cv <- train(expected_survival ~ .,
                   trControl = k_10)
 
 # Print Model Performance
-print(model_cv)
+(model_cv)
 
 cv_results = model_cv$results
 
@@ -612,7 +624,7 @@ cv_results = model_cv$results
 # Find the index position of the target feature
 pred_target_index <- grep(target_name, 
                      colnames(test_pca))
-cat("Target Feature Index =", pred_target_index)
+#cat("Target Feature Index =", pred_target_index)
 
 # Create Predicted Target Feature (y-test) 
 y_test <- test_pca[pred_target_index]
@@ -626,7 +638,7 @@ y_pred = predict(model_cv, newdata = test_pca[, -pred_target_index])
 
 ```{r}
 # Prediction Results from y_predictions
-round(y_pred, digits = 0)
+y_pred <- round(y_pred, digits = 0)
 
 ```
 
@@ -635,8 +647,12 @@ round(y_pred, digits = 0)
 y_test_numeric <- as.numeric(unlist(y_test))
 
 # Original data
-y_test_numeric
+#y_test_numeric
 
+prediction_comparison <- cbind(y_pred, y_test_numeric)
+# table format
+kbl(prediction_comparison) %>%
+  kable_paper("hover", full_width = F)
 ```
 
 ### Prediction Metrics
@@ -644,21 +660,26 @@ y_test_numeric
 ```{r}
 # Calculate Mean Absolute Error (MAE)
 mae_value <- mae(y_pred, y_test_numeric)
-cat("MAE =", mae_value)
+#cat("MAE =", mae_value)
 
 # Calculate MSE
 mse_predict <- mean((y_pred - y_test_numeric)^2)
-cat("\nMSE =", mse_predict)
+#cat("\nMSE =", mse_predict)
 
 # Calculate RMSE
 rmse_predict <- sqrt(mean((y_pred - y_test_numeric)^2))
-cat("\nRMSE =", rmse_predict)
+#cat("\nRMSE =", rmse_predict)
 
 # Calculate R-squared (R^2)
 predicted_r2 <- 1 - sum((y_test_numeric - y_pred)^2) / 
   sum((y_test_numeric - mean(y_test_numeric))^2)
-cat("\nPredicted R^2 =", predicted_r2)
+# cat("\nPredicted R^2 =", predicted_r2)
 
+prediction_metrics_df <- cbind(mae_value, mse_predict,
+                               rmse_predict, predicted_r2)
+# table format
+kbl(prediction_metrics_df) %>%
+  kable_paper("hover", full_width = F)
 ```
 
 ## Training Conclusion
