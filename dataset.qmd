@@ -165,13 +165,13 @@ kbl(no_missing_values_df) %>%
 
 ## Imputation of Missing Values
 
--   Replaced missing values with the median since there are outliers in the dataset.
+-   After substituting missing values with the mean, we are now able to proceed with standardizing the dataset.
 
--   Robust statistical methods will be used to address the nonparametric distribution.
+-   The standardization process will be implemented in the Analysis chapter.
 
--   Generated a table to verify that there are no missing observations in the data frame.
+-   A table was created to confirm the absence of any missing observations in the data frame.
 
--   Excluded the "State" variable due to its categorical data type.
+-   Due to its categorical data type, the "State" variable was omitted from the analysis.
 
     ```{r, echo=FALSE}
     # Remove categorical columns
@@ -199,4 +199,4 @@ kbl(no_missing_values_df) %>%
   kable_paper("hover", full_width = F)
 ```
 
-In conclusion, the dataset has undergone essential preprocessing steps, rendering it well-prepared for outliers detection and normalization, which are crucial for robust and accurate model development. Missing observations have been imputed using the median, ensuring that all variables within the dataset are now numerical. These preliminary steps have not only enhanced the dataset's completeness but also set the stage for further advanced data analysis.
+In conclusion, the dataset has undergone essential pre-processing steps, rendering it well-prepared for outliers detection and normalization, which are crucial for robust and accurate model development. Missing observations have been imputed using the mean, ensuring that all variables within the dataset are now numerical. These preliminary steps have not only enhanced the dataset completeness, but also set the stage for further advanced data analysis.

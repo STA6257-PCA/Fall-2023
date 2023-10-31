@@ -38,7 +38,7 @@ library(olsrr)        # outliers, leverage plot
 
 ```
 
-## 01 - Data Preparation
+## Data Preparation
 
 In the previous Dataset section, we renamed the variables to be more significant, and easier to make inference. Moreover, we imputed the missing values with the Mean.
 
@@ -137,7 +137,7 @@ summary(train_data[, sapply(train_data, is.character)])
 str(train_data)
 ```
 
-## 02 - Feature Scaling
+## Feature Scaling
 
 -   Standardization ensures all features are on the same scale, and this method is less sensitive to outliers.
 
@@ -154,7 +154,7 @@ train_data_sc <- scale(train_data[, -target_index])
 
 ```
 
-## 03 - PCA Requirements
+## PCA Requirements
 
 ### Outliers Detection
 
@@ -232,7 +232,7 @@ full_model <- lm(expected_survival ~ ., data = train_data)
 summary(full_model)
 ```
 
-## 04 - PCA Analysis
+## PCA Analysis
 
 ### SVD - Singular Value Decomposition
 
@@ -317,7 +317,7 @@ selected_pcs <- pc_scores[, 1:num_components]
 selected_pcs
 ```
 
-## 05 - Visualization
+## Visualization
 
 ### Scree Plot - Cumulative Variance Explained
 
@@ -403,7 +403,7 @@ pc2_contribution +
                                                      accuracy = 1))
 ```
 
-## 06 - Model Building
+## Model Building
 
 ### Data Splitting into Training & Test set
 
@@ -423,7 +423,13 @@ test_set <- subset(train_data, split == FALSE)
 
 -   It is important to Mean-Center the data prior to PCA model building to ensure the first Principal Component is in the direction of maximum variance.
 
--   Standardization produces Mean = 0, and Variance = 1.
+-   Standardization produces Mean, $\mu$= 0, and Variance, $\sigma$ = 1.
+
+-   We can rewrite this as:
+
+    $$
+    Z \sim N(0,1)
+    $$
 
 ```{r}
 # Feature Scaling: Standardization
@@ -600,7 +606,7 @@ cv_results = model_cv$results
 
 ```
 
-## 07 - Predictions
+## Predictions
 
 ```{r}
 # Find the index position of the target feature
@@ -655,7 +661,7 @@ cat("\nPredicted R^2 =", predicted_r2)
 
 ```
 
-## 08 - Training Conclusion
+## Training Conclusion
 
 In conclusion, this project has demonstrated the effectiveness of Principal Component Analysis (PCA) in dimension reduction with the following key points:
 

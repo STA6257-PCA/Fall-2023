@@ -22,6 +22,8 @@ csl: ieee-with-url.csl
 format:
   html:
     theme: cosmo
+    code-fold: true
+    code-summary: "Show the code"
   pdf:
     documentclass: scrreprt
 
