@@ -83,7 +83,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./analysis.html" rel="next">
+<link href="./examples.html" rel="next">
 <link href="./dataset.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -186,14 +186,14 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Analysis</span></span></a>
+  <a href="./examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./abalone.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Abalone</span></span></a>
+  <a href="./analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -273,7 +273,7 @@ det(M - \lambda I) = 0
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="centering-and-scaling"><span class="header-section-number">4.4.1</span> Centering and Scaling</h3>
 <p>Let our dataset be represented by the <span class="math inline">\(N \times P\)</span> matrix <span class="math inline">\(X\)</span> comprised of <span class="math inline">\(N\)</span> observations of <span class="math inline">\(P\)</span> variables in the data set, where any element <span class="math inline">\(x_{np}\)</span> represents the <span class="math inline">\(n\)</span>th observation of variable <span class="math inline">\(p\)</span> in the dataset. The matrix <span class="math inline">\(X\)</span> has rank <span class="math inline">\(A\)</span> where <span class="math inline">\(A \leq min\{N, P\}\)</span>. The data in <span class="math inline">\(X\)</span> is centered and scaled, such that the mean of each column <span class="math inline">\(X_p\)</span> is 0 and every <span class="math inline">\(x_{np}\)</span> has been standardized with unit variance. We can represent this with the formula:</p>
 <p><span id="eq-2"><span class="math display">\[
-z_{np} = \frac{x_{np} - \bar{x}_{p}}{\sqrt{\sigma_{p}}}
+z_{np} = \frac{x_{np} - \bar{x}_{p}}{{\sigma_{p}}}
 \tag{4.2}\]</span></span></p>
 </section>
 <section id="eigendecomposition-of-the-covariance-matrix" class="level3" data-number="4.4.2">
@@ -317,7 +317,7 @@ X = FR^T
 </section>
 <section id="step-by-step-calculation-of-principal-component-analysis" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="step-by-step-calculation-of-principal-component-analysis"><span class="header-section-number">4.6</span> Step-by-Step Calculation of Principal Component Analysis</h2>
-<p><u><strong>Example:</strong></u> In this illustration, we have access to the two grades of four students in a statistics subject. We aim to employ Principal Component Analysis (PCA) as a means to reduce the dimensionality from two variables to a singular variable. This transformation will effectively represent students’ performance in the subject with a more compact and interpretable measure. The example is adopted from “<a href="https://www.youtube.com/watch?v=MLaJbA82nzk&amp;ab_channel=EduFlairKTUCS">PCA problem</a>” posted by EduFlair KTU CS on Youtube.com.</p>
+<p>In this illustration, we have access to the two grades of four students in a statistics subject. We aim to employ Principal Component Analysis (PCA) as a means to reduce the dimensionality from two variables to a singular variable. This transformation will effectively represent students’ performance in the subject with a more compact and interpretable measure. The example is adapted from the resource <em>How to compute principal components</em>. <span class="citation" data-cites="eduflair2020"><a href="references.html#ref-eduflair2020" role="doc-biblioref">[8]</a></span></p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -729,6 +729,9 @@ Cumulative Proportion  0.8065 1.0000</code></pre>
 <div id="ref-lever2017points" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[7] </div><div class="csl-right-inline">J. Lever, M. Krzywinski, and N. Altman, <span>“Points of significance: Principal component analysis,”</span> <em>Nature methods</em>, vol. 14, no. 7, pp. 641–643, 2017.</div>
 </div>
+<div id="ref-eduflair2020" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">E. K. CS, <span>“PCA problem / how to compute principal components / KTU machine learning.”</span> 2020. Available: <a href="https://youtu.be/MLaJbA82nzk">https://youtu.be/MLaJbA82nzk</a></div>
+</div>
 </div>
 </section>
 </section>
@@ -974,8 +977,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./analysis.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./examples.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

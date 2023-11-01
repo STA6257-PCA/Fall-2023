@@ -29,7 +29,7 @@ In this approach to PCA, SVD is used to extract the most information (variance) 
 Let our dataset be represented by the $N \times P$ matrix $X$ comprised of $N$ observations of $P$ variables in the data set, where any element $x_{np}$ represents the $n$th observation of variable $p$ in the dataset. The matrix $X$ has rank $A$ where $A \leq min\{N, P\}$. The data in $X$ is centered and scaled, such that the mean of each column $X_p$ is 0 and every $x_{np}$ has been standardized with unit variance. We can represent this with the formula:
 
 $$
-z_{np} = \frac{x_{np} - \bar{x}_{p}}{\sqrt{\sigma_{p}}}
+z_{np} = \frac{x_{np} - \bar{x}_{p}}{{\sigma_{p}}}
 $$ {#eq-2}
 
 ### Eigendecomposition of the Covariance Matrix
@@ -86,7 +86,7 @@ There are several ways to interpret the PCs derived from the analysis. Since the
 
 ## Step-by-Step Calculation of Principal Component Analysis
 
-[**Example:**]{.underline} In this illustration, we have access to the two grades of four students in a statistics subject. We aim to employ Principal Component Analysis (PCA) as a means to reduce the dimensionality from two variables to a singular variable. This transformation will effectively represent students' performance in the subject with a more compact and interpretable measure. The example is adopted from "[PCA problem](https://www.youtube.com/watch?v=MLaJbA82nzk&ab_channel=EduFlairKTUCS)" posted by EduFlair KTU CS on Youtube.com.
+In this illustration, we have access to the two grades of four students in a statistics subject. We aim to employ Principal Component Analysis (PCA) as a means to reduce the dimensionality from two variables to a singular variable. This transformation will effectively represent students' performance in the subject with a more compact and interpretable measure. The example is adapted from the resource *How to compute principal components*. @eduflair2020
 
 | Scores        | **Basic Stats** | **Advanced Stats** |
 |---------------|-----------------|--------------------|

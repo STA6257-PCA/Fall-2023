@@ -12,8 +12,8 @@ book:
     - intro.qmd
     - dataset.qmd
     - methods.qmd
+    - examples.qmd
     - analysis.qmd
-    - abalone.qmd
     - references.qmd
 
 bibliography: references.bib

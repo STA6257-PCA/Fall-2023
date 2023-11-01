@@ -129,7 +129,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./abalone.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./examples.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -186,7 +186,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./abalone.html" class="sidebar-item-text sidebar-link active">
+  <a href="./examples.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></span></a>
   </div>
 </li>
@@ -436,11 +436,11 @@ u_1 \\ u_2
 <p>Derive The New Dataset</p>
 <table>
 <colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 48%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -506,11 +506,11 @@ P_{14}= e_1^T \times
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="the-new-dataset-left-singular-vector"><span class="header-section-number">5.1.1</span> The New Dataset (Left singular vector)</h3>
 <table class="table">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 38%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -621,7 +621,7 @@ Cumulative Proportion  0.8065 1.0000</code></pre>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="abalone_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="examples_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Code</summary>
@@ -629,7 +629,7 @@ Cumulative Proportion  0.8065 1.0000</code></pre>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(data_pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="abalone_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
+<p><img src="examples_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Code</summary>
@@ -771,7 +771,7 @@ Shucked_weight Viscera_weight   Shell_weight          Rings
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(abalone_sc, <span class="at">main =</span> <span class="st">"Visualization of scaled and centered data"</span>, <span class="at">horizontal =</span> <span class="cn">TRUE</span>, <span class="at">las =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="abalone_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="examples_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Are there enough outliers to be a cause for concern? We can see how many lie outside of the third standard deviation of the data for each variable.</p>
@@ -797,7 +797,7 @@ Viscera_weight   Shell_weight          Rings
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(abalone_corr, <span class="at">method=</span><span class="st">"number"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="abalone_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="examples_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Our scaled and centered data has strong linear correlations and contains a relatively small number of outliers. We can now calculate the principal components of the dataset.</p>
@@ -913,7 +913,7 @@ Rings          0.2427128 -0.92120385</code></pre>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(abalone_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="abalone_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="examples_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The scree plot visualizes the variance captured by each PC. PC1 explains 83.9% of the variance, and PC2 explains 8.7% variance.</p>
@@ -927,7 +927,7 @@ Rings          0.2427128 -0.92120385</code></pre>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(abalone_pca, <span class="at">label =</span> <span class="st">"var"</span>, <span class="at">alpha.ind =</span> <span class="st">"contrib"</span>, <span class="at">col.var =</span> <span class="st">"blue"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="abalone_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="examples_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -955,7 +955,7 @@ Rings          0.2427128 -0.92120385</code></pre>
 <span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="abalone_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="examples_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Code</summary>
@@ -977,7 +977,7 @@ Rings          0.2427128 -0.92120385</code></pre>
 <span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="abalone_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid" width="672"></p>
+<p><img src="examples_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
