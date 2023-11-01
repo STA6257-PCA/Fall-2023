@@ -229,9 +229,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-splitting-into-training-test-set" id="toc-data-splitting-into-training-test-set" class="nav-link" data-scroll-target="#data-splitting-into-training-test-set"><span class="header-section-number">6.7.1</span> Data Splitting into Training &amp; Test set</a></li>
   <li><a href="#feature-scaling-standardization" id="toc-feature-scaling-standardization" class="nav-link" data-scroll-target="#feature-scaling-standardization"><span class="header-section-number">6.7.2</span> Feature Scaling: Standardization</a></li>
   <li><a href="#applying-pca-to-training-test-sets" id="toc-applying-pca-to-training-test-sets" class="nav-link" data-scroll-target="#applying-pca-to-training-test-sets"><span class="header-section-number">6.7.3</span> Applying PCA to Training &amp; Test sets</a></li>
-  <li><a href="#press-predicted-r2-functions" id="toc-press-predicted-r2-functions" class="nav-link" data-scroll-target="#press-predicted-r2-functions"><span class="header-section-number">6.7.4</span> PRESS &amp; Predicted <span class="math inline">\(R^2\)</span> Functions</a></li>
-  <li><a href="#pca-full-model-8-principal-components" id="toc-pca-full-model-8-principal-components" class="nav-link" data-scroll-target="#pca-full-model-8-principal-components"><span class="header-section-number">6.7.5</span> PCA Full Model: 8 Principal Components</a></li>
-  <li><a href="#visualization-of-uncorrelated-pca-matrix" id="toc-visualization-of-uncorrelated-pca-matrix" class="nav-link" data-scroll-target="#visualization-of-uncorrelated-pca-matrix"><span class="header-section-number">6.7.6</span> Visualization of Uncorrelated PCA Matrix</a></li>
+  <li><a href="#pca-full-model-8-principal-components" id="toc-pca-full-model-8-principal-components" class="nav-link" data-scroll-target="#pca-full-model-8-principal-components"><span class="header-section-number">6.7.4</span> PCA Full Model: 8 Principal Components</a></li>
+  <li><a href="#visualization-of-uncorrelated-pca-matrix" id="toc-visualization-of-uncorrelated-pca-matrix" class="nav-link" data-scroll-target="#visualization-of-uncorrelated-pca-matrix"><span class="header-section-number">6.7.5</span> Visualization of Uncorrelated PCA Matrix</a></li>
   </ul></li>
   <li><a href="#pca-2-principal-components" id="toc-pca-2-principal-components" class="nav-link" data-scroll-target="#pca-2-principal-components"><span class="header-section-number">6.8</span> PCA: 2 Principal Components</a>
   <ul class="collapse">
@@ -393,8 +392,15 @@ Z \sim N(0,1)
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>high <span class="ot">&lt;-</span> <span class="fu">findCorrelation</span>(corr_matrix, <span class="at">cutoff =</span> <span class="fl">0.30</span>, <span class="at">names =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># table format</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(high) <span class="sc">%&gt;%</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Highly Correlated Features"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Highly Correlated Features"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(high) <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
@@ -504,13 +510,13 @@ Z \sim N(0,1)
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a multiple linear regression model</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>full_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(expected_survival <span class="sc">~</span> ., <span class="at">data =</span> train_data)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the regression model</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(full_model, <span class="at">string.p=</span><span class="st">"P-value"</span>, <span class="at">show.se=</span><span class="st">"T"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a multiple linear regression model</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>full_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(expected_survival <span class="sc">~</span> ., <span class="at">data =</span> train_data)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the regression model</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(full_model, <span class="at">string.p=</span><span class="st">"P-value"</span>, <span class="at">show.se=</span><span class="st">"T"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
@@ -842,16 +848,17 @@ waitlist worse</td>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA using prcomp()</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(train_data_sc, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pca_summ <span class="ot">&lt;-</span> <span class="fu">summary</span>(data_pca)<span class="sc">$</span>importance</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># table format</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(pca_summ) <span class="sc">%&gt;%</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA using prcomp()</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>data_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(train_data_sc, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>pca_summ <span class="ot">&lt;-</span> <span class="fu">summary</span>(data_pca)<span class="sc">$</span>importance</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># table format</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(pca_summ, <span class="at">caption =</span> <span class="st">"PCA"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>PCA</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -1031,20 +1038,20 @@ waitlist worse</td>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Principal Component scores vector</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pc_scores <span class="ot">&lt;-</span> data_pca<span class="sc">$</span>x</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Std Deviation of Components</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>component_sdev <span class="ot">&lt;-</span> data_pca<span class="sc">$</span>sdev</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Eigenvector, or Loadings</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>eigenvector <span class="ot">&lt;-</span> data_pca<span class="sc">$</span>rotation</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean of variables</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>component_mean <span class="ot">&lt;-</span> data_pca<span class="sc">$</span>center </span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Scaling factor of Variables</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>component_scale <span class="ot">&lt;-</span> data_pca<span class="sc">$</span>scale</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Principal Component scores vector</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pc_scores <span class="ot">&lt;-</span> data_pca<span class="sc">$</span>x</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Std Deviation of Components</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>component_sdev <span class="ot">&lt;-</span> data_pca<span class="sc">$</span>sdev</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Eigenvector, or Loadings</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>eigenvector <span class="ot">&lt;-</span> data_pca<span class="sc">$</span>rotation</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean of variables</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>component_mean <span class="ot">&lt;-</span> data_pca<span class="sc">$</span>center </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Scaling factor of Variables</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>component_scale <span class="ot">&lt;-</span> data_pca<span class="sc">$</span>scale</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -1056,58 +1063,217 @@ waitlist worse</td>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access the loadings for the first two principal components</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>loadings_first_two_components <span class="ot">&lt;-</span> eigenvector[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the loadings for the first two principal components</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Loadings for the first two principal components:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access the loadings for the first two principal components</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>loadings_first_two_components <span class="ot">&lt;-</span> eigenvector[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the loadings for the first two principal components</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># print(loadings_first_two_components)</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># table format</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(loadings_first_two_components,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Loadings of first Two Principal Components"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Loadings for the first two principal components:"</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(loadings_first_two_components)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>                                                 PC1          PC2
-better_transfusion                      0.0505988170  0.015071362
-expected_transfusion                    0.2535655387 -0.021428805
-worse_transfusion                       0.2058083243 -0.164735938
-better_infection                        0.2526036797 -0.007341849
-expected_infection                      0.2455149674 -0.065172327
-worse_infection                         0.1381076997  0.063702113
-Kt_v_1.2                                0.0030888370  0.008117565
-Kt_v_1.7                               -0.0077627944  0.044354338
-pedriatic_Kt_v_1.2                     -0.0635839673  0.052731221
-pediatric_Kt_v_1.8                     -0.0139161654  0.002781654
-pediatric_nPCR                         -0.0394255772  0.076824152
-better_fistula                          0.1701351094  0.184888641
-expected_fistula                        0.2521168144 -0.055750964
-worse_fistula                           0.1932023133 -0.048145074
-long_term_catheter                     -0.0054339687  0.040853832
-hypercalcemia_calcium &gt; 10.2Mg         -0.0276031313  0.104909219
-phosphorus &lt; 3.5Mg                      0.0161465158  0.375887922
-phosphorus (3.5 - 4.5) Mg               0.0419719997  0.425799543
-phosphorus (4.6 - 5.5) Mg               0.0888141257  0.266545080
-phosphorus (5.6 - 7) Mg                -0.0954250049 -0.329731283
-phosphorus &gt; 7Mg                       -0.0293097443 -0.439982654
-better_hospitalization                  0.1554828676  0.039769206
-expected_hospitalization                0.2534938280 -0.035294582
-worse_hospitalization                   0.1862740734 -0.104759047
-better_hospital_readmission             0.2100006566 -0.046207863
-expected_hospital_readmission           0.2537238605 -0.041416989
-worse_hospital_readmission              0.2009955081 -0.043217623
-better_survival                         0.1522860091  0.168831835
-worse_survival                          0.2288119832 -0.066222930
-incident_transplant_waitlist_better     0.2015728228  0.151287289
-incident_transplant_waitlist_expected   0.2498798110 -0.057824581
-incident_transplant_waitlist_worse      0.1912997762 -0.019853974
-prevalent_transplant_waitlist_better    0.1617720280  0.176291623
-prevalent_transplant_waitlist_expected  0.2500769232 -0.070274998
-prevalent_transplant_waitlist_worse     0.1201730964 -0.228472026
-Hgb 10g                                -0.0298792287 -0.080370928
-Hgb 12g                                -0.0005836729  0.176481318</code></pre>
+<div class="cell-output-display">
+<table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Loadings of first Two Principal Components</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PC1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PC2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">better_transfusion</td>
+<td style="text-align: right;">0.0505988</td>
+<td style="text-align: right;">0.0150714</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">expected_transfusion</td>
+<td style="text-align: right;">0.2535655</td>
+<td style="text-align: right;">-0.0214288</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">worse_transfusion</td>
+<td style="text-align: right;">0.2058083</td>
+<td style="text-align: right;">-0.1647359</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">better_infection</td>
+<td style="text-align: right;">0.2526037</td>
+<td style="text-align: right;">-0.0073418</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">expected_infection</td>
+<td style="text-align: right;">0.2455150</td>
+<td style="text-align: right;">-0.0651723</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">worse_infection</td>
+<td style="text-align: right;">0.1381077</td>
+<td style="text-align: right;">0.0637021</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kt_v_1.2</td>
+<td style="text-align: right;">0.0030888</td>
+<td style="text-align: right;">0.0081176</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kt_v_1.7</td>
+<td style="text-align: right;">-0.0077628</td>
+<td style="text-align: right;">0.0443543</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pedriatic_Kt_v_1.2</td>
+<td style="text-align: right;">-0.0635840</td>
+<td style="text-align: right;">0.0527312</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pediatric_Kt_v_1.8</td>
+<td style="text-align: right;">-0.0139162</td>
+<td style="text-align: right;">0.0027817</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pediatric_nPCR</td>
+<td style="text-align: right;">-0.0394256</td>
+<td style="text-align: right;">0.0768242</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">better_fistula</td>
+<td style="text-align: right;">0.1701351</td>
+<td style="text-align: right;">0.1848886</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">expected_fistula</td>
+<td style="text-align: right;">0.2521168</td>
+<td style="text-align: right;">-0.0557510</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">worse_fistula</td>
+<td style="text-align: right;">0.1932023</td>
+<td style="text-align: right;">-0.0481451</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">long_term_catheter</td>
+<td style="text-align: right;">-0.0054340</td>
+<td style="text-align: right;">0.0408538</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hypercalcemia_calcium &gt; 10.2Mg</td>
+<td style="text-align: right;">-0.0276031</td>
+<td style="text-align: right;">0.1049092</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">phosphorus &lt; 3.5Mg</td>
+<td style="text-align: right;">0.0161465</td>
+<td style="text-align: right;">0.3758879</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">phosphorus (3.5 - 4.5) Mg</td>
+<td style="text-align: right;">0.0419720</td>
+<td style="text-align: right;">0.4257995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">phosphorus (4.6 - 5.5) Mg</td>
+<td style="text-align: right;">0.0888141</td>
+<td style="text-align: right;">0.2665451</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">phosphorus (5.6 - 7) Mg</td>
+<td style="text-align: right;">-0.0954250</td>
+<td style="text-align: right;">-0.3297313</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">phosphorus &gt; 7Mg</td>
+<td style="text-align: right;">-0.0293097</td>
+<td style="text-align: right;">-0.4399827</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">better_hospitalization</td>
+<td style="text-align: right;">0.1554829</td>
+<td style="text-align: right;">0.0397692</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">expected_hospitalization</td>
+<td style="text-align: right;">0.2534938</td>
+<td style="text-align: right;">-0.0352946</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">worse_hospitalization</td>
+<td style="text-align: right;">0.1862741</td>
+<td style="text-align: right;">-0.1047590</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">better_hospital_readmission</td>
+<td style="text-align: right;">0.2100007</td>
+<td style="text-align: right;">-0.0462079</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">expected_hospital_readmission</td>
+<td style="text-align: right;">0.2537239</td>
+<td style="text-align: right;">-0.0414170</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">worse_hospital_readmission</td>
+<td style="text-align: right;">0.2009955</td>
+<td style="text-align: right;">-0.0432176</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">better_survival</td>
+<td style="text-align: right;">0.1522860</td>
+<td style="text-align: right;">0.1688318</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">worse_survival</td>
+<td style="text-align: right;">0.2288120</td>
+<td style="text-align: right;">-0.0662229</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">incident_transplant_waitlist_better</td>
+<td style="text-align: right;">0.2015728</td>
+<td style="text-align: right;">0.1512873</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">incident_transplant_waitlist_expected</td>
+<td style="text-align: right;">0.2498798</td>
+<td style="text-align: right;">-0.0578246</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">incident_transplant_waitlist_worse</td>
+<td style="text-align: right;">0.1912998</td>
+<td style="text-align: right;">-0.0198540</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prevalent_transplant_waitlist_better</td>
+<td style="text-align: right;">0.1617720</td>
+<td style="text-align: right;">0.1762916</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">prevalent_transplant_waitlist_expected</td>
+<td style="text-align: right;">0.2500769</td>
+<td style="text-align: right;">-0.0702750</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prevalent_transplant_waitlist_worse</td>
+<td style="text-align: right;">0.1201731</td>
+<td style="text-align: right;">-0.2284720</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hgb 10g</td>
+<td style="text-align: right;">-0.0298792</td>
+<td style="text-align: right;">-0.0803709</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hgb 12g</td>
+<td style="text-align: right;">-0.0005837</td>
+<td style="text-align: right;">0.1764813</td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
 </div>
 </section>
@@ -1116,153 +1282,799 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportion of variance explained by each PC</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>variance_explained <span class="ot">&lt;-</span> component_sdev<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(component_sdev<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cumulative proportion of variance explained</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>cumulative_variance_explained <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(variance_explained)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>cumulative_variance_explained</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportion of variance explained by each PC</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>variance_explained <span class="ot">&lt;-</span> component_sdev<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(component_sdev<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cumulative proportion of variance explained</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>cumulative_variance_explained <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(variance_explained)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># table format</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(cumulative_variance_explained, </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Cumulative Variance Explained"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.4080054 0.5026901 0.5939685 0.6766143 0.7313169 0.7735996 0.8079857
- [8] 0.8402922 0.8644234 0.8867126 0.9048213 0.9212244 0.9337751 0.9447292
-[15] 0.9535419 0.9604473 0.9672517 0.9736998 0.9794804 0.9841779 0.9875530
-[22] 0.9904031 0.9926506 0.9944835 0.9958627 0.9971109 0.9981727 0.9989263
-[29] 0.9993607 0.9996827 0.9998725 0.9999427 0.9999698 0.9999920 0.9999976
-[36] 0.9999993 1.0000000</code></pre>
+<div class="cell-output-display">
+<table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Cumulative Variance Explained</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.4080054</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.5026901</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.5939685</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.6766143</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.7313169</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.7735996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.8079857</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.8402922</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.8644234</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.8867126</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9048213</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9212244</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9337751</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9447292</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9535419</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9604473</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9672517</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9736998</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9794804</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9841779</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9875530</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9904031</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9926506</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9944835</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9958627</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9971109</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9981727</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9989263</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9993607</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9996827</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9998725</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9999427</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9999698</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9999920</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9999976</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9999993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.0000000</td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
 </div>
 </section>
 <section id="pca---number-of-principal-components" class="level3" data-number="6.5.5">
 <h3 data-number="6.5.5" class="anchored" data-anchor-id="pca---number-of-principal-components"><span class="header-section-number">6.5.5</span> PCA - Number of Principal Components</h3>
 <ul>
-<li>We conclude that 9 Principal Components explain 86% of the variance.</li>
+<li>We can conclude that 9 Principal Components explain 86% of the variance.</li>
 </ul>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retain components that explain a percentage of the variance</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>num_components <span class="ot">&lt;-</span> <span class="fu">which</span>(cumulative_variance_explained <span class="sc">&gt;=</span> <span class="fl">0.86</span>)[<span class="dv">1</span>]</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the desired number of principal components</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>selected_pcs <span class="ot">&lt;-</span> pc_scores[, <span class="dv">1</span><span class="sc">:</span>num_components]</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>selected_pcs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retain components that explain a percentage of the variance</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>num_components <span class="ot">&lt;-</span> <span class="fu">which</span>(cumulative_variance_explained <span class="sc">&gt;=</span> <span class="fl">0.86</span>)[<span class="dv">1</span>]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the desired number of principal components</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>selected_pcs <span class="ot">&lt;-</span> pc_scores[, <span class="dv">1</span><span class="sc">:</span>num_components]</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># table format</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(selected_pcs, <span class="at">caption =</span> <span class="st">"Components Explaining 86% Variance"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>          PC1          PC2         PC3          PC4         PC5         PC6
-1  -3.1377897  0.771802333 -0.73643610 -0.922235383 -0.35927448  0.38542561
-2   0.9108769 -1.373614712 -0.89066560 -0.046036426  0.02278572  0.32672341
-3  -1.3650210 -1.765641978 -0.14492292  0.259189212 -1.28569119 -0.37616348
-4  -3.0594171  0.334783454 -0.01406268 -0.139540012  0.09202588 -0.28246147
-5  -0.1990728 -0.207347300 -0.71486169 -1.375622870 -1.19927381  0.03193723
-6  15.2031917  2.618707806 -7.73627571  4.051949166 -0.82443732 -2.82184549
-7  -1.1596436  1.121551314 -0.71119818 -0.684236835  0.22859575 -0.38210147
-8  -1.7566946  2.446404457  0.23358063 -0.787124212 -0.10982171 -1.06033591
-9  -2.5604524  1.078492112 -0.02070808 -0.001800478 -0.24737807  1.19300909
-10 -2.2725299  0.767002717 -0.05524655 -1.004506232  2.44302298 -1.80923423
-11 10.2100889 -3.095058992  5.56314501 -2.707865857 -3.23281430 -1.47878094
-12  5.1285806 -1.770508028  1.78490237 -0.162837263  0.51758150 -0.36715154
-13 -3.4958456 -4.420614532 -3.14253662  0.040387883 -0.79275740  0.42165629
-14 -1.7133698  0.822955825 -1.96628840 -1.087070858  0.75045171  0.43567043
-15 -1.9510677  0.907515363 -0.34586585 -1.470709937 -0.77348447 -0.78101531
-16 -2.6295662  0.914891571 -0.52633428 -1.348424988 -0.93480439  0.51812412
-17  4.7463371  0.314584946  2.37090668 -0.252790732  0.83290377  1.42903927
-18  0.3868186 -0.929048000  0.68704793 -0.611740653  1.53736445 -0.11125974
-19 -1.6766975  0.284981397 -0.98417172 -1.813309386 -0.81355933  0.75181767
-20 -0.7344809 -1.322183158  0.37001336 -0.844751806  2.05528745 -1.60184302
-21  0.9392629 -0.699900216 -0.13989705 -0.597819034 -0.02027423 -0.00460663
-22 -0.8326091  1.587389983 -0.73121315  0.290973848  0.11987111  1.10998873
-23  0.8724526  1.045058855  0.27746739  0.217533123 -0.62257760  0.54288629
-24 -2.7729541  0.532823236 -0.38569030 -0.934135557  0.89428334 -2.72370097
-25  2.0146426  0.001409232  0.64033906 -0.692861288 -0.16774408  0.45551037
-26 -1.1376241  0.667578303  0.06120837  0.244365584 -0.44647286  0.92651259
-27  0.1255818 -0.995109875  1.15033009 -0.489711370  0.71084468  1.38539681
-28 -3.6485929 -5.124718566  0.04913529  6.332224295 -1.44380969  1.47256020
-29 -0.3307121  0.279250049 -0.09852864 -0.338816118 -0.59497247 -0.57611719
-30 -3.1386137 -2.484679699 -2.00441012  1.066087068 -0.58765600 -0.02923877
-31  1.8304255 -0.865860455 -0.62921128 -0.288806050 -0.35848754  1.15223519
-32 -2.6299851  1.882042739  1.47902941  1.519749388  0.14837356  0.99433001
-33 -1.9654200  1.443737323  0.42388464 -1.421726497  0.34517137  0.14894489
-34 -2.9433777 -0.445332786 -0.18685858  0.050108988 -0.34712485 -0.38836224
-35  1.9334685  4.227422253 -1.54289340 -0.835373008 -0.54123998  2.37389028
-36 -1.4611450  0.555081258 -1.44670031 -0.273171460  0.41677320 -0.33354615
-37 -1.6820407 -0.925297600 -0.31774506 -0.273721372 -0.78520268  0.20360927
-38  6.7594616  3.638815421  1.05618063  2.351356035  2.49702755  3.43721377
-39  3.4506790 -1.182398955  2.56989757 -1.112911235 -0.05458367  1.43612628
-40 -1.0983772 -1.524068762 -0.53200487 -0.477669191 -0.99945377 -0.80297280
-41 -1.9193470 -0.016455120 -1.08062219 -0.587236913 -0.63239954 -0.20135310
-42  3.4962356  1.519916753  1.31092517 -0.300656841  2.59852281  1.04990713
-43 -0.2522021  3.071775273  2.14067078 -1.925517343 -2.27190695 -3.40926804
-44 -3.0134705 -0.685824171 -1.17123942 -0.855106884 -0.44275792  0.83905452
-45  0.3392488 -0.513300425  0.03908522 -0.176642934 -0.59240146  1.05933117
-46 -2.1136312  2.610044185  0.53298151 -0.847818228  0.07520510  0.14163876
-47  1.3706778 -2.910358069  1.08475124  1.316261684  6.13811703 -2.14363119
-48 13.0708364 -2.725721891  0.42574820 -0.475180731 -0.78335087  0.57890473
-49 -2.6464920 -0.380710708 -0.69436207  1.036469413 -0.92018764  0.45363960
-50  1.7504813 -0.179844084 -0.26891623 -0.341129747  0.60754876 -0.77667306
-51 -3.3724826  3.536458694  5.32705688  7.762674701 -2.31626791 -1.79609628
-52 -3.1242143 -1.042445343  0.80437184  2.133119681  2.85592676 -0.90733360
-53 -1.0176612 -1.671769226 -1.82862519  0.394960511 -0.46534146  0.86157778
-54 -0.3396014  0.750547277  0.95957147 -0.301395219  0.57260088  0.01894730
-55 -2.2360197 -0.655876540  0.77645594  0.231805497 -0.27848656 -0.34479229
-56 -3.1511256  0.180665062 -1.07019444 -0.491205128 -0.21428914 -0.62572389
-           PC7         PC8         PC9
-1   1.76446455  0.71374642 -1.27763836
-2   1.90946042  0.32026834  0.31575168
-3  -0.78560815 -0.92036817 -1.26256359
-4  -0.12860754  0.13732138  0.07796673
-5   0.74994371  0.71599423 -0.19541169
-6  -0.39368588  0.75396577  0.12358783
-7  -0.51476890 -1.37312839  0.55597712
-8  -0.14340022 -1.64114704  1.14619211
-9  -0.12337260  1.64840877  1.12228458
-10  1.30112932  0.04017681  0.78534979
-11 -1.01949796  0.39458663  0.01823775
-12  1.27365641  0.38385941 -0.19143125
-13  0.10866259 -1.13950353 -1.57906009
-14  1.10103413  0.88533889 -1.19056845
-15 -1.01157314 -1.47740924  0.22146676
-16  0.35695340  0.88633035 -0.44875630
-17 -0.84922663  0.01277585 -0.04793206
-18  0.22648544  0.76907240 -0.83845390
-19  0.84498090 -0.26045393  0.78929137
-20  0.75707090 -1.18661916  1.67512391
-21  1.31702137  0.49437991  0.47455077
-22 -1.64549969  1.13118828 -0.04484940
-23 -0.21184648  0.96993606  1.61645155
-24 -0.47378261 -2.62659005  1.14510308
-25 -0.38399443  0.27541717  1.00447793
-26 -0.69664564  0.94135363  0.17566660
-27  0.02791903 -0.36150463 -0.45207374
-28 -0.77192847 -0.90604294  2.92091797
-29  2.01369673  0.05235085  0.94851213
-30 -0.76889273 -0.04319356 -0.93018809
-31  1.40987972 -0.23868533  0.11171350
-32  1.01379575  1.75474773 -0.29044327
-33  0.22672970  0.82917850  0.05368812
-34 -1.84413987  0.45197913  0.38530687
-35 -0.29186460  0.24777941  0.05260103
-36  0.03060274  1.07595713 -0.12917118
-37 -0.46866588  0.53016534 -0.43879593
-38 -1.42758292 -3.60748873 -1.60176642
-39 -0.65914865 -1.03448059 -0.16051740
-40 -0.19504945 -1.60842789 -0.69636619
-41 -1.31580368 -1.30270411  0.17184914
-42 -0.23125332 -0.09689562  0.84640868
-43 -2.15443994  0.22710813 -1.25870358
-44 -1.00388333  0.40847078 -0.11206689
-45  1.16629583  0.52067375 -0.32481693
-46  1.09265840 -0.35878735  1.34775109
-47  0.97170555  0.19459095 -1.28733565
-48  0.96197055  0.51964456 -0.22818731
-49  0.21464465 -0.60479462 -0.75320369
-50 -0.00577914  0.27805102  1.52332281
-51  2.17235909 -0.18750827 -1.11305739
-52 -3.95021078  3.06573217 -0.25289702
-53 -0.24568069 -0.17110049 -0.38166238
-54 -0.04332971  0.06369494  0.62713705
-55 -0.03710043  0.79675151 -1.07516939
-56  0.78314261 -1.34416256 -1.67360042</code></pre>
+<div class="cell-output-display">
+<table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Components Explaining 86% Variance</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">PC1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PC2</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PC3</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PC4</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PC5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PC6</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PC7</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PC8</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PC9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-3.1377897</td>
+<td style="text-align: right;">0.7718023</td>
+<td style="text-align: right;">-0.7364361</td>
+<td style="text-align: right;">-0.9222354</td>
+<td style="text-align: right;">-0.3592745</td>
+<td style="text-align: right;">0.3854256</td>
+<td style="text-align: right;">1.7644646</td>
+<td style="text-align: right;">0.7137464</td>
+<td style="text-align: right;">-1.2776384</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9108769</td>
+<td style="text-align: right;">-1.3736147</td>
+<td style="text-align: right;">-0.8906656</td>
+<td style="text-align: right;">-0.0460364</td>
+<td style="text-align: right;">0.0227857</td>
+<td style="text-align: right;">0.3267234</td>
+<td style="text-align: right;">1.9094604</td>
+<td style="text-align: right;">0.3202683</td>
+<td style="text-align: right;">0.3157517</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-1.3650210</td>
+<td style="text-align: right;">-1.7656420</td>
+<td style="text-align: right;">-0.1449229</td>
+<td style="text-align: right;">0.2591892</td>
+<td style="text-align: right;">-1.2856912</td>
+<td style="text-align: right;">-0.3761635</td>
+<td style="text-align: right;">-0.7856081</td>
+<td style="text-align: right;">-0.9203682</td>
+<td style="text-align: right;">-1.2625636</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-3.0594171</td>
+<td style="text-align: right;">0.3347835</td>
+<td style="text-align: right;">-0.0140627</td>
+<td style="text-align: right;">-0.1395400</td>
+<td style="text-align: right;">0.0920259</td>
+<td style="text-align: right;">-0.2824615</td>
+<td style="text-align: right;">-0.1286075</td>
+<td style="text-align: right;">0.1373214</td>
+<td style="text-align: right;">0.0779667</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.1990728</td>
+<td style="text-align: right;">-0.2073473</td>
+<td style="text-align: right;">-0.7148617</td>
+<td style="text-align: right;">-1.3756229</td>
+<td style="text-align: right;">-1.1992738</td>
+<td style="text-align: right;">0.0319372</td>
+<td style="text-align: right;">0.7499437</td>
+<td style="text-align: right;">0.7159942</td>
+<td style="text-align: right;">-0.1954117</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">15.2031917</td>
+<td style="text-align: right;">2.6187078</td>
+<td style="text-align: right;">-7.7362757</td>
+<td style="text-align: right;">4.0519492</td>
+<td style="text-align: right;">-0.8244373</td>
+<td style="text-align: right;">-2.8218455</td>
+<td style="text-align: right;">-0.3936859</td>
+<td style="text-align: right;">0.7539658</td>
+<td style="text-align: right;">0.1235878</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-1.1596436</td>
+<td style="text-align: right;">1.1215513</td>
+<td style="text-align: right;">-0.7111982</td>
+<td style="text-align: right;">-0.6842368</td>
+<td style="text-align: right;">0.2285957</td>
+<td style="text-align: right;">-0.3821015</td>
+<td style="text-align: right;">-0.5147689</td>
+<td style="text-align: right;">-1.3731284</td>
+<td style="text-align: right;">0.5559771</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.7566946</td>
+<td style="text-align: right;">2.4464045</td>
+<td style="text-align: right;">0.2335806</td>
+<td style="text-align: right;">-0.7871242</td>
+<td style="text-align: right;">-0.1098217</td>
+<td style="text-align: right;">-1.0603359</td>
+<td style="text-align: right;">-0.1434002</td>
+<td style="text-align: right;">-1.6411470</td>
+<td style="text-align: right;">1.1461921</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-2.5604524</td>
+<td style="text-align: right;">1.0784921</td>
+<td style="text-align: right;">-0.0207081</td>
+<td style="text-align: right;">-0.0018005</td>
+<td style="text-align: right;">-0.2473781</td>
+<td style="text-align: right;">1.1930091</td>
+<td style="text-align: right;">-0.1233726</td>
+<td style="text-align: right;">1.6484088</td>
+<td style="text-align: right;">1.1222846</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2.2725299</td>
+<td style="text-align: right;">0.7670027</td>
+<td style="text-align: right;">-0.0552466</td>
+<td style="text-align: right;">-1.0045062</td>
+<td style="text-align: right;">2.4430230</td>
+<td style="text-align: right;">-1.8092342</td>
+<td style="text-align: right;">1.3011293</td>
+<td style="text-align: right;">0.0401768</td>
+<td style="text-align: right;">0.7853498</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">10.2100889</td>
+<td style="text-align: right;">-3.0950590</td>
+<td style="text-align: right;">5.5631450</td>
+<td style="text-align: right;">-2.7078659</td>
+<td style="text-align: right;">-3.2328143</td>
+<td style="text-align: right;">-1.4787809</td>
+<td style="text-align: right;">-1.0194980</td>
+<td style="text-align: right;">0.3945866</td>
+<td style="text-align: right;">0.0182378</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5.1285806</td>
+<td style="text-align: right;">-1.7705080</td>
+<td style="text-align: right;">1.7849024</td>
+<td style="text-align: right;">-0.1628373</td>
+<td style="text-align: right;">0.5175815</td>
+<td style="text-align: right;">-0.3671515</td>
+<td style="text-align: right;">1.2736564</td>
+<td style="text-align: right;">0.3838594</td>
+<td style="text-align: right;">-0.1914313</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-3.4958456</td>
+<td style="text-align: right;">-4.4206145</td>
+<td style="text-align: right;">-3.1425366</td>
+<td style="text-align: right;">0.0403879</td>
+<td style="text-align: right;">-0.7927574</td>
+<td style="text-align: right;">0.4216563</td>
+<td style="text-align: right;">0.1086626</td>
+<td style="text-align: right;">-1.1395035</td>
+<td style="text-align: right;">-1.5790601</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.7133698</td>
+<td style="text-align: right;">0.8229558</td>
+<td style="text-align: right;">-1.9662884</td>
+<td style="text-align: right;">-1.0870709</td>
+<td style="text-align: right;">0.7504517</td>
+<td style="text-align: right;">0.4356704</td>
+<td style="text-align: right;">1.1010341</td>
+<td style="text-align: right;">0.8853389</td>
+<td style="text-align: right;">-1.1905684</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-1.9510677</td>
+<td style="text-align: right;">0.9075154</td>
+<td style="text-align: right;">-0.3458658</td>
+<td style="text-align: right;">-1.4707099</td>
+<td style="text-align: right;">-0.7734845</td>
+<td style="text-align: right;">-0.7810153</td>
+<td style="text-align: right;">-1.0115731</td>
+<td style="text-align: right;">-1.4774092</td>
+<td style="text-align: right;">0.2214668</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2.6295662</td>
+<td style="text-align: right;">0.9148916</td>
+<td style="text-align: right;">-0.5263343</td>
+<td style="text-align: right;">-1.3484250</td>
+<td style="text-align: right;">-0.9348044</td>
+<td style="text-align: right;">0.5181241</td>
+<td style="text-align: right;">0.3569534</td>
+<td style="text-align: right;">0.8863304</td>
+<td style="text-align: right;">-0.4487563</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4.7463371</td>
+<td style="text-align: right;">0.3145849</td>
+<td style="text-align: right;">2.3709067</td>
+<td style="text-align: right;">-0.2527907</td>
+<td style="text-align: right;">0.8329038</td>
+<td style="text-align: right;">1.4290393</td>
+<td style="text-align: right;">-0.8492266</td>
+<td style="text-align: right;">0.0127759</td>
+<td style="text-align: right;">-0.0479321</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.3868186</td>
+<td style="text-align: right;">-0.9290480</td>
+<td style="text-align: right;">0.6870479</td>
+<td style="text-align: right;">-0.6117407</td>
+<td style="text-align: right;">1.5373645</td>
+<td style="text-align: right;">-0.1112597</td>
+<td style="text-align: right;">0.2264854</td>
+<td style="text-align: right;">0.7690724</td>
+<td style="text-align: right;">-0.8384539</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-1.6766975</td>
+<td style="text-align: right;">0.2849814</td>
+<td style="text-align: right;">-0.9841717</td>
+<td style="text-align: right;">-1.8133094</td>
+<td style="text-align: right;">-0.8135593</td>
+<td style="text-align: right;">0.7518177</td>
+<td style="text-align: right;">0.8449809</td>
+<td style="text-align: right;">-0.2604539</td>
+<td style="text-align: right;">0.7892914</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.7344809</td>
+<td style="text-align: right;">-1.3221832</td>
+<td style="text-align: right;">0.3700134</td>
+<td style="text-align: right;">-0.8447518</td>
+<td style="text-align: right;">2.0552875</td>
+<td style="text-align: right;">-1.6018430</td>
+<td style="text-align: right;">0.7570709</td>
+<td style="text-align: right;">-1.1866192</td>
+<td style="text-align: right;">1.6751239</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9392629</td>
+<td style="text-align: right;">-0.6999002</td>
+<td style="text-align: right;">-0.1398971</td>
+<td style="text-align: right;">-0.5978190</td>
+<td style="text-align: right;">-0.0202742</td>
+<td style="text-align: right;">-0.0046066</td>
+<td style="text-align: right;">1.3170214</td>
+<td style="text-align: right;">0.4943799</td>
+<td style="text-align: right;">0.4745508</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.8326091</td>
+<td style="text-align: right;">1.5873900</td>
+<td style="text-align: right;">-0.7312132</td>
+<td style="text-align: right;">0.2909738</td>
+<td style="text-align: right;">0.1198711</td>
+<td style="text-align: right;">1.1099887</td>
+<td style="text-align: right;">-1.6454997</td>
+<td style="text-align: right;">1.1311883</td>
+<td style="text-align: right;">-0.0448494</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.8724526</td>
+<td style="text-align: right;">1.0450589</td>
+<td style="text-align: right;">0.2774674</td>
+<td style="text-align: right;">0.2175331</td>
+<td style="text-align: right;">-0.6225776</td>
+<td style="text-align: right;">0.5428863</td>
+<td style="text-align: right;">-0.2118465</td>
+<td style="text-align: right;">0.9699361</td>
+<td style="text-align: right;">1.6164516</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2.7729541</td>
+<td style="text-align: right;">0.5328232</td>
+<td style="text-align: right;">-0.3856903</td>
+<td style="text-align: right;">-0.9341356</td>
+<td style="text-align: right;">0.8942833</td>
+<td style="text-align: right;">-2.7237010</td>
+<td style="text-align: right;">-0.4737826</td>
+<td style="text-align: right;">-2.6265900</td>
+<td style="text-align: right;">1.1451031</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.0146426</td>
+<td style="text-align: right;">0.0014092</td>
+<td style="text-align: right;">0.6403391</td>
+<td style="text-align: right;">-0.6928613</td>
+<td style="text-align: right;">-0.1677441</td>
+<td style="text-align: right;">0.4555104</td>
+<td style="text-align: right;">-0.3839944</td>
+<td style="text-align: right;">0.2754172</td>
+<td style="text-align: right;">1.0044779</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.1376241</td>
+<td style="text-align: right;">0.6675783</td>
+<td style="text-align: right;">0.0612084</td>
+<td style="text-align: right;">0.2443656</td>
+<td style="text-align: right;">-0.4464729</td>
+<td style="text-align: right;">0.9265126</td>
+<td style="text-align: right;">-0.6966456</td>
+<td style="text-align: right;">0.9413536</td>
+<td style="text-align: right;">0.1756666</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.1255818</td>
+<td style="text-align: right;">-0.9951099</td>
+<td style="text-align: right;">1.1503301</td>
+<td style="text-align: right;">-0.4897114</td>
+<td style="text-align: right;">0.7108447</td>
+<td style="text-align: right;">1.3853968</td>
+<td style="text-align: right;">0.0279190</td>
+<td style="text-align: right;">-0.3615046</td>
+<td style="text-align: right;">-0.4520737</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-3.6485929</td>
+<td style="text-align: right;">-5.1247186</td>
+<td style="text-align: right;">0.0491353</td>
+<td style="text-align: right;">6.3322243</td>
+<td style="text-align: right;">-1.4438097</td>
+<td style="text-align: right;">1.4725602</td>
+<td style="text-align: right;">-0.7719285</td>
+<td style="text-align: right;">-0.9060429</td>
+<td style="text-align: right;">2.9209180</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.3307121</td>
+<td style="text-align: right;">0.2792500</td>
+<td style="text-align: right;">-0.0985286</td>
+<td style="text-align: right;">-0.3388161</td>
+<td style="text-align: right;">-0.5949725</td>
+<td style="text-align: right;">-0.5761172</td>
+<td style="text-align: right;">2.0136967</td>
+<td style="text-align: right;">0.0523509</td>
+<td style="text-align: right;">0.9485121</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-3.1386137</td>
+<td style="text-align: right;">-2.4846797</td>
+<td style="text-align: right;">-2.0044101</td>
+<td style="text-align: right;">1.0660871</td>
+<td style="text-align: right;">-0.5876560</td>
+<td style="text-align: right;">-0.0292388</td>
+<td style="text-align: right;">-0.7688927</td>
+<td style="text-align: right;">-0.0431936</td>
+<td style="text-align: right;">-0.9301881</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.8304255</td>
+<td style="text-align: right;">-0.8658605</td>
+<td style="text-align: right;">-0.6292113</td>
+<td style="text-align: right;">-0.2888060</td>
+<td style="text-align: right;">-0.3584875</td>
+<td style="text-align: right;">1.1522352</td>
+<td style="text-align: right;">1.4098797</td>
+<td style="text-align: right;">-0.2386853</td>
+<td style="text-align: right;">0.1117135</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2.6299851</td>
+<td style="text-align: right;">1.8820427</td>
+<td style="text-align: right;">1.4790294</td>
+<td style="text-align: right;">1.5197494</td>
+<td style="text-align: right;">0.1483736</td>
+<td style="text-align: right;">0.9943300</td>
+<td style="text-align: right;">1.0137957</td>
+<td style="text-align: right;">1.7547477</td>
+<td style="text-align: right;">-0.2904433</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-1.9654200</td>
+<td style="text-align: right;">1.4437373</td>
+<td style="text-align: right;">0.4238846</td>
+<td style="text-align: right;">-1.4217265</td>
+<td style="text-align: right;">0.3451714</td>
+<td style="text-align: right;">0.1489449</td>
+<td style="text-align: right;">0.2267297</td>
+<td style="text-align: right;">0.8291785</td>
+<td style="text-align: right;">0.0536881</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2.9433777</td>
+<td style="text-align: right;">-0.4453328</td>
+<td style="text-align: right;">-0.1868586</td>
+<td style="text-align: right;">0.0501090</td>
+<td style="text-align: right;">-0.3471249</td>
+<td style="text-align: right;">-0.3883622</td>
+<td style="text-align: right;">-1.8441399</td>
+<td style="text-align: right;">0.4519791</td>
+<td style="text-align: right;">0.3853069</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.9334685</td>
+<td style="text-align: right;">4.2274223</td>
+<td style="text-align: right;">-1.5428934</td>
+<td style="text-align: right;">-0.8353730</td>
+<td style="text-align: right;">-0.5412400</td>
+<td style="text-align: right;">2.3738903</td>
+<td style="text-align: right;">-0.2918646</td>
+<td style="text-align: right;">0.2477794</td>
+<td style="text-align: right;">0.0526010</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.4611450</td>
+<td style="text-align: right;">0.5550813</td>
+<td style="text-align: right;">-1.4467003</td>
+<td style="text-align: right;">-0.2731715</td>
+<td style="text-align: right;">0.4167732</td>
+<td style="text-align: right;">-0.3335461</td>
+<td style="text-align: right;">0.0306027</td>
+<td style="text-align: right;">1.0759571</td>
+<td style="text-align: right;">-0.1291712</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-1.6820407</td>
+<td style="text-align: right;">-0.9252976</td>
+<td style="text-align: right;">-0.3177451</td>
+<td style="text-align: right;">-0.2737214</td>
+<td style="text-align: right;">-0.7852027</td>
+<td style="text-align: right;">0.2036093</td>
+<td style="text-align: right;">-0.4686659</td>
+<td style="text-align: right;">0.5301653</td>
+<td style="text-align: right;">-0.4387959</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6.7594616</td>
+<td style="text-align: right;">3.6388154</td>
+<td style="text-align: right;">1.0561806</td>
+<td style="text-align: right;">2.3513560</td>
+<td style="text-align: right;">2.4970276</td>
+<td style="text-align: right;">3.4372138</td>
+<td style="text-align: right;">-1.4275829</td>
+<td style="text-align: right;">-3.6074887</td>
+<td style="text-align: right;">-1.6017664</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3.4506790</td>
+<td style="text-align: right;">-1.1823990</td>
+<td style="text-align: right;">2.5698976</td>
+<td style="text-align: right;">-1.1129112</td>
+<td style="text-align: right;">-0.0545837</td>
+<td style="text-align: right;">1.4361263</td>
+<td style="text-align: right;">-0.6591486</td>
+<td style="text-align: right;">-1.0344806</td>
+<td style="text-align: right;">-0.1605174</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.0983772</td>
+<td style="text-align: right;">-1.5240688</td>
+<td style="text-align: right;">-0.5320049</td>
+<td style="text-align: right;">-0.4776692</td>
+<td style="text-align: right;">-0.9994538</td>
+<td style="text-align: right;">-0.8029728</td>
+<td style="text-align: right;">-0.1950495</td>
+<td style="text-align: right;">-1.6084279</td>
+<td style="text-align: right;">-0.6963662</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-1.9193470</td>
+<td style="text-align: right;">-0.0164551</td>
+<td style="text-align: right;">-1.0806222</td>
+<td style="text-align: right;">-0.5872369</td>
+<td style="text-align: right;">-0.6323995</td>
+<td style="text-align: right;">-0.2013531</td>
+<td style="text-align: right;">-1.3158037</td>
+<td style="text-align: right;">-1.3027041</td>
+<td style="text-align: right;">0.1718491</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.4962356</td>
+<td style="text-align: right;">1.5199168</td>
+<td style="text-align: right;">1.3109252</td>
+<td style="text-align: right;">-0.3006568</td>
+<td style="text-align: right;">2.5985228</td>
+<td style="text-align: right;">1.0499071</td>
+<td style="text-align: right;">-0.2312533</td>
+<td style="text-align: right;">-0.0968956</td>
+<td style="text-align: right;">0.8464087</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.2522021</td>
+<td style="text-align: right;">3.0717753</td>
+<td style="text-align: right;">2.1406708</td>
+<td style="text-align: right;">-1.9255173</td>
+<td style="text-align: right;">-2.2719070</td>
+<td style="text-align: right;">-3.4092680</td>
+<td style="text-align: right;">-2.1544399</td>
+<td style="text-align: right;">0.2271081</td>
+<td style="text-align: right;">-1.2587036</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-3.0134705</td>
+<td style="text-align: right;">-0.6858242</td>
+<td style="text-align: right;">-1.1712394</td>
+<td style="text-align: right;">-0.8551069</td>
+<td style="text-align: right;">-0.4427579</td>
+<td style="text-align: right;">0.8390545</td>
+<td style="text-align: right;">-1.0038833</td>
+<td style="text-align: right;">0.4084708</td>
+<td style="text-align: right;">-0.1120669</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.3392488</td>
+<td style="text-align: right;">-0.5133004</td>
+<td style="text-align: right;">0.0390852</td>
+<td style="text-align: right;">-0.1766429</td>
+<td style="text-align: right;">-0.5924015</td>
+<td style="text-align: right;">1.0593312</td>
+<td style="text-align: right;">1.1662958</td>
+<td style="text-align: right;">0.5206737</td>
+<td style="text-align: right;">-0.3248169</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2.1136312</td>
+<td style="text-align: right;">2.6100442</td>
+<td style="text-align: right;">0.5329815</td>
+<td style="text-align: right;">-0.8478182</td>
+<td style="text-align: right;">0.0752051</td>
+<td style="text-align: right;">0.1416388</td>
+<td style="text-align: right;">1.0926584</td>
+<td style="text-align: right;">-0.3587873</td>
+<td style="text-align: right;">1.3477511</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.3706778</td>
+<td style="text-align: right;">-2.9103581</td>
+<td style="text-align: right;">1.0847512</td>
+<td style="text-align: right;">1.3162617</td>
+<td style="text-align: right;">6.1381170</td>
+<td style="text-align: right;">-2.1436312</td>
+<td style="text-align: right;">0.9717056</td>
+<td style="text-align: right;">0.1945909</td>
+<td style="text-align: right;">-1.2873357</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">13.0708364</td>
+<td style="text-align: right;">-2.7257219</td>
+<td style="text-align: right;">0.4257482</td>
+<td style="text-align: right;">-0.4751807</td>
+<td style="text-align: right;">-0.7833509</td>
+<td style="text-align: right;">0.5789047</td>
+<td style="text-align: right;">0.9619705</td>
+<td style="text-align: right;">0.5196446</td>
+<td style="text-align: right;">-0.2281873</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-2.6464920</td>
+<td style="text-align: right;">-0.3807107</td>
+<td style="text-align: right;">-0.6943621</td>
+<td style="text-align: right;">1.0364694</td>
+<td style="text-align: right;">-0.9201876</td>
+<td style="text-align: right;">0.4536396</td>
+<td style="text-align: right;">0.2146447</td>
+<td style="text-align: right;">-0.6047946</td>
+<td style="text-align: right;">-0.7532037</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.7504813</td>
+<td style="text-align: right;">-0.1798441</td>
+<td style="text-align: right;">-0.2689162</td>
+<td style="text-align: right;">-0.3411297</td>
+<td style="text-align: right;">0.6075488</td>
+<td style="text-align: right;">-0.7766731</td>
+<td style="text-align: right;">-0.0057791</td>
+<td style="text-align: right;">0.2780510</td>
+<td style="text-align: right;">1.5233228</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-3.3724826</td>
+<td style="text-align: right;">3.5364587</td>
+<td style="text-align: right;">5.3270569</td>
+<td style="text-align: right;">7.7626747</td>
+<td style="text-align: right;">-2.3162679</td>
+<td style="text-align: right;">-1.7960963</td>
+<td style="text-align: right;">2.1723591</td>
+<td style="text-align: right;">-0.1875083</td>
+<td style="text-align: right;">-1.1130574</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-3.1242143</td>
+<td style="text-align: right;">-1.0424453</td>
+<td style="text-align: right;">0.8043718</td>
+<td style="text-align: right;">2.1331197</td>
+<td style="text-align: right;">2.8559268</td>
+<td style="text-align: right;">-0.9073336</td>
+<td style="text-align: right;">-3.9502108</td>
+<td style="text-align: right;">3.0657322</td>
+<td style="text-align: right;">-0.2528970</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-1.0176612</td>
+<td style="text-align: right;">-1.6717692</td>
+<td style="text-align: right;">-1.8286252</td>
+<td style="text-align: right;">0.3949605</td>
+<td style="text-align: right;">-0.4653415</td>
+<td style="text-align: right;">0.8615778</td>
+<td style="text-align: right;">-0.2456807</td>
+<td style="text-align: right;">-0.1711005</td>
+<td style="text-align: right;">-0.3816624</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.3396014</td>
+<td style="text-align: right;">0.7505473</td>
+<td style="text-align: right;">0.9595715</td>
+<td style="text-align: right;">-0.3013952</td>
+<td style="text-align: right;">0.5726009</td>
+<td style="text-align: right;">0.0189473</td>
+<td style="text-align: right;">-0.0433297</td>
+<td style="text-align: right;">0.0636949</td>
+<td style="text-align: right;">0.6271370</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-2.2360197</td>
+<td style="text-align: right;">-0.6558765</td>
+<td style="text-align: right;">0.7764559</td>
+<td style="text-align: right;">0.2318055</td>
+<td style="text-align: right;">-0.2784866</td>
+<td style="text-align: right;">-0.3447923</td>
+<td style="text-align: right;">-0.0371004</td>
+<td style="text-align: right;">0.7967515</td>
+<td style="text-align: right;">-1.0751694</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-3.1511256</td>
+<td style="text-align: right;">0.1806651</td>
+<td style="text-align: right;">-1.0701944</td>
+<td style="text-align: right;">-0.4912051</td>
+<td style="text-align: right;">-0.2142891</td>
+<td style="text-align: right;">-0.6257239</td>
+<td style="text-align: right;">0.7831426</td>
+<td style="text-align: right;">-1.3441626</td>
+<td style="text-align: right;">-1.6736004</td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
 </div>
 </section>
@@ -1278,7 +2090,7 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(data_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(data_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
@@ -1295,9 +2107,9 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(data_pca, </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">"point"</span>, <span class="st">"arrow"</span>),</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">geom.var =</span> <span class="st">"arrow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(data_pca, </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">"point"</span>, <span class="st">"arrow"</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">geom.var =</span> <span class="st">"arrow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
@@ -1315,11 +2127,11 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Control variable colors using their contributions</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(data_pca, <span class="at">col.var =</span> <span class="st">"contrib"</span>,</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span>),</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">geom.var =</span> <span class="st">"arrow"</span>,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Control variable colors using their contributions</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(data_pca, <span class="at">col.var =</span> <span class="st">"contrib"</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">geom.var =</span> <span class="st">"arrow"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="analysis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
@@ -1332,44 +2144,44 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contributions of variables to PC1</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>pc2_contribution <span class="ot">&lt;-</span> <span class="fu">fviz_contrib</span>(data_pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">1</span>, <span class="at">top =</span> <span class="dv">20</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify the theme to rotate X-axis labels to 90 degrees</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>pc2_contribution <span class="sc">+</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>),</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)  <span class="co"># horizontal justification</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Contribution of Variables to PC1"</span>,</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Percentage Contribution"</span>,</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">""</span>,</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"PC1 explains 40.8% variance"</span>) <span class="sc">+</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">scale =</span> <span class="dv">1</span>,</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contributions of variables to PC1</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>pc2_contribution <span class="ot">&lt;-</span> <span class="fu">fviz_contrib</span>(data_pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">1</span>, <span class="at">top =</span> <span class="dv">20</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify the theme to rotate X-axis labels to 90 degrees</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>pc2_contribution <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>),</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)  <span class="co"># horizontal justification</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Contribution of Variables to PC1"</span>,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Percentage Contribution"</span>,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"PC1 explains 40.8% variance"</span>) <span class="sc">+</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">scale =</span> <span class="dv">1</span>,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="analysis_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contributions of variables to PC2</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pc2_contribution <span class="ot">&lt;-</span> <span class="fu">fviz_contrib</span>(data_pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">2</span>, <span class="at">top =</span> <span class="dv">12</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify the theme to rotate X-axis labels to 90 degrees</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>pc2_contribution <span class="sc">+</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>),</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)  <span class="co"># horizontal justification</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Contribution of Variables to PC2"</span>,</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Percentage Contribution"</span>,</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">""</span>,</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"PC2 explains 9.5% variance"</span>) <span class="sc">+</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">scale =</span> <span class="dv">1</span>,</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contributions of variables to PC2</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>pc2_contribution <span class="ot">&lt;-</span> <span class="fu">fviz_contrib</span>(data_pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">2</span>, <span class="at">top =</span> <span class="dv">12</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify the theme to rotate X-axis labels to 90 degrees</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>pc2_contribution <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>),</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)  <span class="co"># horizontal justification</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Contribution of Variables to PC2"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Percentage Contribution"</span>,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"PC2 explains 9.5% variance"</span>) <span class="sc">+</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">scale =</span> <span class="dv">1</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="analysis_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid" width="672"></p>
@@ -1384,15 +2196,15 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)  </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Target y-variable for the training set</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> train_data<span class="sc">$</span>expected_survival  </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and test sets </span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> <span class="fu">sample.split</span>(y, <span class="at">SplitRatio =</span> <span class="fl">0.7</span>) </span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>training_set <span class="ot">&lt;-</span> <span class="fu">subset</span>(train_data, split <span class="sc">==</span> <span class="cn">TRUE</span>) </span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>test_set <span class="ot">&lt;-</span> <span class="fu">subset</span>(train_data, split <span class="sc">==</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)  </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Target y-variable for the training set</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> train_data<span class="sc">$</span>expected_survival  </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and test sets </span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> <span class="fu">sample.split</span>(y, <span class="at">SplitRatio =</span> <span class="fl">0.7</span>) </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>training_set <span class="ot">&lt;-</span> <span class="fu">subset</span>(train_data, split <span class="sc">==</span> <span class="cn">TRUE</span>) </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>test_set <span class="ot">&lt;-</span> <span class="fu">subset</span>(train_data, split <span class="sc">==</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -1404,16 +2216,16 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature Scaling: Standardization</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform centering and scaling on the training and test sets</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(training_set[, <span class="sc">-</span>target_index], </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"scale"</span>))</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>training_set[, <span class="sc">-</span>target_index] <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  sc, training_set[, <span class="sc">-</span>target_index])</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>test_set[, <span class="sc">-</span>target_index] <span class="ot">&lt;-</span> <span class="fu">predict</span>(sc, test_set[, <span class="sc">-</span>target_index])</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># training_set[,-target_index] = scale(training_set[, -target_index])</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># test_set[,-target_index] = scale(test_set[, -target_index])</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature Scaling: Standardization</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform centering and scaling on the training and test sets</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(training_set[, <span class="sc">-</span>target_index], </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"scale"</span>))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>training_set[, <span class="sc">-</span>target_index] <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  sc, training_set[, <span class="sc">-</span>target_index])</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>test_set[, <span class="sc">-</span>target_index] <span class="ot">&lt;-</span> <span class="fu">predict</span>(sc, test_set[, <span class="sc">-</span>target_index])</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># training_set[,-target_index] = scale(training_set[, -target_index])</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># test_set[,-target_index] = scale(test_set[, -target_index])</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -1422,66 +2234,38 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform Principal Component Analysis (PCA) preprocessing on the training data</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(training_set[, <span class="sc">-</span>target_index], </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">'pca'</span>, <span class="at">pcaComp =</span> <span class="dv">8</span>)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA transformation to original training set</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>training_set <span class="ot">&lt;-</span> <span class="fu">predict</span>(pca, training_set)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder columns, moving the dependent feature index to the end</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>training_set <span class="ot">&lt;-</span> training_set[<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">1</span>)]</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA transformation to original test set</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>test_set <span class="ot">&lt;-</span> <span class="fu">predict</span>(pca, test_set)</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder columns, moving the dependent feature index to the end</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>test_set <span class="ot">&lt;-</span> test_set[<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">1</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform Principal Component Analysis (PCA) preprocessing on the training data</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(training_set[, <span class="sc">-</span>target_index], </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">'pca'</span>, <span class="at">pcaComp =</span> <span class="dv">8</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA transformation to original training set</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>training_set <span class="ot">&lt;-</span> <span class="fu">predict</span>(pca, training_set)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder columns, moving the dependent feature index to the end</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>training_set <span class="ot">&lt;-</span> training_set[<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">1</span>)]</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA transformation to original test set</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>test_set <span class="ot">&lt;-</span> <span class="fu">predict</span>(pca, test_set)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder columns, moving the dependent feature index to the end</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>test_set <span class="ot">&lt;-</span> test_set[<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">1</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
-<section id="press-predicted-r2-functions" class="level3" data-number="6.7.4">
-<h3 data-number="6.7.4" class="anchored" data-anchor-id="press-predicted-r2-functions"><span class="header-section-number">6.7.4</span> PRESS &amp; Predicted <span class="math inline">\(R^2\)</span> Functions</h3>
+<section id="pca-full-model-8-principal-components" class="level3" data-number="6.7.4">
+<h3 data-number="6.7.4" class="anchored" data-anchor-id="pca-full-model-8-principal-components"><span class="header-section-number">6.7.4</span> PCA Full Model: 8 Principal Components</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PRESS - predicted residual sums of squares</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>PRESS <span class="ot">&lt;-</span> <span class="cf">function</span>(linear.model) {</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate the predictive residuals</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  pr <span class="ot">&lt;-</span> <span class="fu">residuals</span>(linear.model)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">lm.influence</span>(linear.model)<span class="sc">$</span>hat)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate the PRESS</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  PRESS <span class="ot">&lt;-</span> <span class="fu">sum</span>(pr<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(PRESS)</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>pred_r_squared <span class="ot">&lt;-</span> <span class="cf">function</span>(linear.model) {</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use anova() to get the sum of squares for the linear model</span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  lm.anova <span class="ot">&lt;-</span> <span class="fu">anova</span>(linear.model)</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the total sum of squares</span></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  tss <span class="ot">&lt;-</span> <span class="fu">sum</span>(lm.anova<span class="sc">$</span><span class="st">'Sum Sq'</span>)</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the predictive R^2</span></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  pred.r.squared <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">PRESS</span>(linear.model)<span class="sc">/</span>(tss)</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pred.r.squared)</span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="pca-full-model-8-principal-components" class="level3" data-number="6.7.5">
-<h3 data-number="6.7.5" class="anchored" data-anchor-id="pca-full-model-8-principal-components"><span class="header-section-number">6.7.5</span> PCA Full Model: 8 Principal Components</h3>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a multiple linear regression model</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>pca_full_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(expected_survival <span class="sc">~</span> ., <span class="at">data =</span> training_set)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the regression model</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(pca_full_model)</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(pca_full_model, <span class="at">string.p=</span><span class="st">"P-value"</span>, <span class="at">show.se=</span><span class="st">"T"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a multiple linear regression model</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>pca_full_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(expected_survival <span class="sc">~</span> ., <span class="at">data =</span> training_set)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the regression model</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(pca_full_model)</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(pca_full_model, <span class="at">string.p=</span><span class="st">"P-value"</span>, <span class="at">show.se=</span><span class="st">"T"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
@@ -1575,30 +2359,30 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate PRESS</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"PRESS: "</span>, <span class="fu">PRESS</span>(pca_full_model), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate PRESS</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"PRESS: "</span>, <span class="fu">PRESS</span>(pca_full_model), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>PRESS:  31662.39 </code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate predicted R^2</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Predicted R^2: "</span>, <span class="fu">pred_r_squared</span>(pca_full_model), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate predicted R^2</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Predicted R^2: "</span>, <span class="fu">pred_r_squared</span>(pca_full_model), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Predicted R^2:  0.9430373 </code></pre>
 </div>
 </div>
 </section>
-<section id="visualization-of-uncorrelated-pca-matrix" class="level3" data-number="6.7.6">
-<h3 data-number="6.7.6" class="anchored" data-anchor-id="visualization-of-uncorrelated-pca-matrix"><span class="header-section-number">6.7.6</span> Visualization of Uncorrelated PCA Matrix</h3>
+<section id="visualization-of-uncorrelated-pca-matrix" class="level3" data-number="6.7.5">
+<h3 data-number="6.7.5" class="anchored" data-anchor-id="visualization-of-uncorrelated-pca-matrix"><span class="header-section-number">6.7.5</span> Visualization of Uncorrelated PCA Matrix</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual of Principal Components un-correlation</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(training_set)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual of Principal Components un-correlation</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(training_set)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="analysis_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
@@ -1611,24 +2395,24 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a subset with 2 principal components</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>significant_pcs <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">9</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>train_pca <span class="ot">&lt;-</span> training_set[, significant_pcs]</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>test_pca <span class="ot">&lt;-</span> test_set[, significant_pcs]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a subset with 2 principal components</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>significant_pcs <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">9</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>train_pca <span class="ot">&lt;-</span> training_set[, significant_pcs]</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>test_pca <span class="ot">&lt;-</span> test_set[, significant_pcs]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a multiple linear regression model</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>reg_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(expected_survival <span class="sc">~</span> ., </span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> train_pca)</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the regression model</span></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(reg_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a multiple linear regression model</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>reg_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(expected_survival <span class="sc">~</span> ., </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> train_pca)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the regression model</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(reg_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
@@ -1676,16 +2460,16 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate PRESS</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"PRESS: "</span>, <span class="fu">PRESS</span>(reg_model), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate PRESS</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"PRESS: "</span>, <span class="fu">PRESS</span>(reg_model), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>PRESS:  25699.6 </code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate predicted R^2</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Predicted R^2: "</span>, <span class="fu">pred_r_squared</span>(reg_model), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate predicted R^2</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Predicted R^2: "</span>, <span class="fu">pred_r_squared</span>(reg_model), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Predicted R^2:  0.9537647 </code></pre>
@@ -1699,15 +2483,15 @@ Hgb 12g                                -0.0005836729  0.176481318</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> train_pca<span class="sc">$</span>expected_survival</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fit PCR</span></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>pcr_model <span class="ot">&lt;-</span> <span class="fu">pcr</span>(y <span class="sc">~</span> PC1<span class="sc">+</span>PC2, <span class="at">data=</span>train_pca, <span class="at">validation=</span><span class="st">"CV"</span>)</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>(pcr_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> train_pca<span class="sc">$</span>expected_survival</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fit PCR</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>pcr_model <span class="ot">&lt;-</span> <span class="fu">pcr</span>(y <span class="sc">~</span> PC1<span class="sc">+</span>PC2, <span class="at">data=</span>train_pca, <span class="at">validation=</span><span class="st">"CV"</span>)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>(pcr_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Principal component regression, fitted with the singular value decomposition algorithm.
@@ -1722,22 +2506,22 @@ pcr(formula = y ~ PC1 + PC2, data = train_pca, validation = "CV")</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeated cross-validation with 5 folds, 3 repetitions</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>train_control <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"repeatedcv"</span>,</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">number =</span> <span class="dv">10</span>, <span class="at">repeats =</span> <span class="dv">3</span>)</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co"># training the model </span></span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>model_cv_repeat <span class="ot">&lt;-</span> <span class="fu">train</span>(expected_survival <span class="sc">~</span> ., </span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> train_pca,</span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">trControl =</span> train_control)</span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Print Overall Model Performance</span></span>
-<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_cv_repeat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeated cross-validation with 5 folds, 3 repetitions</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>train_control <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"repeatedcv"</span>,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">number =</span> <span class="dv">10</span>, <span class="at">repeats =</span> <span class="dv">3</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co"># training the model </span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>model_cv_repeat <span class="ot">&lt;-</span> <span class="fu">train</span>(expected_survival <span class="sc">~</span> ., </span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> train_pca,</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">trControl =</span> train_control)</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Print Overall Model Performance</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_cv_repeat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear Regression 
@@ -1762,20 +2546,20 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross-validation with n folds</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>k_10 <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co"># training the model </span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>model_cv <span class="ot">&lt;-</span> <span class="fu">train</span>(expected_survival <span class="sc">~</span> ., </span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> train_pca,</span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> k_10)</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Print Model Performance</span></span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>(model_cv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproducible random sampling</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross-validation with n folds</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>k_10 <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co"># training the model </span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>model_cv <span class="ot">&lt;-</span> <span class="fu">train</span>(expected_survival <span class="sc">~</span> ., </span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> train_pca,</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> k_10)</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Print Model Performance</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>(model_cv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear Regression 
@@ -1795,7 +2579,7 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>cv_results <span class="ot">=</span> model_cv<span class="sc">$</span>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>cv_results <span class="ot">=</span> model_cv<span class="sc">$</span>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -1805,42 +2589,42 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the index position of the target feature</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>pred_target_index <span class="ot">&lt;-</span> <span class="fu">grep</span>(target_name, </span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">colnames</span>(test_pca))</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co">#cat("Target Feature Index =", pred_target_index)</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Predicted Target Feature (y-test) </span></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>y_test <span class="ot">&lt;-</span> test_pca[pred_target_index]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the index position of the target feature</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>pred_target_index <span class="ot">&lt;-</span> <span class="fu">grep</span>(target_name, </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">colnames</span>(test_pca))</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co">#cat("Target Feature Index =", pred_target_index)</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Predicted Target Feature (y-test) </span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>y_test <span class="ot">&lt;-</span> test_pca[pred_target_index]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictions using the Cross-Validation model</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">=</span> <span class="fu">predict</span>(model_cv, <span class="at">newdata =</span> test_pca[, <span class="sc">-</span>pred_target_index])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictions using the Cross-Validation model</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">=</span> <span class="fu">predict</span>(model_cv, <span class="at">newdata =</span> test_pca[, <span class="sc">-</span>pred_target_index])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prediction Results from y_predictions</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> <span class="fu">round</span>(y_pred, <span class="at">digits =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prediction Results from y_predictions</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> <span class="fu">round</span>(y_pred, <span class="at">digits =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform y_test from data frame to numeric</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>y_test_numeric <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">unlist</span>(y_test))</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Original data</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co">#y_test_numeric</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>prediction_comparison <span class="ot">&lt;-</span> <span class="fu">cbind</span>(y_pred, y_test_numeric)</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="co"># table format</span></span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(prediction_comparison) <span class="sc">%&gt;%</span></span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform y_test from data frame to numeric</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>y_test_numeric <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">unlist</span>(y_test))</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Original data</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co">#y_test_numeric</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>prediction_comparison <span class="ot">&lt;-</span> <span class="fu">cbind</span>(y_pred, y_test_numeric)</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="co"># table format</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(prediction_comparison) <span class="sc">%&gt;%</span></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
@@ -1948,28 +2732,28 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Mean Absolute Error (MAE)</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>mae_value <span class="ot">&lt;-</span> <span class="fu">mae</span>(y_pred, y_test_numeric)</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co">#cat("MAE =", mae_value)</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate MSE</span></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>mse_predict <span class="ot">&lt;-</span> <span class="fu">mean</span>((y_pred <span class="sc">-</span> y_test_numeric)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="co">#cat("\nMSE =", mse_predict)</span></span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate RMSE</span></span>
-<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>rmse_predict <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((y_pred <span class="sc">-</span> y_test_numeric)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a><span class="co">#cat("\nRMSE =", rmse_predict)</span></span>
-<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate R-squared (R^2)</span></span>
-<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>predicted_r2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>((y_test_numeric <span class="sc">-</span> y_pred)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> </span>
-<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>((y_test_numeric <span class="sc">-</span> <span class="fu">mean</span>(y_test_numeric))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a><span class="co"># cat("\nPredicted R^2 =", predicted_r2)</span></span>
-<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>prediction_metrics_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mae_value, mse_predict,</span>
-<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>                               rmse_predict, predicted_r2)</span>
-<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a><span class="co"># table format</span></span>
-<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(prediction_metrics_df) <span class="sc">%&gt;%</span></span>
-<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Mean Absolute Error (MAE)</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>mae_value <span class="ot">&lt;-</span> <span class="fu">mae</span>(y_pred, y_test_numeric)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">#cat("MAE =", mae_value)</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate MSE</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>mse_predict <span class="ot">&lt;-</span> <span class="fu">mean</span>((y_pred <span class="sc">-</span> y_test_numeric)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co">#cat("\nMSE =", mse_predict)</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate RMSE</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>rmse_predict <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((y_pred <span class="sc">-</span> y_test_numeric)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="co">#cat("\nRMSE =", rmse_predict)</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate R-squared (R^2)</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>predicted_r2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>((y_test_numeric <span class="sc">-</span> y_pred)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> </span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>((y_test_numeric <span class="sc">-</span> <span class="fu">mean</span>(y_test_numeric))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a><span class="co"># cat("\nPredicted R^2 =", predicted_r2)</span></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>prediction_metrics_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mae_value, mse_predict,</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>                               rmse_predict, predicted_r2)</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a><span class="co"># table format</span></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(prediction_metrics_df) <span class="sc">%&gt;%</span></span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">

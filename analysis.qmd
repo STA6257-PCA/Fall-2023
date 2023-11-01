@@ -229,6 +229,7 @@ corr_matrix <- round(corr_matrix, digits = 2)
 high <- findCorrelation(corr_matrix, cutoff = 0.30, names = TRUE)
 
 # table format
+print("Highly Correlated Features")
 kbl(high) %>%
   kable_paper("hover", full_width = F)
 ```
@@ -271,7 +272,7 @@ data_pca <- prcomp(train_data_sc, center = TRUE, scale. = TRUE)
 pca_summ <- summary(data_pca)$importance
 
 # table format
-kbl(pca_summ) %>%
+kbl(pca_summ, caption = "PCA") %>%
   kable_paper("hover", full_width = F)
 ```
 
@@ -308,8 +309,12 @@ component_scale <- data_pca$scale
 loadings_first_two_components <- eigenvector[, 1:2]
 
 # Print the loadings for the first two principal components
-print("Loadings for the first two principal components:")
-print(loadings_first_two_components)
+# print(loadings_first_two_components)
+
+# table format
+kbl(loadings_first_two_components,
+    caption = "Loadings of first Two Principal Components") %>%
+  kable_paper("hover", full_width = F)
 ```
 
 ### PCA - Cumulative Variance
@@ -320,12 +325,16 @@ variance_explained <- component_sdev^2 / sum(component_sdev^2)
 
 # Cumulative proportion of variance explained
 cumulative_variance_explained <- cumsum(variance_explained)
-cumulative_variance_explained
+
+# table format
+kbl(cumulative_variance_explained, 
+    caption = "Cumulative Variance Explained") %>%
+  kable_paper("hover", full_width = F)
 ```
 
 ### PCA - Number of Principal Components
 
--   We conclude that 9 Principal Components explain 86% of the variance.
+-   We can conclude that 9 Principal Components explain 86% of the variance.
 
 ```{r}
 # Retain components that explain a percentage of the variance
@@ -333,7 +342,10 @@ num_components <- which(cumulative_variance_explained >= 0.86)[1]
 
 # Select the desired number of principal components
 selected_pcs <- pc_scores[, 1:num_components]
-selected_pcs
+
+# table format
+kbl(selected_pcs, caption = "Components Explaining 86% Variance") %>%
+  kable_paper("hover", full_width = F)
 ```
 
 ## Visualization
@@ -477,9 +489,8 @@ test_set <- test_set[c(2:9, 1)]
 
 ```
 
-### PRESS & Predicted $R^2$ Functions
-
-```{r}
+```{r, echo=FALSE}
+#PRESS & Predicted $R^2$ Functions
 #PRESS - predicted residual sums of squares
 PRESS <- function(linear.model) {
   # calculate the predictive residuals
