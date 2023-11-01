@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -192,19 +211,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"><span class="header-section-number">6.1</span> Libraries</a></li>
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">7</span> 01 - Data Preparation</a></li>
-  <li><a href="#feature-scaling" id="toc-feature-scaling" class="nav-link" data-scroll-target="#feature-scaling"><span class="header-section-number">8</span> 02 - Feature Scaling</a></li>
-  <li><a href="#pca-via-singular-value-decomposition" id="toc-pca-via-singular-value-decomposition" class="nav-link" data-scroll-target="#pca-via-singular-value-decomposition"><span class="header-section-number">9</span> 03 - PCA via Singular Value Decomposition</a>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">6.2</span> Data Preparation</a></li>
+  <li><a href="#feature-scaling" id="toc-feature-scaling" class="nav-link" data-scroll-target="#feature-scaling"><span class="header-section-number">6.3</span> Feature Scaling</a></li>
+  <li><a href="#pca-via-singular-value-decomposition" id="toc-pca-via-singular-value-decomposition" class="nav-link" data-scroll-target="#pca-via-singular-value-decomposition"><span class="header-section-number">6.4</span> PCA via Singular Value Decomposition</a>
   <ul class="collapse">
-  <li><a href="#pca---cumulative-variance-and-number-of-principal-components" id="toc-pca---cumulative-variance-and-number-of-principal-components" class="nav-link" data-scroll-target="#pca---cumulative-variance-and-number-of-principal-components"><span class="header-section-number">9.1</span> PCA - Cumulative Variance and Number of Principal Components</a></li>
-  <li><a href="#loading-of-first-two-components" id="toc-loading-of-first-two-components" class="nav-link" data-scroll-target="#loading-of-first-two-components"><span class="header-section-number">9.2</span> Loading of First Two Components</a></li>
-  <li><a href="#pca---elements" id="toc-pca---elements" class="nav-link" data-scroll-target="#pca---elements"><span class="header-section-number">9.3</span> PCA - Elements</a></li>
+  <li><a href="#pca---cumulative-variance-and-number-of-principal-components" id="toc-pca---cumulative-variance-and-number-of-principal-components" class="nav-link" data-scroll-target="#pca---cumulative-variance-and-number-of-principal-components"><span class="header-section-number">6.4.1</span> PCA - Cumulative Variance and Number of Principal Components</a></li>
+  <li><a href="#loading-of-first-two-components" id="toc-loading-of-first-two-components" class="nav-link" data-scroll-target="#loading-of-first-two-components"><span class="header-section-number">6.4.2</span> Loading of First Two Components</a></li>
+  <li><a href="#pca---elements" id="toc-pca---elements" class="nav-link" data-scroll-target="#pca---elements"><span class="header-section-number">6.4.3</span> PCA - Elements</a></li>
   </ul></li>
-  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization"><span class="header-section-number">10</span> 05 - Visualization</a>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization"><span class="header-section-number">6.5</span> Visualization</a>
   <ul class="collapse">
-  <li><a href="#scree-plot---cumulative-variance-explained" id="toc-scree-plot---cumulative-variance-explained" class="nav-link" data-scroll-target="#scree-plot---cumulative-variance-explained"><span class="header-section-number">10.1</span> Scree Plot - Cumulative Variance Explained</a></li>
-  <li><a href="#biplot" id="toc-biplot" class="nav-link" data-scroll-target="#biplot"><span class="header-section-number">10.2</span> Biplot</a></li>
-  <li><a href="#variable-contribution" id="toc-variable-contribution" class="nav-link" data-scroll-target="#variable-contribution"><span class="header-section-number">10.3</span> Variable Contribution</a></li>
+  <li><a href="#scree-plot---cumulative-variance-explained" id="toc-scree-plot---cumulative-variance-explained" class="nav-link" data-scroll-target="#scree-plot---cumulative-variance-explained"><span class="header-section-number">6.5.1</span> Scree Plot - Cumulative Variance Explained</a></li>
+  <li><a href="#biplot" id="toc-biplot" class="nav-link" data-scroll-target="#biplot"><span class="header-section-number">6.5.2</span> Biplot</a></li>
+  <li><a href="#variable-contribution" id="toc-variable-contribution" class="nav-link" data-scroll-target="#variable-contribution"><span class="header-section-number">6.5.3</span> Variable Contribution</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -232,6 +251,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="libraries" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="libraries"><span class="header-section-number">6.1</span> Libraries</h2>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)  <span class="co"># for handling missing values</span></span>
@@ -248,11 +269,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># library(pls)        # PC regression</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># library(e1071)      # to fit transform PCA  </span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># library(plotly)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
-<section id="data-preparation" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> 01 - Data Preparation</h1>
+<section id="data-preparation" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">6.2</span> Data Preparation</h2>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clear environment</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -260,10 +284,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>my_seed <span class="ot">=</span> <span class="dv">95</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>abalone <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./abalone.csv'</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>abalone <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./abalone/abalone.csv'</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset structure</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(abalone)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   4177 obs. of  9 variables:
  $ Sex           : chr  "M" "M" "F" "M" ...
@@ -276,8 +301,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  $ Shell_weight  : num  0.15 0.07 0.21 0.155 0.055 0.12 0.33 0.26 0.165 0.32 ...
  $ Rings         : int  15 7 9 10 7 8 20 16 9 19 ...</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Missing values</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(abalone))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>           Sex         Length       Diameter         Height   Whole_weight 
              0              0              0              0              0 
@@ -285,12 +313,15 @@ Shucked_weight Viscera_weight   Shell_weight          Rings
              0              0              0              0 </code></pre>
 </div>
 </div>
-<p>The dataset contains 9 variables with 1 categorical variable and 8 numeric variables. The dataset contains no values. For this example in applying principal component analysis, we exclude the categorical variable ‘Sex’ and focus the PCA on the numerical dimensions of the Abalone. For analyses involving a mix of numeric and non-numeric variables other factor analysis techniques can be used, such as factor analysis of mixed data. [ref]</p>
+<p>The dataset contains 9 variables with 1 categorical variable and 8 numeric variables. The dataset contains no missing values. For this example in applying principal component analysis, we exclude the categorical variable ‘Sex’ and focus the PCA on the numerical dimensions of the Abalone. For analyses involving a mix of numeric and non-numeric variables other factor analysis techniques can be used, such as factor analysis of mixed data. <span class="citation" data-cites="pages2014multiple"><a href="references.html#ref-pages2014multiple" role="doc-biblioref">[1]</a></span></p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only the numeric variables </span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>abalone <span class="ot">&lt;-</span> abalone <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(abalone)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Length         Diameter          Height        Whole_weight   
  Min.   :0.075   Min.   :0.0550   Min.   :0.0000   Min.   :0.0020  
@@ -310,14 +341,17 @@ Shucked_weight Viscera_weight   Shell_weight          Rings
 </div>
 <p>The summary statistics show the differences in measurement between variables, with some variables such as diameter and viscera weight having small ranges and others, namely rings, having relatively large ranges. For this reason, scaling of the variables is a crucial step in PCA to ensure results accurately capture the variance in the data.</p>
 </section>
-<section id="feature-scaling" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> 02 - Feature Scaling</h1>
+<section id="feature-scaling" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="feature-scaling"><span class="header-section-number">6.3</span> Feature Scaling</h2>
 <p>Standardization ensures all variables, also called features, are on the same scale, and the scale function allows us to center the data to a mean of 0 and variance of 1. This ensures no single feature has an outsized effect during the principal component analysis.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardization of numerical features</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>abalone_sc <span class="ot">&lt;-</span> <span class="fu">scale</span>(abalone, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(abalone_sc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Length           Diameter           Height          Whole_weight     
  Min.   :-3.7387   Min.   :-3.5558   Min.   :-3.33555   Min.   :-1.68589  
@@ -337,16 +371,22 @@ Shucked_weight Viscera_weight   Shell_weight          Rings
 </div>
 <p>Viewing the data after scaling and centering, values greater than 3 or less than -3 represent outliers more than 3 standard deviations from the mean. Based on the ranges of the variables, we should view a boxplot of the data to further investigate.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a boxplot to visualize potential outliers</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">4</span>))</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(abalone_sc, <span class="at">main =</span> <span class="st">"Visualization of scaled and centered data"</span>, <span class="at">horizontal =</span> <span class="cn">TRUE</span>, <span class="at">las =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="abalone_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Are there enough outliers to be a cause for concern? We can see how many lie outside of the third standard deviation of the data for each variable.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colSums</span>(abalone_sc <span class="sc">&gt;</span> <span class="dv">3</span> <span class="sc">|</span> abalone_sc <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>        Length       Diameter         Height   Whole_weight Shucked_weight 
             15             13              5             19             37 
@@ -357,22 +397,28 @@ Viscera_weight   Shell_weight          Rings
 <p>Of the 4177 observations, at most 62 in a single variable (rings) are outliers. The tolerance for outliers will differ depending on the investigation, but for our purposes this number is well within tolerance for principal component analysis.</p>
 <p>Lastly, we can investigate the correlation among the variables. PCA is best used with linearly correlated data. If the data is not correlated, the results of PCA will be less meaningful.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate correlations and round to 2 digits</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>abalone_corr <span class="ot">&lt;-</span> <span class="fu">cor</span>(abalone_sc)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(abalone_corr, <span class="at">method=</span><span class="st">"number"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="abalone_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Our scaled and centered data has strong linear correlations and contains a relatively small number of outliers. We can now calculate the principal components of the dataset.</p>
 </section>
-<section id="pca-via-singular-value-decomposition" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> 03 - PCA via Singular Value Decomposition</h1>
-<p>The prcomp() function in R performs principal component analysis on a dataset using the singular value decomposition method which utilizes the covariance matrix of the data.</p>
+<section id="pca-via-singular-value-decomposition" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="pca-via-singular-value-decomposition"><span class="header-section-number">6.4</span> PCA via Singular Value Decomposition</h2>
+<p>The prcomp() function in R performs principal component analysis on a dataset using the singular value decomposition method which utilizes the covariance matrix of the data. <span class="citation" data-cites="prcomp2023ref"><a href="references.html#ref-prcomp2023ref" role="doc-biblioref">[2]</a></span></p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA using prcomp()</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>abalone_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(abalone_sc)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(abalone_pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Importance of components:
                          PC1     PC2     PC3     PC4     PC5     PC6     PC7
@@ -385,9 +431,11 @@ Proportion of Variance 0.00080
 Cumulative Proportion  1.00000</code></pre>
 </div>
 </div>
-<section id="pca---cumulative-variance-and-number-of-principal-components" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="pca---cumulative-variance-and-number-of-principal-components"><span class="header-section-number">9.1</span> PCA - Cumulative Variance and Number of Principal Components</h2>
+<section id="pca---cumulative-variance-and-number-of-principal-components" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="pca---cumulative-variance-and-number-of-principal-components"><span class="header-section-number">6.4.1</span> PCA - Cumulative Variance and Number of Principal Components</h3>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Principal Component scores vector</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pc_scores <span class="ot">&lt;-</span> abalone_pca<span class="sc">$</span>x</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -417,6 +465,7 @@ Cumulative Proportion  1.00000</code></pre>
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Display cumulative variance</span></span>
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>cumulative_variance_explained</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8390549 0.9260065 0.9583119 0.9790606 0.9896793 0.9976134 0.9992002
 [8] 1.0000000</code></pre>
@@ -424,19 +473,25 @@ Cumulative Proportion  1.00000</code></pre>
 </div>
 <p>The first 2 principal components alone explain 92% of the variance in the data.</p>
 </section>
-<section id="loading-of-first-two-components" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="loading-of-first-two-components"><span class="header-section-number">9.2</span> Loading of First Two Components</h2>
+<section id="loading-of-first-two-components" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="loading-of-first-two-components"><span class="header-section-number">6.4.2</span> Loading of First Two Components</h3>
 <p>The loading are the weights assigned to each variable for that particular principal component.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access the loadings for the first two principal components</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>loadings_first_two_components <span class="ot">&lt;-</span> eigenvector[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the loadings for the first two principal components</span></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Loadings for the first two principal components:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Loadings for the first two principal components:"</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(loadings_first_two_components)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                     PC1         PC2
 Length         0.3721385  0.06828270
@@ -450,37 +505,45 @@ Rings          0.2427128 -0.92120385</code></pre>
 </div>
 </div>
 </section>
-<section id="pca---elements" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="pca---elements"><span class="header-section-number">9.3</span> PCA - Elements</h2>
+<section id="pca---elements" class="level3" data-number="6.4.3">
+<h3 data-number="6.4.3" class="anchored" data-anchor-id="pca---elements"><span class="header-section-number">6.4.3</span> PCA - Elements</h3>
 <p>The values in <strong><code>abalone_pca$x</code></strong> are the coordinates of each observation in the new principal component space. These coordinates are the scores for each observation along each principal component. The eigenvectors of the covariance or correlation matrix of the data represent the directions of maximum variance in the dataset.</p>
 </section>
 </section>
-<section id="visualization" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> 05 - Visualization</h1>
-<section id="scree-plot---cumulative-variance-explained" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="scree-plot---cumulative-variance-explained"><span class="header-section-number">10.1</span> Scree Plot - Cumulative Variance Explained</h2>
+<section id="visualization" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="visualization"><span class="header-section-number">6.5</span> Visualization</h2>
+<section id="scree-plot---cumulative-variance-explained" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="scree-plot---cumulative-variance-explained"><span class="header-section-number">6.5.1</span> Scree Plot - Cumulative Variance Explained</h3>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(abalone_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="abalone_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The scree plot visualizes the variance captured by each PC. PC1 explains 83.9% of the variance, and PC2 explains 8.7% variance.</p>
 </section>
-<section id="biplot" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="biplot"><span class="header-section-number">10.2</span> Biplot</h2>
+<section id="biplot" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="biplot"><span class="header-section-number">6.5.2</span> Biplot</h3>
 <p>The correlation between a variable and a principal component is used as the coordinates of the variable on the PC, shown as dimensions on the biplot. Dim1 corresponds to PC1, and Dim2 to PC2. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations. (Abdi and Williams 2010) [ref]</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(abalone_pca, <span class="at">label =</span> <span class="st">"var"</span>, <span class="at">alpha.ind =</span> <span class="st">"contrib"</span>, <span class="at">col.var =</span> <span class="st">"blue"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="abalone_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="variable-contribution" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="variable-contribution"><span class="header-section-number">10.3</span> Variable Contribution</h2>
+<section id="variable-contribution" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="variable-contribution"><span class="header-section-number">6.5.3</span> Variable Contribution</h3>
 <p>Top variable contribution for the first two principal components.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contributions of variables to PC1</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>pc2_contribution <span class="ot">&lt;-</span> <span class="fu">fviz_contrib</span>(abalone_pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">1</span>, <span class="at">top =</span> <span class="dv">20</span>)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -497,9 +560,12 @@ Rings          0.2427128 -0.92120385</code></pre>
 <span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"PC1 explains 83.9% of the variance"</span>) <span class="sc">+</span></span>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">scale =</span> <span class="dv">1</span>,</span>
 <span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="abalone_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contributions of variables to PC2</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>pc2_contribution <span class="ot">&lt;-</span> <span class="fu">fviz_contrib</span>(abalone_pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">2</span>, <span class="at">top =</span> <span class="dv">12</span>)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -516,12 +582,21 @@ Rings          0.2427128 -0.92120385</code></pre>
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"PC2 explains 8.7% of the variance"</span>) <span class="sc">+</span></span>
 <span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">scale =</span> <span class="dv">1</span>,</span>
 <span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="abalone_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
 
+<div id="refs" class="references csl-bib-body" role="list" style="display: none">
+<div id="ref-pages2014multiple" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">J. Pagès, <em>Multiple factor analysis by example using r</em>. CRC Press, 2014.</div>
+</div>
+<div id="ref-prcomp2023ref" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">R Core Team, <span>“Prcomp, a function of r: A language and environment for statistical computing.”</span> R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp</a>. [Accessed: Oct. 16, 2023]</div>
+</div>
+</div>
 </section>
 </section>
 
