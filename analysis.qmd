@@ -232,9 +232,15 @@ corr_matrix <- round(corr_matrix, digits = 2)
 # Print names of highly correlated features; threshold > 0.30
 high <- findCorrelation(corr_matrix, cutoff = 0.30, names = TRUE)
 
+# Create a data frame with an index column
+high_corr_df <- data.frame(
+  Count = 1:length(high),
+  Feature = high
+)
+
 # table format
-kbl(high, caption = "Highly Correlated Features") %>%
-  kable_paper(bootstrap_options = "hover", full_width = F)
+kbl(high_corr_df, caption = "Highly Correlated Features") %>%
+  kable_paper("hover")
 ```
 
 ## Full Model Regression
@@ -252,7 +258,13 @@ tab_model(full_model, title = "Full Model Regression",
           string.p="P-value", string.stat = "T-score",
           string.se = "Std. Error",
           string.resp = "Response",
-          show.se=T, show.stat = T)
+          string.ci = "Conf Int.",
+          show.se=T, show.stat = T,
+           CSS = list(
+             css.depvarhead = 'font-weight: bold; text-align: left;',
+             css.summary = 'color: #10759B; font-weight: bold;'
+           ))
+
 ```
 
 ## PCA Implementation
@@ -278,9 +290,13 @@ The SVD is closely related to the eigenvalue decomposition (EVD), which is anoth
 data_pca <- prcomp(train_data_sc, center = TRUE, scale. = TRUE)
 pca_summ <- summary(data_pca)$importance
 
+# Transpose the matrix
+transposed_pca_summ <- t(pca_summ)
+
 # table format
-kbl(pca_summ, caption = "Pricipal Components Analysis") %>%
-  kable_paper("hover", full_width = F)
+kbl(transposed_pca_summ, caption = "Pricipal Components Analysis",
+    digits = 4) %>%
+  kable_paper("hover")
 ```
 
 ### PCA - Elements
@@ -319,9 +335,10 @@ loadings_first_two_components <- pc_loadings[, 1:2]
 # print(loadings_first_two_components)
 
 # table format
-kbl(loadings_first_two_components,
-    caption = "Loadings of First Two Principal Components") %>%
-  kable_paper("hover", full_width = F)
+kbl(loadings_first_two_components, 
+    caption = "Loadings of First Two Principal Components",
+    digits = 4) %>%
+  kable_paper("hover")
 ```
 
 ### PCA - Cumulative Variance
@@ -335,14 +352,15 @@ cumulative_variance_explained <- cumsum(variance_explained)
 
 # Create a data frame with an index column
 cumulative_variance_explained_df <- data.frame(
-  PC = 1:length(cumulative_variance_explained),
+  Pincipal_Component = 1:length(cumulative_variance_explained),
   Cumulative_Variance_Explained = cumulative_variance_explained
 )
 
 # Create a kable table with an index column
-kbl(cumulative_variance_explained_df, align = "c",
-    caption = "PCA: Cumulative Variance Explained") %>%
-  kable_paper("hover", full_width = F)
+kbl(cumulative_variance_explained_df, align = "cl",
+    caption = "PCA: Cumulative Variance Explained",
+    digits = 4) %>%
+  kable_paper("hover")
 ```
 
 ### PCA - Number of Principal Components
@@ -357,7 +375,8 @@ num_components <- which(cumulative_variance_explained >= 0.86)[1]
 selected_pcs <- pc_scores[, 1:num_components]
 
 # table format
-kbl(selected_pcs, caption = "Components Explaining 86% Variance") %>%
+kbl(selected_pcs, caption = "Components Explaining 86% Variance",
+    digits = 4) %>%
   kable_paper("hover", full_width = F)
 ```
 
@@ -476,9 +495,6 @@ training_set[, -target_index] <- predict(
   sc, training_set[, -target_index])
 test_set[, -target_index] <- predict(sc, test_set[, -target_index])
 
-# training_set[,-target_index] = scale(training_set[, -target_index])
-# test_set[,-target_index] = scale(test_set[, -target_index])
-
 ```
 
 ### Applying PCA to Training & Test sets
@@ -536,14 +552,16 @@ set.seed(my_seed)
 pca_full_model <- lm(expected_survival ~ ., data = training_set)
 
 # Print a summary of the regression model
-# summary(pca_full_model)
-# tab_model(pca_full_model, string.p="P-value", show.se="T")
-
 tab_model(pca_full_model, title = "8 Principal Components Regression",
           string.p="P-value", string.stat = "T-score",
           string.se = "Std. Error",
           string.resp = "Response",
-          show.se=T, show.stat = T)
+          string.ci = "Conf Int.",
+          show.se=T, show.stat = T,
+          CSS = list(
+             css.depvarhead = 'font-weight: bold; text-align: left;',
+             css.summary = 'color: #10759B; font-weight: bold;'
+           ))
 
 # Calculate PRESS
 # cat("PRESS: ", PRESS(pca_full_model), "\n")
@@ -555,7 +573,8 @@ R2_8pcs <- pred_r_squared(pca_full_model)
 predict_8pc <- cbind(PRESS_8pc, R2_8pcs)
 # Print PRESS, predicted R^2
 # table format
-kbl(predict_8pc, caption = "8 Principal Components Prediction Metrics") %>%
+kbl(predict_8pc, caption = "8 Principal Components Prediction Metrics",
+    digits = 4) %>%
   kable_paper("hover", full_width = F)
 ```
 
@@ -585,12 +604,16 @@ reg_model <- lm(expected_survival ~ .,
                 data = train_pca)
 
 # Print a summary of the regression model
-# tab_model(reg_model)
 tab_model(reg_model, title = "2 Principal Components Regression",
           string.p="P-value", string.stat = "T-score",
           string.se = "Std. Error",
           string.resp = "Response",
-          show.se=T, show.stat = T)
+          string.ci = "Conf Int.",
+          show.se=T, show.stat = T,
+          CSS = list(
+             css.depvarhead = 'font-weight: bold; text-align: left;',
+             css.summary = 'color: #10759B; font-weight: bold;'
+           ))
 
 # Calculate PRESS
 # cat("PRESS: ", PRESS(reg_model), "\n")
@@ -604,7 +627,8 @@ R2_2pc <- pred_r_squared(reg_model)
 predict_2pc <- cbind(PRESS_2pc, R2_2pc)
 
 # table format
-kbl(predict_2pc, caption = "2 Principal Components Prediction Metrics") %>%
+kbl(predict_2pc, caption = "2 Principal Components Prediction Metrics",
+    digits = 4) %>%
   kable_paper("hover", full_width = F)
 ```
 
@@ -623,7 +647,8 @@ pcr_model <- pcr(y ~ PC1+PC2, data=train_pca, validation="CV")
 print(pcr_model)
 
 # table format
-kbl(pcr_model$residuals, caption = "PCA Residuals") %>%
+kbl(pcr_model$residuals, caption = "PCA Residuals",
+    digits = 4) %>%
   kable_paper("hover", full_width = F)
 ```
 
@@ -647,7 +672,8 @@ print(model_cv)
 
 # Metrics
 cv_results = model_cv$results
-kbl(cv_results, caption = "PCA: Cross-Validation Metrics") %>%
+kbl(cv_results, caption = "PCA: Cross-Validation Metrics",
+    digits = 4) %>%
   kable_paper("hover", full_width = F)
 ```
 
@@ -708,7 +734,7 @@ predicted_R2 <- 1 - sum((y_test - y_pred)^2) /
 prediction_metrics_df <- cbind(MAE_value, MSE_predict,
                                RMSE_predict, predicted_R2)
 # table format
-kbl(prediction_metrics_df) %>%
+kbl(prediction_metrics_df, digits = 4) %>%
   kable_paper("hover", full_width = F)
 ```
 
