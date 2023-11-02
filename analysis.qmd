@@ -163,20 +163,24 @@ train_data_sc <- scale(train_data[, -target_index])
 
 ### Outliers Detection
 
--   There are some outliers in the data frame.
+-   There are some outliers in the data frame including the dependent variable.
 -   However, there are three outliers with no high leverage.
 
 ```{r}
 # Plot a boxplot to visualize potential outliers
-boxplot(train_data_sc, main = "Outliers Detection")
+boxplot(train_data, main = "Outliers Detection",
+        col = "steelblue")
 ```
 
 ```{r}
-# Create a boxplot
-# train_data_sc %>%  
-#   aes(y = train_data_sc) +
-#   geom_boxplot() +
-#   labs(title = "Outliers Detection")
+# Dependent Variable outliers
+train_data %>% 
+  ggplot(aes(y=expected_survival)) +
+  geom_boxplot(fill="steelblue", alpha=0.75) + 
+  xlab("Expected Survival")+
+  ylab("")+
+  ggtitle("Dependent Variable Outliers")
+
 ```
 
 ### Leverage
@@ -216,9 +220,9 @@ ols_plot_resid_lev(no_outliers_model)
 
 ### Correlations
 
--   There are high correlated features.
-
 -   Multicollinearity is present in the data set.
+
+-   Correlated features were identified using a threshold = 0.30.
 
 ```{r}
 # Calculate correlations and round to 2 digits
@@ -229,9 +233,8 @@ corr_matrix <- round(corr_matrix, digits = 2)
 high <- findCorrelation(corr_matrix, cutoff = 0.30, names = TRUE)
 
 # table format
-print("Highly Correlated Features")
-kbl(high) %>%
-  kable_paper("hover", full_width = F)
+kbl(high, caption = "Highly Correlated Features") %>%
+  kable_paper(bootstrap_options = "hover", full_width = F)
 ```
 
 ## Full Model Regression
@@ -245,10 +248,14 @@ set.seed(my_seed)
 full_model <- lm(expected_survival ~ ., data = train_data)
 
 # Print a summary of the regression model
-tab_model(full_model, string.p="P-value", show.se="T")
+tab_model(full_model, title = "Full Model Regression", 
+          string.p="P-value", string.stat = "T-score",
+          string.se = "Std. Error",
+          string.resp = "Response",
+          show.se=T, show.stat = T)
 ```
 
-## PCA Analysis
+## PCA Implementation
 
 ### SVD - Singular Value Decomposition
 
@@ -272,15 +279,15 @@ data_pca <- prcomp(train_data_sc, center = TRUE, scale. = TRUE)
 pca_summ <- summary(data_pca)$importance
 
 # table format
-kbl(pca_summ, caption = "PCA") %>%
+kbl(pca_summ, caption = "Pricipal Components Analysis") %>%
   kable_paper("hover", full_width = F)
 ```
 
 ### PCA - Elements
 
--   The values in **`data_pca$x`** are the coordinates of each observation in the new principal component space. These coordinates are the scores for each observation along each principal component.
+-   The values in \`**`` data_pca$x` ``** are the coordinates of each observation in the new principal component space. These coordinates are the scores for each observation along each principal component.
 
--   The eigenvectors of the covariance or correlation matrix of the data represent the directions of maximum variance or information in the dataset.
+-   The eigenvectors of the covariance, or correlation matrix of the data represent the directions of maximum variance, or information in the dataset.
 
 ```{r}
 # Principal Component scores vector
@@ -290,7 +297,7 @@ pc_scores <- data_pca$x
 component_sdev <- data_pca$sdev
 
 # Eigenvector, or Loadings
-eigenvector <- data_pca$rotation
+pc_loadings <- data_pca$rotation
 
 # Mean of variables
 component_mean <- data_pca$center 
@@ -302,18 +309,18 @@ component_scale <- data_pca$scale
 
 ### Loadings of First Two Components
 
--   The loading are the weights assigned to each variable for that particular principal component.
+-   The loading \`data_pca\$rotation\` are the weights assigned to each original variable for that particular principal component.
 
 ```{r}
 # Access the loadings for the first two principal components
-loadings_first_two_components <- eigenvector[, 1:2]
+loadings_first_two_components <- pc_loadings[, 1:2]
 
 # Print the loadings for the first two principal components
 # print(loadings_first_two_components)
 
 # table format
 kbl(loadings_first_two_components,
-    caption = "Loadings of first Two Principal Components") %>%
+    caption = "Loadings of First Two Principal Components") %>%
   kable_paper("hover", full_width = F)
 ```
 
@@ -326,9 +333,15 @@ variance_explained <- component_sdev^2 / sum(component_sdev^2)
 # Cumulative proportion of variance explained
 cumulative_variance_explained <- cumsum(variance_explained)
 
-# table format
-kbl(cumulative_variance_explained, 
-    caption = "Cumulative Variance Explained") %>%
+# Create a data frame with an index column
+cumulative_variance_explained_df <- data.frame(
+  PC = 1:length(cumulative_variance_explained),
+  Cumulative_Variance_Explained = cumulative_variance_explained
+)
+
+# Create a kable table with an index column
+kbl(cumulative_variance_explained_df, align = "c",
+    caption = "PCA: Cumulative Variance Explained") %>%
   kable_paper("hover", full_width = F)
 ```
 
@@ -513,7 +526,7 @@ pred_r_squared <- function(linear.model) {
 }
 ```
 
-### PCA Full Model: 8 Principal Components
+## PCA Full Model: 8 Principal Components
 
 ```{r}
 # reproducible random sampling
@@ -524,13 +537,26 @@ pca_full_model <- lm(expected_survival ~ ., data = training_set)
 
 # Print a summary of the regression model
 # summary(pca_full_model)
-tab_model(pca_full_model, string.p="P-value", show.se="T")
+# tab_model(pca_full_model, string.p="P-value", show.se="T")
+
+tab_model(pca_full_model, title = "8 Principal Components Regression",
+          string.p="P-value", string.stat = "T-score",
+          string.se = "Std. Error",
+          string.resp = "Response",
+          show.se=T, show.stat = T)
 
 # Calculate PRESS
-cat("PRESS: ", PRESS(pca_full_model), "\n")
-
+# cat("PRESS: ", PRESS(pca_full_model), "\n")
+PRESS_8pc <- PRESS(pca_full_model)
 # Calculate predicted R^2
-cat("Predicted R^2: ", pred_r_squared(pca_full_model), "\n")
+# cat("Predicted R^2: ", pred_r_squared(pca_full_model), "\n")
+R2_8pcs <- pred_r_squared(pca_full_model)
+
+predict_8pc <- cbind(PRESS_8pc, R2_8pcs)
+# Print PRESS, predicted R^2
+# table format
+kbl(predict_8pc, caption = "8 Principal Components Prediction Metrics") %>%
+  kable_paper("hover", full_width = F)
 ```
 
 ### Visualization of Uncorrelated PCA Matrix
@@ -559,13 +585,27 @@ reg_model <- lm(expected_survival ~ .,
                 data = train_pca)
 
 # Print a summary of the regression model
-tab_model(reg_model)
+# tab_model(reg_model)
+tab_model(reg_model, title = "2 Principal Components Regression",
+          string.p="P-value", string.stat = "T-score",
+          string.se = "Std. Error",
+          string.resp = "Response",
+          show.se=T, show.stat = T)
 
 # Calculate PRESS
-cat("PRESS: ", PRESS(reg_model), "\n")
+# cat("PRESS: ", PRESS(reg_model), "\n")
+PRESS_2pc <- PRESS(reg_model)
 
 # Calculate predicted R^2
-cat("Predicted R^2: ", pred_r_squared(reg_model), "\n")
+# cat("Predicted R^2: ", pred_r_squared(reg_model), "\n")
+R2_2pc <- pred_r_squared(reg_model)
+
+# Print 2PC prediction results
+predict_2pc <- cbind(PRESS_2pc, R2_2pc)
+
+# table format
+kbl(predict_2pc, caption = "2 Principal Components Prediction Metrics") %>%
+  kable_paper("hover", full_width = F)
 ```
 
 ### **Principal Components Regression**
@@ -580,34 +620,14 @@ y = train_pca$expected_survival
 
 # fit PCR
 pcr_model <- pcr(y ~ PC1+PC2, data=train_pca, validation="CV")
+print(pcr_model)
 
-(pcr_model)
-
+# table format
+kbl(pcr_model$residuals, caption = "PCA Residuals") %>%
+  kable_paper("hover", full_width = F)
 ```
 
-### Repeated Cross-Validation
-
-```{r}
-# reproducible random sampling
-set.seed(my_seed)
-
-# Repeated cross-validation with 5 folds, 3 repetitions
-train_control <- trainControl(method = "repeatedcv",
-							                number = 10, repeats = 3)
-
-# training the model 
-model_cv_repeat <- train(expected_survival ~ ., 
-                         data = train_pca,
-                         method = "lm",
-                         trControl = train_control)
-
-
-# Print Overall Model Performance
-print(model_cv_repeat)
-
-```
-
-### Cross-Validation
+### PCA: Cross-Validation Model
 
 ```{r}
 # reproducible random sampling
@@ -623,10 +643,12 @@ model_cv <- train(expected_survival ~ .,
                   trControl = k_10)
 
 # Print Model Performance
-(model_cv)
+print(model_cv)
 
+# Metrics
 cv_results = model_cv$results
-
+kbl(cv_results, caption = "PCA: Cross-Validation Metrics") %>%
+  kable_paper("hover", full_width = F)
 ```
 
 ## Predictions
@@ -655,12 +677,9 @@ y_pred <- round(y_pred, digits = 0)
 
 ```{r}
 # Transform y_test from data frame to numeric
-y_test_numeric <- as.numeric(unlist(y_test))
+y_test <- as.numeric(unlist(y_test))
 
-# Original data
-#y_test_numeric
-
-prediction_comparison <- cbind(y_pred, y_test_numeric)
+prediction_comparison <- cbind(y_pred, y_test)
 # table format
 kbl(prediction_comparison) %>%
   kable_paper("hover", full_width = F)
@@ -670,24 +689,24 @@ kbl(prediction_comparison) %>%
 
 ```{r}
 # Calculate Mean Absolute Error (MAE)
-mae_value <- mae(y_pred, y_test_numeric)
+MAE_value <- mae(y_pred, y_test)
 #cat("MAE =", mae_value)
 
 # Calculate MSE
-mse_predict <- mean((y_pred - y_test_numeric)^2)
+MSE_predict <- mean((y_pred - y_test)^2)
 #cat("\nMSE =", mse_predict)
 
 # Calculate RMSE
-rmse_predict <- sqrt(mean((y_pred - y_test_numeric)^2))
+RMSE_predict <- sqrt(mean((y_pred - y_test)^2))
 #cat("\nRMSE =", rmse_predict)
 
 # Calculate R-squared (R^2)
-predicted_r2 <- 1 - sum((y_test_numeric - y_pred)^2) / 
-  sum((y_test_numeric - mean(y_test_numeric))^2)
+predicted_R2 <- 1 - sum((y_test - y_pred)^2) / 
+  sum((y_test - mean(y_test))^2)
 # cat("\nPredicted R^2 =", predicted_r2)
 
-prediction_metrics_df <- cbind(mae_value, mse_predict,
-                               rmse_predict, predicted_r2)
+prediction_metrics_df <- cbind(MAE_value, MSE_predict,
+                               RMSE_predict, predicted_R2)
 # table format
 kbl(prediction_metrics_df) %>%
   kable_paper("hover", full_width = F)
@@ -703,6 +722,6 @@ In conclusion, this project has demonstrated the effectiveness of Principal Comp
 
 -   The predicted R\^2 = 96%
 
--   The average deviation between the predicted values, and observed values for 'Expected Survival' is RMSE = 33.77.
+-   The average deviation between the predicted values, and observed values for 'Expected Survival' is RMSE = 33.8.
 
 -   The model has not been exposed to unseen data with a large amount of observations to asses its robustness, and reliability.
