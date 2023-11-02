@@ -35,7 +35,23 @@ library(sjPlot)       # format linear regression results
 
 ## Data Preparation
 
-In the previous $Dataset$ chapter, we renamed the variables to be more significant, and easier to make inference. Moreover, we imputed the missing values with the Mean.
+In the section titled "Dataset" introduced the Dialysis dataset. Within this context, we restructured the variables, enhancing their meaningfulness and facilitating inferential analysis. Additionally, the mean imputation approach addressed missing values.It is worth noting that
+
+## Assumptions
+
+PCA relies on certain assumptions, the fulfillment of which is essential for the validity of this technique.
+
+-   **Linearity**: PCA assumes that the dataset is a linear combination of the variables. The variables exhibit relationships among themselves [@chumney2012pcaefa].
+
+-   **Importance of mean and covariance**: PCA assumes that the directions of maximum variance will contain good features for discrimination.
+
+-   **Correlation between features**: PCA assumes a correlation between features.
+
+-   **Normalization of data**: Normalization of data is necessary to apply PCA. Unscaled data can cause relative comparison problems of the dataset [@chumney2012pcaefa]. In addition, the data should contain no significant outliers.
+
+-   **Orthogonality**: The principal components are orthogonal to each other.
+
+-   **Sampling adequacy**: PCA assumes that there is sampling adequacy.
 
 ```{r, echo=FALSE, results='hide'}
 # clear environment
@@ -165,6 +181,7 @@ train_data_sc <- scale(train_data[, -target_index])
 
 -   There are some outliers in the data frame including the dependent variable.
 -   However, there are three outliers with no high leverage.
+-   Outliers are important because these can have a disproportionate influence on results.
 
 ```{r}
 # Plot a boxplot to visualize potential outliers
