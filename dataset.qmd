@@ -20,6 +20,8 @@ The selection of this dataset for our analysis is driven by its inherent charact
 
 In our data preparation process, we have efficiently removed white spaces, and edited variable names, enhancing the readability and interpretability of the dataset. This meticulous effort adds to the overall clarity, making it quicker, and more meaningful for further examination.
 
+For instance, "hypercalcemia_calcium \> 10.2Mg", was used in replacement of Percentage.Of.Adult..Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL.
+
 ## Statistical Summary
 
 The dataset contains 55 observations of 38 variables with 1 discrete variable (States/Territories) and 38 continuous variables. 13 observations have at least 1 missing record, with 34 missing observations in total. Most missing data in the dataset occurs in variables relating to pediatric patient data.
