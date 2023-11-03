@@ -1,8 +1,10 @@
 # Examples
 
-## Step-by-Step Calculation of Principal Component Analysis
+Moving beyond the theoretical foundations of principal components, how is PCA applied to data? We offer two examples; the first a demonstration of the manual calculation of principal components, and the second implementing PCA on a large dataset using R.
 
-In this illustration, we have access to the two grades of four students in a statistics subject. We aim to employ Principal Component Analysis (PCA) as a means to reduce the dimensionality from two variables to a singular variable. This transformation will effectively represent students' performance in the subject with a more compact and interpretable measure. This example is adapted from the resource *How to compute principal components*. @eduflair2020
+## Manual calculation of principal components
+
+In this illustration, we have access to the two grades of four students in a statistics subject. We aim to employ principal component analysis as a means to reduce the dimensionality from two variables to a singular variable. This transformation will effectively represent students' performance in the subject with a more compact and interpretable measure. This example is adapted from the resource *How to compute principal components* @eduflair2020.
 
 | Scores        | **Basic Stats** | **Advanced Stats** |
 |---------------|-----------------|--------------------|
@@ -12,7 +14,7 @@ In this illustration, we have access to the two grades of four students in a sta
 | **Student 4** | **7**           | **14**             |
 | **Mean**      | $\bar{x}$=8     | $\bar{y}$=8.5      |
 
-**Calculate the Covariance Matrix** $M$
+### Calculate the covariance matrix $M$
 
 $$
 \begin{bmatrix}
@@ -31,12 +33,11 @@ $\Rightarrow$ Covariance Matrix $M$ $$
 \begin{bmatrix}
 14 & -11 \\
 -11 & 23 \\
-\end{bmatrix}
-$$
+\end{bmatrix} $$
 
-**Compute the singular value decomposition (SVD): Calculate Eigenvalues and Eigenvectors of the Covariance Matrix** $M$
+### Compute the singular value decomposition (SVD)
 
-We can obtain the principal component and loadings from SVD of the covariance matrix M since covariance matrix M is a square matrix:
+We can obtain the principal components and loadings from SVD of the covariance matrix M since covariance matrix M is a square matrix:
 
 $$ 
 \begin{bmatrix}
@@ -47,18 +48,17 @@ $$
 
 $$det(M - \lambda I) = 0$$
 
-**Obtain Eigenvalues of the Covariance Matrix** $\rightarrow$ $\lambda_1$ & $\lambda_2$
-
-Identity Matrix $I$ =
+#### Obtain eigenvalues of the covariance matrix $\rightarrow$ $\lambda_1$ & $\lambda_2$
 
 $$
-\begin{bmatrix}
+I = \begin{bmatrix}
 1 & 0 \\
 0 & 1 \\
 \end{bmatrix}
 $$
 
-$\lambda I$ = $$ \lambda \times \begin{bmatrix}
+$$
+\lambda I = \lambda \times \begin{bmatrix}
 1 & 0 \\
 0 & 1 \\
 \end{bmatrix} = \begin{bmatrix} 
@@ -95,7 +95,7 @@ $$\lambda^2 +37\lambda -201 = 0$$
 
 $\Rightarrow$ $\lambda_1$ = 30.3849, $\lambda_2$ = 6.6152 (eigenvalues for Covariance Matrix $M$)
 
-**Obtain Eigenvector of** $\lambda_1$
+#### Obtain eigenvector of $\lambda_1$
 
 $$(M - \lambda_1I)\times U_1 = \mathbf{0} $$
 
@@ -108,7 +108,7 @@ u_2 \\
 \end{bmatrix}=\mathbf{0}
 $$
 
-$$(14- \lambda)u_1 - 11u_2 = 0 $$ $\Rightarrow$ $$-16.3849u_1 -11u_2 = 0$$ $\Rightarrow$ $$-16.3849u_1= 11u_2 $$ $u_1 = \frac{11}{-16.3849}u_2$
+$$(14- \lambda)u_1 - 11u_2 = 0 $$ $\Rightarrow$ $$-16.3849u_1 -11u_2 = 0$$ $\Rightarrow$ $$-16.3849u_1= 11u_2 $$ $\Rightarrow$ $$u_1 = \frac{11}{-16.3849}u_2$$
 
 $$
 \begin{bmatrix}
@@ -134,7 +134,7 @@ u_1 \\ u_2
 \end{bmatrix}
 $$
 
-Normalized Eigenvector\
+**Normalized Eigenvector**
 
 $\Rightarrow$ $\lambda_1$: $e_1$
 
@@ -162,10 +162,9 @@ $$
 | **Student 4** | **7**           | **14**             |
 | **Mean**      | $\bar{x}$=8     | $\bar{y}$=8.5      |
 
-Derive The New Dataset
+### Derive The new dataset
 
-| **First Principal Component (PC1)** | $P_{11}$ | $P_{12}$ | $P_{13}$ | $P_{14}$ |
-|-------------------------------------|----------|----------|----------|----------|
+**First Principal Component (PC1)**
 
 $$
 P_{11} = e_1^T \times 
@@ -219,27 +218,27 @@ P_{14}= e_1^T \times
 \end{bmatrix} = -5.1238
 $$
 
-### The New Dataset (Left singular vector)
+<!-- -->
+
+**The new dataset (Left singular vector)**
 
 | **First Principal Component (PC1)** | **Student 1** | **Student 2** | **Student 3** | **Student 4** |
-|:-----------------------------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
 |                                     |  **-4.3052**  |  **3.7361**   |  **5.6928**   |  **-5.1238**  |
 
-Use R code to analyze the same example
+### Verifying and visualizing the results
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 #Load Libraries
-library(MASS)
 library(factoextra)
-library(ggplot2)
 
 #Import Example Data
 data = data.frame(Student = 1:4, BasicStats=c(4,8,13,7), AdvancedStats=c(11,4,5,14))
-dim(data)
+#dim(data)
 
 #Structure of Data
 str(data) #check variable types which matters in PCA 
-summary(data) #details about variable scales and missing values
+#summary(data) #details about variable scales and missing values
 
 #Based on Info from Summary: handle missing values and exclude categorical variable
 #na.omit(data) No missing values here
@@ -248,67 +247,42 @@ data_sample = data[,-c(1)] #exclude categorical variable
 #Run PCA
 data_pca = prcomp(data_sample, scale = TRUE)
 
-
 #Summary of Analysis
 summary(data_pca)
 
 #Elements of PCA Object (all outputs of PCA analysis)
-names(data_pca) 
+#names(data_pca)
+
 #sdev:standard deviation
 #rotation: eigenvectors (loadings per variable within each PC)
 #center: mean of the original variable
 #scale: standard deviations of the original variable
-#x:principal component values/scores
+#x: principal component values/scores
 
 #Scree Plot of Variance
 fviz_eig(data_pca,
          addlabels = TRUE)
 #Biplot with Default Settings
-fviz_pca_biplot(data_pca)
-
-#Biplotwith Labeled Variables
-#fviz_pca_biplot(data_pca,label = "var")
-
+fviz_pca_biplot(data_pca, repel = TRUE)
 ```
 
-## PCA using R
+### Summary
+
+The first principal component of the data captures 80.7% of the variation (or information) while reducing the dimensionality of the dataset from 2 variables to 1. Small datasets such as this make the hand-calculation of principal components feasible and easy to follow, but the strengths of PCA are especially evident when software is used to enable principal component analysis for large datasets. In the next example, we demonstrate how PCA can be used with a large dataset using the R programming language.
+
+## PCA on a large dataset using R
+
+For this application of PCA, the Abalone dataset from the UCI Machine Learning Repository is used @misc_abalone_1. This dataset contain 4177 observations of 9 variables which record characteristics of each abalone including sex, length, diameter, height, weights, and the number of rings. The variables, apart from sex, are continuous and correlated making the dataset an ideal candidate for demonstrating dimensionality reduction via PCA.
 
 ### Libraries
 
-```{r setup, echo=FALSE}
-# Install libraries if needed
-# install.packages("caret")
-# install.packages("corrplot")
-# install.packages("Metrics")
-# install.packages("caTools")
-# install.packages("EnvStats")
-# install.packages("car")
-# install.packages("corrr")
-# install.packages("ggcorrplot")
-# install.packages("FactoMineR")
-# install.packages("factoextra")
-# install.packages("pls")
-# install.packages("e1071")
-# install.packages("plotly")
-```
+First, the appropriate and necessary libraries are loaded in R. These provide the functions which serve as the backbone of the analysis, handling the computational aspects of PCA as well as visualizing the results.
 
 ```{r, warning = FALSE, message = FALSE}
 # Load necessary libraries
-library(dplyr)
 library(tidyverse)  # for handling missing values
-# library(EnvStats) # for rosnerTest
-# library(caTools)
-library(caret)
-library(corrplot)
-# library(Metrics)
-# library(car)        # for outliers test
-# library(corrr)      # correlation matrix
-# library(ggcorrplot) # correlation graph
-# library(FactoMineR) # PCA analysis
+library(corrplot) # for plotting the correlation matrix
 library(factoextra) # PCA plots
-# library(pls)        # PC regression
-# library(e1071)      # to fit transform PCA  
-# library(plotly)
 ```
 
 ### Data Preparation
@@ -316,9 +290,6 @@ library(factoextra) # PCA plots
 ```{r}
 # clear environment
 rm(list = ls())
-
-# Constant seed
-my_seed = 95
 
 # Load dataset
 abalone <- read.csv('./abalone/abalone.csv')
@@ -330,7 +301,7 @@ str(abalone)
 colSums(is.na(abalone))
 ```
 
-The dataset contains 9 variables with 1 categorical variable and 8 numeric variables. The dataset contains no missing values. For this example in applying principal component analysis, we exclude the categorical variable 'Sex' and focus the PCA on the numerical dimensions of the Abalone. For analyses involving a mix of numeric and non-numeric variables other factor analysis techniques can be used, such as factor analysis of mixed data. @pages2014multiple
+The dataset contains 9 variables with 1 categorical variable and 8 numeric variables. The dataset contains no missing values. For this example in applying principal component analysis, we exclude the categorical variable 'Sex' and focus the PCA on the numerical dimensions of the Abalone. For analyses involving a mix of numeric and non-numeric variables other factor analysis techniques can be used, such as factor analysis of mixed data @pages2014multiple.
 
 ```{r}
 # Select only the numeric variables 
@@ -357,7 +328,7 @@ Viewing the data after scaling and centering, values greater than 3 or less than
 ```{r}
 # Plot a boxplot to visualize potential outliers
 par(mar=c(4, 8, 4, 4))
-boxplot(abalone_sc, main = "Visualization of scaled and centered data", horizontal = TRUE, las = 1)
+boxplot(abalone_sc, col = "steelblue", main = "Visualization of scaled and centered data", horizontal = TRUE, las = 1)
 ```
 
 Are there enough outliers to be a cause for concern? We can see how many lie outside of the third standard deviation of the data for each variable.
@@ -366,7 +337,7 @@ Are there enough outliers to be a cause for concern? We can see how many lie out
 print(colSums(abalone_sc > 3 | abalone_sc < -3))
 ```
 
-Of the 4177 observations, at most 62 in a single variable (rings) are outliers. The tolerance for outliers will differ depending on the investigation, but for our purposes this number is well within tolerance for principal component analysis.
+Of the 4177 observations, at most 62 in a single variable (rings) are outliers. The tolerance for outliers will differ depending on the investigation, but for our illustrative purposes this number is well within tolerance for principal component analysis.
 
 Lastly, we can investigate the correlation among the variables. PCA is best used with linearly correlated data. If the data is not correlated, the results of PCA will be less meaningful.
 
@@ -380,7 +351,7 @@ Our scaled and centered data has strong linear correlations and contains a relat
 
 ### PCA via Singular Value Decomposition
 
-The prcomp() function in R performs principal component analysis on a dataset using the singular value decomposition method which utilizes the covariance matrix of the data. @prcomp2023ref
+The prcomp() function @prcomp2023ref performs principal component analysis on a dataset using the singular value decomposition method, which utilizes the covariance matrix of the data.
 
 ```{r}
 # Apply PCA using prcomp()
@@ -453,7 +424,7 @@ The scree plot visualizes the variance captured by each PC. PC1 explains 83.9% o
 
 #### Biplot
 
-The correlation between a variable and a principal component is used as the coordinates of the variable on the PC, shown as dimensions on the biplot. Dim1 corresponds to PC1, and Dim2 to PC2. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations. (Abdi and Williams 2010) \[ref\]
+The correlation between a variable and a principal component is used as the coordinates of the variable on the PC, shown as dimensions on the biplot. Dim1 corresponds to PC1, and Dim2 to PC2. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations @abdi2010principal.
 
 ```{r}
 fviz_pca_biplot(abalone_pca, label = "var", alpha.ind = "contrib", col.var = "blue", repel = TRUE)
@@ -499,3 +470,9 @@ pc2_contribution +
   scale_y_continuous(labels = scales::percent_format(scale = 1,
                                                      accuracy = 1))
 ```
+
+### Summary
+
+The first principal component captures 83.9% of the variance in the data. This linear combination has relatively equal loadings for whole weight, diameter, length, shell weight, viscera weight, and shucked weight, with height and rings having lower loadings. The second principal component is mostly influenced by the variable rings which makes up over 80% of the contribution to PC2. The biplot is an effective visualization of how each variable contributes to PC1, or dimension 1 on the graph, and PC2, or dimension 2 on the graph. The length and direction of each vector represent the contribution of each variable to the principal components; whole weight and rings are the longest, representing the largest contributions to PC1 and PC2 respectively.
+
+PCA is primarily an exploratory tool, which allows us to visualize high-dimensional data in lower dimensions as shown above in the biplot and accompanying scree plot. These PCs can be used to explore data in other ways, such as looking for trends and patterns in the data or identifying clusters and outliers. In the formal analysis in the following chapter, the applications of PCA are further explored through the development of a regression model on the principal components of a dataset.
