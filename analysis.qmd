@@ -35,7 +35,7 @@ library(sjPlot)       # format linear regression results
 
 ## Data Preparation
 
-In the section titled "Dataset" introduced the Dialysis dataset. Within this context, we restructured the variables, enhancing their meaningfulness and facilitating inferential analysis. Additionally, the mean imputation approach addressed missing values.It is worth noting that
+This analysis uses the Dialysis dataset introduced previously in the Dataset chapter. Within this context, we restructured the variables, enhancing their meaningfulness and facilitating inferential analysis. Additionally, the mean imputation approach addressed missing values.
 
 ## Assumptions
 
@@ -262,7 +262,7 @@ kbl(high_corr_df, caption = "Highly Correlated Features") %>%
 
 ## Full Model Regression
 
--   The Adjusted R\^2 = 99.99% is an indication of over-fitting, or bias.
+-   The Adjusted $R^2$ = 99.99% is an indication of over-fitting, or bias.
 
 ```{r}
 set.seed(my_seed)
@@ -292,11 +292,11 @@ We will focus on Singular Value Decomposition which is a classic approach for PC
 
 Singular Value Decomposition is a factorization technique used in linear algebra to decompose a matrix into three matrices.
 
-1.  U: A matrix whose columns are the left singular vectors of the original matrix.
+1.  $L$: A matrix whose columns are the left singular vectors of the original matrix.
 
-2.  D: A diagonal matrix whose entries are the singular values of the original matrix.
+2.  $D$: A diagonal matrix whose entries are the singular values of the original matrix.
 
-3.  V: A matrix whose columns are the right singular vectors of the original matrix.
+3.  $R$: A matrix whose columns are the right singular vectors of the original matrix.
 
 The SVD is closely related to the eigenvalue decomposition (EVD), which is another factorization technique used in linear algebra. While the EVD can only be applied to square matrices, the SVD can be applied to any matrix, including rectangular matrices. The SVD is also more numerically stable than the EVD, making it a preferred method for many applications.
 

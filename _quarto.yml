@@ -5,15 +5,15 @@ project:
 book:
   title: "Principal Component Analysis"
   author: "Hector Gavilanes, Gail Han, Michael T. Mezzano"
-  date: "10/30/2023"
+  date: "11/05/2023"
   chapters:
     - index.qmd
-    - summary.qmd
     - intro.qmd
-    - dataset.qmd
     - methods.qmd
     - examples.qmd
+    - dataset.qmd
     - analysis.qmd
+    - results.qmd
     - references.qmd
 
 bibliography: references.bib

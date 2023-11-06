@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Principal Component Analysis - 6&nbsp; Analysis</title>
+<title>Principal Component Analysis - 5&nbsp; Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -83,8 +83,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
-<link href="./examples.html" rel="prev">
+<link href="./results.html" rel="next">
+<link href="./dataset.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -132,7 +132,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./analysis.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Analysis</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./analysis.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Analysis</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -160,43 +160,43 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Home</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text">index.html</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./dataset.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./examples.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Examples</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dataset.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Dataset</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./analysis.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results and Conclusion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -215,55 +215,55 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link active" data-scroll-target="#data-preparation"><span class="header-section-number">6.1</span> Data Preparation</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">6.2</span> Assumptions</a></li>
-  <li><a href="#feature-scaling" id="toc-feature-scaling" class="nav-link" data-scroll-target="#feature-scaling"><span class="header-section-number">6.3</span> Feature Scaling</a>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link active" data-scroll-target="#data-preparation"><span class="header-section-number">5.1</span> Data Preparation</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">5.2</span> Assumptions</a></li>
+  <li><a href="#feature-scaling" id="toc-feature-scaling" class="nav-link" data-scroll-target="#feature-scaling"><span class="header-section-number">5.3</span> Feature Scaling</a>
   <ul class="collapse">
-  <li><a href="#standardization" id="toc-standardization" class="nav-link" data-scroll-target="#standardization"><span class="header-section-number">6.3.1</span> Standardization</a></li>
+  <li><a href="#standardization" id="toc-standardization" class="nav-link" data-scroll-target="#standardization"><span class="header-section-number">5.3.1</span> Standardization</a></li>
   </ul></li>
-  <li><a href="#pca-requirements" id="toc-pca-requirements" class="nav-link" data-scroll-target="#pca-requirements"><span class="header-section-number">6.4</span> PCA Requirements</a>
+  <li><a href="#pca-requirements" id="toc-pca-requirements" class="nav-link" data-scroll-target="#pca-requirements"><span class="header-section-number">5.4</span> PCA Requirements</a>
   <ul class="collapse">
-  <li><a href="#outliers-detection" id="toc-outliers-detection" class="nav-link" data-scroll-target="#outliers-detection"><span class="header-section-number">6.4.1</span> Outliers Detection</a></li>
-  <li><a href="#leverage" id="toc-leverage" class="nav-link" data-scroll-target="#leverage"><span class="header-section-number">6.4.2</span> Leverage</a></li>
-  <li><a href="#removing-outliers" id="toc-removing-outliers" class="nav-link" data-scroll-target="#removing-outliers"><span class="header-section-number">6.4.3</span> Removing Outliers</a></li>
-  <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations"><span class="header-section-number">6.4.4</span> Correlations</a></li>
+  <li><a href="#outliers-detection" id="toc-outliers-detection" class="nav-link" data-scroll-target="#outliers-detection"><span class="header-section-number">5.4.1</span> Outliers Detection</a></li>
+  <li><a href="#leverage" id="toc-leverage" class="nav-link" data-scroll-target="#leverage"><span class="header-section-number">5.4.2</span> Leverage</a></li>
+  <li><a href="#removing-outliers" id="toc-removing-outliers" class="nav-link" data-scroll-target="#removing-outliers"><span class="header-section-number">5.4.3</span> Removing Outliers</a></li>
+  <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations"><span class="header-section-number">5.4.4</span> Correlations</a></li>
   </ul></li>
-  <li><a href="#full-model-regression" id="toc-full-model-regression" class="nav-link" data-scroll-target="#full-model-regression"><span class="header-section-number">6.5</span> Full Model Regression</a></li>
-  <li><a href="#pca-implementation" id="toc-pca-implementation" class="nav-link" data-scroll-target="#pca-implementation"><span class="header-section-number">6.6</span> PCA Implementation</a>
+  <li><a href="#full-model-regression" id="toc-full-model-regression" class="nav-link" data-scroll-target="#full-model-regression"><span class="header-section-number">5.5</span> Full Model Regression</a></li>
+  <li><a href="#pca-implementation" id="toc-pca-implementation" class="nav-link" data-scroll-target="#pca-implementation"><span class="header-section-number">5.6</span> PCA Implementation</a>
   <ul class="collapse">
-  <li><a href="#svd---singular-value-decomposition" id="toc-svd---singular-value-decomposition" class="nav-link" data-scroll-target="#svd---singular-value-decomposition"><span class="header-section-number">6.6.1</span> SVD - Singular Value Decomposition</a></li>
-  <li><a href="#pca---elements" id="toc-pca---elements" class="nav-link" data-scroll-target="#pca---elements"><span class="header-section-number">6.6.2</span> PCA - Elements</a></li>
-  <li><a href="#loadings-of-first-two-components" id="toc-loadings-of-first-two-components" class="nav-link" data-scroll-target="#loadings-of-first-two-components"><span class="header-section-number">6.6.3</span> Loadings of First Two Components</a></li>
-  <li><a href="#pca---cumulative-variance" id="toc-pca---cumulative-variance" class="nav-link" data-scroll-target="#pca---cumulative-variance"><span class="header-section-number">6.6.4</span> PCA - Cumulative Variance</a></li>
-  <li><a href="#pca---number-of-principal-components" id="toc-pca---number-of-principal-components" class="nav-link" data-scroll-target="#pca---number-of-principal-components"><span class="header-section-number">6.6.5</span> PCA - Number of Principal Components</a></li>
+  <li><a href="#svd---singular-value-decomposition" id="toc-svd---singular-value-decomposition" class="nav-link" data-scroll-target="#svd---singular-value-decomposition"><span class="header-section-number">5.6.1</span> SVD - Singular Value Decomposition</a></li>
+  <li><a href="#pca---elements" id="toc-pca---elements" class="nav-link" data-scroll-target="#pca---elements"><span class="header-section-number">5.6.2</span> PCA - Elements</a></li>
+  <li><a href="#loadings-of-first-two-components" id="toc-loadings-of-first-two-components" class="nav-link" data-scroll-target="#loadings-of-first-two-components"><span class="header-section-number">5.6.3</span> Loadings of First Two Components</a></li>
+  <li><a href="#pca---cumulative-variance" id="toc-pca---cumulative-variance" class="nav-link" data-scroll-target="#pca---cumulative-variance"><span class="header-section-number">5.6.4</span> PCA - Cumulative Variance</a></li>
+  <li><a href="#pca---number-of-principal-components" id="toc-pca---number-of-principal-components" class="nav-link" data-scroll-target="#pca---number-of-principal-components"><span class="header-section-number">5.6.5</span> PCA - Number of Principal Components</a></li>
   </ul></li>
-  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization"><span class="header-section-number">6.7</span> Visualization</a>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization"><span class="header-section-number">5.7</span> Visualization</a>
   <ul class="collapse">
-  <li><a href="#scree-plot---cumulative-variance-explained" id="toc-scree-plot---cumulative-variance-explained" class="nav-link" data-scroll-target="#scree-plot---cumulative-variance-explained"><span class="header-section-number">6.7.1</span> Scree Plot - Cumulative Variance Explained</a></li>
-  <li><a href="#biplot" id="toc-biplot" class="nav-link" data-scroll-target="#biplot"><span class="header-section-number">6.7.2</span> Biplot</a></li>
-  <li><a href="#correlation-circle" id="toc-correlation-circle" class="nav-link" data-scroll-target="#correlation-circle"><span class="header-section-number">6.7.3</span> Correlation Circle</a></li>
-  <li><a href="#variable-contribution" id="toc-variable-contribution" class="nav-link" data-scroll-target="#variable-contribution"><span class="header-section-number">6.7.4</span> Variable Contribution</a></li>
+  <li><a href="#scree-plot---cumulative-variance-explained" id="toc-scree-plot---cumulative-variance-explained" class="nav-link" data-scroll-target="#scree-plot---cumulative-variance-explained"><span class="header-section-number">5.7.1</span> Scree Plot - Cumulative Variance Explained</a></li>
+  <li><a href="#biplot" id="toc-biplot" class="nav-link" data-scroll-target="#biplot"><span class="header-section-number">5.7.2</span> Biplot</a></li>
+  <li><a href="#correlation-circle" id="toc-correlation-circle" class="nav-link" data-scroll-target="#correlation-circle"><span class="header-section-number">5.7.3</span> Correlation Circle</a></li>
+  <li><a href="#variable-contribution" id="toc-variable-contribution" class="nav-link" data-scroll-target="#variable-contribution"><span class="header-section-number">5.7.4</span> Variable Contribution</a></li>
   </ul></li>
-  <li><a href="#model-building" id="toc-model-building" class="nav-link" data-scroll-target="#model-building"><span class="header-section-number">6.8</span> Model Building</a>
+  <li><a href="#model-building" id="toc-model-building" class="nav-link" data-scroll-target="#model-building"><span class="header-section-number">5.8</span> Model Building</a>
   <ul class="collapse">
-  <li><a href="#data-splitting-into-training-test-set" id="toc-data-splitting-into-training-test-set" class="nav-link" data-scroll-target="#data-splitting-into-training-test-set"><span class="header-section-number">6.8.1</span> Data Splitting into Training &amp; Test set</a></li>
-  <li><a href="#feature-scaling-standardization" id="toc-feature-scaling-standardization" class="nav-link" data-scroll-target="#feature-scaling-standardization"><span class="header-section-number">6.8.2</span> Feature Scaling: Standardization</a></li>
-  <li><a href="#applying-pca-to-training-test-sets" id="toc-applying-pca-to-training-test-sets" class="nav-link" data-scroll-target="#applying-pca-to-training-test-sets"><span class="header-section-number">6.8.3</span> Applying PCA to Training &amp; Test sets</a></li>
+  <li><a href="#data-splitting-into-training-test-set" id="toc-data-splitting-into-training-test-set" class="nav-link" data-scroll-target="#data-splitting-into-training-test-set"><span class="header-section-number">5.8.1</span> Data Splitting into Training &amp; Test set</a></li>
+  <li><a href="#feature-scaling-standardization" id="toc-feature-scaling-standardization" class="nav-link" data-scroll-target="#feature-scaling-standardization"><span class="header-section-number">5.8.2</span> Feature Scaling: Standardization</a></li>
+  <li><a href="#applying-pca-to-training-test-sets" id="toc-applying-pca-to-training-test-sets" class="nav-link" data-scroll-target="#applying-pca-to-training-test-sets"><span class="header-section-number">5.8.3</span> Applying PCA to Training &amp; Test sets</a></li>
   </ul></li>
-  <li><a href="#pca-full-model-8-principal-components" id="toc-pca-full-model-8-principal-components" class="nav-link" data-scroll-target="#pca-full-model-8-principal-components"><span class="header-section-number">6.9</span> PCA Full Model: 8 Principal Components</a>
+  <li><a href="#pca-full-model-8-principal-components" id="toc-pca-full-model-8-principal-components" class="nav-link" data-scroll-target="#pca-full-model-8-principal-components"><span class="header-section-number">5.9</span> PCA Full Model: 8 Principal Components</a>
   <ul class="collapse">
-  <li><a href="#visualization-of-uncorrelated-pca-matrix" id="toc-visualization-of-uncorrelated-pca-matrix" class="nav-link" data-scroll-target="#visualization-of-uncorrelated-pca-matrix"><span class="header-section-number">6.9.1</span> Visualization of Uncorrelated PCA Matrix</a></li>
+  <li><a href="#visualization-of-uncorrelated-pca-matrix" id="toc-visualization-of-uncorrelated-pca-matrix" class="nav-link" data-scroll-target="#visualization-of-uncorrelated-pca-matrix"><span class="header-section-number">5.9.1</span> Visualization of Uncorrelated PCA Matrix</a></li>
   </ul></li>
-  <li><a href="#pca-2-principal-components" id="toc-pca-2-principal-components" class="nav-link" data-scroll-target="#pca-2-principal-components"><span class="header-section-number">6.10</span> PCA: 2 Principal Components</a>
+  <li><a href="#pca-2-principal-components" id="toc-pca-2-principal-components" class="nav-link" data-scroll-target="#pca-2-principal-components"><span class="header-section-number">5.10</span> PCA: 2 Principal Components</a>
   <ul class="collapse">
-  <li><a href="#principal-components-regression" id="toc-principal-components-regression" class="nav-link" data-scroll-target="#principal-components-regression"><span class="header-section-number">6.10.1</span> <strong>Principal Components Regression</strong></a></li>
-  <li><a href="#pca-cross-validation-model" id="toc-pca-cross-validation-model" class="nav-link" data-scroll-target="#pca-cross-validation-model"><span class="header-section-number">6.10.2</span> PCA: Cross-Validation Model</a></li>
+  <li><a href="#principal-components-regression" id="toc-principal-components-regression" class="nav-link" data-scroll-target="#principal-components-regression"><span class="header-section-number">5.10.1</span> <strong>Principal Components Regression</strong></a></li>
+  <li><a href="#pca-cross-validation-model" id="toc-pca-cross-validation-model" class="nav-link" data-scroll-target="#pca-cross-validation-model"><span class="header-section-number">5.10.2</span> PCA: Cross-Validation Model</a></li>
   </ul></li>
-  <li><a href="#predictions" id="toc-predictions" class="nav-link" data-scroll-target="#predictions"><span class="header-section-number">6.11</span> Predictions</a>
+  <li><a href="#predictions" id="toc-predictions" class="nav-link" data-scroll-target="#predictions"><span class="header-section-number">5.11</span> Predictions</a>
   <ul class="collapse">
-  <li><a href="#prediction-metrics" id="toc-prediction-metrics" class="nav-link" data-scroll-target="#prediction-metrics"><span class="header-section-number">6.11.1</span> Prediction Metrics</a></li>
+  <li><a href="#prediction-metrics" id="toc-prediction-metrics" class="nav-link" data-scroll-target="#prediction-metrics"><span class="header-section-number">5.11.1</span> Prediction Metrics</a></li>
   </ul></li>
-  <li><a href="#training-conclusion" id="toc-training-conclusion" class="nav-link" data-scroll-target="#training-conclusion"><span class="header-section-number">6.12</span> Training Conclusion</a></li>
+  <li><a href="#training-conclusion" id="toc-training-conclusion" class="nav-link" data-scroll-target="#training-conclusion"><span class="header-section-number">5.12</span> Training Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -272,7 +272,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Analysis</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Analysis</span></h1>
 </div>
 
 
@@ -287,12 +287,12 @@ div.csl-indent {
 
 </header>
 
-<section id="data-preparation" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">6.1</span> Data Preparation</h2>
-<p>In the section titled “Dataset” introduced the Dialysis dataset. Within this context, we restructured the variables, enhancing their meaningfulness and facilitating inferential analysis. Additionally, the mean imputation approach addressed missing values.It is worth noting that</p>
+<section id="data-preparation" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">5.1</span> Data Preparation</h2>
+<p>This analysis uses the Dialysis dataset introduced previously in the Dataset chapter. Within this context, we restructured the variables, enhancing their meaningfulness and facilitating inferential analysis. Additionally, the mean imputation approach addressed missing values.</p>
 </section>
-<section id="assumptions" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">6.2</span> Assumptions</h2>
+<section id="assumptions" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">5.2</span> Assumptions</h2>
 <p>PCA relies on certain assumptions, the fulfillment of which is essential for the validity of this technique.</p>
 <ul>
 <li><p><strong>Linearity</strong>: PCA assumes that the dataset is a linear combination of the variables. The variables exhibit relationships among themselves <span class="citation" data-cites="chumney2012pcaefa"><a href="references.html#ref-chumney2012pcaefa" role="doc-biblioref">[1]</a></span>.</p></li>
@@ -303,10 +303,10 @@ div.csl-indent {
 <li><p><strong>Sampling adequacy</strong>: PCA assumes that there is sampling adequacy.</p></li>
 </ul>
 </section>
-<section id="feature-scaling" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="feature-scaling"><span class="header-section-number">6.3</span> Feature Scaling</h2>
-<section id="standardization" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="standardization"><span class="header-section-number">6.3.1</span> Standardization</h3>
+<section id="feature-scaling" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="feature-scaling"><span class="header-section-number">5.3</span> Feature Scaling</h2>
+<section id="standardization" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="standardization"><span class="header-section-number">5.3.1</span> Standardization</h3>
 <p>It is important to Mean-Center the data prior to PCA model building to ensure the first Principal Component is in the direction of maximum variance.</p>
 <ul>
 <li><p>Standardization produces Mean, <span class="math inline">\(\mu\)</span>= 0, and Variance, <span class="math inline">\(\sigma\)</span> = 1.</p></li>
@@ -333,10 +333,10 @@ Z \sim N(0,1)
 </div>
 </section>
 </section>
-<section id="pca-requirements" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="pca-requirements"><span class="header-section-number">6.4</span> PCA Requirements</h2>
-<section id="outliers-detection" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="outliers-detection"><span class="header-section-number">6.4.1</span> Outliers Detection</h3>
+<section id="pca-requirements" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="pca-requirements"><span class="header-section-number">5.4</span> PCA Requirements</h2>
+<section id="outliers-detection" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="outliers-detection"><span class="header-section-number">5.4.1</span> Outliers Detection</h3>
 <ul>
 <li>There are some outliers in the data frame including the dependent variable.</li>
 <li>However, there are three outliers with no high leverage.</li>
@@ -369,8 +369,8 @@ Z \sim N(0,1)
 </div>
 </div>
 </section>
-<section id="leverage" class="level3" data-number="6.4.2">
-<h3 data-number="6.4.2" class="anchored" data-anchor-id="leverage"><span class="header-section-number">6.4.2</span> Leverage</h3>
+<section id="leverage" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="leverage"><span class="header-section-number">5.4.2</span> Leverage</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -390,8 +390,8 @@ Z \sim N(0,1)
 </div>
 </div>
 </section>
-<section id="removing-outliers" class="level3" data-number="6.4.3">
-<h3 data-number="6.4.3" class="anchored" data-anchor-id="removing-outliers"><span class="header-section-number">6.4.3</span> Removing Outliers</h3>
+<section id="removing-outliers" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="removing-outliers"><span class="header-section-number">5.4.3</span> Removing Outliers</h3>
 <p>After removing one outlier from the dataset, we discovered that the final results produced minimal variability. Therefore, we decided to present a model that captures all the data points’ information; thus, no observations will be removed from the final model.</p>
 <div class="cell">
 <details>
@@ -415,8 +415,8 @@ Z \sim N(0,1)
 </div>
 </div>
 </section>
-<section id="correlations" class="level3" data-number="6.4.4">
-<h3 data-number="6.4.4" class="anchored" data-anchor-id="correlations"><span class="header-section-number">6.4.4</span> Correlations</h3>
+<section id="correlations" class="level3" data-number="5.4.4">
+<h3 data-number="5.4.4" class="anchored" data-anchor-id="correlations"><span class="header-section-number">5.4.4</span> Correlations</h3>
 <ul>
 <li><p>Multicollinearity is present in the data set.</p></li>
 <li><p>Correlated features were identified using a threshold = 0.30.</p></li>
@@ -571,10 +571,10 @@ Z \sim N(0,1)
 </div>
 </section>
 </section>
-<section id="full-model-regression" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="full-model-regression"><span class="header-section-number">6.5</span> Full Model Regression</h2>
+<section id="full-model-regression" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="full-model-regression"><span class="header-section-number">5.5</span> Full Model Regression</h2>
 <ul>
-<li>The Adjusted R^2 = 99.99% is an indication of over-fitting, or bias.</li>
+<li>The Adjusted <span class="math inline">\(R^2\)</span> = 99.99% is an indication of over-fitting, or bias.</li>
 </ul>
 <div class="cell">
 <details>
@@ -949,16 +949,16 @@ waitlist worse</td>
 </div>
 </div>
 </section>
-<section id="pca-implementation" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="pca-implementation"><span class="header-section-number">6.6</span> PCA Implementation</h2>
-<section id="svd---singular-value-decomposition" class="level3" data-number="6.6.1">
-<h3 data-number="6.6.1" class="anchored" data-anchor-id="svd---singular-value-decomposition"><span class="header-section-number">6.6.1</span> SVD - Singular Value Decomposition</h3>
+<section id="pca-implementation" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="pca-implementation"><span class="header-section-number">5.6</span> PCA Implementation</h2>
+<section id="svd---singular-value-decomposition" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="svd---singular-value-decomposition"><span class="header-section-number">5.6.1</span> SVD - Singular Value Decomposition</h3>
 <p>We will focus on Singular Value Decomposition which is a classic approach for PCA analysis.</p>
 <p>Singular Value Decomposition is a factorization technique used in linear algebra to decompose a matrix into three matrices.</p>
 <ol type="1">
-<li><p>U: A matrix whose columns are the left singular vectors of the original matrix.</p></li>
-<li><p>D: A diagonal matrix whose entries are the singular values of the original matrix.</p></li>
-<li><p>V: A matrix whose columns are the right singular vectors of the original matrix.</p></li>
+<li><p><span class="math inline">\(L\)</span>: A matrix whose columns are the left singular vectors of the original matrix.</p></li>
+<li><p><span class="math inline">\(D\)</span>: A diagonal matrix whose entries are the singular values of the original matrix.</p></li>
+<li><p><span class="math inline">\(R\)</span>: A matrix whose columns are the right singular vectors of the original matrix.</p></li>
 </ol>
 <p>The SVD is closely related to the eigenvalue decomposition (EVD), which is another factorization technique used in linear algebra. While the EVD can only be applied to square matrices, the SVD can be applied to any matrix, including rectangular matrices. The SVD is also more numerically stable than the EVD, making it a preferred method for many applications.</p>
 <ul>
@@ -1220,8 +1220,8 @@ waitlist worse</td>
 </div>
 </div>
 </section>
-<section id="pca---elements" class="level3" data-number="6.6.2">
-<h3 data-number="6.6.2" class="anchored" data-anchor-id="pca---elements"><span class="header-section-number">6.6.2</span> PCA - Elements</h3>
+<section id="pca---elements" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="pca---elements"><span class="header-section-number">5.6.2</span> PCA - Elements</h3>
 <ul>
 <li><p>The values in `<strong><code>data_pca$x`</code></strong> are the coordinates of each observation in the new principal component space. These coordinates are the scores for each observation along each principal component.</p></li>
 <li><p>The eigenvectors of the covariance, or correlation matrix of the data represent the directions of maximum variance, or information in the dataset.</p></li>
@@ -1246,8 +1246,8 @@ waitlist worse</td>
 </details>
 </div>
 </section>
-<section id="loadings-of-first-two-components" class="level3" data-number="6.6.3">
-<h3 data-number="6.6.3" class="anchored" data-anchor-id="loadings-of-first-two-components"><span class="header-section-number">6.6.3</span> Loadings of First Two Components</h3>
+<section id="loadings-of-first-two-components" class="level3" data-number="5.6.3">
+<h3 data-number="5.6.3" class="anchored" data-anchor-id="loadings-of-first-two-components"><span class="header-section-number">5.6.3</span> Loadings of First Two Components</h3>
 <ul>
 <li>The loading `data_pca$rotation` are the weights assigned to each original variable for that particular principal component.</li>
 </ul>
@@ -1469,8 +1469,8 @@ waitlist worse</td>
 </div>
 </div>
 </section>
-<section id="pca---cumulative-variance" class="level3" data-number="6.6.4">
-<h3 data-number="6.6.4" class="anchored" data-anchor-id="pca---cumulative-variance"><span class="header-section-number">6.6.4</span> PCA - Cumulative Variance</h3>
+<section id="pca---cumulative-variance" class="level3" data-number="5.6.4">
+<h3 data-number="5.6.4" class="anchored" data-anchor-id="pca---cumulative-variance"><span class="header-section-number">5.6.4</span> PCA - Cumulative Variance</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -1657,8 +1657,8 @@ waitlist worse</td>
 </div>
 </div>
 </section>
-<section id="pca---number-of-principal-components" class="level3" data-number="6.6.5">
-<h3 data-number="6.6.5" class="anchored" data-anchor-id="pca---number-of-principal-components"><span class="header-section-number">6.6.5</span> PCA - Number of Principal Components</h3>
+<section id="pca---number-of-principal-components" class="level3" data-number="5.6.5">
+<h3 data-number="5.6.5" class="anchored" data-anchor-id="pca---number-of-principal-components"><span class="header-section-number">5.6.5</span> PCA - Number of Principal Components</h3>
 <ul>
 <li>We can conclude that 9 Principal Components explain 86% of the variance.</li>
 </ul>
@@ -2317,10 +2317,10 @@ waitlist worse</td>
 </div>
 </section>
 </section>
-<section id="visualization" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="visualization"><span class="header-section-number">6.7</span> Visualization</h2>
-<section id="scree-plot---cumulative-variance-explained" class="level3" data-number="6.7.1">
-<h3 data-number="6.7.1" class="anchored" data-anchor-id="scree-plot---cumulative-variance-explained"><span class="header-section-number">6.7.1</span> Scree Plot - Cumulative Variance Explained</h3>
+<section id="visualization" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="visualization"><span class="header-section-number">5.7</span> Visualization</h2>
+<section id="scree-plot---cumulative-variance-explained" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1" class="anchored" data-anchor-id="scree-plot---cumulative-variance-explained"><span class="header-section-number">5.7.1</span> Scree Plot - Cumulative Variance Explained</h3>
 <ul>
 <li><p>PC1 explains 40.8% variance.</p></li>
 <li><p>PC2 explains 9.5% variance.</p></li>
@@ -2335,8 +2335,8 @@ waitlist worse</td>
 </div>
 </div>
 </section>
-<section id="biplot" class="level3" data-number="6.7.2">
-<h3 data-number="6.7.2" class="anchored" data-anchor-id="biplot"><span class="header-section-number">6.7.2</span> Biplot</h3>
+<section id="biplot" class="level3" data-number="5.7.2">
+<h3 data-number="5.7.2" class="anchored" data-anchor-id="biplot"><span class="header-section-number">5.7.2</span> Biplot</h3>
 <p>The correlation between a variable and a principal component (PC) is used as the coordinates of the variable on the PC. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations <span class="citation" data-cites="abdi2010principal"><a href="references.html#ref-abdi2010principal" role="doc-biblioref">[2]</a></span>.</p>
 <ul>
 <li><p>PC1 is represented in black which displays the longest distance of its projection.</p></li>
@@ -2354,8 +2354,8 @@ waitlist worse</td>
 </div>
 </div>
 </section>
-<section id="correlation-circle" class="level3" data-number="6.7.3">
-<h3 data-number="6.7.3" class="anchored" data-anchor-id="correlation-circle"><span class="header-section-number">6.7.3</span> Correlation Circle</h3>
+<section id="correlation-circle" class="level3" data-number="5.7.3">
+<h3 data-number="5.7.3" class="anchored" data-anchor-id="correlation-circle"><span class="header-section-number">5.7.3</span> Correlation Circle</h3>
 <p>The plot below is also known as variable correlation plots. It shows the relationships between all variables. It can be interpreted as follow:</p>
 <ul>
 <li><p>Positively correlated variables are grouped together.</p></li>
@@ -2376,8 +2376,8 @@ waitlist worse</td>
 </div>
 </div>
 </section>
-<section id="variable-contribution" class="level3" data-number="6.7.4">
-<h3 data-number="6.7.4" class="anchored" data-anchor-id="variable-contribution"><span class="header-section-number">6.7.4</span> Variable Contribution</h3>
+<section id="variable-contribution" class="level3" data-number="5.7.4">
+<h3 data-number="5.7.4" class="anchored" data-anchor-id="variable-contribution"><span class="header-section-number">5.7.4</span> Variable Contribution</h3>
 <p>Top variable contribution for the first two principal components.</p>
 <div class="cell">
 <details>
@@ -2427,10 +2427,10 @@ waitlist worse</td>
 </div>
 </section>
 </section>
-<section id="model-building" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="model-building"><span class="header-section-number">6.8</span> Model Building</h2>
-<section id="data-splitting-into-training-test-set" class="level3" data-number="6.8.1">
-<h3 data-number="6.8.1" class="anchored" data-anchor-id="data-splitting-into-training-test-set"><span class="header-section-number">6.8.1</span> Data Splitting into Training &amp; Test set</h3>
+<section id="model-building" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="model-building"><span class="header-section-number">5.8</span> Model Building</h2>
+<section id="data-splitting-into-training-test-set" class="level3" data-number="5.8.1">
+<h3 data-number="5.8.1" class="anchored" data-anchor-id="data-splitting-into-training-test-set"><span class="header-section-number">5.8.1</span> Data Splitting into Training &amp; Test set</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -2446,8 +2446,8 @@ waitlist worse</td>
 </details>
 </div>
 </section>
-<section id="feature-scaling-standardization" class="level3" data-number="6.8.2">
-<h3 data-number="6.8.2" class="anchored" data-anchor-id="feature-scaling-standardization"><span class="header-section-number">6.8.2</span> Feature Scaling: Standardization</h3>
+<section id="feature-scaling-standardization" class="level3" data-number="5.8.2">
+<h3 data-number="5.8.2" class="anchored" data-anchor-id="feature-scaling-standardization"><span class="header-section-number">5.8.2</span> Feature Scaling: Standardization</h3>
 <ul>
 <li>Standardization ensures all features are on the same scale, and this method is less sensitive to outliers.</li>
 </ul>
@@ -2464,8 +2464,8 @@ waitlist worse</td>
 </details>
 </div>
 </section>
-<section id="applying-pca-to-training-test-sets" class="level3" data-number="6.8.3">
-<h3 data-number="6.8.3" class="anchored" data-anchor-id="applying-pca-to-training-test-sets"><span class="header-section-number">6.8.3</span> Applying PCA to Training &amp; Test sets</h3>
+<section id="applying-pca-to-training-test-sets" class="level3" data-number="5.8.3">
+<h3 data-number="5.8.3" class="anchored" data-anchor-id="applying-pca-to-training-test-sets"><span class="header-section-number">5.8.3</span> Applying PCA to Training &amp; Test sets</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -2488,8 +2488,8 @@ waitlist worse</td>
 </div>
 </section>
 </section>
-<section id="pca-full-model-8-principal-components" class="level2" data-number="6.9">
-<h2 data-number="6.9" class="anchored" data-anchor-id="pca-full-model-8-principal-components"><span class="header-section-number">6.9</span> PCA Full Model: 8 Principal Components</h2>
+<section id="pca-full-model-8-principal-components" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="pca-full-model-8-principal-components"><span class="header-section-number">5.9</span> PCA Full Model: 8 Principal Components</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -2648,8 +2648,8 @@ waitlist worse</td>
 
 </div>
 </div>
-<section id="visualization-of-uncorrelated-pca-matrix" class="level3" data-number="6.9.1">
-<h3 data-number="6.9.1" class="anchored" data-anchor-id="visualization-of-uncorrelated-pca-matrix"><span class="header-section-number">6.9.1</span> Visualization of Uncorrelated PCA Matrix</h3>
+<section id="visualization-of-uncorrelated-pca-matrix" class="level3" data-number="5.9.1">
+<h3 data-number="5.9.1" class="anchored" data-anchor-id="visualization-of-uncorrelated-pca-matrix"><span class="header-section-number">5.9.1</span> Visualization of Uncorrelated PCA Matrix</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -2663,8 +2663,8 @@ waitlist worse</td>
 </div>
 </section>
 </section>
-<section id="pca-2-principal-components" class="level2" data-number="6.10">
-<h2 data-number="6.10" class="anchored" data-anchor-id="pca-2-principal-components"><span class="header-section-number">6.10</span> PCA: 2 Principal Components</h2>
+<section id="pca-2-principal-components" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="pca-2-principal-components"><span class="header-section-number">5.10</span> PCA: 2 Principal Components</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -2787,8 +2787,8 @@ waitlist worse</td>
 
 </div>
 </div>
-<section id="principal-components-regression" class="level3" data-number="6.10.1">
-<h3 data-number="6.10.1" class="anchored" data-anchor-id="principal-components-regression"><span class="header-section-number">6.10.1</span> <strong>Principal Components Regression</strong></h3>
+<section id="principal-components-regression" class="level3" data-number="5.10.1">
+<h3 data-number="5.10.1" class="anchored" data-anchor-id="principal-components-regression"><span class="header-section-number">5.10.1</span> <strong>Principal Components Regression</strong></h3>
 <ul>
 <li>PCA is used to calculate principal components that can then be used in&nbsp;principal components regression. This type of regression is often used when&nbsp;multicollinearity&nbsp;exists between predictors in a data set.</li>
 </ul>
@@ -3030,8 +3030,8 @@ pcr(formula = y ~ PC1 + PC2, data = train_pca, validation = "CV")</code></pre>
 </div>
 </div>
 </section>
-<section id="pca-cross-validation-model" class="level3" data-number="6.10.2">
-<h3 data-number="6.10.2" class="anchored" data-anchor-id="pca-cross-validation-model"><span class="header-section-number">6.10.2</span> PCA: Cross-Validation Model</h3>
+<section id="pca-cross-validation-model" class="level3" data-number="5.10.2">
+<h3 data-number="5.10.2" class="anchored" data-anchor-id="pca-cross-validation-model"><span class="header-section-number">5.10.2</span> PCA: Cross-Validation Model</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -3106,8 +3106,8 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 </div>
 </section>
 </section>
-<section id="predictions" class="level2" data-number="6.11">
-<h2 data-number="6.11" class="anchored" data-anchor-id="predictions"><span class="header-section-number">6.11</span> Predictions</h2>
+<section id="predictions" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="predictions"><span class="header-section-number">5.11</span> Predictions</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -3246,8 +3246,8 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 
 </div>
 </div>
-<section id="prediction-metrics" class="level3" data-number="6.11.1">
-<h3 data-number="6.11.1" class="anchored" data-anchor-id="prediction-metrics"><span class="header-section-number">6.11.1</span> Prediction Metrics</h3>
+<section id="prediction-metrics" class="level3" data-number="5.11.1">
+<h3 data-number="5.11.1" class="anchored" data-anchor-id="prediction-metrics"><span class="header-section-number">5.11.1</span> Prediction Metrics</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -3299,8 +3299,8 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 </div>
 </section>
 </section>
-<section id="training-conclusion" class="level2" data-number="6.12">
-<h2 data-number="6.12" class="anchored" data-anchor-id="training-conclusion"><span class="header-section-number">6.12</span> Training Conclusion</h2>
+<section id="training-conclusion" class="level2" data-number="5.12">
+<h2 data-number="5.12" class="anchored" data-anchor-id="training-conclusion"><span class="header-section-number">5.12</span> Training Conclusion</h2>
 <p>In conclusion, this project has demonstrated the effectiveness of Principal Component Analysis (PCA) in dimension reduction with the following key points:</p>
 <ul>
 <li><p>PCA was able to reduce from 37 features down to just 2 principal components.</p></li>
@@ -3557,13 +3557,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./examples.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></span>
+      <a href="./dataset.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Dataset</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">References</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./results.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results and Conclusion</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
