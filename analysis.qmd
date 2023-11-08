@@ -411,7 +411,6 @@ fviz_eig(data_pca, addlabels = TRUE)
 
 ### Biplot
 
-The correlation between a variable and a principal component (PC) is used as the coordinates of the variable on the PC. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations [@abdi2010principal].
 
 -   PC1 is represented in black which displays the longest distance of its projection.
 
