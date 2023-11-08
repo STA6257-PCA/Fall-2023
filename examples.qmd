@@ -223,7 +223,7 @@ $$
 **The new dataset (Left singular vector)**
 
 | **First Principal Component (PC1)** | **Student 1** | **Student 2** | **Student 3** | **Student 4** |
-|:-----------------------------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+|:--------------------:|:-----------:|:-----------:|:-----------:|:-----------:|
 |                                     |  **-4.3052**  |  **3.7361**   |  **5.6928**   |  **-5.1238**  |
 
 ### Verifying and visualizing the results
@@ -266,7 +266,7 @@ fviz_eig(data_pca,
 fviz_pca_biplot(data_pca, repel = TRUE)
 ```
 
-### Summary
+### Results
 
 The first principal component of the data captures 80.7% of the variation (or information) while reducing the dimensionality of the dataset from 2 variables to 1. Small datasets such as this make the hand-calculation of principal components feasible and easy to follow, but the strengths of PCA are especially evident when software is used to enable principal component analysis for large datasets. In the next example, we demonstrate how PCA can be used with a large dataset using the R programming language.
 
@@ -471,7 +471,7 @@ pc2_contribution +
                                                      accuracy = 1))
 ```
 
-### Summary
+### Results
 
 The first principal component captures 83.9% of the variance in the data. This linear combination has relatively equal loadings for whole weight, diameter, length, shell weight, viscera weight, and shucked weight, with height and rings having lower loadings. The second principal component is mostly influenced by the variable rings which makes up over 80% of the contribution to PC2. The biplot is an effective visualization of how each variable contributes to PC1, or dimension 1 on the graph, and PC2, or dimension 2 on the graph. The length and direction of each vector represent the contribution of each variable to the principal components; whole weight and rings are the longest, representing the largest contributions to PC1 and PC2 respectively.
 

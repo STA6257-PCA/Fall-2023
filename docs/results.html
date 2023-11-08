@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Principal Component Analysis - 6&nbsp; Results and Conclusion</title>
+<title>Principal Component Analysis - 6&nbsp; Results</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -62,6 +81,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -74,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./results.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results and Conclusion</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./results.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -138,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./results.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results and Conclusion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -160,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results and Conclusion</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results</span></h1>
 </div>
 
 
@@ -175,12 +196,24 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>The Dialysis dataset consists of 55 observations of 39 variables with 1 discrete variable (States/Territories) and 38 continuous variables. Principal component analysis was performed using a singular value decomposition approach to calculate the principal components of the 38 continuous variables. Of the resulting principal components, the first PC captures 40.80% of the variance in the data, and the first two principal components capture 50.27% of the variance. The first four PCs capture 67.66% of the variance, or just over two-thirds; after the fourth PC, the variance captured by each successive PC begins to diminish relative to PCs one through four. The first ten PCs capture 88.67% of the variance, and in terms of dimensionality reduction over 90% of the information in the dataset can be explained by only 11 PCs when compared to the original 38 continuous variables.</p>
-<p>The variables which contribute the most to PC1 are expected_hospital_readmission, expected_transfusion, and expected_hospitalization, although the percent of total contribution to PC1 by any one variable is not outsized relative to the remaining variables. PC2, which is orthogonal to PC1, has relatively large contributions from the five variables measuring levels of phosphorus; patterns or trends in the data such as these can be further explored using other methodologies after being highlighted in PCA.</p>
-<p>From here, the analysis extends PCA via model building using linear regression, a technique known as principal component regression, with expected_survival used as the response variable. The first 8 principle components accounting for 84.03% of the variance are used.</p>
-<p>[in progress]</p>
+<p>The Dialysis dataset consists of 55 observations of 39 variables with 1 discrete variable (States/Territories) and 38 continuous variables. For the principal component analysis, 37 of the 38 continuous variables were used; the variable expected_survival was excluded from PCA in order to use it as a target for model building in the latter part of the analysis.</p>
+<p>Principal component analysis was performed using a singular value decomposition approach. Among the resulting principal components, the first PC captures 40.80% of the variance in the data, and the first two principal components capture 50.27% of the variance. The first four PCs capture 67.66% of the variance, or just over two-thirds; after the fourth PC, the variance captured by each successive PC begins to diminish relative to PCs one through four. The first ten PCs capture 88.67% of the variance, and in terms of dimensionality reduction over 90% of the information in the dataset can be explained by only 11 PCs when compared to the original 38 continuous variables.</p>
+<p>The variables which contribute the most to PC1 are expected_hospital_readmission, expected_transfusion, and expected_hospitalization, although the percent of total contribution to PC1 by any one variable is not outsized relative to the remaining variables. PC2, which is orthogonal to PC1, has relatively large contributions from the five variables measuring levels of phosphorus; patterns or trends in the data such as these can be further explored using other methodologies after being highlighted in PCA <span class="citation" data-cites="bro2014principal"><a href="references.html#ref-bro2014principal" role="doc-biblioref">[1]</a></span>.</p>
+<p>From here, the analysis extends PCA via model building using linear regression with a technique known as principal component regression, with expected_survival used as the response variable. The data is first split into training and testing sets; then the data is centered and scaled, after which PCA is applied to each set. The first model is created for illustrative purposes, using 8 principle components from the training set of 39 observations. The estimates and significance of each PC regressor demonstrates the differences between variance captured from the data and usefulness in a linear model; for example, PC4 is a significant regressor despite capturing less variance than PC3 in the training data.</p>
+<p>The analysis concludes by building and comparing two linear regression models using the first two prinicipal components. The first model is a straightforward linear model using the lm() function from the stats package in R <span class="citation" data-cites="lm2023ref"><a href="references.html#ref-lm2023ref" role="doc-biblioref">[2]</a></span>. The second model uses 10-fold cross-validation for a linear model using the train() and trainControl() functions from the caret package in R <span class="citation" data-cites="caret2023ref"><a href="references.html#ref-caret2023ref" role="doc-biblioref">[3]</a></span>. Both models produce an <span class="math inline">\(R^2\)</span> above 96% and a predicted <span class="math inline">\(R^2\)</span> above 95% with a 1% advantage on the cross-validation model. Although the interpretations of the regressors for these PCA models is different than those of a linear regression on the original variables, the lower dimensionality of the data may be desirable as a more simple model which still captures a large portion of the variance in the original data.</p>
 
 
+<div id="refs" class="references csl-bib-body" role="list" style="display: none">
+<div id="ref-bro2014principal" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">R. Bro and A. K. Smilde, <span>“Principal component analysis,”</span> <em>Analytical methods</em>, vol. 6, no. 9, pp. 2812–2831, 2014.</div>
+</div>
+<div id="ref-lm2023ref" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">R Core Team, <span>“Lm: Fitting linear models.”</span> R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm</a>. [Accessed: Nov. 08, 2023]</div>
+</div>
+<div id="ref-caret2023ref" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Kuhn and Max, <span>“Building predictive models in r using the caret package,”</span> <em>Journal of Statistical Software</em>, vol. 28, no. 5, pp. 1–26, 2008, doi: <a href="https://doi.org/10.18637/jss.v028.i05">10.18637/jss.v028.i05</a>. Available: <a href="https://www.jstatsoft.org/index.php/jss/article/view/v028i05">https://www.jstatsoft.org/index.php/jss/article/view/v028i05</a></div>
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

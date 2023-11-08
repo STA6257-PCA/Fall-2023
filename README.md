@@ -1,3 +1,3 @@
 # Fall-2023
 
-Hey team! Welcome to our GitHub organization page.
+This GitHub hosts the PCA project authored by Gail Han, Hector Gavilanes, and Michael Mezzano for STA6257 at the University of West Florida in the Fall 2023 semester.
