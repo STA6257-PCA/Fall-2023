@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Principal Component Analysis - 6&nbsp; Results</title>
+<title>Principal Component Analysis - 6&nbsp; Discussion and Results</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,7 +95,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./results.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./results.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Discussion and Results</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -159,7 +159,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./results.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Discussion and Results</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -181,7 +181,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Discussion and Results</span></h1>
 </div>
 
 
@@ -196,7 +196,10 @@ div.csl-indent {
 
 </header>
 
-<p>The Dialysis dataset consists of 55 observations of 39 variables with 1 discrete variable (States/Territories) and 38 continuous variables. For the principal component analysis, 37 of the 38 continuous variables were used; the variable expected_survival was excluded from PCA in order to use it as a target for model building in the latter part of the analysis.</p>
+<p>Principal Component Analysis (PCA) is a foundational multivariate analysis technique that has been widely employed to extract essential information from intricate multivariate datasets and effectively reduce dimensionality. Due to its simplicity and versatility, PCA has become one of the widely adopted tools for understanding and exploring data features in a multivariate dataset. This approach leverages singular value decomposition to restructure datasets and facilitates subsequent statistical analysis. By doing so, PCA simplifies complexity, eliminating superfluous details and redundant information arising from the original dataset. The outcome is a set of principal components that capture most of the variance explaining the original variables. To accomplish this, PCA first converts the dataset into a covariance matrix and then employs singular value decomposition to identify eigenvalues and eigenvectors, representing the loadings of the newly generated principal components. These components can typically account for over 70-80% of the original variables’ variances.</p>
+<p>PCA’s importance in data analysis is underscored by its adaptability to various scenarios and data types, including binary, ordinal, compositional, and discrete data. Moreover, the PCA algorithm has proven effective in reducing the dimensions of vast datasets with high accuracy, significantly improving classification tasks. It plays a crucial role in exploratory data analysis and preliminary data processing, acting as a feature extraction and dimensionality reduction tool. One of its main benefits is its ability to mitigate multicollinearity issues, which can otherwise lead to biased results in statistical analyses.</p>
+<p>Despite its numerous advantages, PCA does come with certain limitations. For instance, it is sensitive to the presence of outliers, which can distort the results and compromise its effectiveness. Furthermore, the new features or components generated through PCA are not readily interpretable, making it challenging to explain their meaning in a straightforward manner. Nonetheless, PCA remains a pivotal technique in data analysis, offering a powerful means to navigate complex datasets and uncover their underlying structures.</p>
+<p>The Dialysis dataset used in this application of PCA consists of 55 observations of 39 variables with 1 discrete variable (States/Territories) and 38 continuous variables. For the principal component analysis, 37 of the 38 continuous variables were used; the variable expected_survival was excluded from PCA in order to use it as a target for model building in the latter part of the analysis.</p>
 <p>Principal component analysis was performed using a singular value decomposition approach. Among the resulting principal components, the first PC captures 40.80% of the variance in the data, and the first two principal components capture 50.27% of the variance. The first four PCs capture 67.66% of the variance, or just over two-thirds; after the fourth PC, the variance captured by each successive PC begins to diminish relative to PCs one through four. The first ten PCs capture 88.67% of the variance, and in terms of dimensionality reduction over 90% of the information in the dataset can be explained by only 11 PCs when compared to the original 38 continuous variables.</p>
 <p>The variables which contribute the most to PC1 are expected_hospital_readmission, expected_transfusion, and expected_hospitalization, although the percent of total contribution to PC1 by any one variable is not outsized relative to the remaining variables. PC2, which is orthogonal to PC1, has relatively large contributions from the five variables measuring levels of phosphorus; patterns or trends in the data such as these can be further explored using other methodologies after being highlighted in PCA <span class="citation" data-cites="bro2014principal"><a href="references.html#ref-bro2014principal" role="doc-biblioref">[1]</a></span>.</p>
 <p>From here, the analysis extends PCA via model building using linear regression with a technique known as principal component regression, with expected_survival used as the response variable. The data is first split into training and testing sets; then the data is centered and scaled, after which PCA is applied to each set. The first model is created for illustrative purposes, using 8 principle components from the training set of 39 observations. The estimates and significance of each PC regressor demonstrates the differences between variance captured from the data and usefulness in a linear model; for example, PC4 is a significant regressor despite capturing less variance than PC3 in the training data.</p>
