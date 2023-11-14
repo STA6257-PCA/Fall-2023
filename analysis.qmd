@@ -159,6 +159,10 @@ It is important to Mean-Center the data prior to PCA model building to ensure th
 -   We can rewrite this as:
 
     $$
+    Z = \frac{{x - \mu}}{{\sigma}}
+    $$
+
+-   $$
     Z \sim N(0,1)
     $$
 

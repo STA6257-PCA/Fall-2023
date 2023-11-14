@@ -130,7 +130,7 @@
     "href": "analysis.html#feature-scaling",
     "title": "5  Analysis",
     "section": "5.3 Feature Scaling",
-    "text": "5.3 Feature Scaling\n\n5.3.1 Standardization\nIt is important to Mean-Center the data prior to PCA model building to ensure the first Principal Component is in the direction of maximum variance.\n\nStandardization produces Mean, \\(\\mu\\)= 0, and Variance, \\(\\sigma\\) = 1.\nWe can rewrite this as:\n\\[\nZ \\sim N(0,1)\n\\]\n\n\n\nCode\n# Find the index position of the target feature \ntarget_name &lt;- \"expected_survival\"\ntarget_index &lt;- grep(target_name, \n                     colnames(train_data))\n\n\n\n\nCode\n# Standardization Numerical Features\ntrain_data_sc &lt;- scale(train_data[, -target_index])"
+    "text": "5.3 Feature Scaling\n\n5.3.1 Standardization\nIt is important to Mean-Center the data prior to PCA model building to ensure the first Principal Component is in the direction of maximum variance.\n\nStandardization produces Mean, \\(\\mu\\)= 0, and Variance, \\(\\sigma\\) = 1.\nWe can rewrite this as:\n\\[\nZ = \\frac{{x - \\mu}}{{\\sigma}}\n\\]\n\\[\nZ \\sim N(0,1)\n\\]\n\n\n\nCode\n# Find the index position of the target feature \ntarget_name &lt;- \"expected_survival\"\ntarget_index &lt;- grep(target_name, \n                     colnames(train_data))\n\n\n\n\nCode\n# Standardization Numerical Features\ntrain_data_sc &lt;- scale(train_data[, -target_index])"
   },
   {
     "objectID": "analysis.html#pca-requirements",
