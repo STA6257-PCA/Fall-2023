@@ -266,7 +266,8 @@ kbl(high_corr_df, caption = "Highly Correlated Features") %>%
 
 ## Full Model Regression
 
--   The Adjusted $R^2$ = 99.99% is an indication of over-fitting, or bias.
+-   The Adjusted $R^2$ = 99.99% is an indication of overfitting, or high variance.
+-   This dataset is suitable to apply PCA to find the adequate variance balance.
 
 ```{r}
 set.seed(my_seed)
