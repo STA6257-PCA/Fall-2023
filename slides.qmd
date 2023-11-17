@@ -1,0 +1,254 @@
+---
+#title: "Principal Component Analysis (PCA)"
+#author: "Hector Gavilanes, Gail Han, Michael Mezzano"
+format:
+  revealjs: 
+    theme: serif
+    transition: convex
+    embed-resources: true
+editor: visual
+execute:
+  echo: false
+  warning: false
+---
+
+### 
+
+![](images/01-Preface.jpg){fig-align="center"}
+
+# Authors
+
+</br>
+
+|                     |                           |
+|---------------------|---------------------------|
+| Hector R. Gavilanes | Chief Information Officer |
+| Gail Han            | Chief Operating Officer   |
+| Michael Mezzano     | Chief Technology Officer  |
+
+</br>
+
+::: {#date style="text-align: right;"}
+University of West Florida
+
+November 2023
+:::
+
+# What is PCA?
+
+-   Principal Component Analysis (PCA)
+-   Dimensionality reduction technique.
+-   Purpose:
+    -   Simplification of complex datasets.
+    -   Preservation of essential information.
+
+# Why Use PCA?
+
+-   Reducing Dimensionality: Simplify high-dimensional data.
+-   Visualizing Data: Help visualize data in lower dimensions.
+-   Noise Reduction: Eliminate less relevant features.
+-   Improved Model Performance: Enhance machine learning efficiency.
+
+# Methods
+
+-   Data Matrix: Start with a matrix X of size n x m.
+-   Centering: Subtract the mean of each feature.
+-   Covariance Matrix: Calculate the covariance matrix of the centered data.
+-   Select Principal Components: Choose top eigenvectors.
+
+# Singular Value Decomposition (SVD)
+
+-   Eigenvectors: Represent directions of maximum variance.
+-   Eigenvalues: Indicate the variance explained by each eigenvector.
+-   Sorting: Sort eigenvalues in descending order to select the most significant components.
+
+# Variance Explained
+
+-   Explained Variance Ratio: Calculate the ratio of each eigenvalue.
+-   Cumulative Variance: Plot cumulative explained variance to determine components to retain.
+
+# 
+
+::: columns
+::: {.column width="40%"}
+## Objective
+
+-   Weighted Combination
+
+-   Maximal Variance Components
+:::
+
+::: {.column width="60%"}
+### High Variance vs
+
+### Low Variance
+
+![](images/01-Preface.jpg){width="Infinity"}
+:::
+:::
+
+# Dimensionality Reduction
+
+-   Unsupervised Learning.
+-   Reduce Dimensions: Transform data by multiplying with selected eigenvectors.
+-   New Feature Space: Data exists in a lower-dimensional feature space.
+
+# Visualization
+
+-   Data Projection: Visualize data in the reduced feature space.
+-   Scatterplots: Use scatterplots to visualize data distribution.
+
+# Assumptions and Limitations
+
+-   Interpretability: Loss of interpretability in transformed features.
+-   Loss of Information: Reducing dimensionality may result in some information loss.
+-   Scaling: Data scaling is important to avoid feature dominance.
+
+# Applications of PCA
+
+-   Image Compression: Reduce image size while preserving details.
+-   Face Recognition: Reduce facial feature dimensions for classification.
+-   Anomaly Detection: Identify anomalies in large datasets.
+-   Bioinformatics: Analyze gene expression data.
+
+# Dataset
+
+::: panel-tabset
+### Overview
+
+-   39 variables, or features.
+
+-   55 Observations.
+
+### Description
+
+-   Administered to In-Center Hemodialysis Survey.
+
+-   State-level averages.
+
+-   Dialysis Quality measures.
+
+### Source
+
+-   Released on July 19, 2023.
+
+-   [data.cms.gov.](https://data.cms.gov/provider-data/dataset/2fpu-cgbb)
+:::
+
+::: footer
+<div>
+
+Data Obtained from "Consumer Assessment of
+
+Healthcare Providers and Systems (CAHPS)."
+
+</div>
+:::
+
+# Dataset Description {style="text-align:center;"}
+
+![](images/dataset_files/01-overall-description.png){fig-align="center" width="720"}
+
+# Variables / Features
+
+::: panel-tabset
+### Index
+
+-   "State," 50 states & 6 U.S. territories.
+-   Categorical feature removed from model.
+
+### Response
+
+-   24 features: patient care quality ratings.
+-   Transfusions, fistula usage, infections,
+-   Hospitalizations, incident waitlisting, & readmissions.
+
+### Dialysis
+
+-   14 features: dialysis adequacy (Kt/V), type of dialysis,
+-   Serum phosphorus level, & average hemoglobin level,
+-   Normalized protein catabolic rate (nPCR), hypercalcemia level.
+:::
+
+# Dataset Selection Rationale
+
+-   Driven by multicollinearity.
+
+-   Features less significant in explaining variability.
+
+-   All variables are numeric
+
+-   Index (categorical) variable.
+
+# Data Preparation
+
+::: {.panel-tabset style="font-size: 85%;"}
+### Editing
+
+-   Efficient removal of white spaces in the dataset.
+
+-   Editing variable names to enhance readability and meaningful.
+
+### Example
+
+`Original:` "Percentage.Of.Adult..Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL."
+
+`Edited:` "hypercalcemia_calcium \> 10.2Mg."
+:::
+
+# Missing Values {style="text-align:center;"}
+
+![](images/dataset_files/02-missing_observations.png){fig-align="center" width="800"}
+
+-   34 missing values.
+
+-   Imputation of missing values using the $Mean$ ($\mu$)
+
+# Distribution {style="text-align:center;"}
+
+![](images/dataset_files/03-distribution.png){fig-align="center"}
+
+-   Normality is not assumed.
+
+# QQ-Plot of Residuals {style="text-align:center;"}
+
+![](images/dataset_files/04-outliers.png){fig-align="center"}
+
+-   Outliers are present through the entire dataset
+
+# Standardization {style="text-align:center;"}
+
+-   Mean ($\mu$=0); Variance ($\sigma$= 1)
+
+    $$
+    Z = \frac{{ x - \mu }}{{ \sigma }}
+    $$
+
+    $$
+    Z \sim N(0,1)
+    $$
+
+# Outliers & Leverage
+
+# PCA in Machine Learning
+
+-   Feature Selection: Use PCA to select relevant features.
+-   Model Training: Enhance model performance by reducing dimensionality.
+-   Preprocessing: Standardize and normalize data before applying PCA.
+
+# Conclusion
+
+-   Summary: PCA is an unsupervised learning technique for dimensionality reduction and data visualization.
+-   Key Takeaways: Understand eigenvectors, eigenvalues, and explained variance.
+
+# Questions
+
+-   Open the floor for questions from the audience.
+
+# Thank You
+
+-   Contact Information
+
+# References
+
+-   List of sources and references used in the presentation.
