@@ -1,5 +1,5 @@
 ---
-#title: "Principal Component Analysis (PCA)"
+#title: "Understanding Principal Component Analysis (PCA)"
 #author: "Hector Gavilanes, Gail Han, Michael Mezzano"
 format:
   revealjs: 
@@ -113,62 +113,44 @@ November 2023
 
 # Dataset
 
-::: panel-tabset
+::: {.panel-tabset style="font-size: 85%;"}
 ### Overview
 
 -   39 variables, or features.
-
--   55 Observations.
+-   56 observations.
+-   State-level averages.
+-   "State" represents 50 states & 6 U.S. territories.
 
 ### Description
 
 -   Administered to In-Center Hemodialysis Survey.
-
--   State-level averages.
-
 -   Dialysis Quality measures.
 
-### Source
+### Patient Care
 
--   Released on July 19, 2023.
-
--   [data.cms.gov.](https://data.cms.gov/provider-data/dataset/2fpu-cgbb)
-:::
-
-::: footer
-<div>
-
-Data Obtained from "Consumer Assessment of
-
-Healthcare Providers and Systems (CAHPS)."
-
-</div>
-:::
-
-# Dataset Description {style="text-align:center;"}
-
-![](images/dataset_files/01-overall-description.png){fig-align="center" width="720"}
-
-# Variables / Features
-
-::: panel-tabset
-### Index
-
--   "State," 50 states & 6 U.S. territories.
--   Categorical feature removed from model.
-
-### Response
-
--   24 features: patient care quality ratings.
+-   24 features: patient care quality ratings,
 -   Transfusions, fistula usage, infections,
--   Hospitalizations, incident waitlisting, & readmissions.
+-   Hospitalizations, incident waitlisting & readmissions.
 
 ### Dialysis
 
 -   14 features: dialysis adequacy (Kt/V), type of dialysis,
 -   Serum phosphorus level, & average hemoglobin level,
 -   Normalized protein catabolic rate (nPCR), hypercalcemia level.
+
+### Source
+
+-   Released on July 19, 2023.
+-   [data.cms.gov.](https://data.cms.gov/provider-data/dataset/2fpu-cgbb)
 :::
+
+# Dataset Summary {style="text-align:center;"}
+
+![](images/dataset_files/01-overall-description.png){fig-align="center" width="720"}
+
+-   PCA is designed for continuous numerical data.
+
+-   Categorical index feature removed from model.
 
 # Dataset Selection Rationale
 
@@ -178,7 +160,7 @@ Healthcare Providers and Systems (CAHPS)."
 
 -   All variables are numeric
 
--   Index (categorical) variable.
+-   Categorical Index variable.
 
 # Data Preparation
 
@@ -218,7 +200,7 @@ Healthcare Providers and Systems (CAHPS)."
 
 # Standardization {style="text-align:center;"}
 
--   Mean ($\mu$=0); Variance ($\sigma$= 1)
+-   Mean ($\mu$=0); Standard Deviation ($\sigma$= 1)
 
     $$
     Z = \frac{{ x - \mu }}{{ \sigma }}
@@ -229,6 +211,24 @@ Healthcare Providers and Systems (CAHPS)."
     $$
 
 # Outliers & Leverage
+
+::: columns
+::: {.column width="50%" style="font-size: 85%;"}
+-   3 Outliers
+
+-   No leverage
+
+![](images/analysis_files/unnamed-chunk-12-1.png)
+:::
+
+::: {.column width="50%" style="font-size: 85%;"}
+-   Minimal difference.
+
+-   No observations removed.
+
+![](images/analysis_files/unnamed-chunk-13-1.png)
+:::
+:::
 
 # PCA in Machine Learning
 
