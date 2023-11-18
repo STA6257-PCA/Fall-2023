@@ -154,7 +154,7 @@ str(train_data)
 
 It is important to Mean-Center the data prior to PCA model building to ensure the first Principal Component is in the direction of maximum variance.
 
--   Standardization produces Mean, $\mu$= 0, and Variance, $\sigma$ = 1.
+-   Standardization produces Mean, $\mu$= 0, and Standard Deviation, $\sigma$ = 1.
 
 -   We can rewrite this as:
 
@@ -162,7 +162,7 @@ It is important to Mean-Center the data prior to PCA model building to ensure th
     Z = \frac{{x - \mu}}{{\sigma}}
     $$
 
--   $$
+    $$
     Z \sim N(0,1)
     $$
 
@@ -266,7 +266,7 @@ kbl(high_corr_df, caption = "Highly Correlated Features") %>%
 
 ## Full Model Regression
 
--   The Adjusted $R^2$ = 99.99% is an indication of overfitting, or high variance.
+-   The Adjusted $R^2$ = 99.99% is an indication of over-fitting, or high variance.
 -   This dataset is suitable to apply PCA to find the adequate variance balance.
 
 ```{r}

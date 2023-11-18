@@ -24,7 +24,7 @@ For instance, "hypercalcemia_calcium \> 10.2Mg", was used in replacement of Perc
 
 ## Statistical Summary
 
-The dataset contains 55 observations of 39 variables with 1 discrete variable (States/Territories) and 38 continuous variables. 13 observations have at least 1 missing record, with 34 missing observations in total. Most missing data in the dataset occurs in variables relating to pediatric patient data.
+The dataset contains 56 observations of 39 variables with 1 discrete variable (States/Territories) and 38 continuous variables. 13 observations have at least 1 missing record, with 34 missing observations in total. Most missing data in the dataset occurs in variables relating to pediatric patient data.
 
 ```{r, warning = FALSE, message = FALSE, echo=FALSE}
 # Clear environment

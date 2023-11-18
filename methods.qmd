@@ -26,7 +26,7 @@ In this approach to PCA, SVD is used to extract the most information (variance) 
 
 ### Centering and Scaling
 
-Let our dataset be represented by the $N \times P$ matrix $X$ comprised of $N$ observations of $P$ variables in the data set, where any element $x_{np}$ represents the $n$th observation of variable $p$ in the dataset. The matrix $X$ has rank $A$ where $A \leq min\{N, P\}$. The data in $X$ is centered and scaled, such that the mean of each column $X_p$ is 0 and every $x_{np}$ has been standardized with unit variance. We can represent this with the formula:
+Let our dataset be represented by the $N \times P$ matrix $X$ comprised of $N$ observations of $P$ variables in the data set, where any element $x_{np}$ represents the $n$th observation of variable $p$ in the dataset. The matrix $X$ has rank $A$ where $A \leq min\{N, P\}$. The data in $X$ is centered and scaled, such that the mean of each column $X_p$ is 0 and every $x_{np}$ has been standardized with scaled unit variance. We can represent this with the formula:
 
 $$
 z_{np} = \frac{x_{np} - \bar{x}_{p}}{{\sigma_{p}}}
