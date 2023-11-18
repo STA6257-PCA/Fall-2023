@@ -10,7 +10,7 @@ rm(list = ls())
 library(tidyverse)    
 library(caTools)
 library(caret)
-library(corrplot)     # plot correlation matrix
+library(corrplot)     # plot correlogram
 library(Metrics)      # calculate MAE, MSE, RMSE, R^2
 library(pls)          # PC regression
 library(e1071)        # to fit transform PCA  
@@ -243,7 +243,7 @@ ols_plot_resid_lev(no_outliers_model)
 
 -   Multicollinearity is present in the data set.
 
--   Correlated features were identified using a threshold = 0.30.
+-   28 Correlated features were identified using a threshold = 0.30.
 
 ```{r}
 # Calculate correlations and round to 2 digits
@@ -262,6 +262,11 @@ high_corr_df <- data.frame(
 # table format
 kbl(high_corr_df, caption = "Highly Correlated Features") %>%
   kable_paper("hover")
+```
+
+```{r}
+corrplot::corrplot(corr_matrix, type = "full", tl.pos = "n")
+
 ```
 
 ## Full Model Regression
