@@ -12,7 +12,7 @@ In this illustration, we have access to the two grades of four students in a sta
 | **Student 2** | **8**           | **4**              |
 | **Student 3** | **13**          | **5**              |
 | **Student 4** | **7**           | **14**             |
-| **Mean**      | $\bar{x}$=8     | $\bar{y}$=8.5      |
+| **Mean**      | $\bar{x}$ = **8**     | $\bar{y}$ = **8.5**      |
 
 ### Calculate the covariance matrix $M$
 
@@ -154,14 +154,6 @@ $$
 \end{bmatrix} 
 $$
 
-|               | **Basic Stats** | **Advanced Stats** |
-|---------------|-----------------|--------------------|
-| **Student 1** | **4**           | **11**             |
-| **Student 2** | **8**           | **4**              |
-| **Student 3** | **13**          | **5**              |
-| **Student 4** | **7**           | **14**             |
-| **Mean**      | $\bar{x}$=8     | $\bar{y}$=8.5      |
-
 ### Derive The new dataset
 
 **First Principal Component (PC1)**
@@ -218,27 +210,32 @@ P_{14}= e_1^T \times
 \end{bmatrix} = -5.1238
 $$
 
-<!-- -->
+<br>
 
 **The new dataset (Left singular vector)**
 
-| **First Principal Component (PC1)** | **Student 1** | **Student 2** | **Student 3** | **Student 4** |
-|:--------------------:|:-----------:|:-----------:|:-----------:|:-----------:|
-|                                     |  **-4.3052**  |  **3.7361**   |  **5.6928**   |  **-5.1238**  |
+|         | **Student 1** | **Student 2** | **Student 3** | **Student 4** |
+|:-------:|:-------------:|:-------------:|:-------------:|:-------------:|
+| **PC1** |  **-4.3052**  |  **3.7361**   |  **5.6928**   |  **-5.1238**  |
 
 ### Verifying and visualizing the results
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 #Load Libraries
 library(factoextra)
+library(tidyverse)
+library(kableExtra)
+library(dplyr)
 
 #Import Example Data
 data = data.frame(Student = 1:4, BasicStats=c(4,8,13,7), AdvancedStats=c(11,4,5,14))
 #dim(data)
 
 #Structure of Data
-str(data) #check variable types which matters in PCA 
+#check variable types which matters in PCA 
 #summary(data) #details about variable scales and missing values
+kbl(data, align = 'l', caption = "Dataframe structure") %>%
+  kable_paper("hover")
 
 #Based on Info from Summary: handle missing values and exclude categorical variable
 #na.omit(data) No missing values here
@@ -248,7 +245,9 @@ data_sample = data[,-c(1)] #exclude categorical variable
 data_pca = prcomp(data_sample, scale = TRUE)
 
 #Summary of Analysis
-summary(data_pca)
+sum_pca = as.data.frame(summary(data_pca)$importance)
+kbl(sum_pca, align= 'l', caption = "Importance of components") %>%
+  kable_paper("hover")
 
 #Elements of PCA Object (all outputs of PCA analysis)
 #names(data_pca)
@@ -283,31 +282,21 @@ First, the appropriate and necessary libraries are loaded in R. These provide th
 library(tidyverse)  # for handling missing values
 library(corrplot) # for plotting the correlation matrix
 library(factoextra) # PCA plots
+library(summarytools) #produces summary stats
 ```
 
 ### Data Preparation
 
-```{r}
-# clear environment
-rm(list = ls())
-
-# Load dataset
-abalone <- read.csv('./abalone/abalone.csv')
-
-# Dataset structure
-str(abalone)
-
-# Missing values
-colSums(is.na(abalone))
-```
-
 The dataset contains 9 variables with 1 categorical variable and 8 numeric variables. The dataset contains no missing values. For this example in applying principal component analysis, we exclude the categorical variable 'Sex' and focus the PCA on the numerical dimensions of the Abalone. For analyses involving a mix of numeric and non-numeric variables other factor analysis techniques can be used, such as factor analysis of mixed data @pages2014multiple.
 
 ```{r}
-# Select only the numeric variables 
-abalone <- abalone %>% select(where(is.numeric))
+# Load dataset
+abalone <- read.csv('./abalone/abalone.csv')
 
-summary(abalone)
+data_desc = descr(abalone, plain.ascii = FALSE, headings = FALSE) # descriptive statistics for the dataset
+
+kbl(data_desc, align= 'l') %>%
+  kable_paper("hover")
 ```
 
 The summary statistics show the differences in measurement between variables, with some variables such as diameter and viscera weight having small ranges and others, namely rings, having relatively large ranges. For this reason, scaling of the variables is a crucial step in PCA to ensure results accurately capture the variance in the data.
@@ -317,10 +306,16 @@ The summary statistics show the differences in measurement between variables, wi
 Standardization ensures all variables, also called features, are on the same scale, and the scale function allows us to center the data to a mean of 0 and variance of 1. This ensures no single feature has an outsized effect during the principal component analysis.
 
 ```{r}
+# Select only the numeric variables 
+abalone = select_if(abalone, is.numeric)
+
 # Standardization of numerical features
 abalone_sc <- scale(abalone, center = TRUE, scale = TRUE)
 
-summary(abalone_sc)
+sc_sum = summary(abalone_sc)
+
+kbl(sc_sum, align= 'l') %>%
+  kable_paper("hover")
 ```
 
 Viewing the data after scaling and centering, values greater than 3 or less than -3 represent outliers more than 3 standard deviations from the mean. Based on the ranges of the variables, we should view a boxplot of the data to further investigate.
@@ -334,10 +329,13 @@ boxplot(abalone_sc, col = "steelblue", main = "Visualization of scaled and cente
 Are there enough outliers to be a cause for concern? We can see how many lie outside of the third standard deviation of the data for each variable.
 
 ```{r}
-print(colSums(abalone_sc > 3 | abalone_sc < -3))
+outs = colSums(abalone_sc > 3 | abalone_sc < -3)
+
+kbl(outs, col.names = ('Outliers'), align = 'l') %>%
+  kable_paper("hover")
 ```
 
-Of the 4177 observations, at most 62 in a single variable (rings) are outliers. The tolerance for outliers will differ depending on the investigation, but for our illustrative purposes this number is well within tolerance for principal component analysis.
+Of the 4177 observations, at most 62 in a single variable (Rings) are outliers. The tolerance for outliers will differ depending on the investigation, but for our illustrative purposes this number is well within tolerance for principal component analysis.
 
 Lastly, we can investigate the correlation among the variables. PCA is best used with linearly correlated data. If the data is not correlated, the results of PCA will be less meaningful.
 
@@ -356,10 +354,12 @@ The prcomp() function @prcomp2023ref performs principal component analysis on a 
 ```{r}
 # Apply PCA using prcomp()
 abalone_pca <- prcomp(abalone_sc)
-summary(abalone_pca)
-```
 
-#### PCA - Cumulative Variance and Number of Principal Components
+sum_pca = as.data.frame(summary(abalone_pca)$importance)
+
+kbl(sum_pca, align= 'l', caption = "Importance of components") %>%
+  kable_paper("hover")
+```
 
 ```{r}
 # Principal Component scores vector
@@ -388,9 +388,6 @@ num_components <- which(cumulative_variance_explained >= 0.92)[1]
 
 # Select the desired number of principal components
 selected_pcs <- pc_scores[, 1:num_components]
-
-# Display cumulative variance
-cumulative_variance_explained
 ```
 
 The first 2 principal components alone explain 92% of the variance in the data.
@@ -404,8 +401,9 @@ The loading are the weights assigned to each variable for that particular princi
 loadings_first_two_components <- eigenvector[, 1:2]
 
 # Print the loadings for the first two principal components
-print("Loadings for the first two principal components:")
-print(loadings_first_two_components)
+
+kbl(loadings_first_two_components, align= 'l', caption = "Loadings for the first two principal components") %>%
+  kable_paper("hover")
 ```
 
 #### PCA - Elements
