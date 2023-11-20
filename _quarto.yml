@@ -4,8 +4,11 @@ project:
 
 book:
   title: "Principal Component Analysis"
-  author: "Hector Gavilanes, Gail Han, Michael T. Mezzano"
-  date: "11/17/2023"
+  author:
+    - Hector Gavilanes, Chief Information Officer
+    - Gail Han, Chief Operating Officer
+    - Michael Mezzano, Chief Technology Officer
+  date: "11/19/2023"
   chapters:
     - index.qmd
     - intro.qmd

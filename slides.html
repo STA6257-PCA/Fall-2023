@@ -1197,21 +1197,116 @@ margin-right: 0; }
 
 <section id="methods" class="title-slide slide level1 center">
 <h1>Methods</h1>
+<div class="panel-tabset" style="font-size: 85%;">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-1-1">Assumptions</a></li><li><a href="#tabset-1-2">Preprocessing</a></li><li><a href="#tabset-1-3">Eigenvectors</a></li><li><a href="#tabset-1-4">Covariance Matrix</a></li></ul>
+<div class="tab-content" style="font-size: 85%;">
+<div id="tabset-1-1">
 <ul>
-<li>Data Matrix: Start with a matrix X of size n x m.</li>
-<li>Centering: Subtract the mean of each feature.</li>
-<li>Covariance Matrix: Calculate the covariance matrix of the centered data.</li>
-<li>Select Principal Components: Choose top eigenvectors.</li>
+<li>Data matrix <span class="math inline">\(X\)</span> of size <span class="math inline">\(N\)</span> x <span class="math inline">\(P\)</span>.</li>
+<li>Data is linearly related.</li>
+<li>Continuous, normally distributed data.</li>
+<li>Initial data distribution does not truly matter.</li>
+<li>Ideally, variables are similar in scale and free from extreme outliers.</li>
 </ul>
+</div>
+<div id="tabset-1-2">
+<ul>
+<li>Missing data: Imputation or removal of observations.</li>
+<li>Centering and scaling: Transform variables to a mean of 0 and a standard deviation of 1. <span class="math display">\[
+z_{np} = \frac{x_{np} - \bar{x}_{p}}{{\sigma_{p}}}
+\]</span></li>
+</ul>
+</div>
+<div id="tabset-1-3">
+<ul>
+<li>Nonzero vector whose direction is unaffected by a linear transformation.</li>
+<li>An eigenvector is scaled by factor <span class="math inline">\(\lambda\)</span>, the eigenvalue.</li>
+<li>‘Inherent components’ of the covariance matrix which contain the most information.</li>
+<li>Each principal component is an eigenvector of the covariance matrix.</li>
+</ul>
+</div>
+<div id="tabset-1-4">
+<ul>
+<li>Covariance: A measure of how two random variables vary together. <span class="math display">\[
+Cov(x,y) = \frac{\Sigma(x_i-\bar{x})(y_i-\bar{y})}{N}
+\]</span></li>
+<li>Covariance Matrix: Square matrix which gives the covariance values of each pair of variables in the dataset.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 
-<section id="singular-value-decomposition-svd" class="title-slide slide level1 center">
-<h1>Singular Value Decomposition (SVD)</h1>
+<section id="finding-the-principal-components" class="title-slide slide level1 center">
+<h1>Finding the Principal Components</h1>
+<div class="panel-tabset" style="font-size: 85%;">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-2-1">Basis</a></li><li><a href="#tabset-2-2">Eigendecomposition</a></li><li><a href="#tabset-2-3">Result</a></li><li><a href="#tabset-2-4">Principal Components</a></li></ul>
+<div class="tab-content" style="font-size: 85%;">
+<div id="tabset-2-1">
+<ul>
+<li>Find the linear combination of the columns of <span class="math inline">\(X\)</span> which maximizes variance.</li>
+<li>Let <span class="math inline">\(a\)</span> be a vector of constants <span class="math inline">\(a_1, a_2, a_3, …, a_p\)</span> such that <span class="math inline">\(Xa\)</span> represents the linear combination which maximizes variance.</li>
+</ul>
+</div>
+<div id="tabset-2-2">
+<ul>
+<li>The variance of <span class="math inline">\(Xa\)</span> is represented by <span class="math inline">\(var(Xa) = a^TSa\)</span>, with the covariance matrix <span class="math inline">\(S\)</span>.</li>
+<li>Finding the <span class="math inline">\(Xa\)</span> with maximum variance equates to finding the vector <span class="math inline">\(a\)</span> which maximizes the quadratic <span class="math inline">\(a^TSa\)</span>, where <span class="math inline">\(a^Ta = 1\)</span>.</li>
+</ul>
+</div>
+<div id="tabset-2-3">
+<ul>
+<li><span class="math inline">\(a\)</span> is a unit-norm eigenvector with eigenvalue <span class="math inline">\(\lambda\)</span> of the covariance matrix <span class="math inline">\(S\)</span>.</li>
+<li>The largest eigenvalue of <span class="math inline">\(S\)</span> is <span class="math inline">\(\lambda_1\)</span> with the eigenvector <span class="math inline">\(a_1\)</span>, which we can define for any eigenvector <span class="math inline">\(a\)</span>: <span class="math display">\[
+var(Xa) = a^TSa = \lambda a^Ta = \lambda
+\]</span></li>
+</ul>
+</div>
+<div id="tabset-2-4">
+<ul>
+<li>Impose the restriction of orthogonality to the coefficient vectors of <span class="math inline">\(S\)</span>.</li>
+<li>The eigenvectors of <span class="math inline">\(S\)</span> represent the solutions to finding <span class="math inline">\(Xa_k\)</span> which maximize variance while minimizing correlation with prior linear combinations.</li>
+<li><span class="math inline">\(Xa_k\)</span> are the principal components of the dataset with eigenvectors <span class="math inline">\(a_k\)</span> and eigenvalues <span class="math inline">\(\lambda_k\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<section id="principal-components-1" class="title-slide slide level1 center">
+<h1>Principal Components</h1>
+<div class="panel-tabset" style="font-size: 80%;">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-3-1">Interpretation</a></li><li><a href="#tabset-3-2">Factor scores</a></li><li><a href="#tabset-3-3">Loadings</a></li><li><a href="#tabset-3-4">Summary</a></li></ul>
+<div class="tab-content" style="font-size: 80%;">
+<div id="tabset-3-1">
+<ul>
+<li>The elements of <span class="math inline">\(Xa_k\)</span> are the factor scores of the PCs.</li>
+<li>The elements of the eigenvectors <span class="math inline">\(a_k\)</span> represent the loadings of the PCs.</li>
+</ul>
+</div>
+<div id="tabset-3-2">
+<ul>
+<li>The elements of <span class="math inline">\(Xa_k\)</span> are the factor scores of the PCs.</li>
+<li>In a geometric interpretation of PCA, the factor scores measure length on the Cartesian plane.</li>
+<li>This length represents the projection of the original observations onto the PCs from the origin at <span class="math inline">\((0, 0)\)</span>.</li>
+</ul>
+</div>
+<div id="tabset-3-3">
+<ul>
+<li>The elements of the eigenvectors <span class="math inline">\(a_k\)</span> represent the loadings of the PCs.</li>
+<li>The loadings represent the weights of the original variables in the computation of the PCs.</li>
+<li>The correlation from -1 to 1 of each variable with the factor score.</li>
+</ul>
+</div>
+<div id="tabset-3-4">
 <ul>
 <li>Eigenvectors: Represent directions of maximum variance.</li>
 <li>Eigenvalues: Indicate the variance explained by each eigenvector.</li>
 <li>Sorting: Sort eigenvalues in descending order to select the most significant components.</li>
 </ul>
+</div>
+</div>
+</div>
 </section>
 
 <section id="variance-explained" class="title-slide slide level1 center">
@@ -1281,9 +1376,9 @@ margin-right: 0; }
 <section id="dataset" class="title-slide slide level1 center">
 <h1>Dataset</h1>
 <div class="panel-tabset" style="font-size: 85%;">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-1-1">Overview</a></li><li><a href="#tabset-1-2">Description</a></li><li><a href="#tabset-1-3">Patient Care</a></li><li><a href="#tabset-1-4">Dialysis</a></li><li><a href="#tabset-1-5">Source</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-4-1">Overview</a></li><li><a href="#tabset-4-2">Description</a></li><li><a href="#tabset-4-3">Patient Care</a></li><li><a href="#tabset-4-4">Dialysis</a></li><li><a href="#tabset-4-5">Source</a></li></ul>
 <div class="tab-content" style="font-size: 85%;">
-<div id="tabset-1-1">
+<div id="tabset-4-1">
 <ul>
 <li>39 variables, or features.</li>
 <li>56 observations.</li>
@@ -1291,27 +1386,27 @@ margin-right: 0; }
 <li>“State” represents 50 states &amp; 6 U.S. territories.</li>
 </ul>
 </div>
-<div id="tabset-1-2">
+<div id="tabset-4-2">
 <ul>
 <li>Administered to In-Center Hemodialysis Survey.</li>
 <li>Dialysis Quality measures.</li>
 </ul>
 </div>
-<div id="tabset-1-3">
+<div id="tabset-4-3">
 <ul>
 <li>24 features: patient care quality ratings,</li>
 <li>Transfusions, fistula usage, infections,</li>
 <li>Hospitalizations, incident waitlisting &amp; readmissions.</li>
 </ul>
 </div>
-<div id="tabset-1-4">
+<div id="tabset-4-4">
 <ul>
 <li>14 features: dialysis adequacy (Kt/V), type of dialysis,</li>
 <li>Serum phosphorus level, &amp; average hemoglobin level,</li>
 <li>Normalized protein catabolic rate (nPCR), hypercalcemia level.</li>
 </ul>
 </div>
-<div id="tabset-1-5">
+<div id="tabset-4-5">
 <ul>
 <li>Released on July 19, 2023.</li>
 <li><a href="https://data.cms.gov/provider-data/dataset/2fpu-cgbb">data.cms.gov.</a></li>
@@ -1343,15 +1438,15 @@ margin-right: 0; }
 <section id="data-preparation" class="title-slide slide level1 center">
 <h1>Data Preparation</h1>
 <div class="panel-tabset" style="font-size: 85%;">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-2-1">Editing</a></li><li><a href="#tabset-2-2">Example</a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-5-1">Editing</a></li><li><a href="#tabset-5-2">Example</a></li></ul>
 <div class="tab-content" style="font-size: 85%;">
-<div id="tabset-2-1">
+<div id="tabset-5-1">
 <ul>
 <li><p>Efficient removal of white spaces in the dataset.</p></li>
 <li><p>Editing variable names to enhance readability and meaningful.</p></li>
 </ul>
 </div>
-<div id="tabset-2-2">
+<div id="tabset-5-2">
 <p><code>Original:</code> “Percentage.Of.Adult..Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL.”</p>
 <p><code>Edited:</code> “hypercalcemia_calcium &gt; 10.2Mg.”</p>
 </div>

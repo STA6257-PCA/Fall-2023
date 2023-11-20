@@ -50,24 +50,86 @@ November 2023
 -   Improved Model Performance: Enhance machine learning efficiency.
 
 # Methods
+::: {.panel-tabset style="font-size: 85%;"}
+### Assumptions
+-   Data matrix $X$ of size $N$ x $P$.
+-   Data is linearly related.
+-   Continuous, normally distributed data.
+-   Initial data distribution does not truly matter.
+-   Ideally, variables are similar in scale and free from extreme outliers.
 
--   Data Matrix: Start with a matrix X of size n x m.
--   Centering: Subtract the mean of each feature.
--   Covariance Matrix: Calculate the covariance matrix of the centered data.
--   Select Principal Components: Choose top eigenvectors.
+### Preprocessing
+-   Missing data: Imputation or removal of observations.
+-   Centering and scaling: Transform variables to a mean of 0 and a standard deviation of 1.
+$$
+z_{np} = \frac{x_{np} - \bar{x}_{p}}{{\sigma_{p}}}
+$$
 
-# Singular Value Decomposition (SVD)
+### Eigenvectors
+-   Nonzero vector whose direction is unaffected by a linear transformation.
+-   An eigenvector is scaled by factor $\lambda$, the eigenvalue.
+-   'Inherent components' of the covariance matrix which contain the most information.
+-   Each principal component is an eigenvector of the covariance matrix.
 
+### Covariance Matrix
+-   Covariance: A measure of how two random variables vary together.
+$$
+Cov(x,y) = \frac{\Sigma(x_i-\bar{x})(y_i-\bar{y})}{N}
+$$
+-   Covariance Matrix: Square matrix which gives the covariance values of each pair of variables in the dataset.
+:::
+
+# Finding the Principal Components
+::: {.panel-tabset style="font-size: 85%;"}
+### Basis
+-   Find the linear combination of the columns of $X$ which maximizes variance.
+-   Let $a$ be a vector of constants $a_1, a_2, a_3, …, a_p$ such that $Xa$ represents the linear combination which maximizes variance.
+
+### Eigendecomposition
+-   The variance of $Xa$ is represented by $var(Xa) = a^TSa$, with the covariance matrix $S$.
+-   Finding the $Xa$ with maximum variance equates to finding the vector $a$ which maximizes the quadratic $a^TSa$, where $a^Ta = 1$.
+
+### Result
+-   $a$ is a unit-norm eigenvector with eigenvalue $\lambda$ of the covariance matrix $S$.
+-   The largest eigenvalue of $S$ is $\lambda_1$ with the eigenvector $a_1$, which we can define for any eigenvector $a$:
+$$
+var(Xa) = a^TSa = \lambda a^Ta = \lambda
+$$
+
+### Principal Components
+-   Impose the restriction of orthogonality to the coefficient vectors of $S$.
+-   The eigenvectors of $S$ represent the solutions to finding $Xa_k$ which maximize variance while minimizing correlation with prior linear combinations.
+-   $Xa_k$ are the principal components of the dataset with eigenvectors $a_k$ and eigenvalues $\lambda_k$.
+:::
+
+# Principal Components
+::: {.panel-tabset style="font-size: 80%;"}
+### Interpretation
+-   The elements of $Xa_k$ are the factor scores of the PCs.
+-   The elements of the eigenvectors $a_k$ represent the loadings of the PCs.
+
+### Factor scores
+-   The elements of $Xa_k$ are the factor scores of the PCs.
+-   In a geometric interpretation of PCA, the factor scores measure length on the Cartesian plane.
+-   This length represents the projection of the original observations onto the PCs from the origin at $(0, 0)$. 
+
+### Loadings
+-   The elements of the eigenvectors $a_k$ represent the loadings of the PCs.
+-   The loadings represent the weights of the original variables in the computation of the PCs.
+-   The correlation from -1 to 1 of each variable with the factor score.
+
+### Summary
 -   Eigenvectors: Represent directions of maximum variance.
 -   Eigenvalues: Indicate the variance explained by each eigenvector.
 -   Sorting: Sort eigenvalues in descending order to select the most significant components.
+:::
 
 # Variance Explained
 
 -   Explained Variance Ratio: Calculate the ratio of each eigenvalue.
 -   Cumulative Variance: Plot cumulative explained variance to determine components to retain.
 
-# 
+#
 
 ::: columns
 ::: {.column width="40%"}
@@ -79,7 +141,7 @@ November 2023
 :::
 
 ::: {.column width="60%"}
-### High Variance vs
+### High Variance vs.
 
 ### Low Variance
 
