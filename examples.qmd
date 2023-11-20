@@ -6,13 +6,13 @@ Moving beyond the theoretical foundations of principal components, how is PCA ap
 
 In this illustration, we have access to the two grades of four students in a statistics subject. We aim to employ principal component analysis as a means to reduce the dimensionality from two variables to a singular variable. This transformation will effectively represent students' performance in the subject with a more compact and interpretable measure. This example is adapted from the resource *How to compute principal components* @eduflair2020.
 
-| Scores        | **Basic Stats** | **Advanced Stats** |
-|---------------|-----------------|--------------------|
-| **Student 1** | **4**           | **11**             |
-| **Student 2** | **8**           | **4**              |
-| **Student 3** | **13**          | **5**              |
-| **Student 4** | **7**           | **14**             |
-| **Mean**      | $\bar{x}$ = **8**     | $\bar{y}$ = **8.5**      |
+| Scores        | **Basic Stats**   | **Advanced Stats**  |
+|---------------|-------------------|---------------------|
+| **Student 1** | **4**             | **11**              |
+| **Student 2** | **8**             | **4**               |
+| **Student 3** | **13**            | **5**               |
+| **Student 4** | **7**             | **14**              |
+| **Mean**      | $\bar{x}$ = **8** | $\bar{y}$ = **8.5** |
 
 ### Calculate the covariance matrix $M$
 
@@ -295,7 +295,8 @@ abalone <- read.csv('./abalone/abalone.csv')
 
 data_desc = descr(abalone, plain.ascii = FALSE, headings = FALSE) # descriptive statistics for the dataset
 
-kbl(data_desc, align= 'l') %>%
+data_desc %>%
+  kbl(align= 'l') %>%
   kable_paper("hover")
 ```
 
