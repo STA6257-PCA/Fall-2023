@@ -8,7 +8,7 @@ book:
     - Hector R. Gavilanes, Chief Information Officer
     - Gail Han, Chief Operating Officer
     - Michael T. Mezzano, Chief Technology Officer
-  date: "11/19/2023"
+  date: "11/20/2023"
   chapters:
     - index.qmd
     - intro.qmd
@@ -32,7 +32,7 @@ format:
   pdf:
     documentclass: scrreprt
 
-editor: visual
+editor: source
 
 execute: 
   freeze: auto
