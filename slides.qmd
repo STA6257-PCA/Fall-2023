@@ -371,7 +371,29 @@ as.data.frame(loadings_first_two_components)
 ![](docs\analysis_files\figure-html\unnamed-chunk-13-1.png)
 :::
 :::
+<!-- --Slide-- -->
+# Correlations {style="text-align:center;"}
+![](docs\analysis_files\figure-html\unnamed-chunk-15-1.png)
 
+- Multicollinearity is present in the data set.
+- 28 Correlated features were identified using a threshold = 0.30.
+<!-- --Slide-- -->
+# Scree Plot {style="text-align:center;"}
+![](docs\analysis_files\figure-html\unnamed-chunk-21-1.png)
+- PC1 explains 40.8% variance.
+
+- PC2 explains 9.5% variance.
+<!-- --Slide-- -->
+# BiPlot {style="text-align:center;"}
+![](docs\analysis_files\figure-html\unnamed-chunk-23-1.png)
+- PC1 is represented in black which displays the longest distance of its projection.
+
+- PC2 is represented in blue which displays a shorter distance as expected.
+<!-- --Slide-- -->
+# Correlation Circle {style="text-align:center;"}
+![](docs\analysis_files\figure-html\unnamed-chunk-24-1.png)
+- Distance measures the quality of the variables.
+<!-- --Slide-- -->
 # Results
 
 ::: panel-tabset
