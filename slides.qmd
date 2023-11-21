@@ -18,7 +18,7 @@ execute:
   message: false
 ---
 
-# {background-image="images/01-Preface.jpg" background-size="contain"}
+# {background-image="images/01-Preface.jpg" background-size="1200px 760px"}
 
 # Authors
 
@@ -27,8 +27,8 @@ execute:
 |                     |                           |
 |---------------------|---------------------------|
 | Hector R. Gavilanes | Chief Information Officer |
-| Gail Han            | Chief Operating Officer   |
-| Michael T. Mezzano  | Chief Technology Officer  |
+|            Gail Han | Chief Operating Officer   |
+|  Michael T. Mezzano | Chief Technology Officer  |
 
 </br>
 
@@ -46,6 +46,10 @@ November 2023
     -   Simplification of complex datasets.
     -   Preservation of important information.
 
+<!-- --Slide-- -->
+# ![](images/multivariate_methods.png)
+
+<!-- --Slide-- -->
 # Why Use PCA?
 
 -   Reducing Dimensionality: Simplify high-dimensional data.
@@ -53,6 +57,7 @@ November 2023
 -   Noise Reduction: Eliminate less relevant features.
 -   Improved Model Performance: Enhance machine learning efficiency.
 
+<!-- --Slide-- -->
 # Methods
 
 ::: panel-tabset
@@ -283,11 +288,11 @@ as.data.frame(loadings_first_two_components)
 
 # Dataset Summary {style="text-align:center;"}
 
-![](images/dataset_files/01-overall-description.png){fig-align="center" width="720"}
+![](docs\dataset_files\figure-html\unnamed-chunk-5-1.png){fig-align="center"}
 
--   PCA is designed for continuous numerical data.
+<!-- -   PCA is designed for continuous numerical data. -->
 
--   Categorical index feature removed from model.
+<!-- -   Categorical index feature removed from model. -->
 
 # Dataset Selection Rationale
 
@@ -317,7 +322,7 @@ as.data.frame(loadings_first_two_components)
 
 # Missing Values {style="text-align:center;"}
 
-![](images/dataset_files/02-missing_observations.png){fig-align="center" width="800"}
+![](docs\dataset_files\figure-html\unnamed-chunk-5-2.png){fig-align="center"}
 
 -   34 missing values.
 
@@ -325,13 +330,13 @@ as.data.frame(loadings_first_two_components)
 
 # Distribution {style="text-align:center;"}
 
-![](images/dataset_files/03-distribution.png){fig-align="center"}
+![](docs\dataset_files\figure-html\unnamed-chunk-7-1.png){fig-align="center"}
 
 -   Normality is not assumed.
 
 # QQ-Plot of Residuals {style="text-align:center;"}
 
-![](images/dataset_files/04-outliers.png){fig-align="center"}
+![](docs\dataset_files\figure-html\unnamed-chunk-8-2.png){fig-align="center"}
 
 -   Outliers are present through the entire dataset
 
@@ -355,7 +360,7 @@ as.data.frame(loadings_first_two_components)
 
 -   No leverage
 
-![](images/analysis_files/unnamed-chunk-12-1.png)
+![](docs\analysis_files\figure-html\unnamed-chunk-12-1.png)
 :::
 
 ::: {.column width="50%" style="font-size: 85%;"}
@@ -363,7 +368,7 @@ as.data.frame(loadings_first_two_components)
 
 -   No observations removed.
 
-![](images/analysis_files/unnamed-chunk-13-1.png)
+![](docs\analysis_files\figure-html\unnamed-chunk-13-1.png)
 :::
 :::
 
