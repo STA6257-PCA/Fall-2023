@@ -60,6 +60,7 @@ head(data)
 
 ## What
 
+-   Unsupervised Machine Learning
 -   Dimensionality Reduction Technique
   -   Data Exploration
   -   Feature Extraction
