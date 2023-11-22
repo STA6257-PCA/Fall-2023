@@ -38,7 +38,12 @@ University of West Florida
 November 2023
 :::
 
+<<<<<<< HEAD
+
+# What is PCA?
+=======
 # Agenda
+>>>>>>> c738cf2457da5a897339cd1e90d4a31ad8d56550
 
 -   Introduction
 -   Method
