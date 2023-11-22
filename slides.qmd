@@ -452,9 +452,6 @@ as.data.frame(loadings_first_two_components)
 ![8 Uncorrelations Principal Components](docs/analysis_files/figure-html/unnamed-chunk-30-1.png){width="50%" fig-align="center"}
 
 
-<!-- # Uncorrelations {style="text-align:center;"} -->
-<!-- ![](docs\analysis_files\figure-html\unnamed-chunk-30-1.png) {width="50%"; fig-align="center"} -->
-
 <!-- --Slide-- -->
 # Results
 
