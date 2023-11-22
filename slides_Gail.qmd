@@ -18,7 +18,7 @@ execute:
   message: false
 ---
 
-# {background-image="images/01-Preface.jpg"}
+# {background-image="images/01-Preface.jpg" background-size="contain"}
 
 # Authors
 
@@ -27,8 +27,8 @@ execute:
 |                     |                           |
 |---------------------|---------------------------|
 | Hector R. Gavilanes | Chief Information Officer |
-|            Gail Han | Chief Operating Officer   |
-|  Michael T. Mezzano | Chief Technology Officer  |
+| Gail Han            | Chief Operating Officer   |
+| Michael T. Mezzano  | Chief Technology Officer  |
 
 </br>
 
@@ -48,7 +48,6 @@ November 2023
 
 # Principal Component Analysis (PCA)
 
-::: panel-tabset
 
 ## When
 
@@ -59,6 +58,8 @@ head(data)
 ```
 
 ## What
+
+::: {.incremental}
 
 -   Dimensionality Reduction Technique
   -   Data Exploration
@@ -73,13 +74,13 @@ head(data)
 
 :::
 
+
 # Assumptions and Limitations
 
 -   Scaling Data
 -   Loss of interpretability in transformed features.
 -   Loss of Information
 
-# ![](images/multivariate_methods.png)
 
 # Why Use PCA?
 
@@ -98,6 +99,7 @@ head(data)
 
 -   Data Projection: Visualize data in the reduced feature space.
 -   Scatterplots: Use scatterplots to visualize data distribution.
+
 
 # Methods
 
@@ -279,19 +281,25 @@ as.data.frame(loadings_first_two_components)
 
 # Dataset
 
+::: {.panel-tabset style="font-size: 85%;"}
+
+### Overview
+
 -   data collected from 50 US states + 6 U.S. territories
 -   39 variables
     -   24 patient care quality in dialysis facilities
     -   14 characteristics of dialysis patients
-    -   Index variable: categorical variable was removed 
+    -   Index variable: categorical variable was removed    
+   
+:::
 
 # Dataset Summary {style="text-align:center;"}
 
-![](docs\dataset_files\figure-html\unnamed-chunk-5-1.png){fig-align="center"}
+![](images/dataset_files/01-overall-description.png){fig-align="center" width="720"}
 
-<!-- -   PCA is designed for continuous numerical data. -->
+-   PCA is designed for continuous numerical data.
 
-<!-- -   Categorical index feature removed from model. -->
+-   Categorical index feature removed from model.
 
 # Dataset Selection Rationale
 
@@ -321,7 +329,7 @@ as.data.frame(loadings_first_two_components)
 
 # Missing Values {style="text-align:center;"}
 
-![](docs\dataset_files\figure-html\unnamed-chunk-5-2.png){fig-align="center"}
+![](images/dataset_files/02-missing_observations.png){fig-align="center" width="800"}
 
 -   34 missing values.
 
@@ -329,13 +337,13 @@ as.data.frame(loadings_first_two_components)
 
 # Distribution {style="text-align:center;"}
 
-![](docs\dataset_files\figure-html\unnamed-chunk-7-1.png){fig-align="center"}
+![](images/dataset_files/03-distribution.png){fig-align="center"}
 
 -   Normality is not assumed.
 
 # QQ-Plot of Residuals {style="text-align:center;"}
 
-![](docs\dataset_files\figure-html\unnamed-chunk-8-2.png){fig-align="center"}
+![](images/dataset_files/04-outliers.png){fig-align="center"}
 
 -   Outliers are present through the entire dataset
 
@@ -359,7 +367,7 @@ as.data.frame(loadings_first_two_components)
 
 -   No leverage
 
-![](docs\analysis_files\figure-html\unnamed-chunk-12-1.png)
+![](images/analysis_files/unnamed-chunk-12-1.png)
 :::
 
 ::: {.column width="50%" style="font-size: 85%;"}
@@ -367,71 +375,9 @@ as.data.frame(loadings_first_two_components)
 
 -   No observations removed.
 
-![](docs\analysis_files\figure-html\unnamed-chunk-13-1.png)
+![](images/analysis_files/unnamed-chunk-13-1.png)
 :::
 :::
-<!-- --Slide-- -->
-# Correlations {style="text-align:center;"}
-:::: {.columns}
-
-::: {.column width="40%"}
-- Multicollinearity is present.
-- Threshold = 0.30.
-- 28 Correlated features. 
-
-:::
-
-::: {.column width="60%"}
-![](docs\analysis_files\figure-html\unnamed-chunk-15-1.png){width="Infinity"}
-:::
-
-::::
-
-<!-- --Slide-- -->
-# Scree Plot {style="text-align:center;"}
-:::: {.columns}
-
-::: {.column width="40%"}
-- PC1 explains 40.8% variance.
-- PC2 explains 9.5% variance.
-:::
-
-::: {.column width="60%"}
-![](docs\analysis_files\figure-html\unnamed-chunk-21-1.png)
-:::
-
-::::
-
-
-<!-- --Slide-- -->
-# BiPlot {style="text-align:center;"}
-:::: {.columns}
-
-::: {.column width="40%"}
-- PC1 is represented in black which displays the longest distance of its projection.
-- PC2 is represented in blue which displays a shorter distance as expected.
-:::
-
-::: {.column width="60%"}
-![](docs\analysis_files\figure-html\unnamed-chunk-23-1.png)
-:::
-
-::::
-
-
-<!-- --Slide-- -->
-# Correlation Circle {style="text-align:center;"}
-:::: {.columns}
-
-::: {.column width="40%"}
-- Distance measures quality of variables.
-:::
-
-::: {.column width="60%"}
-![](docs\analysis_files\figure-html\unnamed-chunk-24-1.png)
-:::
-
-::::
 
 # Results
 
