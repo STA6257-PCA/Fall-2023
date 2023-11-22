@@ -39,7 +39,7 @@ November 2023
 :::
 
 
-# Agenda
+# Agenda {style="text-align:center;"}
 -   Introduction
 -   Method
 -   Example
