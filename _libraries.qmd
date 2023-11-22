@@ -1,0 +1,30 @@
+```{r, warning = FALSE, message = FALSE, echo=FALSE}
+# Clear environment
+rm(list = ls())
+
+# Load libraries
+library(tidyverse)    
+library(caTools)
+library(caret)
+library(corrplot)     # plot correlation matrix
+library(Metrics)      # calculate MAE, MSE, RMSE, R^2
+library(pls)          # PC regression
+library(e1071)        # to fit transform PCA  
+library(reshape2)     # transform to matrix
+library(ggcorrplot)   # correlation graph
+library(factoextra)   # PCA plots
+library(psych)        # descriptive stats - skew, kurtosis
+library(rcompanion)   # histogram plot
+library(DataExplorer) # EDA
+library(ggplot2)      # graphics
+library(car)          # for outliers test, power transformation
+library(MASS)         # power transformation, robust model
+library(DescTools)    # robust scaler
+library(kableExtra)   # table formatter
+library(EnvStats)     # for rosnerTest
+library(corrr)        # correlation matrix
+library(FactoMineR)   # PCA analysis
+library(factoextra)   # PCA plots
+library(olsrr)        # outliers, leverage plot
+library(sjPlot)       # format linear regression results
+```

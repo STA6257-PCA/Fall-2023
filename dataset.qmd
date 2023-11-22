@@ -1,5 +1,205 @@
 # Dataset {#dataset}
 
+<<<<<<< HEAD
 This is where we can put everything about our dataset description and visualization.
 
 Yeah\~ I know how to push it\~ Gail
+=======
+The principal data used in this analysis was obtained from the "Consumer Assessment of Healthcare Providers and Systems (CAHPS) In-Center Hemodialysis Survey", which is administered to in-center hemodialysis (ICH) facilities by approved survey vendors under the Centers for Medicare & Medicaid Services (CMS). The dataset comprises 39 variables consisting of state-level averages of common dialysis quality measures. The version in this analysis was released on July 19, 2023 through the data.cms.gov website. @dialysis2023july
+
+The structure of the dataset can be categorized into three main components:
+
+1.  Index Variable: The primary index variable is "State," encompassing all 50 states and 6 U.S. territories, namely American Samoa, the District of Columbia, Guam, the Northern Mariana Islands, Puerto Rico, and the U.S. Virgin Islands.
+<br>
+2.  Response Variables: The dataset incorporates 24 response variables aligned with ratings of patient care quality in dialysis facilities. These variables pertain to various aspects of dialysis procedures, such as transfusions, fistula usage, infections, hospitalizations, incident patient waitlisting, and readmissions.
+<br>
+3.  Classification of Dialysis Patients: Fourteen variables within the dataset classify dialysis patients based on parameters including dialysis adequacy (Kt/V), type of dialysis (hemodialysis vs. peritoneal dialysis), normalized protein catabolic rate (nPCR), hypercalcemia level (Serum Calcium, Mg/dL), serum phosphorus level (Mg/dL), and average hemoglobin (Hgb) level.
+
+The selection of this dataset for our analysis is driven by its inherent characteristic of multicollinearity among variables, indicating that certain variables are less significant in explaining the variability of the response variables. Additionally, all variables in the dataset are numeric, except for the index variable that is excluded from the subsequent Principal Component Analysis (PCA). Our objective is to utilize this dataset to illustrate the efficacy of PCA in dimension reduction and the efficient visualization of data.
+
+## Renaming Variables
+
+In our data preparation process, we have efficiently removed white spaces, and edited variable names, enhancing the readability and interpretability of the dataset. This meticulous effort adds to the overall clarity, making it quicker, and more meaningful for further examination. For instance, "hypercalcemia_calcium \> 10.2Mg", was used in replacement of Percentage.Of.Adult..Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL.
+
+## Statistical Summary
+
+The dataset contains 56 observations of 39 variables with 1 discrete variable (States/Territories) and 38 continuous variables. 13 observations have at least 1 missing record, with 34 missing observations in total. Most missing data in the dataset occurs in variables relating to pediatric patient data.
+
+```{r, warning = FALSE, message = FALSE, echo=FALSE}
+# Clear environment
+rm(list = ls())
+
+# Load libraries
+library(tidyverse)    
+library(caTools)
+library(caret)
+library(corrplot)     # plot correlation matrix
+library(Metrics)      # calculate MAE, MSE, RMSE, R^2
+library(pls)          # PC regression
+library(e1071)        # to fit transform PCA  
+library(reshape2)     # transform to matrix
+library(ggcorrplot)   # correlation graph
+library(factoextra)   # PCA plots
+library(psych)        # descriptive stats - skew, kurtosis
+library(rcompanion)   # histogram plot
+library(DataExplorer) # EDA
+library(ggplot2)      # graphics
+library(car)          # for outliers test, power transformation
+library(MASS)         # power transformation, robust model
+library(DescTools)    # robust scaler
+library(kableExtra)   # table formatter
+```
+
+```{r, warning = FALSE, message = FALSE, echo=FALSE}
+# Load the dataset
+data <- read.csv('./dataset/DFC_STATE.csv')
+
+# Make a working copy
+train_data <- data
+
+# Constant seed
+my_seed = 95
+```
+
+```{r, warning = FALSE, message = FALSE, echo=FALSE}
+# Rename the variables
+train_data <- rename(train_data,
+        better_transfusion = Transfusions..Better.than.expected..STATE.,
+        expected_transfusion = Transfusions..As.expected..STATE.,
+        worse_transfusion = Transfusions..Worse.than.expected..STATE.,
+        better_infection = Infection..Better.than.expected..STATE.,
+        expected_infection = Infection..As.expected..STATE.,
+        worse_infection = Infection..Worse.than.expected..STATE.,
+        Kt_v_1.2 = Percentage.of.adult.HD.patients.with.Kt.V..1.2,
+        Kt_v_1.7 = Percentage.Of.Adult.PD.Patients.With.Kt.V..1.7,
+        pedriatic_Kt_v_1.2 = Percentage.Of.Pediatric.HD.Patients.With.Kt.V..1.2,
+        pediatric_Kt_v_1.8 = Percentage.Of.Pediatric.PD.Patients.With.Kt.V..1.8,
+        pediatric_nPCR = Percentage.Of.Pediatric.HD.Patients.With.nPCR.In.Use,
+        better_fistula = Fistula.Rate...Better.Than.Expected..STATE.,
+        expected_fistula = Fistula.Rate...As.Expected..STATE.,
+        worse_fistula = Fistula.Rate...Worse.Than.Expected..STATE.,
+        long_term_catheter = Percentage.Of.Adult.Patients.With.Long.Term.Catheter.In.Use ,
+        "hypercalcemia_calcium > 10.2Mg" = Percentage.Of.Adult.Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL.,
+        "phosphorus < 3.5Mg" = Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Less.Than.3.5.Mg.dL,
+        "phosphorus (3.5 - 4.5) Mg" = Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Between.3.5.4.5.Mg.dL,
+        "phosphorus (4.6 - 5.5) Mg" = Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Between.4.6.5.5.Mg.dL,
+        "phosphorus (5.6 - 7) Mg" = Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Between.5.6.7.0.Mg.dL,
+        "phosphorus > 7Mg" = Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Greater.Than.7.0.Mg.dL,
+        better_hospitalization = Hospitalizations..Better.Than.Expected..STATE.,
+        expected_hospitalization = Hospitalizations..As.Expected..STATE.,
+        worse_hospitalization = Hospitalizations..Worse.Than.Expected..STATE.,
+        better_hospital_readmission = Hospital.Readmission...Better.Than.Expected..STATE.,
+        expected_hospital_readmission = Hospital.Readmission...As.Expected..STATE.,
+        worse_hospital_readmission = Hospital..Readmission...Worse.Than.Expected..STATE.,
+        better_survival = Survival..Better.Than.Expected..STATE.,
+        expected_survival = Survival..As.Expected..STATE.,
+        worse_survival = Survival..Worse.Than.Expected..STATE.,
+        incident_transplant_waitlist_better = Incident.Patients.Transplant.Waitlisting..Better.Than.Expected..STATE.,
+        incident_transplant_waitlist_expected = Incident.Patients.Transplant.Waitlisting...As.Expected..STATE.,
+        incident_transplant_waitlist_worse = Incident.Patients.Transplant.Waitlisting...Worse.Than.Expected..STATE.,
+        prevalent_transplant_waitlist_better = Prevalent.Patients.Transplant.Waitlisting..Better.Than.Expected..STATE.,
+        prevalent_transplant_waitlist_expected = Prevalent.Patients.Transplant.Waitlisting...As.Expected..STATE.,
+        prevalent_transplant_waitlist_worse = Prevalent.Patients.Transplant.Waitlisting...Worse.Than.Expected..STATE.,
+        Hgb_10g = Percentage.Of.Patients.With.Hgb.10.g.dL,
+        Hgb_12g = Percentage.of.patients.with.Hgb.12.g.dL
+        )
+```
+
+```{r, warning = FALSE, message = FALSE, echo=FALSE}
+# install.packages("vtable")
+library(summarytools)
+
+data_desc = descr(train_data, plain.ascii = FALSE, headings = FALSE) # descriptive statistics for the dataset
+
+kbl(data_desc, align= 'l') %>%
+  kable_paper("hover")
+```
+
+<br>
+
+The histograms of the data reveal that majority of the variables are skewed right, with the QQ plots supporting that very few of the variables are normally distributed. Finally, many of the variables are highly correlated as expected based on the design of the dataset.
+
+## Missing Values Detection
+
+-   The 34 missing observations represent 1.6% of the dataset.
+-   14 variables have missing observations.
+-   A table was generated to count missing values for all variables.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# plot Missing values
+plot_intro(train_data)
+plot_missing(train_data, missing_only = TRUE,
+             group = list("Good (0.05)" = 0.05, "OK (0.4)" = 0.4, Bad = 0.8, Remove = 1),)
+
+total_missing <- sum(is.na(train_data))
+#cat("Count Missing Values in Entire Data Frame: ", total_missing)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Count the number of missing values in each column
+no_missing_values_df <- data.frame("Missing_Values" = colSums(is.na(train_data)))
+
+# table format
+kbl(no_missing_values_df) %>%
+  kable_paper("hover", full_width = F)
+```
+
+## Data Distribution
+
+-   Histograms were used to display a sample (8 variables) of the distribution in respect to the predictor variable.
+
+-   Normality is not assumed. The majority of the observations in each variable do not meet the normality assumption.
+
+    ```{r, echo=FALSE}
+    #visualize of data in histograms
+    plot_histogram(train_data[, 18:25], ncol = 2L)
+    ```
+
+## Normal QQ Plot of Residuals
+
+-   It is apparent that the variables have heavy left and right tails.
+
+-   The presence of outliers is consistent though the entire dataset.
+
+    ```{r, message=FALSE, warning=FALSE, echo=FALSE}
+    plot_qq(train_data[, 19:30], ncol = 2L)
+    ```
+
+## Imputation of Missing Values
+
+-   After substituting missing values with the mean, we are now able to proceed with standardizing the dataset.
+
+-   The standardization process will be implemented in the Analysis chapter.
+
+-   A table was created to confirm the absence of any missing observations in the data frame.
+
+-   Due to its categorical data type, the "State" variable was omitted from the analysis.
+
+    ```{r, echo=FALSE}
+    # Remove categorical columns
+    train_data$State <- NULL
+
+    # Impute missing values with the median
+    for (col in colnames(train_data)) {
+      median_value <- median(train_data[[col]], na.rm = TRUE)
+      train_data[[col]] <- ifelse(is.na(train_data[[col]]), median_value,     train_data[[col]])
+    }
+    ```
+
+```{r, echo=FALSE}
+# Round all variables
+train_data <- round(train_data, digits = 0)
+
+# Count the number of missing values in each column
+no_missing_values_df <- data.frame("Missing_Values" = colSums(is.na(train_data)))
+
+Type = sapply(train_data, typeof)
+no_missing_values_df <- cbind(no_missing_values_df, Type)
+
+# table format
+kbl(no_missing_values_df) %>%
+  kable_paper("hover", full_width = F)
+```
+
+In conclusion, the dataset has undergone essential pre-processing steps, rendering it well-prepared for outliers detection and normalization, which are crucial for robust and accurate model development. Missing observations have been imputed using the mean, ensuring that all variables within the dataset are now numerical. These preliminary steps have not only enhanced the dataset completeness, but also set the stage for further advanced data analysis.
+>>>>>>> d0089948d2fdc4b8622c66a8f2143e64d1f38f80

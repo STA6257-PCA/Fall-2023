@@ -1,0 +1,446 @@
+---
+# title: "Understanding Principal Component Analysis (PCA)"
+# author: "Hector R. Gavilanes, Gail Han, Michael T. Mezzano"
+format:
+  revealjs: 
+    theme: dark
+    df-print: paged
+    width: 1600
+    height: 900
+    transition: convex
+    embed-resources: true
+    slide-number: true
+    footer: "[Return to homepage](https://sta6257-pca.github.io/Fall-2023/)"
+editor: source
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+# {background-image="images/01-Preface.jpg" background-size="1600px 900px"}
+
+# Authors
+
+</br>
+
+|                     |                           |
+|---------------------|---------------------------|
+| Hector R. Gavilanes | Chief Information Officer |
+|            Gail Han | Chief Operating Officer   |
+|  Michael T. Mezzano | Chief Technology Officer  |
+
+</br>
+
+::: {#date style="text-align: right;"}
+University of West Florida
+
+November 2023
+:::
+
+# What is PCA?
+
+-   Principal Component Analysis.
+-   Dimensionality reduction technique.
+-   Purpose:
+    -   Simplification of complex datasets.
+    -   Preservation of important information.
+
+<!-- --Slide-- -->
+# ![](images/multivariate_methods.png)
+
+<!-- --Slide-- -->
+# Why Use PCA?
+
+-   Reducing Dimensionality: Simplify high-dimensional data.
+-   Visualizing Data: Help visualize data in lower dimensions.
+-   Noise Reduction: Eliminate less relevant features.
+-   Improved Model Performance: Enhance machine learning efficiency.
+
+<!-- --Slide-- -->
+# Methods
+
+::: panel-tabset
+
+## Assumptions
+-   Data matrix $X$ of size $N$ x $P$.
+-   Data is linearly related.
+-   Continuous and normally distributed data.
+    -   Initial data distribution does not truly matter.
+-   Variables are similar in scale and without extreme outliers.
+
+## Preprocessing
+-   Missing data: Imputation or removal of observations.
+-   Centering and scaling: Transform variables to a mean of 0 and a standard deviation of 1.
+$$
+z_{np} = \frac{x_{np} - \bar{x}_{p}}{{\sigma_{p}}}
+$$
+
+## Covariance Matrix
+-   Covariance: A measure of how two random variables vary together.
+$$
+Cov(x,y) = \frac{\Sigma(x_i-\bar{x})(y_i-\bar{y})}{N}
+$$
+-   Covariance Matrix: Symmetric $p \times p$ matrix which gives the covariance values for each pair of variables in the dataset.
+
+## Eigenvectors
+-   Nonzero vector whose direction is unaffected by a linear transformation.
+-   An eigenvector is scaled by factor $\lambda$, the eigenvalue.
+-   Each principal component is given by the eigenvectors of the covariance matrix.
+    -   The eigenvectors represent the directions of the new principal axes.
+    -   The eigenvalues represent the magnitude of these eigenvectors.
+
+:::
+
+# Finding the Principal Components
+
+::: panel-tabset
+
+## Basis
+-   Find the linear combination of the columns of $X$ (the variables) which maximizes variance.
+-   Let $a$ be a vector of constants $a_1, a_2, a_3, …, a_p$ such that $Xa$ represents the linear combination which maximizes variance.
+
+## Eigendecomposition
+-   The variance of $Xa$ is represented by $var(Xa) = a^TSa$ with the covariance matrix $S$.
+-   Finding the $Xa$ with maximum variance equates to finding the vector $a$ which maximizes the quadratic $a^TSa$, where $a^Ta = 1$.
+
+## Result
+-   $a$ is a unit-norm eigenvector with eigenvalue $\lambda$ of the covariance matrix $S$.
+-   The largest eigenvalue of $S$ is $\lambda_1$ with the eigenvector $a_1$, which we can define for any eigenvector $a$: $$
+var(Xa) = a^TSa = \lambda a^Ta = \lambda
+$$
+
+:::
+
+# Principal Components
+
+::: panel-tabset
+
+## Definition
+-   Impose the restriction of orthogonality to the coefficient vectors of $S$.
+    -   Ensure the principal components are uncorrelated.
+-   The eigenvectors of $S$ represent the solutions to finding $Xa_k$ which maximize variance while minimizing correlation with prior linear combinations.
+-   Each $Xa_k$ is a principal components of the dataset having eigenvectors $a_k$ and eigenvalues $\lambda_k$.
+
+## Interpretation
+-   The elements of $Xa_k$ are the factor scores of the PCs.
+-   The elements of the eigenvectors $a_k$ represent the loadings of the PCs.
+
+## Factor scores
+-   The elements of $Xa_k$.
+-   How each observation scores on a PC.
+-   In a geometric interpretation of PCA the factor scores measure length (magnitude) on the Cartesian plane.
+-   This length represents the projection of the original observations onto the PCs from the origin at $(0, 0)$.
+
+## Loadings
+-   The elements of the eigenvectors $a_k$ represent the loadings of the PCs.
+-   The loadings represent the weights of the original variables in the computation of the PCs.
+-   The correlation from -1 to 1 of each variable with the factor score.
+
+## Summary
+-   Eigenvectors: Represent directions of maximum variance.
+-   Eigenvalues: Indicate the variance explained by each eigenvector.
+-   Sorting: Sort eigenvalues in descending order to select the most significant principal components.
+
+:::
+
+# Example
+-   For this example of PCA, the Abalone dataset from the UCI Machine Learning Repository is used.
+-   This dataset contain 4177 observations of 9 variables which record characteristics of each abalone including sex, length, diameter, height, weights, and the number of rings.
+-   The variables, apart from sex, are continuous and correlated.
+
+```{r}
+# Load dataset
+abalone <- read.csv('./abalone/abalone.csv')
+# Print the first six rows of the dataset
+head(abalone)
+```
+
+## Preprocessing the data
+-   Exclude non-numeric variables from the dataset.
+    -   The variable Sex is excluded.
+-   Check for missing data.
+    -   No missing data in the dataset.
+-   Scale and center the data.
+-   Check for and handle extreme outliers.
+    -   Outliers do not present a large problem.
+
+```{r}
+# Select only the numeric variables
+library(dplyr)
+abalone <- select_if(abalone, is.numeric)
+# Standardization of numerical features
+abalone_sc <- scale(abalone, center = TRUE, scale = TRUE)
+```
+
+## Perform Principal Component Analysis
+The prcomp() function performs principal component analysis on a dataset using the singular value decomposition method with the covariance matrix of the data.
+
+```{r}
+# Apply PCA using prcomp()
+abalone_pca <- prcomp(abalone_sc)
+sum_pca <- as.data.frame(summary(abalone_pca)$importance)
+sum_pca
+```
+
+-   The standard deviation for each PC represents the information captured by that principal component.
+-   The proportion of variance is the percent of total variance captured by each PC.
+-   The cumulative proportion gives the total variance caputured by the PC and all prior PCs.
+
+## Visualizing the results
+```{r}
+#PCA plots
+library(factoextra)
+fviz_pca_biplot(abalone_pca, label = "var", alpha.ind = "contrib", col.var = "blue", repel = TRUE)
+```
+
+## Interpreting the results
+-   The loadings of the first two principal components show the contribution of each variable to PC1 and PC2.
+
+```{r}
+# Eigenvector or Loadings
+eigenvector <- abalone_pca$rotation
+# Access the loadings for the first two principal components
+loadings_first_two_components <- eigenvector[, 1:2]
+# Display the loadings
+as.data.frame(loadings_first_two_components)
+```
+
+# Variance Explained
+-   Explained Variance Ratio: Calculate the ratio of each eigenvalue.
+-   Cumulative Variance: Plot cumulative explained variance to determine components to retain.
+
+# 
+
+::: columns
+::: {.column width="40%"}
+## Objective
+
+-   Weighted Combination
+-   Maximal Variance Components
+:::
+
+::: {.column width="60%"}
+### High Variance vs.
+
+### Low Variance
+
+![](images/01-Preface.jpg){width="Infinity"}
+:::
+:::
+
+# Dimensionality Reduction
+
+-   Unsupervised Learning.
+-   Reduce Dimensions: Transform data by multiplying with selected eigenvectors.
+-   New Feature Space: Data exists in a lower-dimensional feature space.
+
+# Visualization
+
+-   Data Projection: Visualize data in the reduced feature space.
+-   Scatterplots: Use scatterplots to visualize data distribution.
+
+# Assumptions and Limitations
+
+-   Interpretability: Loss of interpretability in transformed features.
+-   Loss of Information: Reducing dimensionality may result in some information loss.
+-   Scaling: Data scaling is important to avoid feature dominance.
+
+# Applications of PCA
+
+-   Image Compression: Reduce image size while preserving details.
+-   Face Recognition: Reduce facial feature dimensions for classification.
+-   Anomaly Detection: Identify anomalies in large datasets.
+-   Bioinformatics: Analyze gene expression data.
+
+# Dataset
+
+::: {.panel-tabset style="font-size: 85%;"}
+### Overview
+
+-   39 variables, or features.
+-   56 observations.
+-   State-level averages.
+-   "State" represents 50 states & 6 U.S. territories.
+
+### Description
+
+-   Administered to In-Center Hemodialysis Survey.
+-   Dialysis Quality measures.
+
+### Patient Care
+
+-   24 features: patient care quality ratings,
+-   Transfusions, fistula usage, infections,
+-   Hospitalizations, incident waitlisting & readmissions.
+
+### Dialysis
+
+-   14 features: dialysis adequacy (Kt/V), type of dialysis,
+-   Serum phosphorus level, & average hemoglobin level,
+-   Normalized protein catabolic rate (nPCR), hypercalcemia level.
+
+### Source
+
+-   Released on July 19, 2023.
+-   [data.cms.gov.](https://data.cms.gov/provider-data/dataset/2fpu-cgbb)
+:::
+
+# Dataset Summary {style="text-align:center;"}
+
+![](docs\dataset_files\figure-html\unnamed-chunk-5-1.png){fig-align="center"}
+
+<!-- -   PCA is designed for continuous numerical data. -->
+
+<!-- -   Categorical index feature removed from model. -->
+
+# Dataset Selection Rationale
+
+-   Driven by multicollinearity.
+
+-   Features less significant in explaining variability.
+
+-   All variables are numeric
+
+-   Categorical Index variable.
+
+# Data Preparation
+
+::: {.panel-tabset style="font-size: 85%;"}
+### Editing
+
+-   Efficient removal of white spaces in the dataset.
+
+-   Editing variable names to enhance readability and meaningful.
+
+### Example
+
+`Original:` "Percentage.Of.Adult..Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL."
+
+`Edited:` "hypercalcemia_calcium \> 10.2Mg."
+:::
+
+# Missing Values {style="text-align:center;"}
+
+![](docs\dataset_files\figure-html\unnamed-chunk-5-2.png){fig-align="center"}
+
+-   34 missing values.
+
+-   Imputation of missing values using the $Mean$ ($\mu$)
+
+# Distribution {style="text-align:center;"}
+
+![](docs\dataset_files\figure-html\unnamed-chunk-7-1.png){fig-align="center"}
+
+-   Normality is not assumed.
+
+# QQ-Plot of Residuals {style="text-align:center;"}
+
+![](docs\dataset_files\figure-html\unnamed-chunk-8-2.png){fig-align="center"}
+
+-   Outliers are present through the entire dataset
+
+# Standardization {style="text-align:center;"}
+
+-   Mean ($\mu$=0); Standard Deviation ($\sigma$= 1)
+
+    $$
+    Z = \frac{{ x - \mu }}{{ \sigma }}
+    $$
+
+    $$
+    Z \sim N(0,1)
+    $$
+
+# Outliers & Leverage
+
+::: columns
+::: {.column width="50%" style="font-size: 85%;"}
+-   3 Outliers
+
+-   No leverage
+
+![](docs\analysis_files\figure-html\unnamed-chunk-12-1.png)
+:::
+
+::: {.column width="50%" style="font-size: 85%;"}
+-   Minimal difference.
+
+-   No observations removed.
+
+![](docs\analysis_files\figure-html\unnamed-chunk-13-1.png)
+:::
+:::
+<!-- --Slide-- -->
+# Correlations {style="text-align:center;"}
+![](docs\analysis_files\figure-html\unnamed-chunk-15-1.png)
+
+- Multicollinearity is present in the data set.
+- 28 Correlated features were identified using a threshold = 0.30.
+<!-- --Slide-- -->
+# Scree Plot {style="text-align:center;"}
+![](docs\analysis_files\figure-html\unnamed-chunk-21-1.png)
+- PC1 explains 40.8% variance.
+
+- PC2 explains 9.5% variance.
+<!-- --Slide-- -->
+# BiPlot {style="text-align:center;"}
+![](docs\analysis_files\figure-html\unnamed-chunk-23-1.png)
+- PC1 is represented in black which displays the longest distance of its projection.
+
+- PC2 is represented in blue which displays a shorter distance as expected.
+<!-- --Slide-- -->
+# Correlation Circle {style="text-align:center;"}
+![](docs\analysis_files\figure-html\unnamed-chunk-24-1.png)
+- Distance measures the quality of the variables.
+<!-- --Slide-- -->
+# Results
+
+::: panel-tabset
+
+## Principal Components
+-   Principal component analysis was performed using a singular value decomposition approach.
+-   PC1 captures 40.80% of the variance in the data.
+    -   PC1 and PC2 capture 50.27% of the variance.
+        -   The first four PCs capture 67.66% of the variance, or just over two-thirds.
+-   After the fourth PC, the variance captured by each successive PC begins to diminish relative to PCs one through four.
+    -   The first ten PCs capture 88.67% of the variance.
+        -   Over 90% of the information in the dataset can be explained by the first eleven PCs.
+
+## Contributions to PCs
+-   The variables which contribute the most to PC1 are
+    -   expected_hospital_readmission
+    -   expected_transfusion
+    -   expected_hospitalization
+-   PC2, which is orthogonal to PC1, has relatively large contributions from the five variables measuring levels of phosphorus.
+
+## PCR
+-   Principal component regression was performed with expected_survival used as the response variable.
+-   The estimates and significance of each PC regressor demonstrates the differences between variance captured from the data and usefulness in a linear model.
+    -   For example, PC4 is a significant regressor despite capturing less variance than PC3 in the training data.
+-   Both models produced an $R^2$ above 96% and a predicted $R^2$ above 95% with a 1% advantage on the cross-validation model.
+
+:::
+
+# PCA in Machine Learning
+
+-   Feature Selection: Use PCA to select relevant features.
+-   Model Training: Enhance model performance by reducing dimensionality.
+-   Preprocessing: Standardize and normalize data before applying PCA.
+
+# Conclusion
+
+-   Summary: PCA is an unsupervised learning technique for dimensionality reduction and data visualization.
+-   Key Takeaways: Understand eigenvectors, eigenvalues, and explained variance.
+
+# Questions
+
+-   Open the floor for questions from the audience.
+
+# Thank You
+
+-   Contact Information
+
+# References
+
+-   List of sources and references used in the presentation.

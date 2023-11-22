@@ -1,0 +1,36 @@
+## Dataset
+
+```{r}
+# clear environment
+rm(list = ls())
+
+# original dataset link: 
+# https://data.cms.gov/provider-data/dataset/2fpu-cgbb
+
+# Load dataset
+train_original <- read.csv('../dataset/DFC_STATE.csv')
+
+# Make a working copy
+train_data <- train_original
+```
+
+## Libraries
+
+```{r, warning = FALSE}
+# install.packages("DataExplorer")
+library(DataExplorer)
+```
+
+## Create EDA Report
+
+```{r, warning = FALSE}
+# Create HTML report
+create_report(train_data)
+create_report(
+  train_data,
+  output_file = "report.html",
+  # output_dir = "docs/",
+  config = configure_report(),
+  report_title = "Exploratory Data Analysis"
+)
+```
