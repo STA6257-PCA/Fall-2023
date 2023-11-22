@@ -408,8 +408,8 @@ as.data.frame(loadings_first_two_components)
 :::: {.columns}
 
 ::: {.column width="40%"}
-- PC1 is represented in black which displays the longest distance of its projection.
-- PC2 is represented in blue which displays a shorter distance as expected.
+- PC1 in black displays longest distance of its projection.
+- PC2 in blue displays shorter distance as expected.
 :::
 
 ::: {.column width="60%"}
@@ -421,17 +421,8 @@ as.data.frame(loadings_first_two_components)
 
 <!-- --Slide-- -->
 # Correlation Circle {style="text-align:center;"}
-:::: {.columns}
+![Distance measures quality of variables.](docs\analysis_files\figure-html\unnamed-chunk-24-1.png)
 
-::: {.column width="40%"}
-- Distance measures quality of variables.
-:::
-
-::: {.column width="60%"}
-![](docs\analysis_files\figure-html\unnamed-chunk-24-1.png)
-:::
-
-::::
 
 <!-- --Slide-- -->
 # Contribution of Variables {style="text-align:center;"}
@@ -447,9 +438,9 @@ as.data.frame(loadings_first_two_components)
 
 ::::
 <!-- --Slide-- -->
-# Uncorrelations {style="text-align:center;"}
+# Uncorrelated Matrix {style="text-align:center;"}
 
-![8 Uncorrelations Principal Components](docs/analysis_files/figure-html/unnamed-chunk-30-1.png){width="50%" fig-align="center"}
+![8 Uncorrelated Principal Components](docs/analysis_files/figure-html/unnamed-chunk-30-1.png){width="50%" fig-align="center"}
 
 
 <!-- --Slide-- -->
