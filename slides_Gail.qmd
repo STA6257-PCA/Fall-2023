@@ -53,7 +53,7 @@ November 2023
 
 ```{r, warning = FALSE, message = FALSE, echo=FALSE}
 # Load the dataset
-data <- read.csv('./dataset/DFC_STATE.csv')
+data <- read.csv('dataset/DFC_STATE.csv')
 head(data)
 ```
 
