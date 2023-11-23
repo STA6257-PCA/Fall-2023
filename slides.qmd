@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 # title: "Understanding Principal Component Analysis (PCA)"
 # author: "Hector R. Gavilanes, Gail Han, Michael T. Mezzano"
@@ -523,3 +524,526 @@ as.data.frame(loadings_first_two_components)
 [26]R Core Team, “Lm: Fitting linear models.” R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm. [Accessed: Nov. 08, 2023]
 [27]Kuhn and Max, “Building predictive models in r using the caret package,” Journal of Statistical Software, vol. 28, no. 5, pp. 1–26, 2008, doi: 10.18637/jss.v028.i05. Available: https://www.jstatsoft.org/index.php/jss/article/view/v028i05
 [28]R. Bro and A. K. Smilde, “Principal component analysis,” Analytical methods, vol. 6, no. 9, pp. 2812–2831, 2014.
+=======
+---
+# title: "Understanding Principal Component Analysis (PCA)"
+# author: "Hector R. Gavilanes, Gail Han, Michael T. Mezzano"
+format:
+  revealjs: 
+    theme: dark
+    df-print: paged
+    width: 1600
+    height: 900
+    transition: convex
+    embed-resources: true
+    slide-number: true
+    footer: "[Return to homepage](https://sta6257-pca.github.io/Fall-2023/)"
+editor: source
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+# {background-image="images/01-Preface.jpg"}
+
+# Authors
+
+</br>
+
+|                     |                           |
+|---------------------|---------------------------|
+| Hector R. Gavilanes | Chief Information Officer |
+|            Gail Han | Chief Operating Officer   |
+|  Michael T. Mezzano | Chief Technology Officer  |
+
+</br>
+
+::: {#date style="text-align: right;"}
+University of West Florida
+
+November 2023
+:::
+
+
+# Agenda {style="margin-left:2rem;"}
+-   Introduction
+-   Method
+-   Example
+-   Application
+-   Conclusion
+
+# Principal Component Analysis (PCA)
+
+::: panel-tabset
+
+## When
+
+```{r, warning = FALSE, message = FALSE, echo=FALSE}
+# Load the dataset
+data <- read.csv('./dataset/DFC_STATE.csv')
+head(data)
+```
+
+## What
+
+-   Unsupervised Machine Learning
+-   Dimensionality Reduction Technique
+  -   Data Exploration
+  -   Feature Extraction
+  -   Data Visualization
+
+## Why
+
+-   Simplification of complex dataset
+-   Principal Component (PC): Capture variances explaining the original variables
+-   Mitigate multicollinearity 
+
+:::
+
+# Assumptions and Limitations
+
+-   Scaling Data
+-   Loss of interpretability in transformed features.
+-   Loss of Information
+
+# ![](images/multivariate_methods.png)
+
+# Why Use PCA?
+
+-   Reducing Dimensionality: Simplify high-dimensional data.
+-   Visualizing Data: Help visualize data in lower dimensions.
+-   Noise Reduction: Eliminate less relevant features.
+-   Improved Model Performance: Enhance machine learning efficiency.
+
+# Dimensionality Reduction
+
+-   Unsupervised Learning.
+-   Reduce Dimensions: Transform data by multiplying with selected eigenvectors.
+-   New Feature Space: Data exists in a lower-dimensional feature space.
+
+# Visualization
+
+-   Data Projection: Visualize data in the reduced feature space.
+-   Scatterplots: Use scatterplots to visualize data distribution.
+
+# Methods
+
+::: panel-tabset
+
+## Assumptions
+-   Data matrix $X$ of size $N$ x $P$.
+-   Data is linearly related.
+-   Continuous and normally distributed data.
+    -   Initial data distribution does not truly matter.
+-   Variables are similar in scale and without extreme outliers.
+
+## Preprocessing
+-   Missing data: Imputation or removal of observations.
+-   Centering and scaling: Transform variables to a mean of 0 and a standard deviation of 1.
+$$
+z_{np} = \frac{x_{np} - \bar{x}_{p}}{{\sigma_{p}}}
+$$
+
+## Covariance Matrix
+-   Covariance: A measure of how two random variables vary together.
+$$
+Cov(x,y) = \frac{\Sigma(x_i-\bar{x})(y_i-\bar{y})}{N}
+$$
+-   Covariance Matrix: Symmetric $p \times p$ matrix which gives the covariance values for each pair of variables in the dataset.
+
+## Eigenvectors
+-   Nonzero vector whose direction is unaffected by a linear transformation.
+-   An eigenvector is scaled by factor $\lambda$, the eigenvalue.
+-   Each principal component is given by the eigenvectors of the covariance matrix.
+    -   The eigenvectors represent the directions of the new principal axes.
+    -   The eigenvalues represent the magnitude of these eigenvectors.
+
+:::
+
+# Finding the Principal Components
+
+::: panel-tabset
+
+## Basis
+-   Find the linear combination of the columns of $X$ (the variables) which maximizes variance.
+-   Let $a$ be a vector of constants $a_1, a_2, a_3, …, a_p$ such that $Xa$ represents the linear combination which maximizes variance.
+
+## Eigendecomposition
+-   The variance of $Xa$ is represented by $var(Xa) = a^TSa$ with the covariance matrix $S$.
+-   Finding the $Xa$ with maximum variance equates to finding the vector $a$ which maximizes the quadratic $a^TSa$, where $a^Ta = 1$.
+
+## Result
+-   $a$ is a unit-norm eigenvector with eigenvalue $\lambda$ of the covariance matrix $S$.
+-   The largest eigenvalue of $S$ is $\lambda_1$ with the eigenvector $a_1$, which we can define for any eigenvector $a$: $$
+var(Xa) = a^TSa = \lambda a^Ta = \lambda
+$$
+
+:::
+
+# Principal Components
+
+::: panel-tabset
+
+## Definition
+-   Impose the restriction of orthogonality to the coefficient vectors of $S$.
+    -   Ensure the principal components are uncorrelated.
+-   The eigenvectors of $S$ represent the solutions to finding $Xa_k$ which maximize variance while minimizing correlation with prior linear combinations.
+-   Each $Xa_k$ is a principal components of the dataset having eigenvectors $a_k$ and eigenvalues $\lambda_k$.
+
+## Interpretation
+-   The elements of $Xa_k$ are the factor scores of the PCs.
+-   The elements of the eigenvectors $a_k$ represent the loadings of the PCs.
+
+## Factor scores
+-   The elements of $Xa_k$.
+-   How each observation scores on a PC.
+-   In a geometric interpretation of PCA the factor scores measure length (magnitude) on the Cartesian plane.
+-   This length represents the projection of the original observations onto the PCs from the origin at $(0, 0)$.
+
+## Loadings
+-   The elements of the eigenvectors $a_k$ represent the loadings of the PCs.
+-   The loadings represent the weights of the original variables in the computation of the PCs.
+-   The correlation from -1 to 1 of each variable with the factor score.
+
+## Summary
+-   Eigenvectors: Represent directions of maximum variance.
+-   Eigenvalues: Indicate the variance explained by each eigenvector.
+-   Sorting: Sort eigenvalues in descending order to select the most significant principal components.
+
+:::
+
+# Example
+-   For this example of PCA, the Abalone dataset from the UCI Machine Learning Repository is used.
+-   This dataset contain 4177 observations of 9 variables which record characteristics of each abalone including sex, length, diameter, height, weights, and the number of rings.
+-   The variables, apart from sex, are continuous and correlated.
+
+```{r}
+# Load dataset
+abalone <- read.csv('./abalone/abalone.csv')
+# Print the first six rows of the dataset
+head(abalone)
+```
+
+## Preprocessing the data
+-   Exclude non-numeric variables from the dataset.
+    -   The variable Sex is excluded.
+-   Check for missing data.
+    -   No missing data in the dataset.
+-   Scale and center the data.
+-   Check for and handle extreme outliers.
+    -   Outliers do not present a large problem.
+
+```{r, warning=FALSE, message=FALSE}
+# Select only the numeric variables
+library(dplyr)
+abalone <- select_if(abalone, is.numeric)
+# Standardization of numerical features
+abalone_sc <- scale(abalone, center = TRUE, scale = TRUE)
+```
+
+## Perform Principal Component Analysis
+The prcomp() function performs principal component analysis on a dataset using the singular value decomposition method with the covariance matrix of the data.
+
+```{r}
+# Apply PCA using prcomp()
+abalone_pca <- prcomp(abalone_sc)
+sum_pca <- as.data.frame(summary(abalone_pca)$importance)
+sum_pca
+```
+
+-   The standard deviation for each PC represents the information captured by that principal component.
+-   The proportion of variance is the percent of total variance captured by each PC.
+-   The cumulative proportion gives the total variance caputured by the PC and all prior PCs.
+
+## Visualizing the results
+```{r, warning=FALSE, message=FALSE}
+#PCA plots
+library(factoextra)
+fviz_pca_biplot(abalone_pca, label = "var", alpha.ind = "contrib", col.var = "blue", repel = TRUE)
+```
+
+## Interpreting the results
+-   The loadings of the first two principal components show the contribution of each variable to PC1 and PC2.
+
+```{r}
+# Eigenvector or Loadings
+eigenvector <- abalone_pca$rotation
+# Access the loadings for the first two principal components
+loadings_first_two_components <- eigenvector[, 1:2]
+# Display the loadings
+as.data.frame(loadings_first_two_components)
+```
+
+# Variance Explained
+-   Explained Variance Ratio: Calculate the ratio of each eigenvalue.
+-   Cumulative Variance: Plot cumulative explained variance to determine components to retain.
+
+# 
+
+::: columns
+::: {.column width="40%"}
+## Objective
+
+-   Weighted Combination
+-   Maximal Variance Components
+:::
+
+::: {.column width="60%"}
+### High Variance vs.
+
+### Low Variance
+
+![](images/01-Preface.jpg){width="Infinity"}
+:::
+:::
+
+# Applications of PCA
+
+-   Image Compression: Reduce image size while preserving details.
+-   Face Recognition: Reduce facial feature dimensions for classification.
+-   Anomaly Detection: Identify anomalies in large datasets.
+-   Bioinformatics: Analyze gene expression data.
+
+# Dataset
+
+-   data collected from 50 US states + 6 U.S. territories
+-   39 variables
+    -   24 patient care quality in dialysis facilities
+    -   14 characteristics of dialysis patients
+    -   Index variable: categorical variable was removed 
+
+# Dataset Summary {style="text-align:center;"}
+
+![](docs\dataset_files\figure-html\unnamed-chunk-5-1.png){fig-align="center"}
+
+<!-- -   PCA is designed for continuous numerical data. -->
+
+<!-- -   Categorical index feature removed from model. -->
+
+# Dataset Selection Rationale
+
+-   Driven by multicollinearity.
+
+-   Features less significant in explaining variability.
+
+-   All variables are numeric
+
+-   Categorical Index variable.
+
+# Data Preparation
+
+::: {.panel-tabset style="font-size: 85%;"}
+### Editing
+
+-   Efficient removal of white spaces in the dataset.
+
+-   Editing variable names to enhance readability and meaningful.
+
+### Example
+
+`Original:` "Percentage.Of.Adult..Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL."
+
+`Edited:` "hypercalcemia_calcium \> 10.2Mg."
+:::
+
+# Missing Values {style="text-align:center;"}
+
+![](docs\dataset_files\figure-html\unnamed-chunk-5-2.png){fig-align="center"}
+
+-   34 missing values.
+
+-   Imputation of missing values using the $Mean$ ($\mu$)
+
+# Distribution {style="text-align:center;"}
+
+![](docs\dataset_files\figure-html\unnamed-chunk-7-1.png){fig-align="center"}
+
+-   Normality is not assumed.
+
+# QQ-Plot of Residuals {style="text-align:center;"}
+
+![](docs\dataset_files\figure-html\unnamed-chunk-8-2.png){fig-align="center"}
+
+-   Outliers are present through the entire dataset
+
+# Standardization {style="text-align:center;"}
+
+-   Mean ($\mu$=0); Standard Deviation ($\sigma$= 1)
+
+    $$
+    Z = \frac{{ x - \mu }}{{ \sigma }}
+    $$
+
+    $$
+    Z \sim N(0,1)
+    $$
+
+# Outliers & Leverage
+
+::: columns
+::: {.column width="50%" style="font-size: 85%;"}
+-   3 Outliers
+
+-   No leverage
+
+![](docs\analysis_files\figure-html\unnamed-chunk-12-1.png)
+:::
+
+::: {.column width="50%" style="font-size: 85%;"}
+-   Minimal difference.
+
+-   No observations removed.
+
+![](docs\analysis_files\figure-html\unnamed-chunk-13-1.png)
+:::
+:::
+<!-- --Slide-- -->
+# Correlations {style="text-align:center;"}
+:::: {.columns}
+
+::: {.column width="40%"}
+- Multicollinearity is present.
+- Threshold = 0.30.
+- 28 Correlated features. 
+
+:::
+
+::: {.column width="60%"}
+![](docs\analysis_files\figure-html\unnamed-chunk-15-1.png){width="Infinity"}
+:::
+
+::::
+
+<!-- --Slide-- -->
+# Scree Plot {style="text-align:center;"}
+:::: {.columns}
+
+::: {.column width="40%"}
+- PC1 explains 40.8% variance.
+- PC2 explains 9.5% variance.
+:::
+
+::: {.column width="60%"}
+![](docs\analysis_files\figure-html\unnamed-chunk-21-1.png)
+:::
+
+::::
+
+
+<!-- --Slide-- -->
+# BiPlot {style="text-align:center;"}
+:::: {.columns}
+
+::: {.column width="40%"}
+- PC1 in black displays longest distance of its projection.
+- PC2 in blue displays shorter distance as expected.
+:::
+
+::: {.column width="60%"}
+![](docs\analysis_files\figure-html\unnamed-chunk-23-1.png)
+:::
+
+::::
+
+
+<!-- --Slide-- -->
+# Correlation Circle {style="text-align:center;"}
+![Distance measures quality of variables.](docs\analysis_files\figure-html\unnamed-chunk-24-1.png)
+
+
+<!-- --Slide-- -->
+# Contribution of Variables {style="text-align:center;"}
+:::: {.columns}
+
+::: {.column width="50%"}
+ ![](docs\analysis_files\figure-html\unnamed-chunk-25-1.png)
+:::
+
+::: {.column width="50%"}
+ ![](docs\analysis_files\figure-html\unnamed-chunk-24-2.png)
+:::
+
+::::
+
+<!-- --Slide-- -->
+# Uncorrelated Matrix {style="text-align:center;"}
+
+![8 Principal Components](docs/analysis_files/figure-html/unnamed-chunk-30-1.png){width="50%" fig-align="center"}
+
+
+<!-- --Slide-- -->
+# Results
+
+::: panel-tabset
+
+## Principal Components
+-   Principal component analysis was performed using a singular value decomposition approach.
+-   PC1 captures 40.80% of the variance in the data.
+    -   PC1 and PC2 capture 50.27% of the variance.
+        -   The first four PCs capture 67.66% of the variance, or just over two-thirds.
+-   After the fourth PC, the variance captured by each successive PC begins to diminish relative to PCs one through four.
+    -   The first ten PCs capture 88.67% of the variance.
+        -   Over 90% of the information in the dataset can be explained by the first eleven PCs.
+
+## Contributions to PCs
+-   The variables which contribute the most to PC1 are
+    -   expected_hospital_readmission
+    -   expected_transfusion
+    -   expected_hospitalization
+-   PC2, which is orthogonal to PC1, has relatively large contributions from the five variables measuring levels of phosphorus.
+
+## PCR
+-   Principal component regression was performed with expected_survival used as the response variable.
+-   The estimates and significance of each PC regressor demonstrates the differences between variance captured from the data and usefulness in a linear model.
+    -   For example, PC4 is a significant regressor despite capturing less variance than PC3 in the training data.
+-   Both models produced an $R^2$ above 96% and a predicted $R^2$ above 95% with a 1% advantage on the cross-validation model.
+
+:::
+
+# PCA in Machine Learning
+
+-   Feature Selection: Use PCA to select relevant features.
+-   Model Training: Enhance model performance by reducing dimensionality.
+-   Preprocessing: Standardize and normalize data before applying PCA.
+
+# Discussion & Conclusion
+
+-   Summary: PCA is an unsupervised learning technique for dimensionality reduction and data visualization.
+-   Key Takeaways: Understand eigenvectors, eigenvalues, and explained variance.
+
+# Questions and Comments
+
+-   Open the floor for questions from the audience.
+
+# References
+
+[1]M. Ringnér, “What is principal component analysis?” Nature biotechnology, vol. 26, no. 3, pp. 303–304, 2008.
+[2]I. T. Jolliffe and J. Cadima, “Principal component analysis: A review and recent developments,” Philosophical transactions of the royal society A: Mathematical, Physical and Engineering Sciences, vol. 374, no. 2065, p. 20150202, 2016.
+[3]B. M. S. Hasan and A. M. Abdulazeez, “A review of principal component analysis algorithm for dimensionality reduction,” Journal of Soft Computing and Data Mining, vol. 2, no. 1, pp. 20–30, 2021.
+[4]B. Everitt and T. Hothorn, An introduction to applied multivariate analysis with r. Springer Science & Business Media, 2011.
+[5]M. Greenacre, P. J. Groenen, T. Hastie, A. I. d’Enza, A. Markos, and E. Tuzhilina, “Principal component analysis,” Nature Reviews Methods Primers, vol. 2, no. 1, p. 100, 2022.
+[6]K. Pearson, “LIII. On lines and planes of closest fit to systems of points in space,” The London, Edinburgh, and Dublin philosophical magazine and journal of science, vol. 2, no. 11, pp. 559–572, 1901.
+[7]R. A. Fisher and W. A. Mackenzie, “Studies in crop variation. II. The manurial response of different potato varieties,” The Journal of Agricultural Science, vol. 13, no. 3, pp. 311–320, 1923.
+[8]H. Hotelling, “Analysis of a complex of statistical variables into principal components.” Journal of educational psychology, vol. 24, no. 6, p. 417, 1933.
+[9]D. Esposito and F. Esposito, Introducing machine learning. Microsoft Press, 2020.
+[10]M. Turk and A. Pentland, “Eigenfaces for recognition,” Journal of cognitive neuroscience, vol. 3, no. 1, pp. 71–86, 1991.
+[11]S. Zhang and M. Turk, “Eigenfaces,” Scholarpedia, vol. 3, no. 9, p. 4244, 2008.
+[12]F. Pedregosa et al., “Scikit-learn: Machine learning in python,” the Journal of machine Learning research, vol. 12, pp. 2825–2830, 2011.
+[13]J. Maindonald and J. Braun, Data analysis and graphics using r: An example-based approach, vol. 10. Cambridge University Press, 2006.
+[14]J. Lever, M. Krzywinski, and N. Altman, “Points of significance: Principal component analysis,” Nature methods, vol. 14, no. 7, pp. 641–643, 2017.
+[15]F. L. Gewers et al., “Principal component analysis: A natural approach to data exploration,” ACM Computing Surveys (CSUR), vol. 54, no. 4, pp. 1–34, 2021.
+[16]J. Hopcroft and R. Kannan, Foundations of data science. 2014.
+[17]“Quarterly dialysis facility care compare (QDFCC) report: July 2023.” Centers for Medicare & Medicaid Services (CMS). Available: https://data.cms.gov/provider-data/dataset/2fpu-cgbb. [Accessed: Oct. 11, 2023]
+[18]R Core Team, “Prcomp, a function of r: A language and environment for statistical computing.” R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp. [Accessed: Oct. 16, 2023]
+[19]S. R. Bennett, “Linear algebra for data science.” 2021. Available: https://shainarace.github.io/LinearAlgebra/index.html. [Accessed: Oct. 16, 2023]
+[20]D. G. Luenberger, Optimization by vector space methods. John Wiley & Sons, 1997.
+[21]S. Nash Warwick and W. Ford, “Abalone.” UCI Machine Learning Repository, 1995.
+[22]J. Pagès, Multiple factor analysis by example using r. CRC Press, 2014.
+[23]E. K. CS, “PCA problem / how to compute principal components / KTU machine learning.” YouTube, 2020. Available: https://youtu.be/MLaJbA82nzk. [Accessed: Nov. 01, 2023]
+[24]F. Chumney, “PCA, EFA, CFA,” pp. 2–3, 6, Sep., 2012, Available: https://www.westga.edu/academics/research/vrc/assets/docs/PCA-EFA-CFA_EssayChumney_09282012.pdf
+[25]H. Abdi and L. J. Williams, “Principal component analysis,” WIREs Computational Statistics, vol. 2, no. 4, pp. 433–459, 2010, doi: https://doi.org/10.1002/wics.101. Available: https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101
+[26]R Core Team, “Lm: Fitting linear models.” R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm. [Accessed: Nov. 08, 2023]
+[27]Kuhn and Max, “Building predictive models in r using the caret package,” Journal of Statistical Software, vol. 28, no. 5, pp. 1–26, 2008, doi: 10.18637/jss.v028.i05. Available: https://www.jstatsoft.org/index.php/jss/article/view/v028i05
+[28]R. Bro and A. K. Smilde, “Principal component analysis,” Analytical methods, vol. 6, no. 9, pp. 2812–2831, 2014.
+>>>>>>> caf29682f5f5a6e02da25e6b7bdbff6cb51243a7
