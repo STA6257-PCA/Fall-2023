@@ -207,7 +207,7 @@ head(abalone)
 -   Check for and handle extreme outliers.
     -   Outliers do not present a large problem.
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 # Select only the numeric variables
 library(dplyr)
 abalone <- select_if(abalone, is.numeric)
@@ -230,7 +230,7 @@ sum_pca
 -   The cumulative proportion gives the total variance caputured by the PC and all prior PCs.
 
 ## Visualizing the results
-```{r}
+```{r, warning=FALSE, message=FALSE}
 #PCA plots
 library(factoextra)
 fviz_pca_biplot(abalone_pca, label = "var", alpha.ind = "contrib", col.var = "blue", repel = TRUE)
@@ -441,7 +441,7 @@ as.data.frame(loadings_first_two_components)
 <!-- --Slide-- -->
 # Uncorrelated Matrix {style="text-align:center;"}
 
-![8 Uncorrelated Principal Components](docs/analysis_files/figure-html/unnamed-chunk-30-1.png){width="50%" fig-align="center"}
+![8 Principal Components](docs/analysis_files/figure-html/unnamed-chunk-30-1.png){width="50%" fig-align="center"}
 
 
 <!-- --Slide-- -->
