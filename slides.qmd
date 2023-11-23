@@ -39,7 +39,7 @@ November 2023
 :::
 
 
-# Agenda {style="margin-left:2rem;"}
+# Agenda {style="margin-left:3rem;"}
 -   Introduction
 -   Method
 -   Example
@@ -444,6 +444,10 @@ as.data.frame(loadings_first_two_components)
 
 ![8 Principal Components](docs/analysis_files/figure-html/unnamed-chunk-30-1.png){width="50%" fig-align="center"}
 
+<!-- --Slide-- -->
+# 8 PC Regression{style="text-align:center;"}
+
+![](images/8pc_regression.png){width="50%" fig-align="center"}
 
 <!-- --Slide-- -->
 # Results
