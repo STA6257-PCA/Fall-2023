@@ -39,7 +39,7 @@ November 2023
 :::
 
 
-# Agenda {style="text-align:center;"}
+# Agenda {style="margin-left:2rem;"}
 -   Introduction
 -   Method
 -   Example
@@ -426,15 +426,28 @@ as.data.frame(loadings_first_two_components)
 
 
 <!-- --Slide-- -->
+<!-- # Contribution of Variables {style="text-align:center;"} -->
+<!-- :::: {.columns} -->
+
+<!-- ::: {.column width="50%"} -->
+<!--  ![](docs\analysis_files\figure-html\unnamed-chunk-25-1.png) --> 
+<!-- ::: -->
+
+<!-- ::: {.column width="50%"} -->
+<!--  ![](docs\analysis_files\figure-html\unnamed-chunk-25-2.png) --> 
+<!-- ::: -->
+
+<!-- :::: -->
+<!-- --Slide-- -->
 # Contribution of Variables {style="text-align:center;"}
 :::: {.columns}
 
 ::: {.column width="50%"}
-![](docs\analysis_files\figure-html\unnamed-chunk-25-1.png)
+Left column
 :::
 
 ::: {.column width="50%"}
-![](docs\analysis_files\figure-html\unnamed-chunk-25-2.png)
+Right column
 :::
 
 ::::
