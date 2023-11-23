@@ -426,31 +426,19 @@ as.data.frame(loadings_first_two_components)
 
 
 <!-- --Slide-- -->
-<!-- # Contribution of Variables {style="text-align:center;"} -->
-<!-- :::: {.columns} -->
-
-<!-- ::: {.column width="50%"} -->
-<!--  ![](docs\analysis_files\figure-html\unnamed-chunk-25-1.png) --> 
-<!-- ::: -->
-
-<!-- ::: {.column width="50%"} -->
-<!--  ![](docs\analysis_files\figure-html\unnamed-chunk-25-2.png) --> 
-<!-- ::: -->
-
-<!-- :::: -->
-<!-- --Slide-- -->
 # Contribution of Variables {style="text-align:center;"}
 :::: {.columns}
 
 ::: {.column width="50%"}
-Left column
+ ![](docs\analysis_files\figure-html\unnamed-chunk-25-1.png)
 :::
 
 ::: {.column width="50%"}
-Right column
+ ![](docs\analysis_files\figure-html\unnamed-chunk-24-2.png)
 :::
 
 ::::
+
 <!-- --Slide-- -->
 # Uncorrelated Matrix {style="text-align:center;"}
 
