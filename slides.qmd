@@ -464,9 +464,21 @@ test_set <- test_set[c(2:9, 1)]
 ![8 Principal Components](docs/analysis_files/figure-html/unnamed-chunk-30-1.png){width="50%" fig-align="center"}
 
 <!-- --Slide-- -->
-# 8 PC Regression{style="text-align:center;"}
+# PC Regression{style="text-align:center;"}
+:::: {.columns}
 
-![](images/8pc_regression.png){width="50%" fig-align="center"}
+::: {.column}
+![8 Components](images/8pc_regression.png){fig-align="center"}
+:::
+
+::: {.column}
+![2 Components](images/2pc_regression.png){fig-align="center"}
+:::
+
+::::
+
+
+
 
 <!-- --Slide-- -->
 # Results
