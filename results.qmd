@@ -1,6 +1,6 @@
 # Results
 
-The Dialysis dataset consists of 55 observations of 39 variables with 1 discrete variable (States/Territories) and 38 continuous variables. For the principal component analysis, 37 of the 38 continuous variables were used; the variable expected_survival was excluded from PCA in order to use it as a target for model building in the latter part of the analysis.
+The Dialysis dataset consists of 56 observations of 39 variables with 1 discrete variable (States/Territories) and 38 continuous variables. For the principal component analysis, 37 of the 38 continuous variables were used; the variable expected_survival was excluded from PCA in order to use it as a target for model building in the latter part of the analysis.
 
 Principal component analysis was performed using a singular value decomposition approach. Among the resulting principal components, the first PC captures 40.80% of the variance in the data, and the first two principal components capture 50.27% of the variance. The first four PCs capture 67.66% of the variance, or just over two-thirds; after the fourth PC, the variance captured by each successive PC begins to diminish relative to PCs one through four. The first ten PCs capture 88.67% of the variance, and in terms of dimensionality reduction over 90% of the information in the dataset can be explained by only 11 PCs when compared to the original 38 continuous variables.
 
