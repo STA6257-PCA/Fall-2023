@@ -299,6 +299,7 @@ div.csl-indent {
 
 </header>
 
+<!-- {{< include _libraries.qmd >}} -->
 <section id="data-preparation" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">5.1</span> Data Preparation</h2>
 <p>This analysis uses the Dialysis dataset introduced previously in the Dataset chapter. Within this context, we restructured the variables, enhancing their meaningfulness and facilitating inferential analysis. Additionally, the mean imputation approach addressed missing values.</p>
@@ -307,10 +308,10 @@ div.csl-indent {
 <h2 data-number="5.2" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">5.2</span> Assumptions</h2>
 <p>PCA relies on certain assumptions, the fulfillment of which is essential for the validity of this technique.</p>
 <ul>
-<li><p><strong>Linearity</strong>: PCA assumes that the dataset is a linear combination of the variables. The variables exhibit relationships among themselves <span class="citation" data-cites="chumney2012pcaefa"><a href="references.html#ref-chumney2012pcaefa" role="doc-biblioref">[1]</a></span>.</p></li>
+<li><p><strong>Linearity</strong>: PCA assumes that the dataset is a linear combination of the variables. The variables exhibit relationships among themselves <span class="citation" data-cites="chumney2012pcaefa"><a href="#ref-chumney2012pcaefa" role="doc-biblioref">[1]</a></span>.</p></li>
 <li><p><strong>Importance of mean and covariance</strong>: PCA assumes that the directions of maximum variance will contain good features for discrimination.</p></li>
 <li><p><strong>Correlation between features</strong>: PCA assumes a correlation between features.</p></li>
-<li><p><strong>Normalization of data</strong>: Normalization of data is necessary to apply PCA. Unscaled data can cause relative comparison problems of the dataset <span class="citation" data-cites="chumney2012pcaefa"><a href="references.html#ref-chumney2012pcaefa" role="doc-biblioref">[1]</a></span>. In addition, the data should contain no significant outliers.</p></li>
+<li><p><strong>Normalization of data</strong>: Normalization of data is necessary to apply PCA. Unscaled data can cause relative comparison problems of the dataset <span class="citation" data-cites="chumney2012pcaefa"><a href="#ref-chumney2012pcaefa" role="doc-biblioref">[1]</a></span>. In addition, the data should contain no significant outliers.</p></li>
 <li><p><strong>Orthogonality</strong>: The principal components are orthogonal to each other.</p></li>
 <li><p><strong>Sampling adequacy</strong>: PCA assumes that there is sampling adequacy.</p></li>
 </ul>
@@ -365,7 +366,7 @@ Z \sim N(0,1)
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
@@ -380,7 +381,7 @@ Z \sim N(0,1)
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Dependent Variable Outliers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -401,7 +402,7 @@ Z \sim N(0,1)
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ols_plot_resid_lev</span>(ordinary_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -426,7 +427,7 @@ Z \sim N(0,1)
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ols_plot_resid_lev</span>(no_outliers_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -590,7 +591,7 @@ Z \sim N(0,1)
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>corrplot<span class="sc">::</span><span class="fu">corrplot</span>(corr_matrix, <span class="at">type =</span> <span class="st">"full"</span>, <span class="at">tl.pos =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -2356,14 +2357,14 @@ waitlist worse</td>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(data_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="biplot" class="level3" data-number="5.7.2">
 <h3 data-number="5.7.2" class="anchored" data-anchor-id="biplot"><span class="header-section-number">5.7.2</span> Biplot</h3>
 <ul>
-<li><p>The correlation between a variable and a principal component (PC) is used as the coordinates of the variable on the PC. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations <span class="citation" data-cites="abdi2010principal"><a href="references.html#ref-abdi2010principal" role="doc-biblioref">[2]</a></span>.</p></li>
+<li><p>The correlation between a variable and a principal component (PC) is used as the coordinates of the variable on the PC. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations <span class="citation" data-cites="abdi2010principal"><a href="#ref-abdi2010principal" role="doc-biblioref">[2]</a></span>.</p></li>
 <li><p>PC1 is represented in black which displays the longest distance of its projection.</p></li>
 <li><p>PC2 is represented in blue which displays a shorter distance as expected.</p></li>
 </ul>
@@ -2375,7 +2376,7 @@ waitlist worse</td>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">geom.var =</span> <span class="st">"arrow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -2397,7 +2398,7 @@ waitlist worse</td>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -2425,7 +2426,7 @@ waitlist worse</td>
 <span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Code</summary>
@@ -2447,7 +2448,7 @@ waitlist worse</td>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -2683,7 +2684,7 @@ waitlist worse</td>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -3336,7 +3337,7 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 </ul>
 
 
-<div id="refs" class="references csl-bib-body" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body" role="list">
 <div id="ref-chumney2012pcaefa" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline">F. Chumney, <span>“PCA, EFA, CFA,”</span> pp. 2–3, 6, Sep., 2012, Available: <a href="https://www.westga.edu/academics/research/vrc/assets/docs/PCA-EFA-CFA_EssayChumney_09282012.pdf">https://www.westga.edu/academics/research/vrc/assets/docs/PCA-EFA-CFA_EssayChumney_09282012.pdf</a></div>
 </div>

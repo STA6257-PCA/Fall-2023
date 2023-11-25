@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 ---
-# title: "Understanding Principal Component Analysis (PCA)"
-# author: "Hector R. Gavilanes, Gail Han, Michael T. Mezzano"
 format:
   revealjs: 
     theme: dark
@@ -249,28 +246,27 @@ loadings_first_two_components <- eigenvector[, 1:2]
 as.data.frame(loadings_first_two_components)
 ```
 
-# Variance Explained
--   Explained Variance Ratio: Calculate the ratio of each eigenvalue.
--   Cumulative Variance: Plot cumulative explained variance to determine components to retain.
+<!-- # Variance Explained -->
+<!-- -   Explained Variance Ratio: Calculate the ratio of each eigenvalue. -->
+<!-- -   Cumulative Variance: Plot cumulative explained variance to determine components to retain. -->
 
-# 
 
-::: columns
-::: {.column width="40%"}
-## Objective
+<!-- ::: columns -->
+<!-- ::: {.column width="40%"} -->
+<!-- ## Objective -->
 
--   Weighted Combination
--   Maximal Variance Components
-:::
+<!-- -   Weighted Combination -->
+<!-- -   Maximal Variance Components -->
+<!-- ::: -->
 
-::: {.column width="60%"}
-### High Variance vs.
+<!-- ::: {.column width="60%"} -->
+<!-- ### High Variance vs. -->
 
-### Low Variance
+<!-- ### Low Variance -->
 
-![](images/01-Preface.jpg){width="Infinity"}
-:::
-:::
+<!-- ![](images/01-Preface.jpg){width="Infinity"} -->
+<!-- ::: -->
+<!-- ::: -->
 
 # Applications of PCA
 
@@ -415,15 +411,15 @@ as.data.frame(loadings_first_two_components)
 :::
 
 ::: {.column width="60%"}
-![](docs\analysis_files\figure-html\unnamed-chunk-23-1.png)
+![](docs\analysis_files\figure-html\unnamed-chunk-22-1.png)
 :::
 
 ::::
 
 
 <!-- --Slide-- -->
-# Correlation Circle {style="text-align:center;"}
-![Distance measures quality of variables.](docs\analysis_files\figure-html\unnamed-chunk-24-1.png)
+<!-- # Correlation Circle {style="text-align:center;"} -->
+<!-- ![Distance measures quality of variables.](docs\analysis_files\figure-html\unnamed-chunk-24-1.png) -->
 
 
 <!-- --Slide-- -->
@@ -439,6 +435,59 @@ as.data.frame(loadings_first_two_components)
 :::
 
 ::::
+
+<!-- --Slide-- -->
+# PCA in Machine Learning
+
+-   Feature Extraction: Use relevant features to create principal components.
+-   Preprocessing: Standardize, or normalize data before applying PCA.
+-   Model Training: Enhance model performance by reducing dimensionality.
+
+<!-- --Slide-- -->
+# Modeling
+::: panel-tabset
+## Data Split
+```{r, echo=TRUE, eval=FALSE}
+# reproducible random sampling
+set.seed(my_seed)  
+ 
+# Create Target y-variable for the training set
+y <- train_data$expected_survival  
+# Split the data into training and test sets 
+split <- sample.split(y, SplitRatio = 0.7) 
+training_set <- subset(train_data, split == TRUE) 
+test_set <- subset(train_data, split == FALSE) 
+```
+
+## Standardization
+```{r, echo=TRUE, eval=FALSE}
+# Perform centering and scaling on the training and test sets
+sc <- preProcess(training_set[, -target_index], 
+                 method = c("center", "scale"))
+training_set[, -target_index] <- predict(
+  sc, training_set[, -target_index])
+test_set[, -target_index] <- predict(sc, test_set[, -target_index])
+```
+
+## PCA Application
+```{r, echo=TRUE, eval=FALSE}
+# Perform Principal Component Analysis (PCA) preprocessing on the training data
+pca <- preProcess(training_set[, -target_index], 
+                  method = 'pca', pcaComp = 8)
+
+# Apply PCA transformation to original training set
+training_set <- predict(pca, training_set)
+
+# Reorder columns, moving the dependent feature index to the end
+training_set <- training_set[c(2:9, 1)]
+
+# Apply PCA transformation to original test set
+test_set <- predict(pca, test_set)
+
+# Reorder columns, moving the dependent feature index to the end
+test_set <- test_set[c(2:9, 1)]
+```
+:::
 
 <!-- --Slide-- -->
 # Uncorrelated Matrix {style="text-align:center;"}
@@ -479,12 +528,9 @@ as.data.frame(loadings_first_two_components)
 
 :::
 
-# PCA in Machine Learning
 
--   Feature Selection: Use PCA to select relevant features.
--   Model Training: Enhance model performance by reducing dimensionality.
--   Preprocessing: Standardize and normalize data before applying PCA.
 
+<!-- Slide -->
 # Discussion & Conclusion
 
 -   Summary: PCA is an unsupervised learning technique for dimensionality reduction and data visualization.
@@ -492,38 +538,41 @@ as.data.frame(loadings_first_two_components)
 
 # Questions and Comments
 
--   Open the floor for questions from the audience.
+<!-- Slide -->
 
-# References
+# References {.scrollable style="font-size:15px"}
 
-[1]M. Ringnér, “What is principal component analysis?” Nature biotechnology, vol. 26, no. 3, pp. 303–304, 2008.
-[2]I. T. Jolliffe and J. Cadima, “Principal component analysis: A review and recent developments,” Philosophical transactions of the royal society A: Mathematical, Physical and Engineering Sciences, vol. 374, no. 2065, p. 20150202, 2016.
-[3]B. M. S. Hasan and A. M. Abdulazeez, “A review of principal component analysis algorithm for dimensionality reduction,” Journal of Soft Computing and Data Mining, vol. 2, no. 1, pp. 20–30, 2021.
-[4]B. Everitt and T. Hothorn, An introduction to applied multivariate analysis with r. Springer Science & Business Media, 2011.
-[5]M. Greenacre, P. J. Groenen, T. Hastie, A. I. d’Enza, A. Markos, and E. Tuzhilina, “Principal component analysis,” Nature Reviews Methods Primers, vol. 2, no. 1, p. 100, 2022.
-[6]K. Pearson, “LIII. On lines and planes of closest fit to systems of points in space,” The London, Edinburgh, and Dublin philosophical magazine and journal of science, vol. 2, no. 11, pp. 559–572, 1901.
-[7]R. A. Fisher and W. A. Mackenzie, “Studies in crop variation. II. The manurial response of different potato varieties,” The Journal of Agricultural Science, vol. 13, no. 3, pp. 311–320, 1923.
-[8]H. Hotelling, “Analysis of a complex of statistical variables into principal components.” Journal of educational psychology, vol. 24, no. 6, p. 417, 1933.
-[9]D. Esposito and F. Esposito, Introducing machine learning. Microsoft Press, 2020.
-[10]M. Turk and A. Pentland, “Eigenfaces for recognition,” Journal of cognitive neuroscience, vol. 3, no. 1, pp. 71–86, 1991.
-[11]S. Zhang and M. Turk, “Eigenfaces,” Scholarpedia, vol. 3, no. 9, p. 4244, 2008.
-[12]F. Pedregosa et al., “Scikit-learn: Machine learning in python,” the Journal of machine Learning research, vol. 12, pp. 2825–2830, 2011.
-[13]J. Maindonald and J. Braun, Data analysis and graphics using r: An example-based approach, vol. 10. Cambridge University Press, 2006.
-[14]J. Lever, M. Krzywinski, and N. Altman, “Points of significance: Principal component analysis,” Nature methods, vol. 14, no. 7, pp. 641–643, 2017.
-[15]F. L. Gewers et al., “Principal component analysis: A natural approach to data exploration,” ACM Computing Surveys (CSUR), vol. 54, no. 4, pp. 1–34, 2021.
-[16]J. Hopcroft and R. Kannan, Foundations of data science. 2014.
-[17]“Quarterly dialysis facility care compare (QDFCC) report: July 2023.” Centers for Medicare & Medicaid Services (CMS). Available: https://data.cms.gov/provider-data/dataset/2fpu-cgbb. [Accessed: Oct. 11, 2023]
-[18]R Core Team, “Prcomp, a function of r: A language and environment for statistical computing.” R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp. [Accessed: Oct. 16, 2023]
-[19]S. R. Bennett, “Linear algebra for data science.” 2021. Available: https://shainarace.github.io/LinearAlgebra/index.html. [Accessed: Oct. 16, 2023]
-[20]D. G. Luenberger, Optimization by vector space methods. John Wiley & Sons, 1997.
-[21]S. Nash Warwick and W. Ford, “Abalone.” UCI Machine Learning Repository, 1995.
-[22]J. Pagès, Multiple factor analysis by example using r. CRC Press, 2014.
-[23]E. K. CS, “PCA problem / how to compute principal components / KTU machine learning.” YouTube, 2020. Available: https://youtu.be/MLaJbA82nzk. [Accessed: Nov. 01, 2023]
-[24]F. Chumney, “PCA, EFA, CFA,” pp. 2–3, 6, Sep., 2012, Available: https://www.westga.edu/academics/research/vrc/assets/docs/PCA-EFA-CFA_EssayChumney_09282012.pdf
-[25]H. Abdi and L. J. Williams, “Principal component analysis,” WIREs Computational Statistics, vol. 2, no. 4, pp. 433–459, 2010, doi: https://doi.org/10.1002/wics.101. Available: https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101
-[26]R Core Team, “Lm: Fitting linear models.” R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm. [Accessed: Nov. 08, 2023]
-[27]Kuhn and Max, “Building predictive models in r using the caret package,” Journal of Statistical Software, vol. 28, no. 5, pp. 1–26, 2008, doi: 10.18637/jss.v028.i05. Available: https://www.jstatsoft.org/index.php/jss/article/view/v028i05
-[28]R. Bro and A. K. Smilde, “Principal component analysis,” Analytical methods, vol. 6, no. 9, pp. 2812–2831, 2014.
+1. M. Ringnér, “What is principal component analysis?” Nature biotechnology, vol. 26, no. 3, pp. 303–304, 2008.
+2. I. T. Jolliffe and J. Cadima, “Principal component analysis: A review and recent developments,” Philosophical transactions of the royal society A: Mathematical, Physical and Engineering Sciences, vol. 374, no. 2065, p. 20150202, 2016.
+3. B. M. S. Hasan and A. M. Abdulazeez, “A review of principal component analysis algorithm for dimensionality reduction,” Journal of Soft Computing and Data Mining, vol. 2, no. 1, pp. 20–30, 2021.
+4. B. Everitt and T. Hothorn, An introduction to applied multivariate analysis with r. Springer Science & Business Media, 2011.
+5. M. Greenacre, P. J. Groenen, T. Hastie, A. I. d’Enza, A. Markos, and E. Tuzhilina, “Principal component analysis,” Nature Reviews Methods Primers, vol. 2, no. 1, p. 100, 2022.
+6. K. Pearson, “LIII. On lines and planes of closest fit to systems of points in space,” The London, Edinburgh, and Dublin philosophical magazine and journal of science, vol. 2, no. 11, pp. 559–572, 1901.
+7. R. A. Fisher and W. A. Mackenzie, “Studies in crop variation. II. The manurial response of different potato varieties,” The Journal of Agricultural Science, vol. 13, no. 3, pp. 311–320, 1923.
+8. H. Hotelling, “Analysis of a complex of statistical variables into principal components.” Journal of educational psychology, vol. 24, no. 6, p. 417, 1933.
+9. D. Esposito and F. Esposito, Introducing machine learning. Microsoft Press, 2020.
+10. M. Turk and A. Pentland, “Eigenfaces for recognition,” Journal of cognitive neuroscience, vol. 3, no. 1, pp. 71–86, 1991.
+11. S. Zhang and M. Turk, “Eigenfaces,” Scholarpedia, vol. 3, no. 9, p. 4244, 2008.
+12. F. Pedregosa et al., “Scikit-learn: Machine learning in python,” the Journal of machine Learning research, vol. 12, pp. 2825–2830, 2011.
+13. J. Maindonald and J. Braun, Data analysis and graphics using r: An example-based approach, vol. 10. Cambridge University Press, 2006.
+14. J. Lever, M. Krzywinski, and N. Altman, “Points of significance: Principal component analysis,” Nature methods, vol. 14, no. 7, pp. 641–643, 2017.
+15. F. L. Gewers et al., “Principal component analysis: A natural approach to data exploration,” ACM Computing Surveys (CSUR), vol. 54, no. 4, pp. 1–34, 2021.
+16. J. Hopcroft and R. Kannan, Foundations of data science. 2014.
+17. “Quarterly dialysis facility care compare (QDFCC) report: July 2023.” Centers for Medicare & Medicaid Services (CMS). Available: https://data.cms.gov/provider-data/dataset/2fpu-cgbb. [Accessed: Oct. 11, 2023]
+18. R Core Team, “Prcomp, a function of r: A language and environment for statistical computing.” R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp. [Accessed: Oct. 16, 2023]
+19. S. R. Bennett, “Linear algebra for data science.” 2021. Available: https://shainarace.github.io/LinearAlgebra/index.html. [Accessed: Oct. 16, 2023]
+20. D. G. Luenberger, Optimization by vector space methods. John Wiley & Sons, 1997.
+21. S. Nash Warwick and W. Ford, “Abalone.” UCI Machine Learning Repository, 1995.
+22. J. Pagès, Multiple factor analysis by example using r. CRC Press, 2014.
+23. E. K. CS, “PCA problem / how to compute principal components / KTU machine learning.” YouTube, 2020. Available: https://youtu.be/MLaJbA82nzk. [Accessed: Nov. 01, 2023]
+24. F. Chumney, “PCA, EFA, CFA,” pp. 2–3, 6, Sep., 2012, Available: https://www.westga.edu/academics/research/vrc/assets/docs/PCA-EFA-CFA_EssayChumney_09282012.pdf
+25. H. Abdi and L. J. Williams, “Principal component analysis,” WIREs Computational Statistics, vol. 2, no. 4, pp. 433–459, 2010, doi: https://doi.org/10.1002/wics.101. Available: https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101
+26. R Core Team, “Lm: Fitting linear models.” R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm. [Accessed: Nov. 08, 2023]
+27. Kuhn and Max, “Building predictive models in r using the caret package,” Journal of Statistical Software, vol. 28, no. 5, pp. 1–26, 2008, doi: 10.18637/jss.v028.i05. Available: https://www.jstatsoft.org/index.php/jss/article/view/v028i05
+28. R. Bro and A. K. Smilde, “Principal component analysis,” Analytical methods, vol. 6, no. 9, pp. 2812–2831, 2014.
+
+
+<!-- Duplicated 
 =======
 ---
 # title: "Understanding Principal Component Analysis (PCA)"
@@ -775,29 +824,6 @@ loadings_first_two_components <- eigenvector[, 1:2]
 as.data.frame(loadings_first_two_components)
 ```
 
-# Variance Explained
--   Explained Variance Ratio: Calculate the ratio of each eigenvalue.
--   Cumulative Variance: Plot cumulative explained variance to determine components to retain.
-
-# 
-
-::: columns
-::: {.column width="40%"}
-## Objective
-
--   Weighted Combination
--   Maximal Variance Components
-:::
-
-::: {.column width="60%"}
-### High Variance vs.
-
-### Low Variance
-
-![](images/01-Preface.jpg){width="Infinity"}
-:::
-:::
-
 # Applications of PCA
 
 -   Image Compression: Reduce image size while preserving details.
@@ -816,10 +842,6 @@ as.data.frame(loadings_first_two_components)
 # Dataset Summary {style="text-align:center;"}
 
 ![](docs\dataset_files\figure-html\unnamed-chunk-5-1.png){fig-align="center"}
-
-<!-- -   PCA is designed for continuous numerical data. -->
-
-<!-- -   Categorical index feature removed from model. -->
 
 # Dataset Selection Rationale
 
@@ -898,7 +920,7 @@ as.data.frame(loadings_first_two_components)
 ![](docs\analysis_files\figure-html\unnamed-chunk-13-1.png)
 :::
 :::
-<!-- --Slide-- -->
+<!-- --Slide-- 
 # Correlations {style="text-align:center;"}
 :::: {.columns}
 
@@ -915,7 +937,7 @@ as.data.frame(loadings_first_two_components)
 
 ::::
 
-<!-- --Slide-- -->
+<!-- --Slide-- 
 # Scree Plot {style="text-align:center;"}
 :::: {.columns}
 
@@ -931,7 +953,7 @@ as.data.frame(loadings_first_two_components)
 ::::
 
 
-<!-- --Slide-- -->
+<!-- --Slide-- 
 # BiPlot {style="text-align:center;"}
 :::: {.columns}
 
@@ -941,18 +963,12 @@ as.data.frame(loadings_first_two_components)
 :::
 
 ::: {.column width="60%"}
-![](docs\analysis_files\figure-html\unnamed-chunk-23-1.png)
+![](docs\analysis_files\figure-html\unnamed-chunk-22-1.png)
 :::
 
 ::::
 
-
-<!-- --Slide-- -->
-# Correlation Circle {style="text-align:center;"}
-![Distance measures quality of variables.](docs\analysis_files\figure-html\unnamed-chunk-24-1.png)
-
-
-<!-- --Slide-- -->
+<!-- --Slide-- 
 # Contribution of Variables {style="text-align:center;"}
 :::: {.columns}
 
@@ -966,13 +982,16 @@ as.data.frame(loadings_first_two_components)
 
 ::::
 
-<!-- --Slide-- -->
+
+::: panel-tabset
+
+<!-- --Slide-- 
 # Uncorrelated Matrix {style="text-align:center;"}
 
 ![8 Principal Components](docs/analysis_files/figure-html/unnamed-chunk-30-1.png){width="50%" fig-align="center"}
 
 
-<!-- --Slide-- -->
+<!-- --Slide-- 
 # Results
 
 ::: panel-tabset
@@ -1001,11 +1020,6 @@ as.data.frame(loadings_first_two_components)
 
 :::
 
-# PCA in Machine Learning
-
--   Feature Selection: Use PCA to select relevant features.
--   Model Training: Enhance model performance by reducing dimensionality.
--   Preprocessing: Standardize and normalize data before applying PCA.
 
 # Discussion & Conclusion
 
@@ -1016,34 +1030,4 @@ as.data.frame(loadings_first_two_components)
 
 -   Open the floor for questions from the audience.
 
-# References
-
-[1]M. Ringnér, “What is principal component analysis?” Nature biotechnology, vol. 26, no. 3, pp. 303–304, 2008.
-[2]I. T. Jolliffe and J. Cadima, “Principal component analysis: A review and recent developments,” Philosophical transactions of the royal society A: Mathematical, Physical and Engineering Sciences, vol. 374, no. 2065, p. 20150202, 2016.
-[3]B. M. S. Hasan and A. M. Abdulazeez, “A review of principal component analysis algorithm for dimensionality reduction,” Journal of Soft Computing and Data Mining, vol. 2, no. 1, pp. 20–30, 2021.
-[4]B. Everitt and T. Hothorn, An introduction to applied multivariate analysis with r. Springer Science & Business Media, 2011.
-[5]M. Greenacre, P. J. Groenen, T. Hastie, A. I. d’Enza, A. Markos, and E. Tuzhilina, “Principal component analysis,” Nature Reviews Methods Primers, vol. 2, no. 1, p. 100, 2022.
-[6]K. Pearson, “LIII. On lines and planes of closest fit to systems of points in space,” The London, Edinburgh, and Dublin philosophical magazine and journal of science, vol. 2, no. 11, pp. 559–572, 1901.
-[7]R. A. Fisher and W. A. Mackenzie, “Studies in crop variation. II. The manurial response of different potato varieties,” The Journal of Agricultural Science, vol. 13, no. 3, pp. 311–320, 1923.
-[8]H. Hotelling, “Analysis of a complex of statistical variables into principal components.” Journal of educational psychology, vol. 24, no. 6, p. 417, 1933.
-[9]D. Esposito and F. Esposito, Introducing machine learning. Microsoft Press, 2020.
-[10]M. Turk and A. Pentland, “Eigenfaces for recognition,” Journal of cognitive neuroscience, vol. 3, no. 1, pp. 71–86, 1991.
-[11]S. Zhang and M. Turk, “Eigenfaces,” Scholarpedia, vol. 3, no. 9, p. 4244, 2008.
-[12]F. Pedregosa et al., “Scikit-learn: Machine learning in python,” the Journal of machine Learning research, vol. 12, pp. 2825–2830, 2011.
-[13]J. Maindonald and J. Braun, Data analysis and graphics using r: An example-based approach, vol. 10. Cambridge University Press, 2006.
-[14]J. Lever, M. Krzywinski, and N. Altman, “Points of significance: Principal component analysis,” Nature methods, vol. 14, no. 7, pp. 641–643, 2017.
-[15]F. L. Gewers et al., “Principal component analysis: A natural approach to data exploration,” ACM Computing Surveys (CSUR), vol. 54, no. 4, pp. 1–34, 2021.
-[16]J. Hopcroft and R. Kannan, Foundations of data science. 2014.
-[17]“Quarterly dialysis facility care compare (QDFCC) report: July 2023.” Centers for Medicare & Medicaid Services (CMS). Available: https://data.cms.gov/provider-data/dataset/2fpu-cgbb. [Accessed: Oct. 11, 2023]
-[18]R Core Team, “Prcomp, a function of r: A language and environment for statistical computing.” R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp. [Accessed: Oct. 16, 2023]
-[19]S. R. Bennett, “Linear algebra for data science.” 2021. Available: https://shainarace.github.io/LinearAlgebra/index.html. [Accessed: Oct. 16, 2023]
-[20]D. G. Luenberger, Optimization by vector space methods. John Wiley & Sons, 1997.
-[21]S. Nash Warwick and W. Ford, “Abalone.” UCI Machine Learning Repository, 1995.
-[22]J. Pagès, Multiple factor analysis by example using r. CRC Press, 2014.
-[23]E. K. CS, “PCA problem / how to compute principal components / KTU machine learning.” YouTube, 2020. Available: https://youtu.be/MLaJbA82nzk. [Accessed: Nov. 01, 2023]
-[24]F. Chumney, “PCA, EFA, CFA,” pp. 2–3, 6, Sep., 2012, Available: https://www.westga.edu/academics/research/vrc/assets/docs/PCA-EFA-CFA_EssayChumney_09282012.pdf
-[25]H. Abdi and L. J. Williams, “Principal component analysis,” WIREs Computational Statistics, vol. 2, no. 4, pp. 433–459, 2010, doi: https://doi.org/10.1002/wics.101. Available: https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101
-[26]R Core Team, “Lm: Fitting linear models.” R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm. [Accessed: Nov. 08, 2023]
-[27]Kuhn and Max, “Building predictive models in r using the caret package,” Journal of Statistical Software, vol. 28, no. 5, pp. 1–26, 2008, doi: 10.18637/jss.v028.i05. Available: https://www.jstatsoft.org/index.php/jss/article/view/v028i05
-[28]R. Bro and A. K. Smilde, “Principal component analysis,” Analytical methods, vol. 6, no. 9, pp. 2812–2831, 2014.
->>>>>>> caf29682f5f5a6e02da25e6b7bdbff6cb51243a7
+-->
