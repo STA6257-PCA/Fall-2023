@@ -246,28 +246,6 @@ loadings_first_two_components <- eigenvector[, 1:2]
 as.data.frame(loadings_first_two_components)
 ```
 
-<!-- # Variance Explained -->
-<!-- -   Explained Variance Ratio: Calculate the ratio of each eigenvalue. -->
-<!-- -   Cumulative Variance: Plot cumulative explained variance to determine components to retain. -->
-
-
-<!-- ::: columns -->
-<!-- ::: {.column width="40%"} -->
-<!-- ## Objective -->
-
-<!-- -   Weighted Combination -->
-<!-- -   Maximal Variance Components -->
-<!-- ::: -->
-
-<!-- ::: {.column width="60%"} -->
-<!-- ### High Variance vs. -->
-
-<!-- ### Low Variance -->
-
-<!-- ![](images/01-Preface.jpg){width="Infinity"} -->
-<!-- ::: -->
-<!-- ::: -->
-
 # Applications of PCA
 
 -   Image Compression: Reduce image size while preserving details.
@@ -286,10 +264,6 @@ as.data.frame(loadings_first_two_components)
 # Dataset Summary {style="text-align:center;"}
 
 ![](docs\dataset_files\figure-html\unnamed-chunk-5-1.png){fig-align="center"}
-
-<!-- -   PCA is designed for continuous numerical data. -->
-
-<!-- -   Categorical index feature removed from model. -->
 
 # Dataset Selection Rationale
 
@@ -352,7 +326,7 @@ as.data.frame(loadings_first_two_components)
 # Outliers & Leverage
 
 ::: columns
-::: {.column width="50%" style="font-size: 85%;"}
+::: {.column style="font-size: 85%;"}
 -   3 Outliers
 
 -   No leverage
@@ -360,7 +334,7 @@ as.data.frame(loadings_first_two_components)
 ![](docs\analysis_files\figure-html\unnamed-chunk-12-1.png)
 :::
 
-::: {.column width="50%" style="font-size: 85%;"}
+::: {.column style="font-size: 85%;"}
 -   Minimal difference.
 
 -   No observations removed.
@@ -418,19 +392,14 @@ as.data.frame(loadings_first_two_components)
 
 
 <!-- --Slide-- -->
-<!-- # Correlation Circle {style="text-align:center;"} -->
-<!-- ![Distance measures quality of variables.](docs\analysis_files\figure-html\unnamed-chunk-24-1.png) -->
-
-
-<!-- --Slide-- -->
 # Contribution of Variables {style="text-align:center;"}
 :::: {.columns}
 
-::: {.column width="50%"}
+::: {.column}
  ![](docs\analysis_files\figure-html\unnamed-chunk-25-1.png)
 :::
 
-::: {.column width="50%"}
+::: {.column}
  ![](docs\analysis_files\figure-html\unnamed-chunk-24-2.png)
 :::
 
