@@ -477,9 +477,31 @@ test_set <- test_set[c(2:9, 1)]
 
 ::::
 
+<!-- --Slide-- -->
+# Cross-Validation Model
+:::: {.columns}
 
+::: {.column width="60%"}
+```{r, echo=TRUE, eval=FALSE}
+# Cross-validation with n folds
+k_10 <- trainControl(method = "cv", number = 10)
 
+# training the model 
+model_cv <- train(expected_survival ~ ., 
+                  data = train_pca,
+                  method = "lm",
+                  trControl = k_10)
 
+# Print Model Performance
+print(model_cv)
+```
+:::
+
+::: {.column width="40%"}
+![](images/cross-validation.png){fig-align="center"}
+:::
+
+::::
 <!-- --Slide-- -->
 # Results
 
