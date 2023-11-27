@@ -48,6 +48,14 @@ November 2023
 
 ::: panel-tabset
 
+## When
+
+```{r, warning = FALSE, message = FALSE, echo=FALSE}
+# Load the dataset
+data <- read.csv('./dataset/DFC_STATE.csv')
+head(data)
+```
+
 ## What
 
 -   Unsupervised Machine Learning
@@ -64,8 +72,31 @@ November 2023
 
 :::
 
+# Assumptions and Limitations
+
+-   Scaling Data
+-   Loss of interpretability in transformed features.
+-   Loss of Information
+
 # ![](images/multivariate_methods.png)
 
+# Why Use PCA?
+
+-   Reducing Dimensionality: Simplify high-dimensional data.
+-   Visualizing Data: Help visualize data in lower dimensions.
+-   Noise Reduction: Eliminate less relevant features.
+-   Improved Model Performance: Enhance machine learning efficiency.
+
+# Dimensionality Reduction
+
+-   Unsupervised Learning.
+-   Reduce Dimensions: Transform data by multiplying with selected eigenvectors.
+-   New Feature Space: Data exists in a lower-dimensional feature space.
+
+# Visualization
+
+-   Data Projection: Visualize data in the reduced feature space.
+-   Scatterplots: Use scatterplots to visualize data distribution.
 
 # Methods
 
@@ -215,17 +246,20 @@ loadings_first_two_components <- eigenvector[, 1:2]
 as.data.frame(loadings_first_two_components)
 ```
 
+# Applications of PCA
 
-# Dataset - State Averages of Common Dialysis Quality Measures
+-   Image Compression: Reduce image size while preserving details.
+-   Face Recognition: Reduce facial feature dimensions for classification.
+-   Anomaly Detection: Identify anomalies in large datasets.
+-   Bioinformatics: Analyze gene expression data.
 
--   Source:Center for Medicare & Medicaid Services (Data.CMS.gov)
+# Dataset
+
 -   data collected from 50 US states + 6 U.S. territories
 -   39 variables
     -   24 patient care quality in dialysis facilities
     -   14 characteristics of dialysis patients
-    -   Response variable: As Expected Survival
     -   Index variable: categorical variable was removed 
-    
 
 # Dataset Summary {style="text-align:center;"}
 
@@ -372,6 +406,13 @@ as.data.frame(loadings_first_two_components)
 ::::
 
 <!-- --Slide-- -->
+# PCA in Machine Learning
+
+-   Feature Extraction: Use relevant features to create principal components.
+-   Preprocessing: Standardize, or normalize data before applying PCA.
+-   Model Training: Enhance model performance by reducing dimensionality.
+
+<!-- --Slide-- -->
 # Modeling
 ::: panel-tabset
 ## Data Split
@@ -493,24 +534,10 @@ print(model_cv)
 
 
 <!-- Slide -->
-# Discussion 
+# Discussion & Conclusion
 
-::: panel-tabset
-
-## Summary
--   Principal Component Analysis is an essential multivariate analysis technique
--   Covariance matrix -> SVD -> Principal Components 
-
-## Limitation
--   Scaling Data
--   Sensitive to outliers
--   Loss of interpretability in transformed features.
--   Loss of Information
-
-## Take Home Message
-PCA is a definitely a useful tool to have in your toolkit! 
-
-:::
+-   Summary: PCA is an unsupervised learning technique for dimensionality reduction and data visualization.
+-   Key Takeaways: Understand eigenvectors, eigenvalues, and explained variance.
 
 # Questions and Comments
 
