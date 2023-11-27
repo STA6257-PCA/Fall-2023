@@ -128,7 +128,6 @@ $$
 ## Definition
 -   Impose the restriction of orthogonality to the coefficient vectors of $S$.
     -   Ensure the principal components are uncorrelated.
--   The eigenvectors of $S$ are the solutions to finding the $Xa_k$ which maximize variance while minimizing correlation.
 -   Each $Xa_k$ is a principal component of the dataset having eigenvectors $a_k$ and eigenvalues $\lambda_k$.
 
 ## Interpretation
@@ -138,7 +137,7 @@ $$
 ## Factor scores
 -   The elements of $Xa_k$.
 -   How each observation scores on a PC.
--   The vector length represents the projection of the original observations onto the PCs.
+-   Represents the projection of the original observations onto the PCs.
 
 ## Loadings
 -   The elements of the eigenvectors $a_k$.
