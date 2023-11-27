@@ -42,7 +42,7 @@ November 2023
 -   Method
 -   Example
 -   Application
--   Conclusion
+-   Discussion
 
 # Principal Component Analysis (PCA)
 
