@@ -1,4 +1,11 @@
-# Presentation {.unnumbered}
+# Presentation
 
-<iframe width="100%" height="90%" iframe class="slide-deck" src="slides.html"></iframe>
+<iframe width="100%" height="66%" iframe class="slide-deck" src="slides.html"></iframe>
 
+-  Use the "m" key to access the menu.
+
+-  Use the "f" key to view the presentation in fullscreen.
+
+-  Use the left and right arrow keys to navigate the presentation.
+
+-  Use the "esc" key to exit fullscreen mode.
