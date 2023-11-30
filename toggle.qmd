@@ -1,0 +1,241 @@
+---
+title: "toggle"
+output: 
+  html_document:
+    css: toggle.css
+---
+
+## Load Libraries
+
+```{r, message=FALSE, warning=FALSE}
+library(htmlwidgets)
+library(htmltools)
+library(tidyverse)
+```
+
+### CSS style
+
+<!-- Include CSS styles for the rounded slider button -->
+
+```{=html}
+<style>
+  /* The switch - the box around the slider */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px; /* Added border-radius for rounded corners */
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%; /* Added border-radius for rounded circle */
+  }
+
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+</style>
+```
+Trying CSS slider switch
+
+
+```{r, echo=FALSE, results='hide'}
+# clear environment
+rm(list = ls())
+
+# Load dataset
+train_original <- read.csv('dataset/DFC_STATE.csv')
+
+# Make a working copy
+train_data <- train_original
+
+# Remove categorical columns
+train_data$State <- NULL
+
+# Impute missing values with the mean
+for (col in colnames(train_data)) {
+  mean_value <- mean(train_data[[col]], na.rm = TRUE)
+  train_data[[col]] <- ifelse(is.na(train_data[[col]]), mean_value,     train_data[[col]])
+}
+
+# Find the index position of the target feature 
+target_name <- "expected_survival"
+target_index <- grep(target_name,
+                     colnames(train_data))
+
+# Constant seed
+my_seed = 95
+
+# Summary statistics of the data
+train_summary <- summary(train_data)
+train_summary <- t(train_summary)
+train_summary_html <- as.character(train_summary)
+# Capture the HTML of the training summary
+train_summary_html <- htmltools::HTML(train_summary_html)
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(kableExtra)
+# Style the summary table using kableExtra functions
+styled_train_summary <- kbl(train_summary, format = "html") %>%
+  kable_styling(full_width = FALSE, position = "center", font_size = 14)
+
+# Capture the HTML of the styled training summary
+styled_train_summary_html <- htmltools::HTML(as.character(styled_train_summary))
+```
+
+### Correlations
+```{r, message=FALSE, warning=FALSE}
+library(caret)
+# Calculate correlations and round to 2 digits
+corr_matrix <- cor(train_data)
+corr_matrix <- round(corr_matrix, digits = 2)
+
+# Print names of highly correlated features; threshold > 0.30
+high <- findCorrelation(corr_matrix, cutoff = 0.30, names = TRUE)
+
+# Create a data frame with an index column
+high_corr_df <- data.frame(
+  Count = 1:length(high),
+  Feature = high
+)
+
+# table format
+correlations_table <- kbl(high_corr_df, caption = "Highly Correlated Features") %>%
+  kable_paper("hover")
+
+
+# Format the content using kableExtra
+styled_correlations_table <- kbl(correlations_table, format = "html") %>%
+  kable_styling(full_width = FALSE, position = "center", font_size = 14)
+
+# Capture the HTML of the styled training summary
+styled_correlations_table_html <- htmltools::HTML(as.character(styled_correlations_table))
+```
+
+
+### Styled Kable
+```{r}
+styled <- sprintf('
+<div class="switch">
+  <input type="checkbox" id="toggleSwitch">
+  <label class="slider round" for="toggleSwitch"></label>
+</div>
+
+<div id="result-container">
+  <p id="result">Result: </p>
+  <div id="trainSummaryTable" style="display: none;">%s</div>
+</div>
+
+<script>
+document.getElementById("toggleSwitch").addEventListener("change", function() {
+  toggleResult();
+});
+
+function toggleResult() {
+  var resultContainer = document.getElementById("result-container");
+  var trainSummaryTable = document.getElementById("trainSummaryTable");
+  var toggleSwitch = document.getElementById("toggleSwitch");
+
+  if (toggleSwitch.checked) {
+    resultContainer.style.display = "block";
+    trainSummaryTable.style.display = "block";
+  } else {
+    resultContainer.style.display = "none";
+    trainSummaryTable.style.display = "none";
+  }
+}
+</script>
+', styled_train_summary_html)
+
+htmltools::HTML(styled)
+```
+
+### Correlations
+```{r}
+styled <- sprintf('
+<div class="switch">
+  <input type="checkbox" id="toggleCorr">
+  <label class="slider round" for="toggleCorr"></label>
+</div>
+
+<div id="result-container">
+  <p id="result">Result: </p>
+  <div id="trainSummaryTable" style="display: none;">%s</div>
+</div>
+
+<script>
+document.getElementById("toggleCorr").addEventListener("change", function() {
+  toggleResult();
+});
+
+function toggleResult() {
+  var resultContainer = document.getElementById("result-container");
+  var trainSummaryTable = document.getElementById("trainSummaryTable");
+  var toggleSwitch = document.getElementById("toggleSwitch");
+
+  if (toggleSwitch.checked) {
+    resultContainer.style.display = "block";
+    trainSummaryTable.style.display = "block";
+  } else {
+    resultContainer.style.display = "none";
+    trainSummaryTable.style.display = "none";
+  }
+}
+</script>
+', styled_train_summary_html)
+
+htmltools::HTML(styled)
+```
+
+
+
