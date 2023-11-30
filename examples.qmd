@@ -220,12 +220,16 @@ $$
 
 ### Verifying and visualizing the results
 
+Using the factoextra @factoextra, tidyverse @tidyverse, and kableExtra @kableExtra packages, we can easily visualize the results of this analysis.
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Clear environment
+rm(list = ls())
+
 #Load Libraries
-library(factoextra)
-library(tidyverse)
-library(kableExtra)
-library(dplyr)
+library(factoextra) #fviz_eig; PCA plots
+library(tidyverse)  #rename; pipe operator
+library(kableExtra) #kable_paper; table formatting
 
 #Import Example Data
 data = data.frame(Student = 1:4, BasicStats=c(4,8,13,7), AdvancedStats=c(11,4,5,14))
@@ -279,9 +283,7 @@ First, the appropriate and necessary libraries are loaded in R. These provide th
 
 ```{r, warning = FALSE, message = FALSE}
 # Load necessary libraries
-library(tidyverse)  # for handling missing values
-library(corrplot) # for plotting the correlation matrix
-library(factoextra) # PCA plots
+library(corrplot) #for plotting the correlation matrix
 library(summarytools) #produces summary stats
 ```
 
@@ -350,7 +352,7 @@ Our scaled and centered data has strong linear correlations and contains a relat
 
 ### PCA via Singular Value Decomposition
 
-The prcomp() function @prcomp2023ref performs principal component analysis on a dataset using the singular value decomposition method, which utilizes the covariance matrix of the data.
+The prcomp() function from the stats package in R @R performs principal component analysis on a dataset using the singular value decomposition method, which utilizes the covariance matrix of the data.
 
 ```{r}
 # Apply PCA using prcomp()

@@ -106,7 +106,7 @@ div.csl-indent {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
@@ -171,14 +171,14 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  <a href="./presentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Presentation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./presentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation</span></a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
@@ -201,7 +201,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -229,6 +229,7 @@ div.csl-indent {
 <li>Classification of Dialysis Patients: Fourteen variables within the dataset classify dialysis patients based on parameters including dialysis adequacy (Kt/V), type of dialysis (hemodialysis vs.&nbsp;peritoneal dialysis), normalized protein catabolic rate (nPCR), hypercalcemia level (Serum Calcium, Mg/dL), serum phosphorus level (Mg/dL), and average hemoglobin (Hgb) level.</li>
 </ol>
 <p>The selection of this dataset for our analysis is driven by its inherent characteristic of multicollinearity among variables, indicating that certain variables are less significant in explaining the variability of the response variables. Additionally, all variables in the dataset are numeric, except for the index variable that is excluded from the subsequent Principal Component Analysis (PCA). Our objective is to utilize this dataset to illustrate the efficacy of PCA in dimension reduction and the efficient visualization of data.</p>
+<p>The packages used for this exploration are tidyverse <span class="citation" data-cites="tidyverse"><a href="references.html#ref-tidyverse" role="doc-biblioref">[2]</a></span>, summarytools <span class="citation" data-cites="summarytools"><a href="references.html#ref-summarytools" role="doc-biblioref">[3]</a></span>, kableExtra <span class="citation" data-cites="kableExtra"><a href="references.html#ref-kableExtra" role="doc-biblioref">[4]</a></span>, and DataExplorer <span class="citation" data-cites="DataExplorer"><a href="references.html#ref-DataExplorer" role="doc-biblioref">[5]</a></span>.</p>
 <section id="renaming-variables" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="renaming-variables"><span class="header-section-number">4.1</span> Renaming Variables</h2>
 <p>In our data preparation process, we have efficiently removed white spaces, and edited variable names, enhancing the readability and interpretability of the dataset. This meticulous effort adds to the overall clarity, making it quicker, and more meaningful for further examination. For instance, “hypercalcemia_calcium &gt; 10.2Mg”, was used in replacement of Percentage.Of.Adult..Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL.</p>
@@ -1099,19 +1100,20 @@ div.csl-indent {
 <h2 data-number="4.4" class="anchored" data-anchor-id="data-distribution"><span class="header-section-number">4.4</span> Data Distribution</h2>
 <ul>
 <li><p>Histograms were used to display a sample (8 variables) of the distribution in respect to the predictor variable.</p></li>
-<li><p>Normality is not assumed. The majority of the observations in each variable do not meet the normality assumption.</p>
+<li><p>Normality is not assumed. The majority of the observations in each variable do not meet the normality assumption.</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="dataset_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
-</div></li>
-</ul>
+</div>
 </section>
 <section id="normal-qq-plot-of-residuals" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="normal-qq-plot-of-residuals"><span class="header-section-number">4.5</span> Normal QQ Plot of Residuals</h2>
 <ul>
 <li><p>It is apparent that the variables have heavy left and right tails.</p></li>
-<li><p>The presence of outliers is consistent though the entire dataset.</p>
+<li><p>The presence of outliers is consistent though the entire dataset.</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="dataset_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
@@ -1119,8 +1121,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <p><img src="dataset_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
 </div>
-</div></li>
-</ul>
+</div>
 </section>
 <section id="imputation-of-missing-values" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="imputation-of-missing-values"><span class="header-section-number">4.6</span> Imputation of Missing Values</h2>
@@ -1343,6 +1344,18 @@ div.csl-indent {
 <div id="refs" class="references csl-bib-body" role="list" style="display: none">
 <div id="ref-dialysis2023july" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Quarterly dialysis facility care compare (QDFCC) report: July 2023.”</span> Centers for Medicare &amp; Medicaid Services (CMS). Available: <a href="https://data.cms.gov/provider-data/dataset/2fpu-cgbb">https://data.cms.gov/provider-data/dataset/2fpu-cgbb</a>. [Accessed: Oct. 11, 2023]</div>
+</div>
+<div id="ref-tidyverse" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">H. Wickham <em>et al.</em>, <span>“Welcome to the <span class="nocase">tidyverse</span>,”</span> <em>Journal of Open Source Software</em>, vol. 4, no. 43, p. 1686, 2019, doi: <a href="https://doi.org/10.21105/joss.01686">10.21105/joss.01686</a></div>
+</div>
+<div id="ref-summarytools" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">D. Comtois, <em>Summarytools: Tools to quickly and neatly summarize data</em>. 2022. Available: <a href="https://CRAN.R-project.org/package=summarytools">https://CRAN.R-project.org/package=summarytools</a></div>
+</div>
+<div id="ref-kableExtra" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">H. Zhu, <em>kableExtra: Construct complex table with ’kable’ and pipe syntax</em>. 2021. Available: <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a></div>
+</div>
+<div id="ref-DataExplorer" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">B. Cui, <em>DataExplorer: Automate data exploration and treatment</em>. 2020. Available: <a href="https://CRAN.R-project.org/package=DataExplorer">https://CRAN.R-project.org/package=DataExplorer</a></div>
 </div>
 </div>
 </section>
@@ -1581,7 +1594,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./examples.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Examples</span></span>

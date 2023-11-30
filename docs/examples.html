@@ -142,7 +142,7 @@ div.csl-indent {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
@@ -207,14 +207,14 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  <a href="./presentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Presentation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./presentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation</span></a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
@@ -248,7 +248,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -507,6 +507,7 @@ P_{14}= e_1^T \times
 </section>
 <section id="verifying-and-visualizing-the-results" class="level3" data-number="3.1.4">
 <h3 data-number="3.1.4" class="anchored" data-anchor-id="verifying-and-visualizing-the-results"><span class="header-section-number">3.1.4</span> Verifying and visualizing the results</h3>
+<p>Using the factoextra <span class="citation" data-cites="factoextra"><a href="references.html#ref-factoextra" role="doc-biblioref">[2]</a></span>, tidyverse <span class="citation" data-cites="tidyverse"><a href="references.html#ref-tidyverse" role="doc-biblioref">[3]</a></span>, and kableExtra <span class="citation" data-cites="kableExtra"><a href="references.html#ref-kableExtra" role="doc-biblioref">[4]</a></span> packages, we can easily visualize the results of this analysis.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
@@ -590,7 +591,7 @@ P_{14}= e_1^T \times
 </section>
 <section id="pca-on-a-large-dataset-using-r" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="pca-on-a-large-dataset-using-r"><span class="header-section-number">3.2</span> PCA on a large dataset using R</h2>
-<p>For this application of PCA, the Abalone dataset from the UCI Machine Learning Repository is used <span class="citation" data-cites="misc_abalone_1"><a href="references.html#ref-misc_abalone_1" role="doc-biblioref">[2]</a></span>. This dataset contain 4177 observations of 9 variables which record characteristics of each abalone including sex, length, diameter, height, weights, and the number of rings. The variables, apart from sex, are continuous and correlated making the dataset an ideal candidate for demonstrating dimensionality reduction via PCA.</p>
+<p>For this application of PCA, the Abalone dataset from the UCI Machine Learning Repository is used <span class="citation" data-cites="misc_abalone_1"><a href="references.html#ref-misc_abalone_1" role="doc-biblioref">[5]</a></span>. This dataset contain 4177 observations of 9 variables which record characteristics of each abalone including sex, length, diameter, height, weights, and the number of rings. The variables, apart from sex, are continuous and correlated making the dataset an ideal candidate for demonstrating dimensionality reduction via PCA.</p>
 <section id="libraries" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="libraries"><span class="header-section-number">3.2.1</span> Libraries</h3>
 <p>First, the appropriate and necessary libraries are loaded in R. These provide the functions which serve as the backbone of the analysis, handling the computational aspects of PCA as well as visualizing the results.</p>
@@ -598,16 +599,14 @@ P_{14}= e_1^T \times
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)  <span class="co"># for handling missing values</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot) <span class="co"># for plotting the correlation matrix</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra) <span class="co"># PCA plots</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools) <span class="co">#produces summary stats</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot) <span class="co">#for plotting the correlation matrix</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools) <span class="co">#produces summary stats</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 <section id="data-preparation" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">3.2.2</span> Data Preparation</h3>
-<p>The dataset contains 9 variables with 1 categorical variable and 8 numeric variables. The dataset contains no missing values. For this example in applying principal component analysis, we exclude the categorical variable ‘Sex’ and focus the PCA on the numerical dimensions of the Abalone. For analyses involving a mix of numeric and non-numeric variables other factor analysis techniques can be used, such as factor analysis of mixed data <span class="citation" data-cites="pages2014multiple"><a href="references.html#ref-pages2014multiple" role="doc-biblioref">[3]</a></span>.</p>
+<p>The dataset contains 9 variables with 1 categorical variable and 8 numeric variables. The dataset contains no missing values. For this example in applying principal component analysis, we exclude the categorical variable ‘Sex’ and focus the PCA on the numerical dimensions of the Abalone. For analyses involving a mix of numeric and non-numeric variables other factor analysis techniques can be used, such as factor analysis of mixed data <span class="citation" data-cites="pages2014multiple"><a href="references.html#ref-pages2014multiple" role="doc-biblioref">[6]</a></span>.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -999,7 +998,7 @@ P_{14}= e_1^T \times
 </section>
 <section id="pca-via-singular-value-decomposition" class="level3" data-number="3.2.4">
 <h3 data-number="3.2.4" class="anchored" data-anchor-id="pca-via-singular-value-decomposition"><span class="header-section-number">3.2.4</span> PCA via Singular Value Decomposition</h3>
-<p>The prcomp() function <span class="citation" data-cites="prcomp2023ref"><a href="references.html#ref-prcomp2023ref" role="doc-biblioref">[4]</a></span> performs principal component analysis on a dataset using the singular value decomposition method, which utilizes the covariance matrix of the data.</p>
+<p>The prcomp() function from the stats package in R <span class="citation" data-cites="R"><a href="references.html#ref-R" role="doc-biblioref">[7]</a></span> performs principal component analysis on a dataset using the singular value decomposition method, which utilizes the covariance matrix of the data.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -1193,7 +1192,7 @@ P_{14}= e_1^T \times
 </section>
 <section id="biplot" class="level4" data-number="3.2.5.2">
 <h4 data-number="3.2.5.2" class="anchored" data-anchor-id="biplot"><span class="header-section-number">3.2.5.2</span> Biplot</h4>
-<p>The correlation between a variable and a principal component is used as the coordinates of the variable on the PC, shown as dimensions on the biplot. Dim1 corresponds to PC1, and Dim2 to PC2. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations <span class="citation" data-cites="abdi2010principal"><a href="references.html#ref-abdi2010principal" role="doc-biblioref">[5]</a></span>.</p>
+<p>The correlation between a variable and a principal component is used as the coordinates of the variable on the PC, shown as dimensions on the biplot. Dim1 corresponds to PC1, and Dim2 to PC2. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations <span class="citation" data-cites="abdi2010principal"><a href="references.html#ref-abdi2010principal" role="doc-biblioref">[8]</a></span>.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -1263,19 +1262,28 @@ P_{14}= e_1^T \times
 
 <div id="refs" class="references csl-bib-body" role="list" style="display: none">
 <div id="ref-eduflair2020" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">E. K. CS, <span>“PCA problem / how to compute principal components / KTU machine learning.”</span> YouTube, 2020. Available: <a href="https://youtu.be/MLaJbA82nzk">https://youtu.be/MLaJbA82nzk</a>. [Accessed: Nov. 01, 2023]</div>
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">E. K. CS, <span>“PCA problem / how to compute principal components / KTU machine learning.”</span> YouTube, 2020. Available: <a href="https://youtu.be/MLaJbA82nzk">https://youtu.be/MLaJbA82nzk</a></div>
+</div>
+<div id="ref-factoextra" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">A. Kassambara and F. Mundt, <em>Factoextra: Extract and visualize the results of multivariate data analyses</em>. 2020. Available: <a href="https://CRAN.R-project.org/package=factoextra">https://CRAN.R-project.org/package=factoextra</a></div>
+</div>
+<div id="ref-tidyverse" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">H. Wickham <em>et al.</em>, <span>“Welcome to the <span class="nocase">tidyverse</span>,”</span> <em>Journal of Open Source Software</em>, vol. 4, no. 43, p. 1686, 2019, doi: <a href="https://doi.org/10.21105/joss.01686">10.21105/joss.01686</a></div>
+</div>
+<div id="ref-kableExtra" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">H. Zhu, <em>kableExtra: Construct complex table with ’kable’ and pipe syntax</em>. 2021. Available: <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a></div>
 </div>
 <div id="ref-misc_abalone_1" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">S. Nash Warwick and W. Ford, <span>“<span>Abalone</span>.”</span> UCI Machine Learning Repository, 1995.</div>
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">S. Nash Warwick and W. Ford, <span>“<span>Abalone</span>.”</span> UCI Machine Learning Repository, 1995. Available: <a href="https://doi.org/10.24432/C55C7W">https://doi.org/10.24432/C55C7W</a></div>
 </div>
 <div id="ref-pages2014multiple" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">J. Pagès, <em>Multiple factor analysis by example using r</em>. CRC Press, 2014.</div>
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">J. Pagès, <em>Multiple factor analysis by example using r</em>. CRC Press, 2014.</div>
 </div>
-<div id="ref-prcomp2023ref" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline">R Core Team, <span>“Prcomp, a function of r: A language and environment for statistical computing.”</span> R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp</a>. [Accessed: Oct. 16, 2023]</div>
+<div id="ref-R" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">R Core Team, <span>“R: A language and environment for statistical computing.”</span> R Foundation for Statistical Computing, Vienna, Austria, 2023. Available: <a href="https://www.R-project.org/">https://www.R-project.org/</a></div>
 </div>
 <div id="ref-abdi2010principal" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline">H. Abdi and L. J. Williams, <span>“Principal component analysis,”</span> <em>WIREs Computational Statistics</em>, vol. 2, no. 4, pp. 433–459, 2010, doi: <a href="https://doi.org/10.1002/wics.101">https://doi.org/10.1002/wics.101</a>. Available: <a href="https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101">https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101</a></div>
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">H. Abdi and L. J. Williams, <span>“Principal component analysis,”</span> <em>WIREs Computational Statistics</em>, vol. 2, no. 4, pp. 433–459, 2010, doi: <a href="https://doi.org/10.1002/wics.101">https://doi.org/10.1002/wics.101</a>. Available: <a href="https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101">https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101</a></div>
 </div>
 </div>
 </section>
@@ -1515,7 +1523,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./methods.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Methods</span></span>

@@ -14,6 +14,8 @@ The structure of the dataset can be categorized into three main components:
 
 The selection of this dataset for our analysis is driven by its inherent characteristic of multicollinearity among variables, indicating that certain variables are less significant in explaining the variability of the response variables. Additionally, all variables in the dataset are numeric, except for the index variable that is excluded from the subsequent Principal Component Analysis (PCA). Our objective is to utilize this dataset to illustrate the efficacy of PCA in dimension reduction and the efficient visualization of data.
 
+The packages used for this exploration are tidyverse @tidyverse, summarytools @summarytools, kableExtra @kableExtra, and DataExplorer @DataExplorer.
+
 ## Renaming Variables
 
 In our data preparation process, we have efficiently removed white spaces, and edited variable names, enhancing the readability and interpretability of the dataset. This meticulous effort adds to the overall clarity, making it quicker, and more meaningful for further examination. For instance, "hypercalcemia_calcium \> 10.2Mg", was used in replacement of Percentage.Of.Adult..Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL.
@@ -27,24 +29,10 @@ The dataset contains 56 observations of 39 variables with 1 discrete variable (S
 rm(list = ls())
 
 # Load libraries
-library(tidyverse)    
-library(caTools)
-library(caret)
-library(corrplot)     # plot correlation matrix
-library(Metrics)      # calculate MAE, MSE, RMSE, R^2
-library(pls)          # PC regression
-library(e1071)        # to fit transform PCA  
-library(reshape2)     # transform to matrix
-library(ggcorrplot)   # correlation graph
-library(factoextra)   # PCA plots
-library(psych)        # descriptive stats - skew, kurtosis
-library(rcompanion)   # histogram plot
-library(DataExplorer) # EDA
-library(ggplot2)      # graphics
-library(car)          # for outliers test, power transformation
-library(MASS)         # power transformation, robust model
-library(DescTools)    # robust scaler
-library(kableExtra)   # table formatter
+library(tidyverse)
+library(summarytools)
+library(kableExtra)
+library(DataExplorer)
 ```
 
 ```{r, warning = FALSE, message = FALSE, echo=FALSE}
@@ -103,9 +91,6 @@ train_data <- rename(train_data,
 ```
 
 ```{r, warning = FALSE, message = FALSE, echo=FALSE}
-# install.packages("vtable")
-library(summarytools)
-
 data_desc = descr(train_data, plain.ascii = FALSE, headings = FALSE) # descriptive statistics for the dataset
 
 kbl(data_desc, align= 'l') %>%
@@ -125,8 +110,7 @@ The histograms of the data reveal that majority of the variables are skewed righ
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # plot Missing values
 plot_intro(train_data)
-plot_missing(train_data, missing_only = TRUE,
-             group = list("Good (0.05)" = 0.05, "OK (0.4)" = 0.4, Bad = 0.8, Remove = 1),)
+plot_missing(train_data, missing_only = TRUE, group = list("Good (0.05)" = 0.05, "OK (0.4)" = 0.4, Bad = 0.8, Remove = 1),)
 
 total_missing <- sum(is.na(train_data))
 #cat("Count Missing Values in Entire Data Frame: ", total_missing)
@@ -147,10 +131,10 @@ kbl(no_missing_values_df) %>%
 
 -   Normality is not assumed. The majority of the observations in each variable do not meet the normality assumption.
 
-    ```{r, echo=FALSE}
-    #visualize of data in histograms
-    plot_histogram(train_data[, 18:25], ncol = 2L)
-    ```
+```{r, echo=FALSE}
+#visualize of data in histograms
+plot_histogram(train_data[, 18:25], ncol = 2L)
+```
 
 ## Normal QQ Plot of Residuals
 
@@ -158,9 +142,9 @@ kbl(no_missing_values_df) %>%
 
 -   The presence of outliers is consistent though the entire dataset.
 
-    ```{r, message=FALSE, warning=FALSE, echo=FALSE}
-    plot_qq(train_data[, 19:30], ncol = 2L)
-    ```
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+plot_qq(train_data[, 19:30], ncol = 2L)
+```
 
 ## Imputation of Missing Values
 
@@ -172,16 +156,16 @@ kbl(no_missing_values_df) %>%
 
 -   Due to its categorical data type, the "State" variable was omitted from the analysis.
 
-    ```{r, echo=FALSE}
-    # Remove categorical columns
-    train_data$State <- NULL
+```{r, echo=FALSE}
+# Remove categorical columns
+train_data$State <- NULL
 
-    # Impute missing values with the median
-    for (col in colnames(train_data)) {
-      median_value <- median(train_data[[col]], na.rm = TRUE)
-      train_data[[col]] <- ifelse(is.na(train_data[[col]]), median_value,     train_data[[col]])
-    }
-    ```
+# Impute missing values with the median
+for (col in colnames(train_data)) {
+  median_value <- median(train_data[[col]], na.rm = TRUE)
+  train_data[[col]] <- ifelse(is.na(train_data[[col]]), median_value, train_data[[col]])
+}
+```
 
 ```{r, echo=FALSE}
 # Round all variables
