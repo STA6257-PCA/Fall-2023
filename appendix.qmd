@@ -14,6 +14,8 @@ library(corrplot) #for plotting the correlation matrix
 library(summarytools) #produces summary stats
 ```
 
+The packages used in this chapter are tidyverse @tidyverse, kableExtra @kableExtra,  factoextra @factoextra, corrplot @corrplot2021 and summarytools @summarytools.
+
 ## Code
 ```{r, eval = FALSE}
 # Import Example Data
@@ -179,6 +181,8 @@ library(kableExtra)
 library(DataExplorer)
 ```
 
+The packages used for this chapter are tidyverse @tidyverse, summarytools @summarytools, kableExtra @kableExtra, and DataExplorer @DataExplorer.
+
 ## Code
 ```{r, eval = FALSE}
 # Load the dataset
@@ -296,6 +300,8 @@ library(ggcorrplot) #ggcorrplot; correlation graph
 library(pls)        #pcr; PC regression
 library(Metrics)    #mae; calculate MAE, MSE, RMSE, R^2
 ```
+
+The packages used in this analysis are tidyverse @tidyverse, olsrr @olsrr, caret @caret, kableExtra @kableExtra, sjPlot @sjPlot, factoextra @factoextra, caTools @caTools, ggcorrplot @ggcorrplot, pls @pls, and Metrics @Metrics.
 
 ## Code
 ```{r, eval = FALSE}

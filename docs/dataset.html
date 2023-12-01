@@ -268,7 +268,6 @@ div.csl-indent {
 <li>Classification of Dialysis Patients: Fourteen variables within the dataset classify dialysis patients based on parameters including dialysis adequacy (Kt/V), type of dialysis (hemodialysis vs.&nbsp;peritoneal dialysis), normalized protein catabolic rate (nPCR), hypercalcemia level (Serum Calcium, Mg/dL), serum phosphorus level (Mg/dL), and average hemoglobin (Hgb) level.</li>
 </ol>
 <p>The selection of this dataset for our analysis is driven by its inherent characteristic of multicollinearity among variables, indicating that certain variables are less significant in explaining the variability of the response variables. Additionally, all variables in the dataset are numeric, except for the index variable that is excluded from the subsequent Principal Component Analysis (PCA). Our objective is to utilize this dataset to illustrate the efficacy of PCA in dimension reduction and the efficient visualization of data.</p>
-<p>The packages used for this exploration are tidyverse <span class="citation" data-cites="tidyverse"><a href="references.html#ref-tidyverse" role="doc-biblioref">[2]</a></span>, summarytools <span class="citation" data-cites="summarytools"><a href="references.html#ref-summarytools" role="doc-biblioref">[3]</a></span>, kableExtra <span class="citation" data-cites="kableExtra"><a href="references.html#ref-kableExtra" role="doc-biblioref">[4]</a></span>, and DataExplorer <span class="citation" data-cites="DataExplorer"><a href="references.html#ref-DataExplorer" role="doc-biblioref">[5]</a></span>.</p>
 <section id="renaming-variables" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="renaming-variables"><span class="header-section-number">4.1</span> Renaming Variables</h2>
 <p>In our data preparation process, we have efficiently removed white spaces, and edited variable names, enhancing the readability and interpretability of the dataset. This meticulous effort adds to the overall clarity, making it quicker, and more meaningful for further examination. For instance, “hypercalcemia_calcium &gt; 10.2Mg”, was used in replacement of Percentage.Of.Adult..Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL.</p>
@@ -1016,18 +1015,6 @@ div.csl-indent {
 <div id="refs" class="references csl-bib-body" role="list" style="display: none">
 <div id="ref-dialysis2023july" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Quarterly dialysis facility care compare (QDFCC) report: July 2023.”</span> Centers for Medicare &amp; Medicaid Services (CMS). Available: <a href="https://data.cms.gov/provider-data/dataset/2fpu-cgbb">https://data.cms.gov/provider-data/dataset/2fpu-cgbb</a>. [Accessed: Oct. 11, 2023]</div>
-</div>
-<div id="ref-tidyverse" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">H. Wickham <em>et al.</em>, <span>“Welcome to the <span class="nocase">tidyverse</span>,”</span> <em>Journal of Open Source Software</em>, vol. 4, no. 43, p. 1686, 2019, doi: <a href="https://doi.org/10.21105/joss.01686">10.21105/joss.01686</a></div>
-</div>
-<div id="ref-summarytools" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">D. Comtois, <em>Summarytools: Tools to quickly and neatly summarize data</em>. 2022. Available: <a href="https://CRAN.R-project.org/package=summarytools">https://CRAN.R-project.org/package=summarytools</a></div>
-</div>
-<div id="ref-kableExtra" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline">H. Zhu, <em>kableExtra: Construct complex table with ’kable’ and pipe syntax</em>. 2021. Available: <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a></div>
-</div>
-<div id="ref-DataExplorer" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline">B. Cui, <em>DataExplorer: Automate data exploration and treatment</em>. 2020. Available: <a href="https://CRAN.R-project.org/package=DataExplorer">https://CRAN.R-project.org/package=DataExplorer</a></div>
 </div>
 </div>
 </section>
