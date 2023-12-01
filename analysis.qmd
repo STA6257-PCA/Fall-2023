@@ -227,6 +227,8 @@ ols_plot_resid_lev(no_outliers_model)
 
 -   28 Correlated features were identified using a threshold = 0.30.
 
+-   The radio buttons here and throughout this chapter can be used to display data tables. Click the radio button to show or hide the table.
+
 ```{r}
 # Calculate correlations and round to 2 digits
 corr_matrix <- cor(train_data_sc)
