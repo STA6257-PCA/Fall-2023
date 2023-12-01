@@ -19,6 +19,7 @@ book:
     - results.qmd
     - discussion.qmd
     - presentation.qmd
+    - appendix.qmd
     - references.qmd
 
 bibliography: references.bib

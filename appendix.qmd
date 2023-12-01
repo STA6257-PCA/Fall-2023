@@ -1,9 +1,289 @@
-# Analysis
+# Appendix {.unnumbered}
 
-```{r, warning = FALSE, message = FALSE, echo=FALSE}
-# Clear environment
-rm(list = ls())
+This is an appendix of all code used in this project. Click the code buttons under each header to display the code chunk. You may also return to each chapter and view each individual code chunk by clicking the code buttons.
 
+# Chapter 3: Examples
+
+## Libraries
+```{r, eval = FALSE}
+# Load Libraries for Chapter 3
+library(factoextra) #fviz_eig; PCA plots
+library(tidyverse)  #rename; pipe operator
+library(kableExtra) #kable_paper; table formatting
+library(corrplot) #for plotting the correlation matrix
+library(summarytools) #produces summary stats
+```
+
+## Code
+```{r, eval = FALSE}
+# Import Example Data
+data = data.frame(Student = 1:4, BasicStats=c(4,8,13,7), AdvancedStats=c(11,4,5,14))
+#dim(data)
+
+# Structure of Data
+# check variable types which matters in PCA 
+# summary(data) #details about variable scales and missing values
+kbl(data, align = 'l', caption = "Dataframe structure") %>%
+  kable_paper("hover")
+
+# Based on Info from Summary: handle missing values and exclude categorical variable
+# na.omit(data) No missing values here
+data_sample = data[,-c(1)] #exclude categorical variable
+
+# Run PCA
+data_pca = prcomp(data_sample, scale = TRUE)
+
+# Summary of Analysis
+sum_pca = as.data.frame(summary(data_pca)$importance)
+kbl(sum_pca, align= 'l', caption = "Importance of components") %>%
+  kable_paper("hover")
+
+# Elements of PCA Object (all outputs of PCA analysis)
+# names(data_pca)
+
+# sdev:standard deviation
+# rotation: eigenvectors (loadings per variable within each PC)
+# center: mean of the original variable
+# scale: standard deviations of the original variable
+# x: principal component values/scores
+
+# Scree Plot of Variance
+fviz_eig(data_pca,
+         addlabels = TRUE)
+# Biplot with Default Settings
+fviz_pca_biplot(data_pca, repel = TRUE)
+
+# Load dataset
+abalone <- read.csv('./abalone/abalone.csv')
+
+data_desc = descr(abalone, plain.ascii = FALSE, headings = FALSE) # descriptive statistics for the dataset
+
+data_desc %>%
+  kbl(align= 'l') %>%
+  kable_paper("hover")
+
+# Select only the numeric variables 
+abalone = select_if(abalone, is.numeric)
+
+# Standardization of numerical features
+abalone_sc <- scale(abalone, center = TRUE, scale = TRUE)
+
+sc_sum = summary(abalone_sc)
+
+kbl(sc_sum, align= 'l') %>%
+  kable_paper("hover")
+
+# Plot a boxplot to visualize potential outliers
+par(mar=c(4, 8, 4, 4))
+boxplot(abalone_sc, col = "steelblue", main = "Visualization of scaled and centered data", horizontal = TRUE, las = 1)
+
+outs = colSums(abalone_sc > 3 | abalone_sc < -3)
+
+kbl(outs, col.names = ('Outliers'), align = 'l') %>%
+  kable_paper("hover")
+
+# Calculate correlations and round to 2 digits
+abalone_corr <- cor(abalone_sc)
+corrplot(abalone_corr, method="number")
+
+# Apply PCA using prcomp()
+abalone_pca <- prcomp(abalone_sc)
+
+sum_pca = as.data.frame(summary(abalone_pca)$importance)
+
+kbl(sum_pca, align= 'l', caption = "Importance of components") %>%
+  kable_paper("hover")
+
+# Principal Component scores vector
+pc_scores <- abalone_pca$x
+
+# Std Deviation of Components
+component_sdev <- abalone_pca$sdev
+
+# Eigenvector or Loadings
+eigenvector <- abalone_pca$rotation
+
+# Mean of variables
+component_mean <- abalone_pca$center 
+
+# Scaling factor of Variables
+component_scale <- abalone_pca$scale
+
+# Proportion of variance explained by each PC
+variance_explained <- component_sdev^2 / sum(component_sdev^2)
+
+# Cumulative proportion of variance explained
+cumulative_variance_explained <- cumsum(variance_explained)
+
+# Retain components that explain a percentage of the variance
+num_components <- which(cumulative_variance_explained >= 0.92)[1]
+
+# Select the desired number of principal components
+selected_pcs <- pc_scores[, 1:num_components]
+
+# Access the loadings for the first two principal components
+loadings_first_two_components <- eigenvector[, 1:2]
+
+# Print the loadings for the first two principal components
+
+kbl(loadings_first_two_components, align= 'l', caption = "Loadings for the first two principal components") %>%
+  kable_paper("hover")
+
+fviz_eig(abalone_pca, addlabels = TRUE)
+
+fviz_pca_biplot(abalone_pca, label = "var", alpha.ind = "contrib", col.var = "blue", repel = TRUE)
+
+# Contributions of variables to PC1
+pc2_contribution <- fviz_contrib(abalone_pca, choice = "var", axes = 1, top = 20)
+
+# Modify the theme to rotate X-axis labels to 90 degrees
+pc2_contribution +
+  theme(
+    axis.text.x = element_text(angle = 0),
+    plot.title = element_text(hjust = 0)  # horizontal justification
+  ) +
+  coord_flip() +
+  labs(title = "Contribution of Variables to PC1",
+       y = "Percentage Contribution",
+       x = "",
+       caption = "PC1 explains 83.9% of the variance") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1,
+                                                     accuracy = 1))
+
+# Contributions of variables to PC2
+pc2_contribution <- fviz_contrib(abalone_pca, choice = "var", axes = 2, top = 12)
+
+# Modify the theme to rotate X-axis labels to 90 degrees
+pc2_contribution +
+  theme(
+    axis.text.x = element_text(angle = 0),
+    plot.title = element_text(hjust = 0)  # horizontal justification
+  ) +
+  coord_flip() +
+  labs(title = "Contribution of Variables to PC2",
+       y = "Percentage Contribution",
+       x = "",
+       caption = "PC2 explains 8.7% of the variance") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1,
+                                                     accuracy = 1))
+```
+
+# Chapter 4: Dataset
+
+## Libraries
+```{r, eval = FALSE}
+# Load libraries
+library(tidyverse)
+library(summarytools)
+library(kableExtra)
+library(DataExplorer)
+```
+
+## Code
+```{r, eval = FALSE}
+# Load the dataset
+data <- read.csv('./dataset/DFC_STATE.csv')
+
+# Make a working copy
+train_data <- data
+
+# Constant seed
+my_seed = 95
+
+# Rename the variables
+train_data <- rename(train_data,
+        better_transfusion = Transfusions..Better.than.expected..STATE.,
+        expected_transfusion = Transfusions..As.expected..STATE.,
+        worse_transfusion = Transfusions..Worse.than.expected..STATE.,
+        better_infection = Infection..Better.than.expected..STATE.,
+        expected_infection = Infection..As.expected..STATE.,
+        worse_infection = Infection..Worse.than.expected..STATE.,
+        Kt_v_1.2 = Percentage.of.adult.HD.patients.with.Kt.V..1.2,
+        Kt_v_1.7 = Percentage.Of.Adult.PD.Patients.With.Kt.V..1.7,
+        pedriatic_Kt_v_1.2 = Percentage.Of.Pediatric.HD.Patients.With.Kt.V..1.2,
+        pediatric_Kt_v_1.8 = Percentage.Of.Pediatric.PD.Patients.With.Kt.V..1.8,
+        pediatric_nPCR = Percentage.Of.Pediatric.HD.Patients.With.nPCR.In.Use,
+        better_fistula = Fistula.Rate...Better.Than.Expected..STATE.,
+        expected_fistula = Fistula.Rate...As.Expected..STATE.,
+        worse_fistula = Fistula.Rate...Worse.Than.Expected..STATE.,
+        long_term_catheter = Percentage.Of.Adult.Patients.With.Long.Term.Catheter.In.Use ,
+        "hypercalcemia_calcium > 10.2Mg" = Percentage.Of.Adult.Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL.,
+        "phosphorus < 3.5Mg" = Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Less.Than.3.5.Mg.dL,
+        "phosphorus (3.5 - 4.5) Mg" = Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Between.3.5.4.5.Mg.dL,
+        "phosphorus (4.6 - 5.5) Mg" = Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Between.4.6.5.5.Mg.dL,
+        "phosphorus (5.6 - 7) Mg" = Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Between.5.6.7.0.Mg.dL,
+        "phosphorus > 7Mg" = Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Greater.Than.7.0.Mg.dL,
+        better_hospitalization = Hospitalizations..Better.Than.Expected..STATE.,
+        expected_hospitalization = Hospitalizations..As.Expected..STATE.,
+        worse_hospitalization = Hospitalizations..Worse.Than.Expected..STATE.,
+        better_hospital_readmission = Hospital.Readmission...Better.Than.Expected..STATE.,
+        expected_hospital_readmission = Hospital.Readmission...As.Expected..STATE.,
+        worse_hospital_readmission = Hospital..Readmission...Worse.Than.Expected..STATE.,
+        better_survival = Survival..Better.Than.Expected..STATE.,
+        expected_survival = Survival..As.Expected..STATE.,
+        worse_survival = Survival..Worse.Than.Expected..STATE.,
+        incident_transplant_waitlist_better = Incident.Patients.Transplant.Waitlisting..Better.Than.Expected..STATE.,
+        incident_transplant_waitlist_expected = Incident.Patients.Transplant.Waitlisting...As.Expected..STATE.,
+        incident_transplant_waitlist_worse = Incident.Patients.Transplant.Waitlisting...Worse.Than.Expected..STATE.,
+        prevalent_transplant_waitlist_better = Prevalent.Patients.Transplant.Waitlisting..Better.Than.Expected..STATE.,
+        prevalent_transplant_waitlist_expected = Prevalent.Patients.Transplant.Waitlisting...As.Expected..STATE.,
+        prevalent_transplant_waitlist_worse = Prevalent.Patients.Transplant.Waitlisting...Worse.Than.Expected..STATE.,
+        Hgb_10g = Percentage.Of.Patients.With.Hgb.10.g.dL,
+        Hgb_12g = Percentage.of.patients.with.Hgb.12.g.dL
+        )
+
+data_desc = descr(train_data, plain.ascii = FALSE, headings = FALSE) # descriptive statistics for the dataset
+
+kbl(data_desc, align= 'l') %>%
+  kable_paper("hover")
+
+# Plot Missing values
+plot_intro(train_data)
+plot_missing(train_data, missing_only = TRUE, group = list("Good (0.05)" = 0.05, "OK (0.4)" = 0.4, Bad = 0.8, Remove = 1),)
+
+total_missing <- sum(is.na(train_data))
+# cat("Count Missing Values in Entire Data Frame: ", total_missing)
+
+# Count the number of missing values in each column
+no_missing_values_df <- data.frame("Missing_Values" = colSums(is.na(train_data)))
+
+# Table format
+kbl(no_missing_values_df) %>%
+  kable_paper("hover", full_width = F)
+
+# Visualize of data in histograms
+plot_histogram(train_data[, 18:25], ncol = 2L)
+
+# Plot qq
+plot_qq(train_data[, 19:30], ncol = 2L)
+
+# Remove categorical columns
+train_data$State <- NULL
+
+# Impute missing values with the median
+for (col in colnames(train_data)) {
+  median_value <- median(train_data[[col]], na.rm = TRUE)
+  train_data[[col]] <- ifelse(is.na(train_data[[col]]), median_value, train_data[[col]])
+}
+
+# Round all variables
+train_data <- round(train_data, digits = 0)
+
+# Count the number of missing values in each column
+no_missing_values_df <- data.frame("Missing_Values" = colSums(is.na(train_data)))
+
+Type = sapply(train_data, typeof)
+no_missing_values_df <- cbind(no_missing_values_df, Type)
+
+# table format
+kbl(no_missing_values_df) %>%
+  kable_paper("hover", full_width = F)
+```
+
+# Chapter 5: Analysis
+
+## Libraries
+```{r, eval = FALSE}
 # Load libraries
 library(tidyverse)  #rename; pipe operator
 library(olsrr)      #ols_plot_resid_lev; outliers, leverage plot
@@ -17,27 +297,8 @@ library(pls)        #pcr; PC regression
 library(Metrics)    #mae; calculate MAE, MSE, RMSE, R^2
 ```
 
-## Data Preparation
-
-This analysis uses the Dialysis dataset introduced previously. Within this context, we restructured the variables, enhancing their meaningfulness and facilitating inferential analysis. Additionally, the mean imputation approach addressed missing values.
-
-## Assumptions
-
-PCA relies on certain assumptions, the fulfillment of which is essential for the validity of this technique.
-
--   **Linearity**: PCA assumes that the dataset is a linear combination of the variables. The variables exhibit relationships among themselves [@chumney2012pcaefa].
-
--   **Importance of mean and covariance**: PCA assumes that the directions of maximum variance will contain good features for discrimination.
-
--   **Correlation between features**: PCA assumes a correlation between features.
-
--   **Normalization of data**: Normalization of data is necessary to apply PCA. Unscaled data can cause relative comparison problems of the dataset [@chumney2012pcaefa]. In addition, the data should contain no significant outliers.
-
--   **Orthogonality**: The principal components are orthogonal to each other.
-
--   **Sampling adequacy**: PCA assumes that there is sampling adequacy.
-
-```{r, echo=FALSE, results='hide'}
+## Code
+```{r, eval = FALSE}
 # Load dataset
 train_original <- read.csv('dataset/DFC_STATE.csv')
 
@@ -46,9 +307,7 @@ train_data <- train_original
 
 # Constant seed
 my_seed = 95
-```
 
-```{r, echo=FALSE, results='hide'}
 # Rename Variables
 train_data <- rename(train_data,
                       better_transfusion = Transfusions..Better.than.expected..STATE.,
@@ -90,9 +349,7 @@ train_data <- rename(train_data,
         "Hgb 10g"= Percentage.Of.Patients.With.Hgb.10.g.dL,
         "Hgb 12g" = Percentage.of.patients.with.Hgb.12.g.dL
         )
-```
 
-```{r, echo=FALSE, results='hide'}
 # Impute Missing Values
 # Count the number of missing values in each column
 colSums(is.na(train_data))
@@ -105,9 +362,7 @@ for (col in colnames(train_data)) {
   mean_value <- mean(train_data[[col]], na.rm = TRUE)
   train_data[[col]] <- ifelse(is.na(train_data[[col]]), mean_value,     train_data[[col]])
 }
-```
 
-```{r, echo=FALSE, results='hide'}
 # Remove rows with missing values
 train_data <- na.omit(train_data)
 
@@ -122,59 +377,22 @@ summary(train_data)
 
 # Summary statistics of categorical variables
 summary(train_data[, sapply(train_data, is.character)])
-```
 
-```{r, echo=FALSE, results='hide'}
 # Check dataset structure
 str(train_data)
-```
 
-## Feature Scaling
-
-### Standardization
-
-It is important to Mean-Center the data prior to PCA model building to ensure the first Principal Component is in the direction of maximum variance.
-
--   Standardization produces Mean, $\mu$= 0, and Standard Deviation, $\sigma$ = 1.
-
--   We can rewrite this as:
-
-    $$
-    Z = \frac{{x - \mu}}{{\sigma}}
-    $$
-
-    $$
-    Z \sim N(0,1)
-    $$
-
-```{r}
 # Find the index position of the target feature 
 target_name <- "expected_survival"
 target_index <- grep(target_name, 
                      colnames(train_data))
-```
 
-```{r}
 # Standardization Numerical Features
 train_data_sc <- scale(train_data[, -target_index])
 
-```
-
-## PCA Requirements
-
-### Outliers Detection
-
--   There are some outliers in the data frame including the dependent variable.
--   However, there are three outliers with no high leverage.
--   Outliers are important because these can have a disproportionate influence on results.
-
-```{r}
 # Plot a boxplot to visualize potential outliers
 boxplot(train_data, main = "Outliers Detection",
         col = "steelblue")
-```
 
-```{r}
 # Dependent Variable outliers
 train_data %>% 
   ggplot(aes(y=expected_survival)) +
@@ -182,11 +400,7 @@ train_data %>%
   xlab("Expected Survival")+
   ylab("")+
   ggtitle("Dependent Variable Outliers")
-```
 
-### Leverage
-
-```{r, results='hide', fig.show='asis'}
 set.seed(my_seed)
 
 # Fit regression model
@@ -197,13 +411,7 @@ summary(ordinary_model)
 
 # Residual Diagnostics
 ols_plot_resid_lev(ordinary_model)
-```
 
-### Removing Outliers
-
-After removing one outlier from the dataset, we discovered that the final results produced minimal variability. Therefore, we decided to present a model that captures all the data points' information; thus, no observations will be removed from the final model.
-
-```{r, results='hide', fig.show='asis'}
 # No Outliers subset
 no_outliers_df <- slice(train_data, -c(56))
 
@@ -217,15 +425,7 @@ summary(no_outliers_model)
 
 # Residual Diagnostics
 ols_plot_resid_lev(no_outliers_model)
-```
 
-### Correlations
-
--   Multicollinearity is present in the data set.
-
--   28 Correlated features were identified using a threshold = 0.30.
-
-```{r}
 # Calculate correlations and round to 2 digits
 corr_matrix <- cor(train_data_sc)
 corr_matrix <- round(corr_matrix, digits = 2)
@@ -242,18 +442,9 @@ high_corr_df <- data.frame(
 # table format
 kbl(high_corr_df, caption = "Highly Correlated Features") %>%
   kable_paper("hover")
-```
 
-```{r}
 corrplot::corrplot(corr_matrix, type = "full", tl.pos = "n")
-```
 
-## Full Model Regression
-
--   The Adjusted $R^2$ = 99.99% is an indication of over-fitting, or high variance.
--   This dataset is suitable to apply PCA to find the adequate variance balance.
-
-```{r}
 set.seed(my_seed)
 
 # Fit a multiple linear regression model
@@ -271,27 +462,6 @@ tab_model(full_model, title = "Full Model Regression",
              css.summary = 'color: #10759B; font-weight: bold;'
            ))
 
-```
-
-## PCA Implementation
-
-### SVD - Singular Value Decomposition
-
-We will focus on Singular Value Decomposition which is a classic approach for PCA analysis.
-
-Singular Value Decomposition is a factorization technique used in linear algebra to decompose a matrix into three matrices.
-
-1.  $L$: A matrix whose columns are the left singular vectors of the original matrix.
-
-2.  $D$: A diagonal matrix whose entries are the singular values of the original matrix.
-
-3.  $R$: A matrix whose columns are the right singular vectors of the original matrix.
-
-The SVD is closely related to the eigenvalue decomposition (EVD), which is another factorization technique used in linear algebra. While the EVD can only be applied to square matrices, the SVD can be applied to any matrix, including rectangular matrices. The SVD is also more numerically stable than the EVD, making it a preferred method for many applications.
-
--   Note: The Spectral Decomposition approach is used with the princomp() function.
-
-```{r}
 # Apply PCA using prcomp()
 data_pca <- prcomp(train_data_sc, center = TRUE, scale. = TRUE)
 pca_summ <- summary(data_pca)$importance
@@ -303,15 +473,7 @@ transposed_pca_summ <- t(pca_summ)
 kbl(transposed_pca_summ, caption = "Pricipal Components Analysis",
     digits = 4) %>%
   kable_paper("hover")
-```
 
-### PCA - Elements
-
--   The values in \`**`` data_pca$x` ``** are the coordinates of each observation in the new principal component space. These coordinates are the scores for each observation along each principal component.
-
--   The eigenvectors of the covariance, or correlation matrix of the data represent the directions of maximum variance, or information in the dataset.
-
-```{r}
 # Principal Component scores vector
 pc_scores <- data_pca$x
 
@@ -327,13 +489,6 @@ component_mean <- data_pca$center
 # Scaling factor of Variables
 component_scale <- data_pca$scale
 
-```
-
-### Loadings of First Two Components
-
--   The loading \`data_pca\$rotation\` are the weights assigned to each original variable for that particular principal component.
-
-```{r}
 # Access the loadings for the first two principal components
 loadings_first_two_components <- pc_loadings[, 1:2]
 
@@ -345,11 +500,7 @@ kbl(loadings_first_two_components,
     caption = "Loadings of First Two Principal Components",
     digits = 4) %>%
   kable_paper("hover")
-```
 
-### PCA - Cumulative Variance
-
-```{r}
 # Proportion of variance explained by each PC
 variance_explained <- component_sdev^2 / sum(component_sdev^2)
 
@@ -367,13 +518,7 @@ kbl(cumulative_variance_explained_df, align = "cl",
     caption = "PCA: Cumulative Variance Explained",
     digits = 4) %>%
   kable_paper("hover")
-```
 
-### PCA - Number of Principal Components
-
--   We can conclude that 9 Principal Components explain 86% of the variance.
-
-```{r}
 # Retain components that explain a percentage of the variance
 num_components <- which(cumulative_variance_explained >= 0.86)[1]
 
@@ -384,57 +529,19 @@ selected_pcs <- pc_scores[, 1:num_components]
 kbl(selected_pcs, caption = "Components Explaining 86% Variance",
     digits = 4) %>%
   kable_paper("hover", full_width = F)
-```
 
-## Visualization
-
-### Scree Plot - Cumulative Variance Explained
-
--   PC1 explains 40.8% variance.
-
--   PC2 explains 9.5% variance.
-
-```{r}
 fviz_eig(data_pca, addlabels = TRUE)
-```
 
-### Biplot
-
--   The correlation between a variable and a principal component (PC) is used as the coordinates of the variable on the PC. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations @abdi2010principal.
-
--   PC1 is represented in black which displays the longest distance of its projection.
-
--   PC2 is represented in blue which displays a shorter distance as expected.
-
-```{r}
 fviz_pca_biplot(data_pca, 
                 geom = c("point", "arrow"),
                 geom.var = "arrow")
-```
 
-### Correlation Circle
-
-The plot below is also known as variable correlation plots. It shows the relationships between all variables. It can be interpreted as follow:
-
--   Positively correlated variables are grouped together.
-
--   Negatively correlated variables are positioned on opposite sides of the plot origin (opposed quadrants).
-
--   The distance between variables and the origin measures the quality of the variables on the factor map. Variables that are away from the origin are well represented on the factor map.
-
-```{r}
 # Control variable colors using their contributions
 fviz_pca_var(data_pca, col.var = "contrib",
    gradient.cols = c("white", "blue", "red"),
    geom.var = "arrow",
    ggtheme = theme_minimal())
-```
 
-### Variable Contribution
-
-Top variable contribution for the first two principal components.
-
-```{r}
 # Contributions of variables to PC1
 pc2_contribution <- fviz_contrib(data_pca, choice = "var", axes = 1, top = 20)
 
@@ -469,13 +576,7 @@ pc2_contribution +
        caption = "PC2 explains 9.5% variance") +
   scale_y_continuous(labels = scales::percent_format(scale = 1,
                                                      accuracy = 1))
-```
 
-## Model Building
-
-### Data Splitting into Training & Test set
-
-```{r}
 # reproducible random sampling
 set.seed(my_seed)  
  
@@ -485,13 +586,7 @@ y <- train_data$expected_survival
 split <- sample.split(y, SplitRatio = 0.7) 
 training_set <- subset(train_data, split == TRUE) 
 test_set <- subset(train_data, split == FALSE) 
-```
 
-### Feature Scaling: Standardization
-
--   Standardization ensures all features are on the same scale, and this method is less sensitive to outliers.
-
-```{r}
 # Feature Scaling: Standardization
 # Perform centering and scaling on the training and test sets
 sc <- preProcess(training_set[, -target_index], 
@@ -500,11 +595,6 @@ training_set[, -target_index] <- predict(
   sc, training_set[, -target_index])
 test_set[, -target_index] <- predict(sc, test_set[, -target_index])
 
-```
-
-### Applying PCA to Training & Test sets
-
-```{r}
 # Perform Principal Component Analysis (PCA) preprocessing on the training data
 pca <- preProcess(training_set[, -target_index], 
                   method = 'pca', pcaComp = 8)
@@ -521,9 +611,6 @@ test_set <- predict(pca, test_set)
 # Reorder columns, moving the dependent feature index to the end
 test_set <- test_set[c(2:9, 1)]
 
-```
-
-```{r, echo=FALSE}
 #PRESS & Predicted $R^2$ Functions
 #PRESS - predicted residual sums of squares
 PRESS <- function(linear.model) {
@@ -545,11 +632,7 @@ pred_r_squared <- function(linear.model) {
   
   return(pred.r.squared)
 }
-```
 
-## PCA Full Model: 8 Principal Components
-
-```{r}
 # reproducible random sampling
 set.seed(my_seed)
 
@@ -581,26 +664,16 @@ predict_8pc <- cbind(PRESS_8pc, R2_8pcs)
 kbl(predict_8pc, caption = "8 Principal Components Prediction Metrics",
     digits = 4) %>%
   kable_paper("hover", full_width = F)
-```
 
-### Visualization of Uncorrelated PCA Matrix
-
-```{r}
 # Visual of Principal Components un-correlation
 corr_matrix <- cor(training_set)
 ggcorrplot(corr_matrix)
-```
 
-## PCA: 2 Principal Components
-
-```{r}
 # Create a subset with 2 principal components
 significant_pcs = c(1,2,9)
 train_pca <- training_set[, significant_pcs]
 test_pca <- test_set[, significant_pcs]
-```
 
-```{r}
 # reproducible random sampling
 set.seed(my_seed)
 
@@ -635,13 +708,7 @@ predict_2pc <- cbind(PRESS_2pc, R2_2pc)
 kbl(predict_2pc, caption = "2 Principal Components Prediction Metrics",
     digits = 4) %>%
   kable_paper("hover", full_width = F)
-```
 
-### **Principal Components Regression**
-
--   PCA is used to calculate principal components that can then be used in principal components regression. This type of regression is often used when multicollinearity exists between predictors in a data set.
-
-```{r}
 # reproducible random sampling
 set.seed(my_seed)
 
@@ -655,11 +722,7 @@ print(pcr_model)
 # kbl(pcr_model$residuals, caption = "PCA Residuals",
 #     digits = 4) %>%
 #   kable_paper("hover", full_width = F)
-```
 
-### PCA: Cross-Validation Model
-
-```{r}
 # reproducible random sampling
 set.seed(my_seed)
 
@@ -680,11 +743,7 @@ cv_results = model_cv$results
 kbl(cv_results, caption = "PCA: Cross-Validation Metrics",
     digits = 4) %>%
   kable_paper("hover", full_width = F)
-```
 
-## Predictions
-
-```{r}
 # Find the index position of the target feature
 pred_target_index <- grep(target_name, 
                      colnames(test_pca))
@@ -692,21 +751,13 @@ pred_target_index <- grep(target_name,
 
 # Create Predicted Target Feature (y-test) 
 y_test <- test_pca[pred_target_index]
-```
 
-```{r}
 # Predictions using the Cross-Validation model
 y_pred = predict(model_cv, newdata = test_pca[, -pred_target_index])
 
-```
-
-```{r}
 # Prediction Results from y_predictions
 y_pred <- round(y_pred, digits = 0)
 
-```
-
-```{r}
 # Transform y_test from data frame to numeric
 y_test <- as.numeric(unlist(y_test))
 
@@ -714,11 +765,7 @@ prediction_comparison <- cbind(y_pred, y_test)
 # table format
 kbl(prediction_comparison) %>%
   kable_paper("hover", full_width = F)
-```
 
-### Prediction Metrics
-
-```{r}
 # Calculate Mean Absolute Error (MAE)
 MAE_value <- mae(y_pred, y_test)
 #cat("MAE =", mae_value)
@@ -742,19 +789,3 @@ prediction_metrics_df <- cbind(MAE_value, MSE_predict,
 kbl(prediction_metrics_df, digits = 4) %>%
   kable_paper("hover", full_width = F)
 ```
-
-## Training Conclusion
-
-In conclusion, this project has demonstrated the effectiveness of Principal Component Analysis (PCA) in dimension reduction with the following key points:
-
--   PCA was able to reduce from 37 features down to just 2 principal components.
-
--   The best score of $R^2$ = 97.61% was from the Linear Regression with Cross-validation model.
-
--   The predicted $R^2$ = 96%
-
--   The average deviation between the predicted values, and observed values for 'Expected Survival' is RMSE = 33.8.
-
--   The model has not been exposed to unseen data with a large amount of observations to asses its robustness, and reliability.
-
-The packages used in this analysis are tidyverse @tidyverse, olsrr @olsrr, caret @caret, kableExtra @kableExtra, sjPlot @sjPlot, factoextra @factoextra, caTools @caTools, ggcorrplot @ggcorrplot, pls @pls, and Metrics @Metrics.
