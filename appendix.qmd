@@ -179,6 +179,8 @@ library(kableExtra)
 library(DataExplorer)
 ```
 
+The packages used for this chapter are tidyverse @tidyverse, summarytools @summarytools, kableExtra @kableExtra, and DataExplorer @DataExplorer.
+
 ## Code
 ```{r, eval = FALSE}
 # Load the dataset

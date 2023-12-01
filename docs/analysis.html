@@ -307,16 +307,16 @@ div.csl-indent {
 
 <section id="data-preparation" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">5.1</span> Data Preparation</h2>
-<p>This analysis uses the Dialysis dataset introduced previously. Within this context, we restructured the variables, enhancing their meaningfulness and facilitating inferential analysis. Additionally, the mean imputation approach addressed missing values.</p>
+<p>This analysis uses the Dialysis dataset introduced previously. Within this context, we restructured the variables, enhancing their meaningfulness and facilitating inferential analysis. Additionally, the mean imputation approach addressed missing values. The packages used in this analysis are tidyverse <span class="citation" data-cites="tidyverse"><a href="references.html#ref-tidyverse" role="doc-biblioref">[1]</a></span>, olsrr <span class="citation" data-cites="olsrr"><a href="references.html#ref-olsrr" role="doc-biblioref">[2]</a></span>, caret <span class="citation" data-cites="caret"><a href="references.html#ref-caret" role="doc-biblioref">[3]</a></span>, kableExtra <span class="citation" data-cites="kableExtra"><a href="references.html#ref-kableExtra" role="doc-biblioref">[4]</a></span>, sjPlot <span class="citation" data-cites="sjPlot"><a href="references.html#ref-sjPlot" role="doc-biblioref">[5]</a></span>, factoextra <span class="citation" data-cites="factoextra"><a href="references.html#ref-factoextra" role="doc-biblioref">[6]</a></span>, caTools <span class="citation" data-cites="caTools"><a href="references.html#ref-caTools" role="doc-biblioref">[7]</a></span>, ggcorrplot <span class="citation" data-cites="ggcorrplot"><a href="references.html#ref-ggcorrplot" role="doc-biblioref">[8]</a></span>, pls <span class="citation" data-cites="pls"><a href="references.html#ref-pls" role="doc-biblioref">[9]</a></span>, and Metrics <span class="citation" data-cites="Metrics"><a href="references.html#ref-Metrics" role="doc-biblioref">[10]</a></span>.</p>
 </section>
 <section id="assumptions" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">5.2</span> Assumptions</h2>
 <p>PCA relies on certain assumptions, the fulfillment of which is essential for the validity of this technique.</p>
 <ul>
-<li><p><strong>Linearity</strong>: PCA assumes that the dataset is a linear combination of the variables. The variables exhibit relationships among themselves <span class="citation" data-cites="chumney2012pcaefa"><a href="references.html#ref-chumney2012pcaefa" role="doc-biblioref">[1]</a></span>.</p></li>
+<li><p><strong>Linearity</strong>: PCA assumes that the dataset is a linear combination of the variables. The variables exhibit relationships among themselves <span class="citation" data-cites="chumney2012pcaefa"><a href="references.html#ref-chumney2012pcaefa" role="doc-biblioref">[11]</a></span>.</p></li>
 <li><p><strong>Importance of mean and covariance</strong>: PCA assumes that the directions of maximum variance will contain good features for discrimination.</p></li>
 <li><p><strong>Correlation between features</strong>: PCA assumes a correlation between features.</p></li>
-<li><p><strong>Normalization of data</strong>: Normalization of data is necessary to apply PCA. Unscaled data can cause relative comparison problems of the dataset <span class="citation" data-cites="chumney2012pcaefa"><a href="references.html#ref-chumney2012pcaefa" role="doc-biblioref">[1]</a></span>. In addition, the data should contain no significant outliers.</p></li>
+<li><p><strong>Normalization of data</strong>: Normalization of data is necessary to apply PCA. Unscaled data can cause relative comparison problems of the dataset <span class="citation" data-cites="chumney2012pcaefa"><a href="references.html#ref-chumney2012pcaefa" role="doc-biblioref">[11]</a></span>. In addition, the data should contain no significant outliers.</p></li>
 <li><p><strong>Orthogonality</strong>: The principal components are orthogonal to each other.</p></li>
 <li><p><strong>Sampling adequacy</strong>: PCA assumes that there is sampling adequacy.</p></li>
 </ul>
@@ -2369,7 +2369,7 @@ waitlist worse</td>
 <section id="biplot" class="level3" data-number="5.7.2">
 <h3 data-number="5.7.2" class="anchored" data-anchor-id="biplot"><span class="header-section-number">5.7.2</span> Biplot</h3>
 <ul>
-<li><p>The correlation between a variable and a principal component (PC) is used as the coordinates of the variable on the PC. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations <span class="citation" data-cites="abdi2010principal"><a href="references.html#ref-abdi2010principal" role="doc-biblioref">[2]</a></span>.</p></li>
+<li><p>The correlation between a variable and a principal component (PC) is used as the coordinates of the variable on the PC. The representation of variables differs from the plot of the observations: The observations are represented by their projections, but the variables are represented by their correlations <span class="citation" data-cites="abdi2010principal"><a href="references.html#ref-abdi2010principal" role="doc-biblioref">[12]</a></span>.</p></li>
 <li><p>PC1 is represented in black which displays the longest distance of its projection.</p></li>
 <li><p>PC2 is represented in blue which displays a shorter distance as expected.</p></li>
 </ul>
@@ -3129,45 +3129,44 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 <li><p>The average deviation between the predicted values, and observed values for ‘Expected Survival’ is RMSE = 33.8.</p></li>
 <li><p>The model has not been exposed to unseen data with a large amount of observations to asses its robustness, and reliability.</p></li>
 </ul>
-<p>The packages used in this analysis are tidyverse <span class="citation" data-cites="tidyverse"><a href="references.html#ref-tidyverse" role="doc-biblioref">[3]</a></span>, olsrr <span class="citation" data-cites="olsrr"><a href="references.html#ref-olsrr" role="doc-biblioref">[4]</a></span>, caret <span class="citation" data-cites="caret"><a href="references.html#ref-caret" role="doc-biblioref">[5]</a></span>, kableExtra <span class="citation" data-cites="kableExtra"><a href="references.html#ref-kableExtra" role="doc-biblioref">[6]</a></span>, sjPlot <span class="citation" data-cites="sjPlot"><a href="references.html#ref-sjPlot" role="doc-biblioref">[7]</a></span>, factoextra <span class="citation" data-cites="factoextra"><a href="references.html#ref-factoextra" role="doc-biblioref">[8]</a></span>, caTools <span class="citation" data-cites="caTools"><a href="references.html#ref-caTools" role="doc-biblioref">[9]</a></span>, ggcorrplot <span class="citation" data-cites="ggcorrplot"><a href="references.html#ref-ggcorrplot" role="doc-biblioref">[10]</a></span>, pls <span class="citation" data-cites="pls"><a href="references.html#ref-pls" role="doc-biblioref">[11]</a></span>, and Metrics <span class="citation" data-cites="Metrics"><a href="references.html#ref-Metrics" role="doc-biblioref">[12]</a></span>.</p>
 
 
 <div id="refs" class="references csl-bib-body" role="list" style="display: none">
-<div id="ref-chumney2012pcaefa" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">F. Chumney, <span>“PCA, EFA, CFA,”</span> pp. 2–3, 6, Sep., 2012, Available: <a href="https://www.westga.edu/academics/research/vrc/assets/docs/PCA-EFA-CFA_EssayChumney_09282012.pdf">https://www.westga.edu/academics/research/vrc/assets/docs/PCA-EFA-CFA_EssayChumney_09282012.pdf</a></div>
-</div>
-<div id="ref-abdi2010principal" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">H. Abdi and L. J. Williams, <span>“Principal component analysis,”</span> <em>WIREs Computational Statistics</em>, vol. 2, no. 4, pp. 433–459, 2010, doi: <a href="https://doi.org/10.1002/wics.101">https://doi.org/10.1002/wics.101</a>. Available: <a href="https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101">https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101</a></div>
-</div>
 <div id="ref-tidyverse" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">H. Wickham <em>et al.</em>, <span>“Welcome to the <span class="nocase">tidyverse</span>,”</span> <em>Journal of Open Source Software</em>, vol. 4, no. 43, p. 1686, 2019, doi: <a href="https://doi.org/10.21105/joss.01686">10.21105/joss.01686</a></div>
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">H. Wickham <em>et al.</em>, <span>“Welcome to the <span class="nocase">tidyverse</span>,”</span> <em>Journal of Open Source Software</em>, vol. 4, no. 43, p. 1686, 2019, doi: <a href="https://doi.org/10.21105/joss.01686">10.21105/joss.01686</a></div>
 </div>
 <div id="ref-olsrr" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline">A. Hebbali, <em>Olsrr: Tools for building OLS regression models</em>. 2020. Available: <a href="https://CRAN.R-project.org/package=olsrr">https://CRAN.R-project.org/package=olsrr</a></div>
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">A. Hebbali, <em>Olsrr: Tools for building OLS regression models</em>. 2020. Available: <a href="https://CRAN.R-project.org/package=olsrr">https://CRAN.R-project.org/package=olsrr</a></div>
 </div>
 <div id="ref-caret" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Kuhn and Max, <span>“Building predictive models in r using the caret package,”</span> <em>Journal of Statistical Software</em>, vol. 28, no. 5, pp. 1–26, 2008, doi: <a href="https://doi.org/10.18637/jss.v028.i05">10.18637/jss.v028.i05</a>. Available: <a href="https://www.jstatsoft.org/index.php/jss/article/view/v028i05">https://www.jstatsoft.org/index.php/jss/article/view/v028i05</a></div>
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Kuhn and Max, <span>“Building predictive models in r using the caret package,”</span> <em>Journal of Statistical Software</em>, vol. 28, no. 5, pp. 1–26, 2008, doi: <a href="https://doi.org/10.18637/jss.v028.i05">10.18637/jss.v028.i05</a>. Available: <a href="https://www.jstatsoft.org/index.php/jss/article/view/v028i05">https://www.jstatsoft.org/index.php/jss/article/view/v028i05</a></div>
 </div>
 <div id="ref-kableExtra" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[6] </div><div class="csl-right-inline">H. Zhu, <em>kableExtra: Construct complex table with ’kable’ and pipe syntax</em>. 2021. Available: <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a></div>
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">H. Zhu, <em>kableExtra: Construct complex table with ’kable’ and pipe syntax</em>. 2021. Available: <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a></div>
 </div>
 <div id="ref-sjPlot" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[7] </div><div class="csl-right-inline">D. Lüdecke, <em>sjPlot: Data visualization for statistics in social science</em>. 2023. Available: <a href="https://CRAN.R-project.org/package=sjPlot">https://CRAN.R-project.org/package=sjPlot</a></div>
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">D. Lüdecke, <em>sjPlot: Data visualization for statistics in social science</em>. 2023. Available: <a href="https://CRAN.R-project.org/package=sjPlot">https://CRAN.R-project.org/package=sjPlot</a></div>
 </div>
 <div id="ref-factoextra" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[8] </div><div class="csl-right-inline">A. Kassambara and F. Mundt, <em>Factoextra: Extract and visualize the results of multivariate data analyses</em>. 2020. Available: <a href="https://CRAN.R-project.org/package=factoextra">https://CRAN.R-project.org/package=factoextra</a></div>
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">A. Kassambara and F. Mundt, <em>Factoextra: Extract and visualize the results of multivariate data analyses</em>. 2020. Available: <a href="https://CRAN.R-project.org/package=factoextra">https://CRAN.R-project.org/package=factoextra</a></div>
 </div>
 <div id="ref-caTools" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[9] </div><div class="csl-right-inline">J. Tuszynski, <em>caTools: Tools: Moving window statistics, GIF, Base64, ROC AUC, etc</em>. 2021. Available: <a href="https://CRAN.R-project.org/package=caTools">https://CRAN.R-project.org/package=caTools</a></div>
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">J. Tuszynski, <em>caTools: Tools: Moving window statistics, GIF, Base64, ROC AUC, etc</em>. 2021. Available: <a href="https://CRAN.R-project.org/package=caTools">https://CRAN.R-project.org/package=caTools</a></div>
 </div>
 <div id="ref-ggcorrplot" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[10] </div><div class="csl-right-inline">A. Kassambara, <em>Ggcorrplot: Visualization of a correlation matrix using ’ggplot2’</em>. 2023. Available: <a href="https://CRAN.R-project.org/package=ggcorrplot">https://CRAN.R-project.org/package=ggcorrplot</a></div>
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">A. Kassambara, <em>Ggcorrplot: Visualization of a correlation matrix using ’ggplot2’</em>. 2023. Available: <a href="https://CRAN.R-project.org/package=ggcorrplot">https://CRAN.R-project.org/package=ggcorrplot</a></div>
 </div>
 <div id="ref-pls" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[11] </div><div class="csl-right-inline">K. H. Liland, B.-H. Mevik, and R. Wehrens, <em>Pls: Partial least squares and principal component regression</em>. 2023. Available: <a href="https://CRAN.R-project.org/package=pls">https://CRAN.R-project.org/package=pls</a></div>
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">K. H. Liland, B.-H. Mevik, and R. Wehrens, <em>Pls: Partial least squares and principal component regression</em>. 2023. Available: <a href="https://CRAN.R-project.org/package=pls">https://CRAN.R-project.org/package=pls</a></div>
 </div>
 <div id="ref-Metrics" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[12] </div><div class="csl-right-inline">B. Hamner and M. Frasco, <em>Metrics: Evaluation metrics for machine learning</em>. 2018. Available: <a href="https://CRAN.R-project.org/package=Metrics">https://CRAN.R-project.org/package=Metrics</a></div>
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">B. Hamner and M. Frasco, <em>Metrics: Evaluation metrics for machine learning</em>. 2018. Available: <a href="https://CRAN.R-project.org/package=Metrics">https://CRAN.R-project.org/package=Metrics</a></div>
+</div>
+<div id="ref-chumney2012pcaefa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">F. Chumney, <span>“PCA, EFA, CFA,”</span> pp. 2–3, 6, Sep., 2012, Available: <a href="https://www.westga.edu/academics/research/vrc/assets/docs/PCA-EFA-CFA_EssayChumney_09282012.pdf">https://www.westga.edu/academics/research/vrc/assets/docs/PCA-EFA-CFA_EssayChumney_09282012.pdf</a></div>
+</div>
+<div id="ref-abdi2010principal" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline">H. Abdi and L. J. Williams, <span>“Principal component analysis,”</span> <em>WIREs Computational Statistics</em>, vol. 2, no. 4, pp. 433–459, 2010, doi: <a href="https://doi.org/10.1002/wics.101">https://doi.org/10.1002/wics.101</a>. Available: <a href="https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101">https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.101</a></div>
 </div>
 </div>
 </section>

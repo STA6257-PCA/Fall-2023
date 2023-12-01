@@ -14,8 +14,6 @@ The structure of the dataset can be categorized into three main components:
 
 The selection of this dataset for our analysis is driven by its inherent characteristic of multicollinearity among variables, indicating that certain variables are less significant in explaining the variability of the response variables. Additionally, all variables in the dataset are numeric, except for the index variable that is excluded from the subsequent Principal Component Analysis (PCA). Our objective is to utilize this dataset to illustrate the efficacy of PCA in dimension reduction and the efficient visualization of data.
 
-The packages used for this exploration are tidyverse @tidyverse, summarytools @summarytools, kableExtra @kableExtra, and DataExplorer @DataExplorer.
-
 ## Renaming Variables
 
 In our data preparation process, we have efficiently removed white spaces, and edited variable names, enhancing the readability and interpretability of the dataset. This meticulous effort adds to the overall clarity, making it quicker, and more meaningful for further examination. For instance, "hypercalcemia_calcium \> 10.2Mg", was used in replacement of Percentage.Of.Adult..Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL.
