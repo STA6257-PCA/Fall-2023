@@ -316,43 +316,6 @@ full <- tab_model(full_model, title = "Full Model Regression",
 full
 ```
 
-```{r}
-# # Adding the toggle switch
-# full_html_out <- sprintf('
-# <p id="result-full">Show/Hide Results: </p> 
-# <div class="switch">
-#   <input type="checkbox" id="togglefull">
-#   <label class="slider round" for="togglefull"></label>
-# </div>
-# 
-# <div id="result-container-full">
-#   <div id="fullTable" style="display: none;">%s</div>
-# </div>
-# 
-# <script>
-# document.getElementById("togglefull").addEventListener("change", function() {
-#   togglefullResult();
-# });
-# 
-# function togglefullResult() {
-#   var resultContainer = document.getElementById("result-container-full");
-#   var fullTable = document.getElementById("fullTable");
-#   var fullSwitch = document.getElementById("togglefull");
-# 
-#   if (fullSwitch.checked) {
-#     resultContainer.style.display = "block";
-#     fullTable.style.display = "block";
-#   } else {
-#     resultContainer.style.display = "none";
-#     fullTable.style.display = "none";
-#   }
-# }
-# </script>', full)
-# 
-# htmltools::HTML(full_html_out)
-
-```
-
 
 ## PCA Implementation
 
