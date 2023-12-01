@@ -15,8 +15,6 @@ library(caTools)    #sample.split
 library(ggcorrplot) #ggcorrplot; correlation graph
 library(pls)        #pcr; PC regression
 library(Metrics)    #mae; calculate MAE, MSE, RMSE, R^2
-# library(htmlwidgets)#html as text
-library(htmltools)  #html render
 ```
 
 ## Data Preparation
@@ -242,50 +240,9 @@ high_corr_df <- data.frame(
 )
 
 # table format
-correlations_table <- kbl(high_corr_df, caption = "Highly Correlated Features") %>%
+kbl(high_corr_df, caption = "Highly Correlated Features") %>%
   kable_paper("hover")
-
-# Capture the HTML of the styled training summary
-styled_correlations_table_html <- htmltools::HTML(as.character(correlations_table))
 ```
-
-```{r}
-# Adding toggle switch
-styled_corr <- sprintf('
-<p id="result-corr">Show/Hide Results: </p> 
-<div class="switch">
-  <input type="checkbox" id="toggleCorr">
-  <label class="slider round" for="toggleCorr"></label>
-</div>
-
-<div id="result-container-correlations">
-  
-  <div id="corrTable" style="display: none;">%s</div>
-</div>
-
-<script>
-document.getElementById("toggleCorr").addEventListener("change", function() {
-  toggleCorrResult();
-});
-
-function toggleCorrResult() {
-  var resultContainer = document.getElementById("result-container-correlations");
-  var corrTable = document.getElementById("corrTable");
-  var corrSwitch = document.getElementById("toggleCorr");
-
-  if (corrSwitch.checked) {
-    resultContainer.style.display = "block";
-    corrTable.style.display = "block";
-  } else {
-    resultContainer.style.display = "none";
-    corrTable.style.display = "none";
-  }
-}
-</script>', styled_correlations_table_html)
-
-htmltools::HTML(styled_corr)
-```
-
 
 ```{r}
 corrplot::corrplot(corr_matrix, type = "full", tl.pos = "n")
@@ -296,14 +253,14 @@ corrplot::corrplot(corr_matrix, type = "full", tl.pos = "n")
 -   The Adjusted $R^2$ = 99.99% is an indication of over-fitting, or high variance.
 -   This dataset is suitable to apply PCA to find the adequate variance balance.
 
-```{r, results='markup'}
+```{r}
 set.seed(my_seed)
 
 # Fit a multiple linear regression model
 full_model <- lm(expected_survival ~ ., data = train_data)
 
 # Print a summary of the regression model
-full <- tab_model(full_model, title = "Full Model Regression", 
+tab_model(full_model, title = "Full Model Regression", 
           string.p="P-value", string.stat = "T-score",
           string.se = "Std. Error",
           string.resp = "Response",
@@ -313,9 +270,8 @@ full <- tab_model(full_model, title = "Full Model Regression",
              css.depvarhead = 'font-weight: bold; text-align: left;',
              css.summary = 'color: #10759B; font-weight: bold;'
            ))
-full
-```
 
+```
 
 ## PCA Implementation
 
@@ -344,51 +300,10 @@ pca_summ <- summary(data_pca)$importance
 transposed_pca_summ <- t(pca_summ)
 
 # table format
-pca_summary <- kbl(transposed_pca_summ, caption = "Pricipal Components Analysis",
+kbl(transposed_pca_summ, caption = "Pricipal Components Analysis",
     digits = 4) %>%
   kable_paper("hover")
-
-# Capture the HTML of the styled training summary
-pca_summary_html <- htmltools::HTML(as.character(pca_summary))
 ```
-
-```{r}
-# Adding toggle switch
-styled_pca_summary <- sprintf('
-<p id="result-pca">Show/Hide Results: </p> 
-<div class="switch">
-  <input type="checkbox" id="togglepca">
-  <label class="slider round" for="togglepca"></label>
-</div>
-
-<div id="result-container-pca">
-  
-  <div id="pcaTable" style="display: none;">%s</div>
-</div>
-
-<script>
-document.getElementById("togglepca").addEventListener("change", function() {
-  togglepcaResult();
-});
-
-function togglepcaResult() {
-  var resultContainer = document.getElementById("result-container-pca");
-  var pcaTable = document.getElementById("pcaTable");
-  var pcaSwitch = document.getElementById("togglepca");
-
-  if (pcaSwitch.checked) {
-    resultContainer.style.display = "block";
-    pcaTable.style.display = "block";
-  } else {
-    resultContainer.style.display = "none";
-    pcaTable.style.display = "none";
-  }
-}
-</script>', pca_summary_html)
-
-htmltools::HTML(styled_pca_summary)
-```
-
 
 ### PCA - Elements
 
@@ -426,55 +341,13 @@ loadings_first_two_components <- pc_loadings[, 1:2]
 # print(loadings_first_two_components)
 
 # table format
-pc2_loadings <- kbl(loadings_first_two_components, 
+kbl(loadings_first_two_components, 
     caption = "Loadings of First Two Principal Components",
     digits = 4) %>%
   kable_paper("hover")
-
-# Capture the HTML of the styled training summary
-pc2_loadings_html <- htmltools::HTML(as.character(pc2_loadings))
 ```
-
-```{r}
-# Adding the toggle switch
-pc2_loadings_out <- sprintf('
-<p id="result-pc2">Show/Hide Results: </p> 
-<div class="switch">
-  <input type="checkbox" id="togglepc2">
-  <label class="slider round" for="togglepc2"></label>
-</div>
-
-<div id="result-container-pc2">
-  
-  <div id="pc2Table" style="display: none;">%s</div>
-</div>
-
-<script>
-document.getElementById("togglepc2").addEventListener("change", function() {
-  togglepc2Result();
-});
-
-function togglepc2Result() {
-  var resultContainer = document.getElementById("result-container-pc2");
-  var pc2Table = document.getElementById("pc2Table");
-  var pc2Switch = document.getElementById("togglepc2");
-
-  if (pc2Switch.checked) {
-    resultContainer.style.display = "block";
-    pc2Table.style.display = "block";
-  } else {
-    resultContainer.style.display = "none";
-    pc2Table.style.display = "none";
-  }
-}
-</script>', pc2_loadings_html)
-
-htmltools::HTML(pc2_loadings_out)
-```
-
 
 ### PCA - Cumulative Variance
-The cumulative measure helps determine the proportion of total variance explained by a certain number of components. A high cumulative variance indicates that a significant amount of the dataset's variability is retained by considering those components.
 
 ```{r}
 # Proportion of variance explained by each PC
@@ -490,52 +363,11 @@ cumulative_variance_explained_df <- data.frame(
 )
 
 # Create a kable table with an index column
-cumulative <- kbl(cumulative_variance_explained_df, align = "cl",
+kbl(cumulative_variance_explained_df, align = "cl",
     caption = "PCA: Cumulative Variance Explained",
     digits = 4) %>%
   kable_paper("hover")
-
-# Capture the HTML of the styled training summary
-cumulative_html <- htmltools::HTML(as.character(cumulative))
 ```
-
-```{r}
-# Adding the toggle switch
-cummulative_html_out <- sprintf('
-<p id="result-cummulative">Show/Hide Results: </p> 
-<div class="switch">
-  <input type="checkbox" id="togglecummulative">
-  <label class="slider round" for="togglecummulative"></label>
-</div>
-
-<div id="result-container-cummulative">
-  
-  <div id="cummulativeTable" style="display: none;">%s</div>
-</div>
-
-<script>
-document.getElementById("togglecummulative").addEventListener("change", function() {
-  togglecummulativeResult();
-});
-
-function togglecummulativeResult() {
-  var resultContainer = document.getElementById("result-container-cummulative");
-  var cummulativeTable = document.getElementById("cummulativeTable");
-  var cummulativeSwitch = document.getElementById("togglecummulative");
-
-  if (cummulativeSwitch.checked) {
-    resultContainer.style.display = "block";
-    cummulativeTable.style.display = "block";
-  } else {
-    resultContainer.style.display = "none";
-    cummulativeTable.style.display = "none";
-  }
-}
-</script>', cumulative_html)
-
-htmltools::HTML(cummulative_html_out)
-```
-
 
 ### PCA - Number of Principal Components
 
@@ -549,51 +381,10 @@ num_components <- which(cumulative_variance_explained >= 0.86)[1]
 selected_pcs <- pc_scores[, 1:num_components]
 
 # table format
-variance_pc <- kbl(selected_pcs, caption = "Components Explaining 86% Variance",
+kbl(selected_pcs, caption = "Components Explaining 86% Variance",
     digits = 4) %>%
   kable_paper("hover", full_width = F)
-
-# Capture the HTML of the styled training summary
-variance_pc_html <- htmltools::HTML(as.character(variance_pc))
 ```
-
-```{r}
-# Adding the toggle switch
-variance_pc_html_out <- sprintf('
-<p id="result-variance">Show/Hide Results: </p> 
-<div class="switch">
-  <input type="checkbox" id="togglevariance">
-  <label class="slider round" for="togglevariance"></label>
-</div>
-
-<div id="result-container-variance">
-  
-  <div id="varianceTable" style="display: none;">%s</div>
-</div>
-
-<script>
-document.getElementById("togglevariance").addEventListener("change", function() {
-  togglevarianceResult();
-});
-
-function togglevarianceResult() {
-  var resultContainer = document.getElementById("result-container-variance");
-  var varianceTable = document.getElementById("varianceTable");
-  var varianceSwitch = document.getElementById("togglevariance");
-
-  if (varianceSwitch.checked) {
-    resultContainer.style.display = "block";
-    varianceTable.style.display = "block";
-  } else {
-    resultContainer.style.display = "none";
-    varianceTable.style.display = "none";
-  }
-}
-</script>', variance_pc_html)
-
-htmltools::HTML(variance_pc_html_out)
-```
-
 
 ## Visualization
 
@@ -965,4 +756,3 @@ In conclusion, this project has demonstrated the effectiveness of Principal Comp
 -   The average deviation between the predicted values, and observed values for 'Expected Survival' is RMSE = 33.8.
 
 -   The model has not been exposed to unseen data with a large amount of observations to asses its robustness, and reliability.
-

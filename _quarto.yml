@@ -16,7 +16,6 @@ book:
     - examples.qmd
     - dataset.qmd
     - analysis.qmd
-    - analysis_switch.qmd
     - results.qmd
     - discussion.qmd
     - presentation.qmd
