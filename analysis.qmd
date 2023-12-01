@@ -17,6 +17,10 @@ library(pls)        #pcr; PC regression
 library(Metrics)    #mae; calculate MAE, MSE, RMSE, R^2
 ```
 
+## Libraries
+
+The packages used in this analysis are tidyverse (@tidyverse), olsrr (@olsrr), caret (@caret), kableExtra (@kableExtra), sjPlot (@sjPlot), factoextra (@factoextra), caTools (@caTools), ggcorrplot (@ggcorrplot), pls (@pls), and Metrics (@Metrics).
+
 ## Data Preparation
 
 This analysis uses the Dialysis dataset introduced previously. Within this context, we restructured the variables, enhancing their meaningfulness and facilitating inferential analysis. Additionally, the mean imputation approach addressed missing values.
@@ -763,4 +767,3 @@ In conclusion, this project has demonstrated the effectiveness of Principal Comp
 
 -   The model has not been exposed to unseen data with a large amount of observations to asses its robustness, and reliability.
 
-The packages used in this analysis are tidyverse @tidyverse, olsrr @olsrr, caret @caret, kableExtra @kableExtra, sjPlot @sjPlot, factoextra @factoextra, caTools @caTools, ggcorrplot @ggcorrplot, pls @pls, and Metrics @Metrics.

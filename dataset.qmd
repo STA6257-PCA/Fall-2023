@@ -1,7 +1,5 @@
 # Dataset {#dataset}
 
-This is where we can put everything about our dataset description and visualization.
-
 The principal data used in this analysis was obtained from the "Consumer Assessment of Healthcare Providers and Systems (CAHPS) In-Center Hemodialysis Survey", which is administered to in-center hemodialysis (ICH) facilities by approved survey vendors under the Centers for Medicare & Medicaid Services (CMS). The dataset comprises 39 variables consisting of state-level averages of common dialysis quality measures. The version in this analysis was released on July 19, 2023 through the data.cms.gov website. @dialysis2023july
 
 The structure of the dataset can be categorized into three main components:

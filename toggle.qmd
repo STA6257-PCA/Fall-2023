@@ -117,7 +117,7 @@ my_seed = 95
 
 # Summary statistics of the data
 train_summary <- summary(train_data)
-train_summary <- t(train_summary)
+# train_summary <- t(train_summary)
 train_summary_html <- as.character(train_summary)
 # Capture the HTML of the training summary
 train_summary_html <- htmltools::HTML(train_summary_html)
@@ -212,10 +212,10 @@ styled_corr <- sprintf('
 
 <script>
 document.getElementById("toggleCorr").addEventListener("change", function() {
-  toggleResult();
+  toggleCorrResult();
 });
 
-function toggleResult() {
+function toggleCorrResult() {
   var resultContainer = document.getElementById("result-container-correlations");
   var corrTable = document.getElementById("corrTable");
   var corrSwitch = document.getElementById("toggleCorr");
@@ -256,6 +256,45 @@ print_full_model <- tab_model(full_model, title = "Full Model Regression",
 styled_regression_model_html <- htmltools::HTML(as.character(print_full_model))
 ```
 
+## full model
+```{r}
+fmodel <- sprintf('
+<div class="switch">
+  <input type="checkbox" id="fullSwitch">
+  <label class="slider round" for="fullSwitch"></label>
+</div>
+
+<div id="result-container-full">
+  <p id="result-full">Result: </p>
+  <div id="fullTable" style="display: none;">%s</div>
+</div>
+
+<script>
+document.getElementById("fullSwitch").addEventListener("change", function() {
+  toggleFullResult();
+});
+
+function toggleFullResult() {
+  var resultContainer = document.getElementById("result-container-full");
+  var table = document.getElementById("fullTable");
+  var switchCheckbox = document.getElementById("fullSwitch");
+
+  if (switchCheckbox.checked) {
+    resultContainer.style.display = "block";
+    table.style.display = "block";
+  } else {
+    resultContainer.style.display = "none";
+    table.style.display = "none";
+  }
+}
+</script>
+', styled_regression_model_html)
+# htmltools::HTML(fmodel)
+
+```
+
+
+
 ```{r, warning=FALSE, message=FALSE}
 full_model_html <- sprintf('
 <div class="switch">
@@ -269,6 +308,8 @@ full_model_html <- sprintf('
 </div>
 
 <script>
+var isTableRendered = false;
+
 document.getElementById("toggleSwitchRegressionModel").addEventListener("change", function() {
   toggleResult();
 });
@@ -276,11 +317,14 @@ document.getElementById("toggleSwitchRegressionModel").addEventListener("change"
 function toggleResult() {
   var resultContainer = document.getElementById("result-container-fullmodel");
   var Table = document.getElementById("fullmodelTable");
-  var Switch = document.getElementById("toggleSwitchRegressionModel");
+  var switchCheckbox = document.getElementById("toggleSwitchRegressionModel");
 
-  if (Switch.checked) {
+  if (switchCheckbox.checked && !isTableRendered) {
     resultContainer.style.display = "block";
     Table.style.display = "block";
+    
+    // Render the table only once
+    isTableRendered = true;
   } else {
     resultContainer.style.display = "none";
     Table.style.display = "none";
@@ -288,7 +332,8 @@ function toggleResult() {
 }
 </script>', styled_regression_model_html)
 
-htmltools::HTML(full_model_html)
+# htmltools::HTML(full_model_html)
+
 ```
 
 
