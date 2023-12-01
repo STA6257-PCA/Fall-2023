@@ -154,16 +154,13 @@ correlations_table <- kbl(high_corr_df, caption = "Highly Correlated Features") 
   kable_paper("hover")
 
 
-# Format the content using kableExtra
-styled_correlations_table <- kbl(correlations_table, format = "html") %>%
-  kable_styling(full_width = FALSE, position = "center", font_size = 14)
-
 # Capture the HTML of the styled training summary
-styled_correlations_table_html <- htmltools::HTML(as.character(styled_correlations_table))
+styled_correlations_table_html <- htmltools::HTML(as.character(correlations_table))
 ```
 
 
-### Styled Kable
+### Styled Summary
+
 ```{r}
 styled <- sprintf('
 <div class="switch">
@@ -202,15 +199,15 @@ htmltools::HTML(styled)
 
 ### Correlations
 ```{r}
-styled <- sprintf('
+styled_corr <- sprintf('
 <div class="switch">
   <input type="checkbox" id="toggleCorr">
   <label class="slider round" for="toggleCorr"></label>
 </div>
 
-<div id="result-container">
-  <p id="result">Result: </p>
-  <div id="trainSummaryTable" style="display: none;">%s</div>
+<div id="result-container-correlations">
+  <p id="result-corr">Result: </p>
+  <div id="corrTable" style="display: none;">%s</div>
 </div>
 
 <script>
@@ -219,23 +216,79 @@ document.getElementById("toggleCorr").addEventListener("change", function() {
 });
 
 function toggleResult() {
-  var resultContainer = document.getElementById("result-container");
-  var trainSummaryTable = document.getElementById("trainSummaryTable");
-  var toggleSwitch = document.getElementById("toggleSwitch");
+  var resultContainer = document.getElementById("result-container-correlations");
+  var corrTable = document.getElementById("corrTable");
+  var corrSwitch = document.getElementById("toggleCorr");
 
-  if (toggleSwitch.checked) {
+  if (corrSwitch.checked) {
     resultContainer.style.display = "block";
-    trainSummaryTable.style.display = "block";
+    corrTable.style.display = "block";
   } else {
     resultContainer.style.display = "none";
-    trainSummaryTable.style.display = "none";
+    corrTable.style.display = "none";
   }
 }
-</script>
-', styled_train_summary_html)
+</script>', styled_correlations_table_html)
 
-htmltools::HTML(styled)
+htmltools::HTML(styled_corr)
 ```
 
+```{r, warning=FALSE, message=FALSE}
+library(sjPlot)
+set.seed(my_seed)
+
+# Fit a multiple linear regression model
+full_model <- lm(train_data$Survival..As.Expected..STATE. ~ ., data = train_data)
+
+# Print a summary of the regression model
+print_full_model <- tab_model(full_model, title = "Full Model Regression", 
+          string.p="P-value", string.stat = "T-score",
+          string.se = "Std. Error",
+          string.resp = "Response",
+          string.ci = "Conf Int.",
+          show.se=T, show.stat = T,
+           CSS = list(
+             css.depvarhead = 'font-weight: bold; text-align: left;',
+             css.summary = 'color: #10759B; font-weight: bold;'
+           ))
+
+# Capture the HTML of the styled training summary
+styled_regression_model_html <- htmltools::HTML(as.character(print_full_model))
+```
+
+```{r, warning=FALSE, message=FALSE}
+full_model_html <- sprintf('
+<div class="switch">
+  <input type="checkbox" id="toggleSwitchRegressionModel">
+  <label class="slider round" for="toggleSwitchRegressionModel"></label>
+</div>
+
+<div id="result-container-fullmodel">
+  <p id="result-fullmodel">Result: </p>
+  <div id="fullmodelTable" style="display: none;">%s</div>
+</div>
+
+<script>
+document.getElementById("toggleSwitchRegressionModel").addEventListener("change", function() {
+  toggleResult();
+});
+
+function toggleResult() {
+  var resultContainer = document.getElementById("result-container-fullmodel");
+  var Table = document.getElementById("fullmodelTable");
+  var Switch = document.getElementById("toggleSwitchRegressionModel");
+
+  if (Switch.checked) {
+    resultContainer.style.display = "block";
+    Table.style.display = "block";
+  } else {
+    resultContainer.style.display = "none";
+    Table.style.display = "none";
+  }
+}
+</script>', styled_regression_model_html)
+
+htmltools::HTML(full_model_html)
+```
 
 

@@ -2815,7 +2815,7 @@ waitlist worse</td>
 <section id="principal-components-regression" class="level3" data-number="5.10.1">
 <h3 data-number="5.10.1" class="anchored" data-anchor-id="principal-components-regression"><span class="header-section-number">5.10.1</span> <strong>Principal Components Regression</strong></h3>
 <ul>
-<li>PCA is used to calculate principal components that can then be used in&nbsp;principal components regression. This type of regression is often used when&nbsp;multicollinearity&nbsp;exists between predictors in a data set.</li>
+<li>PCA is used to calculate principal components that can then be used in principal components regression. This type of regression is often used when multicollinearity exists between predictors in a data set.</li>
 </ul>
 <div class="cell">
 <details>
@@ -2838,221 +2838,10 @@ pcr(formula = y ~ PC1 + PC2, data = train_pca, validation = "CV")</code></pre>
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># table format</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(pcr_model<span class="sc">$</span>residuals, <span class="at">caption =</span> <span class="st">"PCA Residuals"</span>,</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># kbl(pcr_model$residuals, caption = "PCA Residuals",</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     digits = 4) %&gt;%</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   kable_paper("hover", full_width = F)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
-<caption>PCA Residuals</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">y.1 comps</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">y.2 comps</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">1</td>
-<td style="text-align: right;">0.1506</td>
-<td style="text-align: right;">-0.7094</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">14.8415</td>
-<td style="text-align: right;">8.7438</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">-9.9048</td>
-<td style="text-align: right;">-15.6499</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: right;">-11.9950</td>
-<td style="text-align: right;">-10.5934</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">5</td>
-<td style="text-align: right;">14.5581</td>
-<td style="text-align: right;">7.4172</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">6</td>
-<td style="text-align: right;">10.5628</td>
-<td style="text-align: right;">-4.1105</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">7</td>
-<td style="text-align: right;">-1.1997</td>
-<td style="text-align: right;">-1.8621</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">8</td>
-<td style="text-align: right;">-13.8770</td>
-<td style="text-align: right;">-8.7908</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">10</td>
-<td style="text-align: right;">-10.6707</td>
-<td style="text-align: right;">-7.5478</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">13</td>
-<td style="text-align: right;">15.9325</td>
-<td style="text-align: right;">-6.8066</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">14</td>
-<td style="text-align: right;">-28.4995</td>
-<td style="text-align: right;">-32.2191</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">15</td>
-<td style="text-align: right;">13.7912</td>
-<td style="text-align: right;">10.2807</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">19</td>
-<td style="text-align: right;">2.2654</td>
-<td style="text-align: right;">-4.9708</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">20</td>
-<td style="text-align: right;">20.7004</td>
-<td style="text-align: right;">18.6124</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">22</td>
-<td style="text-align: right;">-22.7913</td>
-<td style="text-align: right;">-18.7054</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">24</td>
-<td style="text-align: right;">0.3036</td>
-<td style="text-align: right;">-1.8158</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">27</td>
-<td style="text-align: right;">15.1056</td>
-<td style="text-align: right;">16.6785</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">29</td>
-<td style="text-align: right;">-18.5425</td>
-<td style="text-align: right;">-18.3174</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">30</td>
-<td style="text-align: right;">7.9759</td>
-<td style="text-align: right;">-3.5721</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">31</td>
-<td style="text-align: right;">61.8084</td>
-<td style="text-align: right;">55.7883</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">32</td>
-<td style="text-align: right;">-20.9204</td>
-<td style="text-align: right;">-5.0790</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">33</td>
-<td style="text-align: right;">-12.8183</td>
-<td style="text-align: right;">-9.2901</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">34</td>
-<td style="text-align: right;">1.6594</td>
-<td style="text-align: right;">-0.6758</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">35</td>
-<td style="text-align: right;">-17.3032</td>
-<td style="text-align: right;">-12.3010</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">36</td>
-<td style="text-align: right;">-17.2435</td>
-<td style="text-align: right;">-19.9354</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">37</td>
-<td style="text-align: right;">-4.2019</td>
-<td style="text-align: right;">-9.4719</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">38</td>
-<td style="text-align: right;">-90.8171</td>
-<td style="text-align: right;">-71.1562</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">39</td>
-<td style="text-align: right;">57.1428</td>
-<td style="text-align: right;">59.6527</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">41</td>
-<td style="text-align: right;">10.0589</td>
-<td style="text-align: right;">4.0816</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">42</td>
-<td style="text-align: right;">18.5721</td>
-<td style="text-align: right;">29.7334</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">44</td>
-<td style="text-align: right;">3.2955</td>
-<td style="text-align: right;">-4.0228</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">45</td>
-<td style="text-align: right;">8.2807</td>
-<td style="text-align: right;">7.3105</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">46</td>
-<td style="text-align: right;">-17.5634</td>
-<td style="text-align: right;">-10.1654</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">49</td>
-<td style="text-align: right;">14.4348</td>
-<td style="text-align: right;">13.0494</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">50</td>
-<td style="text-align: right;">5.5387</td>
-<td style="text-align: right;">3.5868</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">51</td>
-<td style="text-align: right;">-9.4323</td>
-<td style="text-align: right;">29.4206</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">54</td>
-<td style="text-align: right;">10.5787</td>
-<td style="text-align: right;">15.4795</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">55</td>
-<td style="text-align: right;">-1.1796</td>
-<td style="text-align: right;">1.1198</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">56</td>
-<td style="text-align: right;">1.4025</td>
-<td style="text-align: right;">-3.1866</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
 </div>
 </section>
 <section id="pca-cross-validation-model" class="level3" data-number="5.10.2">
@@ -3329,8 +3118,8 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 <p>In conclusion, this project has demonstrated the effectiveness of Principal Component Analysis (PCA) in dimension reduction with the following key points:</p>
 <ul>
 <li><p>PCA was able to reduce from 37 features down to just 2 principal components.</p></li>
-<li><p>The best score of R^2 = 97.61% was from the Linear Regression with Cross-validation model.</p></li>
-<li><p>The predicted R^2 = 96%</p></li>
+<li><p>The best score of <span class="math inline">\(R^2\)</span> = 97.61% was from the Linear Regression with Cross-validation model.</p></li>
+<li><p>The predicted <span class="math inline">\(R^2\)</span> = 96%</p></li>
 <li><p>The average deviation between the predicted values, and observed values for ‘Expected Survival’ is RMSE = 33.8.</p></li>
 <li><p>The model has not been exposed to unseen data with a large amount of observations to asses its robustness, and reliability.</p></li>
 </ul>

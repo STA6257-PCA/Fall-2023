@@ -645,7 +645,7 @@ kbl(predict_2pc, caption = "2 Principal Components Prediction Metrics",
 
 ### **Principal Components Regression**
 
--   PCA is used to calculate principal components that can then be used in principal components regression. This type of regression is often used when multicollinearity exists between predictors in a data set.
+-   PCA is used to calculate principal components that can then be used in principal components regression. This type of regression is often used when multicollinearity exists between predictors in a data set.
 
 ```{r}
 # reproducible random sampling
@@ -658,9 +658,9 @@ pcr_model <- pcr(y ~ PC1+PC2, data=train_pca, validation="CV")
 print(pcr_model)
 
 # table format
-kbl(pcr_model$residuals, caption = "PCA Residuals",
-    digits = 4) %>%
-  kable_paper("hover", full_width = F)
+# kbl(pcr_model$residuals, caption = "PCA Residuals",
+#     digits = 4) %>%
+#   kable_paper("hover", full_width = F)
 ```
 
 ### PCA: Cross-Validation Model
@@ -755,9 +755,9 @@ In conclusion, this project has demonstrated the effectiveness of Principal Comp
 
 -   PCA was able to reduce from 37 features down to just 2 principal components.
 
--   The best score of R\^2 = 97.61% was from the Linear Regression with Cross-validation model.
+-   The best score of $R^2$ = 97.61% was from the Linear Regression with Cross-validation model.
 
--   The predicted R\^2 = 96%
+-   The predicted $R^2$ = 96%
 
 -   The average deviation between the predicted values, and observed values for 'Expected Survival' is RMSE = 33.8.
 
