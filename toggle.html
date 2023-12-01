@@ -69,6 +69,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="toggle_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
+<link rel="stylesheet" href="css/toggle.css">
 </head>
 
 <body class="fullcontent">
@@ -104,72 +105,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="css-style" class="level3">
 <h3 class="anchored" data-anchor-id="css-style">CSS style</h3>
 <!-- Include CSS styles for the rounded slider button -->
-<style>
-  /* The switch - the box around the slider */
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
+<!-- <style> -->
+<!--   /* The switch - the box around the slider */ -->
+<!--   .switch { -->
+<!--     position: relative; -->
+<!--     display: inline-block; -->
+<!--     width: 60px; -->
+<!--     height: 34px; -->
+<!--   } -->
 
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
+<!--   /* Hide default HTML checkbox */ -->
+<!--   .switch input { -->
+<!--     opacity: 0; -->
+<!--     width: 0; -->
+<!--     height: 0; -->
+<!--   } -->
 
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 34px; /* Added border-radius for rounded corners */
-  }
+<!--   /* The slider */ -->
+<!--   .slider { -->
+<!--     position: absolute; -->
+<!--     cursor: pointer; -->
+<!--     top: 0; -->
+<!--     left: 0; -->
+<!--     right: 0; -->
+<!--     bottom: 0; -->
+<!--     background-color: #ccc; -->
+<!--     -webkit-transition: .4s; -->
+<!--     transition: .4s; -->
+<!--     border-radius: 34px; /* Added border-radius for rounded corners */ -->
+<!--   } -->
 
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 50%; /* Added border-radius for rounded circle */
-  }
+<!--   .slider:before { -->
+<!--     position: absolute; -->
+<!--     content: ""; -->
+<!--     height: 26px; -->
+<!--     width: 26px; -->
+<!--     left: 4px; -->
+<!--     bottom: 4px; -->
+<!--     background-color: white; -->
+<!--     -webkit-transition: .4s; -->
+<!--     transition: .4s; -->
+<!--     border-radius: 50%; /* Added border-radius for rounded circle */ -->
+<!--   } -->
 
-  input:checked + .slider {
-    background-color: #2196F3;
-  }
+<!--   input:checked + .slider { -->
+<!--     background-color: #2196F3; -->
+<!--   } -->
 
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-  }
+<!--   input:focus + .slider { -->
+<!--     box-shadow: 0 0 1px #2196F3; -->
+<!--   } -->
 
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
+<!--   input:checked + .slider:before { -->
+<!--     -webkit-transform: translateX(26px); -->
+<!--     -ms-transform: translateX(26px); -->
+<!--     transform: translateX(26px); -->
+<!--   } -->
 
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
+<!--   /* Rounded sliders */ -->
+<!--   .slider.round { -->
+<!--     border-radius: 34px; -->
+<!--   } -->
 
-  .slider.round:before {
-    border-radius: 50%;
-  }
-</style>
+<!--   .slider.round:before { -->
+<!--     border-radius: 50%; -->
+<!--   } -->
+<!-- </style> -->
 <p>Trying CSS slider switch</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
@@ -210,368 +211,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="styled-summary" class="level3">
 <h3 class="anchored" data-anchor-id="styled-summary">Styled Summary</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>styled <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">'</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div class="switch"&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;input type="checkbox" id="toggleSwitch"&gt;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;label class="slider round" for="toggleSwitch"&gt;&lt;/label&gt;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div id="result-container"&gt;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;p id="result"&gt;Result: &lt;/p&gt;</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;div id="trainSummaryTable" style="display: none;"&gt;%s&lt;/div&gt;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;script&gt;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="st">document.getElementById("toggleSwitch").addEventListener("change", function() {</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="st">  toggleResult();</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="st">});</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="st">function toggleResult() {</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="st">  var resultContainer = document.getElementById("result-container");</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="st">  var trainSummaryTable = document.getElementById("trainSummaryTable");</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="st">  var toggleSwitch = document.getElementById("toggleSwitch");</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="st">  if (toggleSwitch.checked) {</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="st">    resultContainer.style.display = "block";</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="st">    trainSummaryTable.style.display = "block";</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="st">  } else {</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="st">    resultContainer.style.display = "none";</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="st">    trainSummaryTable.style.display = "none";</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/script&gt;</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="st">'</span>, styled_train_summary_html)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>htmltools<span class="sc">::</span><span class="fu">HTML</span>(styled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-
-
-<div class="switch">
-  <input type="checkbox" id="toggleSwitch">
-  <label class="slider round" for="toggleSwitch"></label>
-</div>
-
-<div id="result-container">
-  <p id="result">Result: </p>
-  <div id="trainSummaryTable" style="display: none;">
-<table class="table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Transfusions..Better.than.expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Transfusions..As.expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Transfusions..Worse.than.expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Infection..Better.than.expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Infection..As.expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Infection..Worse.than.expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.of.adult.HD.patients.with.Kt.V..1.2</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Adult.PD.Patients.With.Kt.V..1.7</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Pediatric.HD.Patients.With.Kt.V..1.2</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Pediatric.PD.Patients.With.Kt.V..1.8</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Pediatric.HD.Patients.With.nPCR.In.Use</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Fistula.Rate...Better.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Fistula.Rate...As.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Fistula.Rate...Worse.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Adult.Patients.With.Long.Term.Catheter.In.Use</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Adult.Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Less.Than.3.5.Mg.dL</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Between.3.5.4.5.Mg.dL</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Between.4.6.5.5.Mg.dL</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Between.5.6.7.0.Mg.dL</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Greater.Than.7.0.Mg.dL</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Hospitalizations..Better.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Hospitalizations..As.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Hospitalizations..Worse.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Hospital.Readmission...Better.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Hospital.Readmission...As.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Hospital..Readmission...Worse.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Survival..Better.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Survival..As.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Survival..Worse.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Incident.Patients.Transplant.Waitlisting..Better.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Incident.Patients.Transplant.Waitlisting...As.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Incident.Patients.Transplant.Waitlisting...Worse.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Prevalent.Patients.Transplant.Waitlisting..Better.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Prevalent.Patients.Transplant.Waitlisting...As.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Prevalent.Patients.Transplant.Waitlisting...Worse.Than.Expected..STATE.</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.Of.Patients.With.Hgb.10.g.dL</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage.of.patients.with.Hgb.12.g.dL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Min. :0.0000</td>
-<td style="text-align: left;">Min. : 1.00</td>
-<td style="text-align: left;">Min. : 0.000</td>
-<td style="text-align: left;">Min. : 0.00</td>
-<td style="text-align: left;">Min. : 0.0</td>
-<td style="text-align: left;">Min. :0.000</td>
-<td style="text-align: left;">Min. :87.0</td>
-<td style="text-align: left;">Min. :69.00</td>
-<td style="text-align: left;">Min. : 47.00</td>
-<td style="text-align: left;">Min. : 0.00</td>
-<td style="text-align: left;">Min. : 15.00</td>
-<td style="text-align: left;">Min. : 0.000</td>
-<td style="text-align: left;">Min. : 0.00</td>
-<td style="text-align: left;">Min. : 0.00</td>
-<td style="text-align: left;">Min. :10.00</td>
-<td style="text-align: left;">Min. : 1.0</td>
-<td style="text-align: left;">Min. : 5.0</td>
-<td style="text-align: left;">Min. :11.00</td>
-<td style="text-align: left;">Min. :24.00</td>
-<td style="text-align: left;">Min. :20.00</td>
-<td style="text-align: left;">Min. : 8.00</td>
-<td style="text-align: left;">Min. : 0.00</td>
-<td style="text-align: left;">Min. : 1.0</td>
-<td style="text-align: left;">Min. : 0.000</td>
-<td style="text-align: left;">Min. : 0.000</td>
-<td style="text-align: left;">Min. : 2.00</td>
-<td style="text-align: left;">Min. : 0.0</td>
-<td style="text-align: left;">Min. : 0.000</td>
-<td style="text-align: left;">Min. : 2.0</td>
-<td style="text-align: left;">Min. : 0.000</td>
-<td style="text-align: left;">Min. : 0.000</td>
-<td style="text-align: left;">Min. : 0.00</td>
-<td style="text-align: left;">Min. : 0.000</td>
-<td style="text-align: left;">Min. : 0.000</td>
-<td style="text-align: left;">Min. : 0.0</td>
-<td style="text-align: left;">Min. : 0.000</td>
-<td style="text-align: left;">Min. : 9.00</td>
-<td style="text-align: left;">Min. :0.00000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">1st Qu.:0.0000</td>
-<td style="text-align: left;">1st Qu.: 22.75</td>
-<td style="text-align: left;">1st Qu.: 1.000</td>
-<td style="text-align: left;">1st Qu.: 5.75</td>
-<td style="text-align: left;">1st Qu.: 13.0</td>
-<td style="text-align: left;">1st Qu.:0.000</td>
-<td style="text-align: left;">1st Qu.:96.0</td>
-<td style="text-align: left;">1st Qu.:90.00</td>
-<td style="text-align: left;">1st Qu.: 87.75</td>
-<td style="text-align: left;">1st Qu.: 66.75</td>
-<td style="text-align: left;">1st Qu.: 90.75</td>
-<td style="text-align: left;">1st Qu.: 0.000</td>
-<td style="text-align: left;">1st Qu.: 25.25</td>
-<td style="text-align: left;">1st Qu.: 0.00</td>
-<td style="text-align: left;">1st Qu.:15.00</td>
-<td style="text-align: left;">1st Qu.: 1.0</td>
-<td style="text-align: left;">1st Qu.: 7.0</td>
-<td style="text-align: left;">1st Qu.:22.00</td>
-<td style="text-align: left;">1st Qu.:28.00</td>
-<td style="text-align: left;">1st Qu.:23.00</td>
-<td style="text-align: left;">1st Qu.:15.00</td>
-<td style="text-align: left;">1st Qu.: 0.00</td>
-<td style="text-align: left;">1st Qu.: 26.5</td>
-<td style="text-align: left;">1st Qu.: 0.000</td>
-<td style="text-align: left;">1st Qu.: 0.000</td>
-<td style="text-align: left;">1st Qu.: 23.75</td>
-<td style="text-align: left;">1st Qu.: 0.0</td>
-<td style="text-align: left;">1st Qu.: 0.000</td>
-<td style="text-align: left;">1st Qu.: 24.0</td>
-<td style="text-align: left;">1st Qu.: 0.000</td>
-<td style="text-align: left;">1st Qu.: 0.000</td>
-<td style="text-align: left;">1st Qu.: 8.75</td>
-<td style="text-align: left;">1st Qu.: 0.000</td>
-<td style="text-align: left;">1st Qu.: 0.000</td>
-<td style="text-align: left;">1st Qu.: 27.5</td>
-<td style="text-align: left;">1st Qu.: 0.000</td>
-<td style="text-align: left;">1st Qu.:18.00</td>
-<td style="text-align: left;">1st Qu.:0.00000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Median :0.0000</td>
-<td style="text-align: left;">Median : 53.00</td>
-<td style="text-align: left;">Median : 3.000</td>
-<td style="text-align: left;">Median : 22.00</td>
-<td style="text-align: left;">Median : 47.5</td>
-<td style="text-align: left;">Median :0.000</td>
-<td style="text-align: left;">Median :97.0</td>
-<td style="text-align: left;">Median :93.00</td>
-<td style="text-align: left;">Median : 91.20</td>
-<td style="text-align: left;">Median : 75.27</td>
-<td style="text-align: left;">Median : 94.00</td>
-<td style="text-align: left;">Median : 2.000</td>
-<td style="text-align: left;">Median : 66.00</td>
-<td style="text-align: left;">Median : 1.00</td>
-<td style="text-align: left;">Median :17.00</td>
-<td style="text-align: left;">Median : 2.0</td>
-<td style="text-align: left;">Median : 8.0</td>
-<td style="text-align: left;">Median :23.00</td>
-<td style="text-align: left;">Median :29.00</td>
-<td style="text-align: left;">Median :24.00</td>
-<td style="text-align: left;">Median :16.23</td>
-<td style="text-align: left;">Median : 1.00</td>
-<td style="text-align: left;">Median : 71.5</td>
-<td style="text-align: left;">Median : 1.000</td>
-<td style="text-align: left;">Median : 1.500</td>
-<td style="text-align: left;">Median : 68.50</td>
-<td style="text-align: left;">Median : 1.0</td>
-<td style="text-align: left;">Median : 1.000</td>
-<td style="text-align: left;">Median : 67.5</td>
-<td style="text-align: left;">Median : 1.000</td>
-<td style="text-align: left;">Median : 1.000</td>
-<td style="text-align: left;">Median : 32.00</td>
-<td style="text-align: left;">Median : 1.000</td>
-<td style="text-align: left;">Median : 1.000</td>
-<td style="text-align: left;">Median : 63.0</td>
-<td style="text-align: left;">Median : 2.000</td>
-<td style="text-align: left;">Median :20.50</td>
-<td style="text-align: left;">Median :0.00000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Mean :0.1786</td>
-<td style="text-align: left;">Mean : 99.23</td>
-<td style="text-align: left;">Mean : 7.286</td>
-<td style="text-align: left;">Mean : 40.00</td>
-<td style="text-align: left;">Mean : 74.0</td>
-<td style="text-align: left;">Mean :1.143</td>
-<td style="text-align: left;">Mean :96.4</td>
-<td style="text-align: left;">Mean :91.72</td>
-<td style="text-align: left;">Mean : 91.20</td>
-<td style="text-align: left;">Mean : 74.54</td>
-<td style="text-align: left;">Mean : 91.02</td>
-<td style="text-align: left;">Mean : 4.929</td>
-<td style="text-align: left;">Mean :116.57</td>
-<td style="text-align: left;">Mean : 5.25</td>
-<td style="text-align: left;">Mean :17.02</td>
-<td style="text-align: left;">Mean : 2.4</td>
-<td style="text-align: left;">Mean : 7.6</td>
-<td style="text-align: left;">Mean :23.13</td>
-<td style="text-align: left;">Mean :29.09</td>
-<td style="text-align: left;">Mean :23.71</td>
-<td style="text-align: left;">Mean :16.45</td>
-<td style="text-align: left;">Mean : 1.25</td>
-<td style="text-align: left;">Mean :123.0</td>
-<td style="text-align: left;">Mean : 4.929</td>
-<td style="text-align: left;">Mean : 2.446</td>
-<td style="text-align: left;">Mean :119.59</td>
-<td style="text-align: left;">Mean : 3.5</td>
-<td style="text-align: left;">Mean : 3.482</td>
-<td style="text-align: left;">Mean :118.9</td>
-<td style="text-align: left;">Mean : 4.125</td>
-<td style="text-align: left;">Mean : 4.714</td>
-<td style="text-align: left;">Mean : 61.02</td>
-<td style="text-align: left;">Mean : 2.857</td>
-<td style="text-align: left;">Mean : 7.839</td>
-<td style="text-align: left;">Mean :120.9</td>
-<td style="text-align: left;">Mean : 2.893</td>
-<td style="text-align: left;">Mean :21.47</td>
-<td style="text-align: left;">Mean :0.23636</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">3rd Qu.:0.0000</td>
-<td style="text-align: left;">3rd Qu.:134.25</td>
-<td style="text-align: left;">3rd Qu.:10.250</td>
-<td style="text-align: left;">3rd Qu.: 51.00</td>
-<td style="text-align: left;">3rd Qu.:105.5</td>
-<td style="text-align: left;">3rd Qu.:2.000</td>
-<td style="text-align: left;">3rd Qu.:97.0</td>
-<td style="text-align: left;">3rd Qu.:94.00</td>
-<td style="text-align: left;">3rd Qu.:100.00</td>
-<td style="text-align: left;">3rd Qu.: 92.00</td>
-<td style="text-align: left;">3rd Qu.:100.00</td>
-<td style="text-align: left;">3rd Qu.: 5.250</td>
-<td style="text-align: left;">3rd Qu.:157.75</td>
-<td style="text-align: left;">3rd Qu.: 6.50</td>
-<td style="text-align: left;">3rd Qu.:18.00</td>
-<td style="text-align: left;">3rd Qu.: 2.0</td>
-<td style="text-align: left;">3rd Qu.: 8.0</td>
-<td style="text-align: left;">3rd Qu.:24.00</td>
-<td style="text-align: left;">3rd Qu.:30.00</td>
-<td style="text-align: left;">3rd Qu.:24.00</td>
-<td style="text-align: left;">3rd Qu.:18.00</td>
-<td style="text-align: left;">3rd Qu.: 2.00</td>
-<td style="text-align: left;">3rd Qu.:168.8</td>
-<td style="text-align: left;">3rd Qu.: 4.250</td>
-<td style="text-align: left;">3rd Qu.: 3.250</td>
-<td style="text-align: left;">3rd Qu.:156.75</td>
-<td style="text-align: left;">3rd Qu.: 3.0</td>
-<td style="text-align: left;">3rd Qu.: 4.250</td>
-<td style="text-align: left;">3rd Qu.:160.5</td>
-<td style="text-align: left;">3rd Qu.: 5.000</td>
-<td style="text-align: left;">3rd Qu.: 4.250</td>
-<td style="text-align: left;">3rd Qu.: 79.00</td>
-<td style="text-align: left;">3rd Qu.: 3.000</td>
-<td style="text-align: left;">3rd Qu.: 4.000</td>
-<td style="text-align: left;">3rd Qu.:166.5</td>
-<td style="text-align: left;">3rd Qu.: 4.250</td>
-<td style="text-align: left;">3rd Qu.:23.00</td>
-<td style="text-align: left;">3rd Qu.:0.05909</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Max. :2.0000</td>
-<td style="text-align: left;">Max. :596.00</td>
-<td style="text-align: left;">Max. :47.000</td>
-<td style="text-align: left;">Max. :290.00</td>
-<td style="text-align: left;">Max. :397.0</td>
-<td style="text-align: left;">Max. :8.000</td>
-<td style="text-align: left;">Max. :99.0</td>
-<td style="text-align: left;">Max. :96.00</td>
-<td style="text-align: left;">Max. :100.00</td>
-<td style="text-align: left;">Max. :100.00</td>
-<td style="text-align: left;">Max. :100.00</td>
-<td style="text-align: left;">Max. :50.000</td>
-<td style="text-align: left;">Max. :659.00</td>
-<td style="text-align: left;">Max. :40.00</td>
-<td style="text-align: left;">Max. :29.00</td>
-<td style="text-align: left;">Max. :33.0</td>
-<td style="text-align: left;">Max. :11.0</td>
-<td style="text-align: left;">Max. :27.00</td>
-<td style="text-align: left;">Max. :32.00</td>
-<td style="text-align: left;">Max. :29.00</td>
-<td style="text-align: left;">Max. :26.00</td>
-<td style="text-align: left;">Max. :15.00</td>
-<td style="text-align: left;">Max. :675.0</td>
-<td style="text-align: left;">Max. :67.000</td>
-<td style="text-align: left;">Max. :17.000</td>
-<td style="text-align: left;">Max. :665.00</td>
-<td style="text-align: left;">Max. :38.0</td>
-<td style="text-align: left;">Max. :24.000</td>
-<td style="text-align: left;">Max. :657.0</td>
-<td style="text-align: left;">Max. :24.000</td>
-<td style="text-align: left;">Max. :52.000</td>
-<td style="text-align: left;">Max. :420.00</td>
-<td style="text-align: left;">Max. :34.000</td>
-<td style="text-align: left;">Max. :168.000</td>
-<td style="text-align: left;">Max. :714.0</td>
-<td style="text-align: left;">Max. :18.000</td>
-<td style="text-align: left;">Max. :60.00</td>
-<td style="text-align: left;">Max. :1.00000</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-
-<script>
-document.getElementById("toggleSwitch").addEventListener("change", function() {
-  toggleResult();
-});
-
-function toggleResult() {
-  var resultContainer = document.getElementById("result-container");
-  var trainSummaryTable = document.getElementById("trainSummaryTable");
-  var toggleSwitch = document.getElementById("toggleSwitch");
-
-  if (toggleSwitch.checked) {
-    resultContainer.style.display = "block";
-    trainSummaryTable.style.display = "block";
-  } else {
-    resultContainer.style.display = "none";
-    trainSummaryTable.style.display = "none";
-  }
-}
-</script>
-
-</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># styled &lt;- sprintf('</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;div class="switch"&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;input type="checkbox" id="toggleSwitch"&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;label class="slider round" for="toggleSwitch"&gt;&lt;/label&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;/div&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;div id="result-container"&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;p id="result"&gt;Result: &lt;/p&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;div id="trainSummaryTable" style="display: none;"&gt;%s&lt;/div&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;/div&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;script&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># document.getElementById("toggleSwitch").addEventListener("change", function() {</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   toggleResult();</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># });</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># function toggleResult() {</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   var resultContainer = document.getElementById("result-container");</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   var trainSummaryTable = document.getElementById("trainSummaryTable");</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   var toggleSwitch = document.getElementById("toggleSwitch");</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   if (toggleSwitch.checked) {</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#     resultContainer.style.display = "block";</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#     trainSummaryTable.style.display = "block";</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   } else {</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#     resultContainer.style.display = "none";</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">#     trainSummaryTable.style.display = "none";</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   }</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;/script&gt;</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co"># ', styled_train_summary_html)</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co"># htmltools::HTML(styled)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="correlations-1" class="level3">
@@ -772,104 +444,307 @@ function toggleCorrResult() {
 </script>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a multiple linear regression model</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>full_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(train_data<span class="sc">$</span>Survival..As.Expected..STATE. <span class="sc">~</span> ., <span class="at">data =</span> train_data)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the regression model</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>print_full_model <span class="ot">&lt;-</span> <span class="fu">tab_model</span>(full_model, <span class="at">title =</span> <span class="st">"Full Model Regression"</span>, </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">string.p=</span><span class="st">"P-value"</span>, <span class="at">string.stat =</span> <span class="st">"T-score"</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">string.se =</span> <span class="st">"Std. Error"</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">string.resp =</span> <span class="st">"Response"</span>,</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">string.ci =</span> <span class="st">"Conf Int."</span>,</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.se=</span>T, <span class="at">show.stat =</span> T,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">CSS =</span> <span class="fu">list</span>(</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">css.depvarhead =</span> <span class="st">'font-weight: bold; text-align: left;'</span>,</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">css.summary =</span> <span class="st">'color: #10759B; font-weight: bold;'</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>           ))</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Capture the HTML of the styled training summary</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>styled_regression_model_html <span class="ot">&lt;-</span> htmltools<span class="sc">::</span><span class="fu">HTML</span>(<span class="fu">as.character</span>(print_full_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
+</section>
+<section id="function-with-one-parameter" class="level2">
+<h2 class="anchored" data-anchor-id="function-with-one-parameter">Function with one parameter</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>high_corr <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">'</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div class="switch" id="toggleSwitchCorr"&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;p id="result-Corr"&gt;Result: &lt;/p&gt;  </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;input type="checkbox" id="toggleSwitchCorr"&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;label class="slider round" for="toggleSwitchCorr"&gt;&lt;/label&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div id="result-container-Corr"&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;div id="CorrTable" style="display: none;"&gt;%s&lt;/div&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;script&gt;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="st">document.getElementById("toggleSwitchCorr").addEventListener("change", function() {</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st">  toggleResult("Corr");</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="st">});</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="st">function toggleResult(resultType) {</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="st">  var resultContainer = document.getElementById("result-container-" + resultType);</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="st">  var resultTable = document.getElementById(resultType + "Table");</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="st">  var toggleSwitch = document.getElementById("toggleSwitch" + resultType);</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="st">  if (toggleSwitch.checked) {</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="st">    resultContainer.style.display = "block";</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="st">    resultTable.style.display = "block";</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="st">  } else {</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="st">    resultContainer.style.display = "none";</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="st">    resultTable.style.display = "none";</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/script&gt;</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="st">'</span>, styled_correlations_table_html)</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>htmltools<span class="sc">::</span><span class="fu">HTML</span>(high_corr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+
+<div class="switch" id="toggleSwitchCorr">
+  <p id="result-Corr">Result: </p>  
+  <input type="checkbox" id="toggleSwitchCorr">
+  <label class="slider round" for="toggleSwitchCorr"></label>
+</div>
+
+<div id="result-container-Corr">
+  
+  <div id="CorrTable" style="display: none;">
+<table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Highly Correlated Features</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">Count</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Transfusions..As.expected..STATE.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Hospitalizations..As.Expected..STATE.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Infection..Better.than.expected..STATE.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Hospital.Readmission...As.Expected..STATE.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Survival..As.Expected..STATE.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Fistula.Rate...As.Expected..STATE.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Prevalent.Patients.Transplant.Waitlisting...As.Expected..STATE.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Incident.Patients.Transplant.Waitlisting...As.Expected..STATE.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Infection..As.expected..STATE.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Survival..Worse.Than.Expected..STATE.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Incident.Patients.Transplant.Waitlisting..Better.Than.Expected..STATE.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">Hospital.Readmission...Better.Than.Expected..STATE.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Transfusions..Worse.than.expected..STATE.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Hospital..Readmission...Worse.Than.Expected..STATE.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">Fistula.Rate...Worse.Than.Expected..STATE.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Incident.Patients.Transplant.Waitlisting...Worse.Than.Expected..STATE.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">Fistula.Rate...Better.Than.Expected..STATE.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">Prevalent.Patients.Transplant.Waitlisting..Better.Than.Expected..STATE.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">Survival..Better.Than.Expected..STATE.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">Infection..Worse.than.expected..STATE.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Between.5.6.7.0.Mg.dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">22</td>
+<td style="text-align: left;">Prevalent.Patients.Transplant.Waitlisting...Worse.Than.Expected..STATE.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">23</td>
+<td style="text-align: left;">Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Between.3.5.4.5.Mg.dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">Percentage.Of.Adult.Patients.With.Serum.Phosphorus.Greater.Than.7.0.Mg.dL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">Transfusions..Better.than.expected..STATE.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">26</td>
+<td style="text-align: left;">Percentage.Of.Patients.With.Hgb.10.g.dL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">27</td>
+<td style="text-align: left;">Percentage.Of.Adult.Patients.With.Hypercalcemia..Serum.Calcium.Greater.Than.10.2.Mg.dL.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">28</td>
+<td style="text-align: left;">Percentage.Of.Pediatric.HD.Patients.With.nPCR.In.Use</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">Percentage.Of.Adult.Patients.With.Long.Term.Catheter.In.Use</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+
+<script>
+document.getElementById("toggleSwitchCorr").addEventListener("change", function() {
+  toggleResult("Corr");
+});
+
+function toggleResult(resultType) {
+  var resultContainer = document.getElementById("result-container-" + resultType);
+  var resultTable = document.getElementById(resultType + "Table");
+  var toggleSwitch = document.getElementById("toggleSwitch" + resultType);
+
+  if (toggleSwitch.checked) {
+    resultContainer.style.display = "block";
+    resultTable.style.display = "block";
+  } else {
+    resultContainer.style.display = "none";
+    resultTable.style.display = "none";
+  }
+}
+</script>
+
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a multiple linear regression model</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>full_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(train_data<span class="sc">$</span>Survival..As.Expected..STATE. <span class="sc">~</span> ., <span class="at">data =</span> train_data)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the regression model</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>print_full_model <span class="ot">&lt;-</span> <span class="fu">tab_model</span>(full_model, <span class="at">title =</span> <span class="st">"Full Model Regression"</span>, </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">string.p=</span><span class="st">"P-value"</span>, <span class="at">string.stat =</span> <span class="st">"T-score"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">string.se =</span> <span class="st">"Std. Error"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">string.resp =</span> <span class="st">"Response"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">string.ci =</span> <span class="st">"Conf Int."</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.se=</span>T, <span class="at">show.stat =</span> T,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">CSS =</span> <span class="fu">list</span>(</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">css.depvarhead =</span> <span class="st">'font-weight: bold; text-align: left;'</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">css.summary =</span> <span class="st">'color: #10759B; font-weight: bold;'</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>           ))</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Capture the HTML of the styled training summary</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>styled_regression_model_html <span class="ot">&lt;-</span> htmltools<span class="sc">::</span><span class="fu">HTML</span>(<span class="fu">as.character</span>(print_full_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="full-model" class="level2">
 <h2 class="anchored" data-anchor-id="full-model">full model</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fmodel <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">'</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div class="switch"&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;input type="checkbox" id="fullSwitch"&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;label class="slider round" for="fullSwitch"&gt;&lt;/label&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div id="result-container-full"&gt;</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;p id="result-full"&gt;Result: &lt;/p&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;div id="fullTable" style="display: none;"&gt;%s&lt;/div&gt;</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;script&gt;</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="st">document.getElementById("fullSwitch").addEventListener("change", function() {</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="st">  toggleFullResult();</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="st">});</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="st">function toggleFullResult() {</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="st">  var resultContainer = document.getElementById("result-container-full");</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="st">  var table = document.getElementById("fullTable");</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="st">  var switchCheckbox = document.getElementById("fullSwitch");</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="st">  if (switchCheckbox.checked) {</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="st">    resultContainer.style.display = "block";</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="st">    table.style.display = "block";</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="st">  } else {</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="st">    resultContainer.style.display = "none";</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="st">    table.style.display = "none";</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/script&gt;</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="st">'</span>, styled_regression_model_html)</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co"># htmltools::HTML(fmodel)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>full_model_html <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">'</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fmodel <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">'</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div class="switch"&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;input type="checkbox" id="toggleSwitchRegressionModel"&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;label class="slider round" for="toggleSwitchRegressionModel"&gt;&lt;/label&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;input type="checkbox" id="fullSwitch"&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;label class="slider round" for="fullSwitch"&gt;&lt;/label&gt;</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div id="result-container-fullmodel"&gt;</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;p id="result-fullmodel"&gt;Result: &lt;/p&gt;</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;div id="fullmodelTable" style="display: none;"&gt;%s&lt;/div&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div id="result-container-full"&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;p id="result-full"&gt;Result: &lt;/p&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;div id="fullTable" style="display: none;"&gt;%s&lt;/div&gt;</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;script&gt;</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="st">var isTableRendered = false;</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="st">document.getElementById("toggleSwitchRegressionModel").addEventListener("change", function() {</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="st">  toggleResult();</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="st">});</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="st">function toggleResult() {</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="st">  var resultContainer = document.getElementById("result-container-fullmodel");</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="st">  var Table = document.getElementById("fullmodelTable");</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="st">  var switchCheckbox = document.getElementById("toggleSwitchRegressionModel");</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="st">  if (switchCheckbox.checked &amp;&amp; !isTableRendered) {</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="st">    resultContainer.style.display = "block";</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="st">    Table.style.display = "block";</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="st">    // Render the table only once</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="st">    isTableRendered = true;</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="st">  } else {</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="st">    resultContainer.style.display = "none";</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="st">    Table.style.display = "none";</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/script&gt;'</span>, styled_regression_model_html)</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="co"># htmltools::HTML(full_model_html)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="st">document.getElementById("fullSwitch").addEventListener("change", function() {</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="st">  toggleFullResult();</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="st">});</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="st">function toggleFullResult() {</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="st">  var resultContainer = document.getElementById("result-container-full");</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="st">  var table = document.getElementById("fullTable");</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="st">  var switchCheckbox = document.getElementById("fullSwitch");</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="st">  if (switchCheckbox.checked) {</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="st">    resultContainer.style.display = "block";</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="st">    table.style.display = "block";</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="st">  } else {</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="st">    resultContainer.style.display = "none";</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="st">    table.style.display = "none";</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/script&gt;</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="st">'</span>, styled_regression_model_html)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co"># htmltools::HTML(fmodel)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># full_model_html &lt;- sprintf('</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;div class="switch"&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;input type="checkbox" id="toggleSwitchRegressionModel"&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;label class="slider round" for="toggleSwitchRegressionModel"&gt;&lt;/label&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;/div&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;div id="result-container-fullmodel"&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;p id="result-fullmodel"&gt;Result: &lt;/p&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;div id="fullmodelTable" style="display: none;"&gt;%s&lt;/div&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;/div&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;script&gt;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># var isTableRendered = false;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># document.getElementById("toggleSwitchRegressionModel").addEventListener("change", function() {</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   toggleResult();</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># });</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># function toggleResult() {</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   var resultContainer = document.getElementById("result-container-fullmodel");</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   var Table = document.getElementById("fullmodelTable");</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   var switchCheckbox = document.getElementById("toggleSwitchRegressionModel");</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   if (switchCheckbox.checked &amp;&amp; !isTableRendered) {</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">#     resultContainer.style.display = "block";</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#     Table.style.display = "block";</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#     </span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#     // Render the table only once</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">#     isTableRendered = true;</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#   } else {</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#     resultContainer.style.display = "none";</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#     Table.style.display = "none";</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#   }</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;/script&gt;', styled_regression_model_html)</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co"># htmltools::HTML(full_model_html)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 

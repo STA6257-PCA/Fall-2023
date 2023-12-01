@@ -16,6 +16,7 @@ book:
     - examples.qmd
     - dataset.qmd
     - analysis.qmd
+    - analysis_switch.qmd
     - results.qmd
     - discussion.qmd
     - presentation.qmd
@@ -31,6 +32,7 @@ format:
     code-fold: true
     code-summary: "Show the code"
     page-layout: full
+    css: css/toggle.css
   pdf:
     documentclass: scrreprt
 

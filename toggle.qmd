@@ -1,8 +1,8 @@
 ---
 title: "toggle"
-output: 
-  html_document:
-    css: toggle.css
+format: 
+  html:
+    css: css/toggle.css
 ---
 
 ## Load Libraries
@@ -13,78 +13,6 @@ library(htmltools)
 library(tidyverse)
 ```
 
-### CSS style
-
-<!-- Include CSS styles for the rounded slider button -->
-
-```{=html}
-<style>
-  /* The switch - the box around the slider */
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
-
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 34px; /* Added border-radius for rounded corners */
-  }
-
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 50%; /* Added border-radius for rounded circle */
-  }
-
-  input:checked + .slider {
-    background-color: #2196F3;
-  }
-
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-  }
-
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
-
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-
-  .slider.round:before {
-    border-radius: 50%;
-  }
-</style>
-```
 Trying CSS slider switch
 
 
@@ -162,51 +90,52 @@ styled_correlations_table_html <- htmltools::HTML(as.character(correlations_tabl
 ### Styled Summary
 
 ```{r}
-styled <- sprintf('
-<div class="switch">
-  <input type="checkbox" id="toggleSwitch">
-  <label class="slider round" for="toggleSwitch"></label>
-</div>
-
-<div id="result-container">
-  <p id="result">Result: </p>
-  <div id="trainSummaryTable" style="display: none;">%s</div>
-</div>
-
-<script>
-document.getElementById("toggleSwitch").addEventListener("change", function() {
-  toggleResult();
-});
-
-function toggleResult() {
-  var resultContainer = document.getElementById("result-container");
-  var trainSummaryTable = document.getElementById("trainSummaryTable");
-  var toggleSwitch = document.getElementById("toggleSwitch");
-
-  if (toggleSwitch.checked) {
-    resultContainer.style.display = "block";
-    trainSummaryTable.style.display = "block";
-  } else {
-    resultContainer.style.display = "none";
-    trainSummaryTable.style.display = "none";
-  }
-}
-</script>
-', styled_train_summary_html)
-
-htmltools::HTML(styled)
+# styled <- sprintf('
+# <div class="switch">
+#   <input type="checkbox" id="toggleSwitch">
+#   <label class="slider round" for="toggleSwitch"></label>
+# </div>
+# 
+# <div id="result-container">
+#   <p id="result">Result: </p>
+#   <div id="trainSummaryTable" style="display: none;">%s</div>
+# </div>
+# 
+# <script>
+# document.getElementById("toggleSwitch").addEventListener("change", function() {
+#   toggleResult();
+# });
+# 
+# function toggleResult() {
+#   var resultContainer = document.getElementById("result-container");
+#   var trainSummaryTable = document.getElementById("trainSummaryTable");
+#   var toggleSwitch = document.getElementById("toggleSwitch");
+# 
+#   if (toggleSwitch.checked) {
+#     resultContainer.style.display = "block";
+#     trainSummaryTable.style.display = "block";
+#   } else {
+#     resultContainer.style.display = "none";
+#     trainSummaryTable.style.display = "none";
+#   }
+# }
+# </script>
+# ', styled_train_summary_html)
+# 
+# htmltools::HTML(styled)
 ```
 
 ### Correlations
 ```{r}
 styled_corr <- sprintf('
 <div class="switch">
-  <input type="checkbox" id="toggleCorr">
+<p id="result-corr">Show Results: </p>  
+<input type="checkbox" id="toggleCorr">
   <label class="slider round" for="toggleCorr"></label>
 </div>
 
 <div id="result-container-correlations">
-  <p id="result-corr">Result: </p>
+  
   <div id="corrTable" style="display: none;">%s</div>
 </div>
 
@@ -232,6 +161,45 @@ function toggleCorrResult() {
 
 htmltools::HTML(styled_corr)
 ```
+## Function with one parameter
+```{r}
+high_corr <- sprintf('
+<div class="switch" id="toggleSwitchCorr">
+  <p id="result-Corr">Result: </p>  
+  <input type="checkbox" id="toggleSwitchCorr">
+  <label class="slider round" for="toggleSwitchCorr"></label>
+</div>
+
+<div id="result-container-Corr">
+  
+  <div id="CorrTable" style="display: none;">%s</div>
+</div>
+
+<script>
+document.getElementById("toggleSwitchCorr").addEventListener("change", function() {
+  toggleResult("Corr");
+});
+
+function toggleResult(resultType) {
+  var resultContainer = document.getElementById("result-container-" + resultType);
+  var resultTable = document.getElementById(resultType + "Table");
+  var toggleSwitch = document.getElementById("toggleSwitch" + resultType);
+
+  if (toggleSwitch.checked) {
+    resultContainer.style.display = "block";
+    resultTable.style.display = "block";
+  } else {
+    resultContainer.style.display = "none";
+    resultTable.style.display = "none";
+  }
+}
+</script>
+', styled_correlations_table_html)
+
+htmltools::HTML(high_corr)
+```
+
+
 
 ```{r, warning=FALSE, message=FALSE}
 library(sjPlot)
@@ -296,41 +264,41 @@ function toggleFullResult() {
 
 
 ```{r, warning=FALSE, message=FALSE}
-full_model_html <- sprintf('
-<div class="switch">
-  <input type="checkbox" id="toggleSwitchRegressionModel">
-  <label class="slider round" for="toggleSwitchRegressionModel"></label>
-</div>
-
-<div id="result-container-fullmodel">
-  <p id="result-fullmodel">Result: </p>
-  <div id="fullmodelTable" style="display: none;">%s</div>
-</div>
-
-<script>
-var isTableRendered = false;
-
-document.getElementById("toggleSwitchRegressionModel").addEventListener("change", function() {
-  toggleResult();
-});
-
-function toggleResult() {
-  var resultContainer = document.getElementById("result-container-fullmodel");
-  var Table = document.getElementById("fullmodelTable");
-  var switchCheckbox = document.getElementById("toggleSwitchRegressionModel");
-
-  if (switchCheckbox.checked && !isTableRendered) {
-    resultContainer.style.display = "block";
-    Table.style.display = "block";
-    
-    // Render the table only once
-    isTableRendered = true;
-  } else {
-    resultContainer.style.display = "none";
-    Table.style.display = "none";
-  }
-}
-</script>', styled_regression_model_html)
+# full_model_html <- sprintf('
+# <div class="switch">
+#   <input type="checkbox" id="toggleSwitchRegressionModel">
+#   <label class="slider round" for="toggleSwitchRegressionModel"></label>
+# </div>
+# 
+# <div id="result-container-fullmodel">
+#   <p id="result-fullmodel">Result: </p>
+#   <div id="fullmodelTable" style="display: none;">%s</div>
+# </div>
+# 
+# <script>
+# var isTableRendered = false;
+# 
+# document.getElementById("toggleSwitchRegressionModel").addEventListener("change", function() {
+#   toggleResult();
+# });
+# 
+# function toggleResult() {
+#   var resultContainer = document.getElementById("result-container-fullmodel");
+#   var Table = document.getElementById("fullmodelTable");
+#   var switchCheckbox = document.getElementById("toggleSwitchRegressionModel");
+# 
+#   if (switchCheckbox.checked && !isTableRendered) {
+#     resultContainer.style.display = "block";
+#     Table.style.display = "block";
+#     
+#     // Render the table only once
+#     isTableRendered = true;
+#   } else {
+#     resultContainer.style.display = "none";
+#     Table.style.display = "none";
+#   }
+# }
+# </script>', styled_regression_model_html)
 
 # htmltools::HTML(full_model_html)
 
