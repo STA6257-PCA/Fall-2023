@@ -226,46 +226,46 @@ Using the factoextra @factoextra, tidyverse @tidyverse, and kableExtra @kableExt
 # Clear environment
 rm(list = ls())
 
-#Load Libraries
-library(factoextra) #fviz_eig; PCA plots
-library(tidyverse)  #rename; pipe operator
-library(kableExtra) #kable_paper; table formatting
+# Load Libraries
+library(factoextra) # fviz_eig; PCA plots
+library(tidyverse)  # rename; pipe operator
+library(kableExtra) # kable_paper; table formatting
 
-#Import Example Data
+# Import Example Data
 data = data.frame(Student = 1:4, BasicStats=c(4,8,13,7), AdvancedStats=c(11,4,5,14))
 #dim(data)
 
-#Structure of Data
-#check variable types which matters in PCA 
-#summary(data) #details about variable scales and missing values
+# Structure of Data
+# check variable types which matters in PCA 
+# summary(data) #details about variable scales and missing values
 kbl(data, align = 'l', caption = "Dataframe structure") %>%
   kable_paper("hover")
 
-#Based on Info from Summary: handle missing values and exclude categorical variable
-#na.omit(data) No missing values here
+# Based on Info from Summary: handle missing values and exclude categorical variable
+# na.omit(data) No missing values here
 data_sample = data[,-c(1)] #exclude categorical variable
 
-#Run PCA
+# Run PCA
 data_pca = prcomp(data_sample, scale = TRUE)
 
-#Summary of Analysis
+# Summary of Analysis
 sum_pca = as.data.frame(summary(data_pca)$importance)
 kbl(sum_pca, align= 'l', caption = "Importance of components") %>%
   kable_paper("hover")
 
-#Elements of PCA Object (all outputs of PCA analysis)
-#names(data_pca)
+# Elements of PCA Object (all outputs of PCA analysis)
+# names(data_pca)
 
-#sdev:standard deviation
-#rotation: eigenvectors (loadings per variable within each PC)
-#center: mean of the original variable
-#scale: standard deviations of the original variable
-#x: principal component values/scores
+# sdev:standard deviation
+# rotation: eigenvectors (loadings per variable within each PC)
+# center: mean of the original variable
+# scale: standard deviations of the original variable
+# x: principal component values/scores
 
-#Scree Plot of Variance
+# Scree Plot of Variance
 fviz_eig(data_pca,
          addlabels = TRUE)
-#Biplot with Default Settings
+# Biplot with Default Settings
 fviz_pca_biplot(data_pca, repel = TRUE)
 ```
 
@@ -277,21 +277,15 @@ The first principal component of the data captures 80.7% of the variation (or in
 
 For this application of PCA, the Abalone dataset from the UCI Machine Learning Repository is used @misc_abalone_1. This dataset contain 4177 observations of 9 variables which record characteristics of each abalone including sex, length, diameter, height, weights, and the number of rings. The variables, apart from sex, are continuous and correlated making the dataset an ideal candidate for demonstrating dimensionality reduction via PCA.
 
-### Libraries
-
-First, the appropriate and necessary libraries are loaded in R. These provide the functions which serve as the backbone of the analysis, handling the computational aspects of PCA as well as visualizing the results.
-
-```{r, warning = FALSE, message = FALSE}
-# Load necessary libraries
-library(corrplot) #for plotting the correlation matrix
-library(summarytools) #produces summary stats
-```
-
 ### Data Preparation
 
 The dataset contains 9 variables with 1 categorical variable and 8 numeric variables. The dataset contains no missing values. For this example in applying principal component analysis, we exclude the categorical variable 'Sex' and focus the PCA on the numerical dimensions of the Abalone. For analyses involving a mix of numeric and non-numeric variables other factor analysis techniques can be used, such as factor analysis of mixed data @pages2014multiple.
 
 ```{r}
+# Load libraries
+library(corrplot) # for plotting the correlation matrix
+library(summarytools) # produces summary stats
+
 # Load dataset
 abalone <- read.csv('./abalone/abalone.csv')
 
@@ -452,7 +446,6 @@ pc2_contribution +
        caption = "PC1 explains 83.9% of the variance") +
   scale_y_continuous(labels = scales::percent_format(scale = 1,
                                                      accuracy = 1))
-
 
 # Contributions of variables to PC2
 pc2_contribution <- fviz_contrib(abalone_pca, choice = "var", axes = 2, top = 12)

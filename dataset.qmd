@@ -106,7 +106,7 @@ The histograms of the data reveal that majority of the variables are skewed righ
 -   A table was generated to count missing values for all variables.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# plot Missing values
+# Plot Missing values
 plot_intro(train_data)
 plot_missing(train_data, missing_only = TRUE, group = list("Good (0.05)" = 0.05, "OK (0.4)" = 0.4, Bad = 0.8, Remove = 1),)
 
@@ -118,7 +118,7 @@ total_missing <- sum(is.na(train_data))
 # Count the number of missing values in each column
 no_missing_values_df <- data.frame("Missing_Values" = colSums(is.na(train_data)))
 
-# table format
+# Table format
 kbl(no_missing_values_df) %>%
   kable_paper("hover", full_width = F)
 ```
@@ -130,7 +130,7 @@ kbl(no_missing_values_df) %>%
 -   Normality is not assumed. Overall, the distribution in each variable does not meet the normality assumption.
 
 ```{r, echo=FALSE}
-#visualize of data in histograms
+# Visualize of data in histograms
 plot_histogram(train_data[, 18:25], ncol = 2L)
 ```
 
@@ -141,11 +141,11 @@ plot_histogram(train_data[, 18:25], ncol = 2L)
 -   The presence of outliers is consistent though the entire dataset.
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
+# Plot qq
 plot_qq(train_data[, 19:30], ncol = 2L)
 ```
 
 ## Imputation of Missing Values
-
 
 <!-- -   A table was created to confirm the absence of any missing observations in the data frame. -->
 
