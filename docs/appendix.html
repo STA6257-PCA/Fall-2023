@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -263,6 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools) <span class="co">#produces summary stats</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>The packages used in this chapter are tidyverse <span class="citation" data-cites="tidyverse"><a href="references.html#ref-tidyverse" role="doc-biblioref">[1]</a></span>, kableExtra <span class="citation" data-cites="kableExtra"><a href="references.html#ref-kableExtra" role="doc-biblioref">[2]</a></span>, factoextra <span class="citation" data-cites="factoextra"><a href="references.html#ref-factoextra" role="doc-biblioref">[3]</a></span>, corrplot <span class="citation" data-cites="corrplot2021"><a href="references.html#ref-corrplot2021" role="doc-biblioref">[4]</a></span> and summarytools <span class="citation" data-cites="summarytools"><a href="references.html#ref-summarytools" role="doc-biblioref">[5]</a></span>.</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -437,6 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DataExplorer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>The packages used for this chapter are tidyverse <span class="citation" data-cites="tidyverse"><a href="references.html#ref-tidyverse" role="doc-biblioref">[1]</a></span>, summarytools <span class="citation" data-cites="summarytools"><a href="references.html#ref-summarytools" role="doc-biblioref">[5]</a></span>, kableExtra <span class="citation" data-cites="kableExtra"><a href="references.html#ref-kableExtra" role="doc-biblioref">[2]</a></span>, and DataExplorer <span class="citation" data-cites="DataExplorer"><a href="references.html#ref-DataExplorer" role="doc-biblioref">[6]</a></span>.</p>
 </section>
 <section id="code-1" class="level2">
 <h2 class="anchored" data-anchor-id="code-1">Code</h2>
@@ -564,6 +585,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Metrics)    <span class="co">#mae; calculate MAE, MSE, RMSE, R^2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>The packages used in this analysis are tidyverse <span class="citation" data-cites="tidyverse"><a href="references.html#ref-tidyverse" role="doc-biblioref">[1]</a></span>, olsrr <span class="citation" data-cites="olsrr"><a href="references.html#ref-olsrr" role="doc-biblioref">[7]</a></span>, caret <span class="citation" data-cites="caret"><a href="references.html#ref-caret" role="doc-biblioref">[8]</a></span>, kableExtra <span class="citation" data-cites="kableExtra"><a href="references.html#ref-kableExtra" role="doc-biblioref">[2]</a></span>, sjPlot <span class="citation" data-cites="sjPlot"><a href="references.html#ref-sjPlot" role="doc-biblioref">[9]</a></span>, factoextra <span class="citation" data-cites="factoextra"><a href="references.html#ref-factoextra" role="doc-biblioref">[3]</a></span>, caTools <span class="citation" data-cites="caTools"><a href="references.html#ref-caTools" role="doc-biblioref">[10]</a></span>, ggcorrplot <span class="citation" data-cites="ggcorrplot"><a href="references.html#ref-ggcorrplot" role="doc-biblioref">[11]</a></span>, pls <span class="citation" data-cites="pls"><a href="references.html#ref-pls" role="doc-biblioref">[12]</a></span>, and Metrics <span class="citation" data-cites="Metrics"><a href="references.html#ref-Metrics" role="doc-biblioref">[13]</a></span>.</p>
 </section>
 <section id="code-2" class="level2">
 <h2 class="anchored" data-anchor-id="code-2">Code</h2>
@@ -1063,6 +1085,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+<div id="refs" class="references csl-bib-body" role="list" style="display: none">
+<div id="ref-tidyverse" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">H. Wickham <em>et al.</em>, <span>“Welcome to the <span class="nocase">tidyverse</span>,”</span> <em>Journal of Open Source Software</em>, vol. 4, no. 43, p. 1686, 2019, doi: <a href="https://doi.org/10.21105/joss.01686">10.21105/joss.01686</a></div>
+</div>
+<div id="ref-kableExtra" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">H. Zhu, <em>kableExtra: Construct complex table with ’kable’ and pipe syntax</em>. 2021. Available: <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a></div>
+</div>
+<div id="ref-factoextra" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">A. Kassambara and F. Mundt, <em>Factoextra: Extract and visualize the results of multivariate data analyses</em>. 2020. Available: <a href="https://CRAN.R-project.org/package=factoextra">https://CRAN.R-project.org/package=factoextra</a></div>
+</div>
+<div id="ref-corrplot2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">T. Wei and V. Simko, <em>R package ’corrplot’: Visualization of a correlation matrix</em>. 2021. Available: <a href="https://github.com/taiyun/corrplot">https://github.com/taiyun/corrplot</a></div>
+</div>
+<div id="ref-summarytools" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">D. Comtois, <em>Summarytools: Tools to quickly and neatly summarize data</em>. 2022. Available: <a href="https://CRAN.R-project.org/package=summarytools">https://CRAN.R-project.org/package=summarytools</a></div>
+</div>
+<div id="ref-DataExplorer" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">B. Cui, <em>DataExplorer: Automate data exploration and treatment</em>. 2020. Available: <a href="https://CRAN.R-project.org/package=DataExplorer">https://CRAN.R-project.org/package=DataExplorer</a></div>
+</div>
+<div id="ref-olsrr" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">A. Hebbali, <em>Olsrr: Tools for building OLS regression models</em>. 2020. Available: <a href="https://CRAN.R-project.org/package=olsrr">https://CRAN.R-project.org/package=olsrr</a></div>
+</div>
+<div id="ref-caret" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Kuhn and Max, <span>“Building predictive models in r using the caret package,”</span> <em>Journal of Statistical Software</em>, vol. 28, no. 5, pp. 1–26, 2008, doi: <a href="https://doi.org/10.18637/jss.v028.i05">10.18637/jss.v028.i05</a>. Available: <a href="https://www.jstatsoft.org/index.php/jss/article/view/v028i05">https://www.jstatsoft.org/index.php/jss/article/view/v028i05</a></div>
+</div>
+<div id="ref-sjPlot" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">D. Lüdecke, <em>sjPlot: Data visualization for statistics in social science</em>. 2023. Available: <a href="https://CRAN.R-project.org/package=sjPlot">https://CRAN.R-project.org/package=sjPlot</a></div>
+</div>
+<div id="ref-caTools" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">J. Tuszynski, <em>caTools: Tools: Moving window statistics, GIF, Base64, ROC AUC, etc</em>. 2021. Available: <a href="https://CRAN.R-project.org/package=caTools">https://CRAN.R-project.org/package=caTools</a></div>
+</div>
+<div id="ref-ggcorrplot" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">A. Kassambara, <em>Ggcorrplot: Visualization of a correlation matrix using ’ggplot2’</em>. 2023. Available: <a href="https://CRAN.R-project.org/package=ggcorrplot">https://CRAN.R-project.org/package=ggcorrplot</a></div>
+</div>
+<div id="ref-pls" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline">K. H. Liland, B.-H. Mevik, and R. Wehrens, <em>Pls: Partial least squares and principal component regression</em>. 2023. Available: <a href="https://CRAN.R-project.org/package=pls">https://CRAN.R-project.org/package=pls</a></div>
+</div>
+<div id="ref-Metrics" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[13] </div><div class="csl-right-inline">B. Hamner and M. Frasco, <em>Metrics: Evaluation metrics for machine learning</em>. 2018. Available: <a href="https://CRAN.R-project.org/package=Metrics">https://CRAN.R-project.org/package=Metrics</a></div>
+</div>
+</div>
 </section>
 </section>
 
